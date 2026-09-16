@@ -1,0 +1,1121 @@
+/* =========================================================
+   CLEAN N CLEAR — NAVBAR
+   Primary Blue: #081FEF
+   White: #FFFFFF
+========================================================= */
+
+
+/* =========================================================
+   GLOBAL RESET
+========================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow-x: hidden;
+  background: #ffffff;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.rt-header {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
+  background: #ffffff;
+
+  border: 0 !important;
+  box-shadow: none !important;
+
+  position: relative;
+  z-index: 1000;
+}
+
+
+/* =========================================================
+   TOP INFORMATION BAR
+========================================================= */
+
+.rt-topbar {
+  width: 100%;
+  height: 50px;
+
+  margin: 0;
+  padding: 0;
+
+  background: #081FEF;
+  color: #ffffff;
+
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.rt-topbar__inner {
+  width: 100%;
+  max-width: 1400px;
+
+  height: 50px;
+
+  margin: 0 auto;
+  padding: 0 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: #081FEF;
+
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+
+/* =========================================================
+   TOP BAR INFORMATION
+========================================================= */
+
+.rt-topbar__info {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  white-space: nowrap;
+}
+
+.rt-topbar__info li {
+  margin: 0;
+  padding: 0;
+  color: #ffffff;
+}
+
+.rt-topbar__info a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.rt-topbar__info a:hover {
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   TOP BAR DIVIDERS
+========================================================= */
+
+.rt-topbar__divider {
+  display: inline-block;
+
+  width: 1px;
+  height: 16px;
+
+  margin: 0 3px;
+
+  background: #ffffff;
+
+  opacity: 0.75;
+}
+
+
+/* =========================================================
+   TOP BAR SELECT
+========================================================= */
+
+.rt-topbar__select-wrap {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.rt-topbar__select {
+  width: 250px;
+  height: 36px;
+
+  padding: 0 12px;
+
+  background: #ffffff;
+  color: #081FEF;
+
+  border: 1px solid #ffffff;
+  border-radius: 3px;
+
+  outline: none;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   MAIN NAVBAR
+========================================================= */
+
+.rt-navbar {
+  width: 100%;
+
+  height: 82px;
+  min-height: 82px;
+
+  margin: 0;
+  padding: 0;
+
+  background: #ffffff;
+
+  border: 0 !important;
+  border-bottom: 0 !important;
+
+  box-shadow: none !important;
+
+  position: relative;
+  z-index: 1000;
+}
+
+
+/* =========================================================
+   MAIN NAVBAR INNER
+========================================================= */
+
+.rt-navbar__inner {
+  width: 100%;
+  max-width: 1700px;
+
+  height: 82px;
+  min-height: 82px;
+
+  margin: 0 auto;
+
+  padding: 3px 16px;
+
+  display: flex;
+  align-items: center;
+
+  background: #ffffff;
+
+  border: 0 !important;
+  box-shadow: none !important;
+
+  gap: 38px;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.rt-navbar__logo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  flex-shrink: 0;
+
+  width: auto;
+
+  margin: 0;
+  padding: 0;
+
+  text-decoration: none;
+  line-height: 0;
+}
+
+.rt-navbar__logo img {
+  display: block;
+
+  width: auto;
+  height: 150px;
+
+  max-width: 260px;
+
+  margin: 0;
+  padding: 0;
+
+  object-fit: contain;
+}
+
+
+/* =========================================================
+   NAVIGATION CONTAINER
+========================================================= */
+
+.rt-navbar__links {
+  flex: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  min-width: 0;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+
+  gap: 5px;
+}
+
+
+/* =========================================================
+   NAVIGATION ITEM
+========================================================= */
+
+.rt-navbar__item {
+  position: relative;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+
+/* =========================================================
+   NAVIGATION LINK
+========================================================= */
+
+.rt-navbar__link {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  min-height: 58px;
+
+  padding: 0 11px;
+
+  background: #ffffff;
+  color: #081FEF;
+
+  border: 0;
+
+  font-family:
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  font-size: 17px;
+  font-weight: 600;
+
+  line-height: 1.2;
+
+  text-decoration: none;
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition: color 0.2s ease;
+}
+
+.rt-navbar__link:hover {
+  color: #081FEF;
+}
+
+
+/* =========================================================
+   ACTIVE HOME
+========================================================= */
+
+.rt-navbar__link.is-active {
+  color: #081FEF;
+  background: #ffffff;
+}
+
+.rt-navbar__link.is-active::after {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  bottom: 2px;
+
+  width: 48px;
+  height: 3px;
+
+  transform: translateX(-50%);
+
+  background: #081FEF;
+
+  border-radius: 10px;
+}
+
+
+/* =========================================================
+   DROPDOWN ARROW
+========================================================= */
+
+.rt-navbar__caret {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #081FEF;
+
+  flex-shrink: 0;
+
+  transition: transform 0.2s ease;
+}
+
+.rt-navbar__caret.is-open {
+  transform: rotate(180deg);
+}
+
+
+/* =========================================================
+   DROPDOWN MENU
+========================================================= */
+
+.rt-dropdown {
+  position: absolute;
+
+  top: calc(100% + 1px);
+  left: 0;
+
+  width: 290px;
+
+  margin: 0;
+  padding: 8px 0;
+
+  list-style: none;
+
+  background: #ffffff;
+
+  border: 1px solid #081FEF;
+  border-radius: 3px;
+
+  box-shadow: none !important;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transform: translateY(-5px);
+
+  transition:
+    opacity 0.18s ease,
+    visibility 0.18s ease,
+    transform 0.18s ease;
+
+  z-index: 2000;
+}
+
+.rt-dropdown.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.rt-navbar__item.has-dropdown:hover > .rt-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   DROPDOWN LINKS
+========================================================= */
+
+.rt-dropdown li {
+  width: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.rt-dropdown li a {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  min-height: 44px;
+
+  padding: 10px 18px;
+
+  background: #ffffff;
+  color: #081FEF;
+
+  font-size: 15px;
+  font-weight: 500;
+
+  text-decoration: none;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.rt-dropdown li a:hover {
+  background: #081FEF;
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   RIGHT SIDE ACTIONS
+========================================================= */
+
+.rt-navbar__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  flex-shrink: 0;
+
+  margin: 0;
+  padding: 0;
+}
+
+
+/* =========================================================
+   ACTION BUTTON
+========================================================= */
+
+.rt-navbar__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 50px;
+
+  padding: 0 22px;
+
+  border-radius: 3px;
+
+  font-family:
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  line-height: 1;
+
+  text-decoration: none;
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+
+/* =========================================================
+   GET A QUOTE
+========================================================= */
+
+.rt-navbar__cta--solid {
+  min-width: 165px;
+
+  background: #081FEF;
+  color: #ffffff;
+
+  border: 1px solid #081FEF;
+}
+
+.rt-navbar__cta--solid:hover {
+  background: #ffffff;
+  color: #081FEF;
+  border-color: #081FEF;
+}
+
+
+/* =========================================================
+   WHATSAPP
+========================================================= */
+
+.rt-navbar__cta--outline {
+  min-width: 165px;
+
+  background: #ffffff;
+  color: #081FEF;
+
+  border: 1px solid #081FEF;
+}
+
+.rt-navbar__cta--outline:hover {
+  background: #081FEF;
+  color: #ffffff;
+  border-color: #081FEF;
+}
+
+
+/* =========================================================
+   REMOVE UNWANTED LINES / SHADOWS
+========================================================= */
+
+.rt-header,
+.rt-topbar,
+.rt-topbar__inner,
+.rt-navbar,
+.rt-navbar__inner,
+.rt-navbar__logo,
+.rt-navbar__links,
+.rt-navbar__actions {
+  border: none !important;
+  border-bottom: none !important;
+  border-right: none !important;
+  box-shadow: none !important;
+}
+
+.rt-header::before,
+.rt-header::after,
+.rt-navbar::before,
+.rt-navbar::after,
+.rt-navbar__inner::before,
+.rt-navbar__inner::after {
+  content: none !important;
+  display: none !important;
+}
+
+
+/* =========================================================
+   HAMBURGER
+========================================================= */
+
+.rt-hamburger {
+  display: none;
+
+  width: 44px;
+  height: 44px;
+
+  margin-left: auto;
+  padding: 0;
+
+  background: #ffffff;
+
+  border: 1px solid #081FEF;
+  border-radius: 3px;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-direction: column;
+
+  gap: 5px;
+
+  cursor: pointer;
+}
+
+.rt-hamburger span {
+  display: block;
+
+  width: 22px;
+  height: 2px;
+
+  background: #081FEF;
+
+  border-radius: 2px;
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+========================================================= */
+
+@media (min-width: 1600px) {
+
+  .rt-navbar {
+    height: 84px;
+    min-height: 84px;
+  }
+
+  .rt-navbar__inner {
+    height: 84px;
+    min-height: 84px;
+
+    padding-left: 18px;
+    padding-right: 18px;
+
+    gap: 45px;
+  }
+
+  .rt-navbar__logo img {
+    height: 76px;
+    max-width: 280px;
+  }
+
+  .rt-navbar__links {
+    gap: 10px;
+  }
+
+  .rt-navbar__link {
+    font-size: 18px;
+  }
+
+  .rt-navbar__cta {
+    height: 52px;
+  }
+}
+
+
+/* =========================================================
+   LAPTOP
+========================================================= */
+
+@media (max-width: 1400px) {
+
+  .rt-navbar__inner {
+    gap: 25px;
+
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .rt-navbar__logo img {
+    height: 68px;
+    max-width: 245px;
+  }
+
+  .rt-navbar__link {
+    padding-left: 7px;
+    padding-right: 7px;
+
+    font-size: 16px;
+  }
+
+  .rt-navbar__cta {
+    height: 48px;
+
+    padding-left: 15px;
+    padding-right: 15px;
+
+    font-size: 14px;
+  }
+
+  .rt-navbar__cta--solid,
+  .rt-navbar__cta--outline {
+    min-width: 135px;
+  }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  /* Hide desktop navigation */
+  .rt-navbar__links,
+  .rt-navbar__actions {
+    display: none;
+  }
+
+  .rt-navbar {
+    height: 74px;
+    min-height: 74px;
+  }
+
+  .rt-navbar__inner {
+    height: 74px;
+    min-height: 74px;
+
+    width: 100%;
+
+    padding: 3px 18px;
+
+    gap: 0;
+  }
+
+  .rt-navbar__logo img {
+    height: 62px;
+    max-width: 230px;
+  }
+
+  .rt-hamburger {
+    display: flex;
+  }
+}
+
+
+/* =========================================================
+   MOBILE — 768px
+========================================================= */
+
+@media (max-width: 768px) {
+
+  /* -------------------------
+     TOP BAR
+  ------------------------- */
+
+  .rt-topbar {
+    height: 40px;
+    min-height: 40px;
+  }
+
+  .rt-topbar__inner {
+    width: 100%;
+
+    height: 40px;
+    min-height: 40px;
+
+    padding: 0 12px;
+
+    justify-content: center;
+  }
+
+  .rt-topbar__info {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    font-size: 11px;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .rt-topbar__select-wrap {
+    display: none;
+  }
+
+  .rt-topbar__divider {
+    height: 13px;
+    margin: 0 1px;
+  }
+
+
+  /* -------------------------
+     MAIN NAVBAR
+  ------------------------- */
+
+  .rt-navbar {
+    width: 100%;
+
+    height: 68px;
+    min-height: 68px;
+  }
+
+  .rt-navbar__inner {
+    width: 100%;
+
+    height: 68px;
+    min-height: 68px;
+
+    padding: 3px 14px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 0;
+  }
+
+
+  /* -------------------------
+     MOBILE LOGO
+  ------------------------- */
+
+  .rt-navbar__logo {
+    display: flex;
+    align-items: center;
+
+    flex: 0 0 auto;
+
+    max-width: calc(100% - 65px);
+  }
+
+  .rt-navbar__logo img {
+    display: block;
+
+    width: auto;
+    height: 57px;
+
+    max-width: 205px;
+
+    object-fit: contain;
+  }
+
+
+  /* -------------------------
+     HAMBURGER
+  ------------------------- */
+
+  .rt-hamburger {
+    display: flex;
+
+    flex: 0 0 auto;
+
+    width: 42px;
+    height: 42px;
+
+    margin-left: auto;
+
+    border: 1px solid #081FEF;
+    border-radius: 3px;
+
+    background: #ffffff;
+
+    gap: 5px;
+  }
+
+  .rt-hamburger span {
+    width: 21px;
+    height: 2px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE — 600px
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .rt-topbar {
+    height: 38px;
+    min-height: 38px;
+  }
+
+  .rt-topbar__inner {
+    height: 38px;
+    min-height: 38px;
+
+    padding: 0 10px;
+  }
+
+  .rt-topbar__info {
+    font-size: 10px;
+    gap: 5px;
+  }
+
+  .rt-topbar__divider {
+    height: 12px;
+  }
+
+  .rt-navbar {
+    height: 66px;
+    min-height: 66px;
+  }
+
+  .rt-navbar__inner {
+    height: 66px;
+    min-height: 66px;
+
+    padding: 3px 12px;
+  }
+
+  .rt-navbar__logo img {
+    height: 55px;
+    max-width: 195px;
+  }
+
+  .rt-hamburger {
+    width: 41px;
+    height: 41px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE — 480px
+========================================================= */
+
+@media (max-width: 480px) {
+
+  .rt-topbar {
+    height: 36px;
+    min-height: 36px;
+  }
+
+  .rt-topbar__inner {
+    height: 36px;
+    min-height: 36px;
+
+    padding: 0 8px;
+  }
+
+  .rt-topbar__info {
+    font-size: 9.5px;
+    gap: 4px;
+  }
+
+  .rt-topbar__divider {
+    height: 11px;
+  }
+
+  .rt-navbar {
+    height: 64px;
+    min-height: 64px;
+  }
+
+  .rt-navbar__inner {
+    height: 64px;
+    min-height: 64px;
+
+    padding: 2px 10px;
+  }
+
+  .rt-navbar__logo {
+    max-width: calc(100% - 58px);
+  }
+
+  .rt-navbar__logo img {
+    height: 52px;
+    max-width: 185px;
+  }
+
+  .rt-hamburger {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 3px;
+  }
+
+  .rt-hamburger span {
+    width: 20px;
+    height: 2px;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE — 380px
+========================================================= */
+
+@media (max-width: 380px) {
+
+  .rt-topbar {
+    height: 34px;
+    min-height: 34px;
+  }
+
+  .rt-topbar__inner {
+    height: 34px;
+    min-height: 34px;
+
+    padding: 0 6px;
+  }
+
+  .rt-topbar__info {
+    font-size: 8.5px;
+    gap: 3px;
+  }
+
+  .rt-navbar {
+    height: 61px;
+    min-height: 61px;
+  }
+
+  .rt-navbar__inner {
+    height: 61px;
+    min-height: 61px;
+
+    padding: 2px 8px;
+  }
+
+  .rt-navbar__logo img {
+    height: 49px;
+    max-width: 175px;
+  }
+
+  .rt-hamburger {
+    width: 38px;
+    height: 38px;
+  }
+
+  .rt-hamburger span {
+    width: 19px;
+  }
+}
+
+
+/* =========================================================
+   EXTRA SMALL MOBILE — 340px
+========================================================= */
+
+@media (max-width: 340px) {
+
+  .rt-topbar__info {
+    font-size: 8px;
+  }
+
+  .rt-navbar {
+    height: 59px;
+    min-height: 59px;
+  }
+
+  .rt-navbar__inner {
+    height: 59px;
+    min-height: 59px;
+
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+
+  .rt-navbar__logo img {
+    height: 46px;
+    max-width: 165px;
+  }
+
+  .rt-hamburger {
+    width: 37px;
+    height: 37px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .rt-navbar__link,
+  .rt-dropdown,
+  .rt-dropdown li a,
+  .rt-navbar__cta,
+  .rt-navbar__caret,
+  .rt-hamburger {
+    transition: none;
+  }
+}
