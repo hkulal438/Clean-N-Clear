@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./SubNavbar.css";
+import "./subNavbar.css";
 
 import logo from "../../images/CLEANNCLEAR_LOGO-01.png";
 
