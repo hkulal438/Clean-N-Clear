@@ -1,98 +1,79 @@
 /* =========================================================
-   CLEAN N CLEAR — IMAGE ONLY HERO SLIDER
+   CLEAN N CLEAR — HERO SLIDER
+   FULL WIDTH + RESPONSIVE
+   ========================================================= */
+
+/* =========================================================
+   HERO
    ========================================================= */
 
 .hero {
   position: relative;
-
   width: 100%;
-  height: auto;
-
+  max-width: 100%;
   margin: 0;
   padding: 0;
-
   overflow: hidden;
-
   background: #ffffff;
 }
 
-
 /* =========================================================
-   SLIDES
+   SLIDES CONTAINER
    ========================================================= */
 
 .hero__slides {
   position: relative;
-
   width: 100%;
-  height: auto;
-
+  max-width: 100%;
   overflow: hidden;
 }
 
-
 /* =========================================================
-   INDIVIDUAL SLIDE
+   SLIDE
    ========================================================= */
 
 .hero__slide {
   position: absolute;
-
-  top: 0;
-  left: 0;
-
+  inset: 0;
   width: 100%;
-
   opacity: 0;
   visibility: hidden;
+  z-index: 1;
 
   transition:
     opacity 0.8s ease,
     visibility 0.8s ease;
-
-  z-index: 1;
 }
-
-
-/* Active slide */
 
 .hero__slide--active {
   position: relative;
-
   opacity: 1;
   visibility: visible;
-
   z-index: 2;
 }
 
-
 /* =========================================================
    IMAGE
+   IMPORTANT:
+   Natural aspect ratio prevents unnecessary cropping
    ========================================================= */
 
 .hero__image {
   display: block;
 
   width: 100%;
+  max-width: 100%;
   height: auto;
-
-  /*
-    Important:
-    contain / auto keeps the complete image visible.
-    Nothing gets cropped.
-  */
-
-  object-fit: contain;
-
-  object-position: center center;
 
   margin: 0;
   padding: 0;
 
+  object-fit: contain;
+  object-position: center center;
+
   user-select: none;
   -webkit-user-drag: none;
 }
-
 
 /* =========================================================
    ARROWS
@@ -103,63 +84,54 @@
 
   top: 50%;
 
-  width: 58px;
-  height: 58px;
+  width: 52px;
+  height: 52px;
 
   transform: translateY(-50%);
 
   display: flex;
-
   align-items: center;
   justify-content: center;
 
   padding: 0;
 
-  background: rgba(0, 0, 0, 0.12);
-
+  background: rgba(8, 31, 239, 0.9);
   color: #ffffff;
 
-  border: 1px solid rgba(255, 255, 255, 0.8);
-
+  border: none;
   border-radius: 50%;
 
   font-family: Arial, sans-serif;
-
-  font-size: 38px;
+  font-size: 34px;
   font-weight: 300;
 
   line-height: 1;
 
   cursor: pointer;
 
-  z-index: 10;
+  z-index: 20;
 
   transition:
-    background 0.25s ease,
-    transform 0.25s ease;
+    background 0.2s ease,
+    transform 0.2s ease;
 }
-
 
 .hero__arrow:hover {
   background: #081FEF;
-
   transform: translateY(-50%) scale(1.05);
 }
-
 
 /* Previous */
 
 .hero__arrow--prev {
-  left: 30px;
+  left: 28px;
 }
-
 
 /* Next */
 
 .hero__arrow--next {
-  right: 30px;
+  right: 28px;
 }
-
 
 /* =========================================================
    PAGINATION
@@ -169,32 +141,33 @@
   position: absolute;
 
   left: 50%;
-  bottom: 20px;
+  bottom: 18px;
 
   transform: translateX(-50%);
 
   display: flex;
-
   align-items: center;
 
-  gap: 8px;
+  gap: 7px;
 
-  z-index: 10;
+  z-index: 20;
 }
 
+/* =========================================================
+   DOT
+   ========================================================= */
 
 .hero__dot {
-  width: 9px;
-  height: 9px;
+  width: 8px;
+  height: 8px;
 
   padding: 0;
   margin: 0;
 
-  border: 0;
-
+  border: none;
   border-radius: 50%;
 
-  background: rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.75);
 
   cursor: pointer;
 
@@ -203,63 +176,59 @@
     background 0.25s ease;
 }
 
-
 .hero__dot:hover {
   background: #ffffff;
 }
 
-
 .hero__dot--active {
-  width: 32px;
-
-  background: #ffffff;
-
+  width: 30px;
   border-radius: 20px;
+  background: #ffffff;
 }
 
+/* =========================================================
+   LARGE DESKTOP
+   ========================================================= */
+
+@media (min-width: 1600px) {
+
+  .hero__arrow {
+    width: 56px;
+    height: 56px;
+    font-size: 36px;
+  }
+
+  .hero__arrow--prev {
+    left: 32px;
+  }
+
+  .hero__arrow--next {
+    right: 32px;
+  }
+
+  .hero__pagination {
+    bottom: 20px;
+  }
+}
 
 /* =========================================================
-   LAPTOP
+   LAPTOP / DESKTOP
    ========================================================= */
 
 @media (max-width: 1400px) {
 
   .hero__arrow {
-    width: 52px;
-    height: 52px;
-
-    font-size: 34px;
+    width: 48px;
+    height: 48px;
+    font-size: 31px;
   }
 
   .hero__arrow--prev {
-    left: 22px;
+    left: 20px;
   }
 
   .hero__arrow--next {
-    right: 22px;
-  }
-}
-
-
-/* =========================================================
-   TABLET
-   ========================================================= */
-
-@media (max-width: 1100px) {
-
-  .hero__arrow {
-    width: 46px;
-    height: 46px;
-
-    font-size: 30px;
-  }
-
-  .hero__arrow--prev {
-    left: 16px;
-  }
-
-  .hero__arrow--next {
-    right: 16px;
+    right: 20px;
   }
 
   .hero__pagination {
@@ -267,12 +236,11 @@
   }
 }
 
-
 /* =========================================================
-   MOBILE
+   TABLET
    ========================================================= */
 
-@media (max-width: 768px) {
+@media (max-width: 1100px) {
 
   .hero {
     width: 100%;
@@ -286,12 +254,56 @@
   }
 
   .hero__arrow {
+    width: 44px;
+    height: 44px;
+
+    font-size: 28px;
+  }
+
+  .hero__arrow--prev {
+    left: 15px;
+  }
+
+  .hero__arrow--next {
+    right: 15px;
+  }
+
+  .hero__pagination {
+    bottom: 14px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .hero {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .hero__slides {
+    width: 100%;
+  }
+
+  .hero__image {
+    width: 100%;
+    height: auto;
+
+    object-fit: contain;
+    object-position: center center;
+  }
+
+  .hero__arrow {
     width: 38px;
     height: 38px;
 
-    font-size: 26px;
+    font-size: 25px;
 
-    background: rgba(0, 0, 0, 0.18);
+    background: rgba(8, 31, 239, 0.9);
   }
 
   .hero__arrow--prev {
@@ -303,8 +315,7 @@
   }
 
   .hero__pagination {
-    bottom: 12px;
-
+    bottom: 11px;
     gap: 6px;
   }
 
@@ -314,10 +325,9 @@
   }
 
   .hero__dot--active {
-    width: 25px;
+    width: 24px;
   }
 }
-
 
 /* =========================================================
    SMALL MOBILE
@@ -325,11 +335,22 @@
 
 @media (max-width: 480px) {
 
+  .hero {
+    width: 100%;
+  }
+
+  .hero__image {
+    width: 100%;
+    height: auto;
+
+    object-fit: contain;
+  }
+
   .hero__arrow {
     width: 34px;
     height: 34px;
 
-    font-size: 23px;
+    font-size: 22px;
   }
 
   .hero__arrow--prev {
@@ -343,8 +364,51 @@
   .hero__pagination {
     bottom: 9px;
   }
+
+  .hero__dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .hero__dot--active {
+    width: 22px;
+  }
 }
 
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+  .hero__arrow {
+    width: 31px;
+    height: 31px;
+
+    font-size: 20px;
+  }
+
+  .hero__arrow--prev {
+    left: 5px;
+  }
+
+  .hero__arrow--next {
+    right: 5px;
+  }
+
+  .hero__pagination {
+    bottom: 8px;
+  }
+}
+
+/* =========================================================
+   IMAGE RESET
+   ========================================================= */
+
+.hero img {
+  max-width: 100%;
+  vertical-align: middle;
+}
 
 /* =========================================================
    REDUCED MOTION

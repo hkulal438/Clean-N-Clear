@@ -4,9 +4,9 @@ import "./Hero.css";
 import slider1 from "../../images/Slider1.png";
 import slider2 from "../../images/Slider2.png";
 import slider3 from "../../images/Slider3.png";
-import slider4 from "../../images/Slider4.png";
 
-const slides = [slider1, slider2, slider3, slider4];
+
+const slides = [slider1, slider2, slider3];
 
 const AUTO_DELAY = 4500;
 
