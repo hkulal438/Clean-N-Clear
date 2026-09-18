@@ -1,20 +1,23 @@
 /* =========================================================
-   CLEAN N CLEAR — HERO SLIDER
-   FULL WIDTH + RESPONSIVE
-   ========================================================= */
-
-/* =========================================================
    HERO
    ========================================================= */
 
 .hero {
-  position: relative;
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding: 0;
+  position: relative !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  max-height: none !important;
+  min-height: 0 !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
   overflow: hidden;
+
   background: #ffffff;
+
+  line-height: 0;
 }
 
 /* =========================================================
@@ -22,10 +25,20 @@
    ========================================================= */
 
 .hero__slides {
-  position: relative;
-  width: 100%;
-  max-width: 100%;
+  position: relative !important;
+
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  max-height: none !important;
+  min-height: 0 !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
   overflow: hidden;
+
+  line-height: 0;
 }
 
 /* =========================================================
@@ -35,9 +48,16 @@
 .hero__slide {
   position: absolute;
   inset: 0;
-  width: 100%;
+
+  width: 100% !important;
+  height: auto !important;
+
+  margin: 0;
+  padding: 0;
+
   opacity: 0;
   visibility: hidden;
+
   z-index: 1;
 
   transition:
@@ -47,32 +67,39 @@
 
 .hero__slide--active {
   position: relative;
+
   opacity: 1;
   visibility: visible;
+
   z-index: 2;
 }
 
 /* =========================================================
    IMAGE
    IMPORTANT:
-   Natural aspect ratio prevents unnecessary cropping
+   IMAGE IS NOT CROPPED OR STRETCHED
    ========================================================= */
 
 .hero__image {
-  display: block;
+  display: block !important;
 
-  width: 100%;
-  max-width: 100%;
-  height: auto;
+  width: 100% !important;
+  max-width: 100% !important;
 
-  margin: 0;
-  padding: 0;
+  height: auto !important;
+  max-height: none !important;
+  min-height: 0 !important;
 
-  object-fit: contain;
+  margin: 0 !important;
+  padding: 0 !important;
+
+  object-fit: contain !important;
   object-position: center center;
 
   user-select: none;
   -webkit-user-drag: none;
+
+  line-height: 0;
 }
 
 /* =========================================================
@@ -84,8 +111,8 @@
 
   top: 50%;
 
-  width: 52px;
-  height: 52px;
+  width: 50px;
+  height: 50px;
 
   transform: translateY(-50%);
 
@@ -94,17 +121,18 @@
   justify-content: center;
 
   padding: 0;
+  margin: 0;
 
   background: rgba(8, 31, 239, 0.9);
+
   color: #ffffff;
 
   border: none;
   border-radius: 50%;
 
   font-family: Arial, sans-serif;
-  font-size: 34px;
+  font-size: 32px;
   font-weight: 300;
-
   line-height: 1;
 
   cursor: pointer;
@@ -118,19 +146,16 @@
 
 .hero__arrow:hover {
   background: #081FEF;
+
   transform: translateY(-50%) scale(1.05);
 }
 
-/* Previous */
-
 .hero__arrow--prev {
-  left: 28px;
+  left: 25px;
 }
 
-/* Next */
-
 .hero__arrow--next {
-  right: 28px;
+  right: 25px;
 }
 
 /* =========================================================
@@ -141,7 +166,7 @@
   position: absolute;
 
   left: 50%;
-  bottom: 18px;
+  bottom: 12px;
 
   transform: translateX(-50%);
 
@@ -150,7 +175,12 @@
 
   gap: 7px;
 
+  margin: 0;
+  padding: 0;
+
   z-index: 20;
+
+  line-height: 1;
 }
 
 /* =========================================================
@@ -167,7 +197,7 @@
   border: none;
   border-radius: 50%;
 
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.8);
 
   cursor: pointer;
 
@@ -181,8 +211,10 @@
 }
 
 .hero__dot--active {
-  width: 30px;
+  width: 28px;
+
   border-radius: 20px;
+
   background: #ffffff;
 }
 
@@ -193,21 +225,22 @@
 @media (min-width: 1600px) {
 
   .hero__arrow {
-    width: 56px;
-    height: 56px;
-    font-size: 36px;
+    width: 54px;
+    height: 54px;
+
+    font-size: 35px;
   }
 
   .hero__arrow--prev {
-    left: 32px;
+    left: 30px;
   }
 
   .hero__arrow--next {
-    right: 32px;
+    right: 30px;
   }
 
   .hero__pagination {
-    bottom: 20px;
+    bottom: 14px;
   }
 }
 
@@ -218,9 +251,10 @@
 @media (max-width: 1400px) {
 
   .hero__arrow {
-    width: 48px;
-    height: 48px;
-    font-size: 31px;
+    width: 47px;
+    height: 47px;
+
+    font-size: 30px;
   }
 
   .hero__arrow--prev {
@@ -232,7 +266,7 @@
   }
 
   .hero__pagination {
-    bottom: 16px;
+    bottom: 11px;
   }
 }
 
@@ -242,22 +276,11 @@
 
 @media (max-width: 1100px) {
 
-  .hero {
-    width: 100%;
-  }
-
-  .hero__image {
-    width: 100%;
-    height: auto;
-
-    object-fit: contain;
-  }
-
   .hero__arrow {
-    width: 44px;
-    height: 44px;
+    width: 43px;
+    height: 43px;
 
-    font-size: 28px;
+    font-size: 27px;
   }
 
   .hero__arrow--prev {
@@ -269,7 +292,7 @@
   }
 
   .hero__pagination {
-    bottom: 14px;
+    bottom: 10px;
   }
 }
 
@@ -279,43 +302,24 @@
 
 @media (max-width: 768px) {
 
-  .hero {
-    width: 100%;
-    max-width: 100%;
-    overflow: hidden;
-  }
-
-  .hero__slides {
-    width: 100%;
-  }
-
-  .hero__image {
-    width: 100%;
-    height: auto;
-
-    object-fit: contain;
-    object-position: center center;
-  }
-
   .hero__arrow {
-    width: 38px;
-    height: 38px;
+    width: 37px;
+    height: 37px;
 
-    font-size: 25px;
-
-    background: rgba(8, 31, 239, 0.9);
+    font-size: 24px;
   }
 
   .hero__arrow--prev {
-    left: 10px;
+    left: 9px;
   }
 
   .hero__arrow--next {
-    right: 10px;
+    right: 9px;
   }
 
   .hero__pagination {
-    bottom: 11px;
+    bottom: 8px;
+
     gap: 6px;
   }
 
@@ -325,7 +329,7 @@
   }
 
   .hero__dot--active {
-    width: 24px;
+    width: 23px;
   }
 }
 
@@ -335,34 +339,23 @@
 
 @media (max-width: 480px) {
 
-  .hero {
-    width: 100%;
-  }
-
-  .hero__image {
-    width: 100%;
-    height: auto;
-
-    object-fit: contain;
-  }
-
   .hero__arrow {
-    width: 34px;
-    height: 34px;
+    width: 33px;
+    height: 33px;
 
-    font-size: 22px;
+    font-size: 21px;
   }
 
   .hero__arrow--prev {
-    left: 7px;
+    left: 6px;
   }
 
   .hero__arrow--next {
-    right: 7px;
+    right: 6px;
   }
 
   .hero__pagination {
-    bottom: 9px;
+    bottom: 7px;
   }
 
   .hero__dot {
@@ -371,7 +364,7 @@
   }
 
   .hero__dot--active {
-    width: 22px;
+    width: 20px;
   }
 }
 
@@ -382,10 +375,10 @@
 @media (max-width: 380px) {
 
   .hero__arrow {
-    width: 31px;
-    height: 31px;
+    width: 30px;
+    height: 30px;
 
-    font-size: 20px;
+    font-size: 19px;
   }
 
   .hero__arrow--prev {
@@ -397,7 +390,7 @@
   }
 
   .hero__pagination {
-    bottom: 8px;
+    bottom: 6px;
   }
 }
 
@@ -406,8 +399,26 @@
    ========================================================= */
 
 .hero img {
+  display: block;
+
   max-width: 100%;
-  vertical-align: middle;
+
+  margin: 0;
+  padding: 0;
+}
+
+/* =========================================================
+   REMOVE UNWANTED SPACE FROM COMMON ELEMENTS
+   ========================================================= */
+
+.hero figure,
+.hero picture {
+  display: block;
+
+  margin: 0;
+  padding: 0;
+
+  line-height: 0;
 }
 
 /* =========================================================
