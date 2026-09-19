@@ -1,0 +1,528 @@
+/* =========================================================
+   WE SUPPLY — PREMIUM PROFESSIONAL SECTION
+   ========================================================= */
+
+.supply {
+  width: 100%;
+  box-sizing: border-box;
+
+  /* Reduced top whitespace */
+  padding: 25px 30px 60px;
+
+  background: #ffffff;
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
+
+.supply__container {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   SECTION HEADING
+   ========================================================= */
+
+.supply__heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 22px;
+
+  margin: 0 0 8px;
+}
+
+
+.supply__heading h2 {
+  margin: 0;
+
+  font-family: "Cambria", "Times New Roman", serif;
+
+  font-size: 34px;
+  font-weight: 700;
+
+  line-height: 1.2;
+
+  letter-spacing: 2px;
+
+  color: #164c78;
+}
+
+
+/* Gold lines beside heading */
+
+.supply__line {
+  display: block;
+
+  width: 70px;
+  height: 2px;
+
+  background: #d5a63c;
+
+  border-radius: 2px;
+}
+
+
+/* =========================================================
+   SUBTITLE
+   ========================================================= */
+
+.supply__subtitle {
+  margin: 0 0 32px;
+
+  font-family: "Cambria", "Times New Roman", serif;
+
+  font-size: 17px;
+  font-weight: 400;
+
+  line-height: 1.5;
+
+  letter-spacing: 0.3px;
+
+  color: #6c747c;
+}
+
+
+/* =========================================================
+   SUPPLIER LOGO GRID
+   ========================================================= */
+
+.supply__logos {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  column-gap: 45px;
+  row-gap: 28px;
+
+  align-items: center;
+}
+
+
+/* =========================================================
+   SUPPLIER LOGO CARD
+   ========================================================= */
+
+.supply__brand {
+  position: relative;
+
+  width: 100%;
+  height: 135px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 18px;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+
+  border: 1px solid #edf0f3;
+
+  border-radius: 12px;
+
+  box-shadow:
+    0 5px 18px rgba(20, 50, 75, 0.05);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+
+  animation: supplyFade 0.65s ease both;
+
+  animation-delay: calc(var(--brand-index) * 80ms);
+}
+
+
+/* =========================================================
+   HOVER EFFECT
+   ========================================================= */
+
+.supply__brand:hover {
+  transform: translateY(-4px);
+
+  border-color: rgba(22, 76, 120, 0.18);
+
+  box-shadow:
+    0 10px 25px rgba(20, 50, 75, 0.09);
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.supply__logo {
+  display: block;
+
+  max-width: 100%;
+  max-height: 100%;
+
+  width: auto;
+  height: auto;
+
+  object-fit: contain;
+
+  transition: transform 0.3s ease;
+}
+
+
+/* Logo hover */
+
+.supply__brand:hover .supply__logo {
+  transform: scale(1.04);
+}
+
+
+/* =========================================================
+   INDIVIDUAL LOGO SIZES
+   ========================================================= */
+
+.supply__logo--karcher {
+  width: 175px;
+}
+
+.supply__logo--revachem {
+  width: 105px;
+}
+
+.supply__logo--iclean {
+  width: 180px;
+}
+
+.supply__logo--taski {
+  width: 125px;
+}
+
+.supply__logo--aristo {
+  width: 190px;
+}
+
+.supply__logo--diversey {
+  width: 205px;
+}
+
+
+/* =========================================================
+   LOGO ENTRY ANIMATION
+   ========================================================= */
+
+@keyframes supplyFade {
+  from {
+    opacity: 0;
+
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================================
+   TABLET — 901px to 1200px
+   ========================================================= */
+
+@media (max-width: 1200px) {
+
+  .supply {
+    padding: 25px 25px 55px;
+  }
+
+  .supply__container {
+    width: min(1050px, 100%);
+  }
+
+  .supply__logos {
+    column-gap: 30px;
+    row-gap: 25px;
+  }
+
+}
+
+
+/* =========================================================
+   TABLET — 701px to 900px
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .supply {
+    padding: 20px 25px 50px;
+  }
+
+  .supply__heading {
+    gap: 18px;
+  }
+
+  .supply__heading h2 {
+    font-size: 31px;
+  }
+
+  .supply__line {
+    width: 55px;
+  }
+
+  .supply__subtitle {
+    font-size: 16px;
+
+    margin-bottom: 28px;
+  }
+
+  .supply__logos {
+    column-gap: 22px;
+    row-gap: 22px;
+  }
+
+  .supply__brand {
+    height: 125px;
+  }
+
+  .supply__logo--karcher {
+    width: 155px;
+  }
+
+  .supply__logo--revachem {
+    width: 95px;
+  }
+
+  .supply__logo--iclean {
+    width: 160px;
+  }
+
+  .supply__logo--taski {
+    width: 110px;
+  }
+
+  .supply__logo--aristo {
+    width: 165px;
+  }
+
+  .supply__logo--diversey {
+    width: 175px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE — UP TO 700px
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .supply {
+    padding: 15px 18px 45px;
+  }
+
+  .supply__heading {
+    gap: 14px;
+
+    margin-bottom: 7px;
+  }
+
+  .supply__heading h2 {
+    font-size: 27px;
+
+    letter-spacing: 1.5px;
+  }
+
+  .supply__line {
+    width: 40px;
+    height: 2px;
+  }
+
+  .supply__subtitle {
+    font-size: 15px;
+
+    line-height: 1.5;
+
+    margin-bottom: 25px;
+  }
+
+  .supply__logos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    column-gap: 16px;
+    row-gap: 16px;
+  }
+
+  .supply__brand {
+    height: 110px;
+
+    padding: 14px;
+
+    border-radius: 10px;
+  }
+
+
+  /* Mobile logo sizes */
+
+  .supply__logo--karcher {
+    width: 135px;
+  }
+
+  .supply__logo--revachem {
+    width: 80px;
+  }
+
+  .supply__logo--iclean {
+    width: 140px;
+  }
+
+  .supply__logo--taski {
+    width: 95px;
+  }
+
+  .supply__logo--aristo {
+    width: 145px;
+  }
+
+  .supply__logo--diversey {
+    width: 155px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE — UP TO 430px
+   ========================================================= */
+
+@media (max-width: 430px) {
+
+  .supply {
+    padding: 10px 14px 40px;
+  }
+
+  .supply__heading {
+    gap: 10px;
+
+    margin-bottom: 6px;
+  }
+
+  .supply__heading h2 {
+    font-size: 24px;
+
+    letter-spacing: 1px;
+  }
+
+  .supply__line {
+    width: 28px;
+    height: 2px;
+  }
+
+  .supply__subtitle {
+    font-size: 14px;
+
+    margin-bottom: 22px;
+  }
+
+  .supply__logos {
+    grid-template-columns: 1fr;
+
+    gap: 14px;
+  }
+
+  .supply__brand {
+    height: 100px;
+
+    padding: 14px;
+  }
+
+  .supply__logo--karcher {
+    width: 145px;
+  }
+
+  .supply__logo--revachem {
+    width: 85px;
+  }
+
+  .supply__logo--iclean {
+    width: 150px;
+  }
+
+  .supply__logo--taski {
+    width: 100px;
+  }
+
+  .supply__logo--aristo {
+    width: 155px;
+  }
+
+  .supply__logo--diversey {
+    width: 165px;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL DEVICES — UP TO 360px
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+  .supply {
+    padding: 8px 10px 35px;
+  }
+
+  .supply__heading {
+    gap: 7px;
+  }
+
+  .supply__heading h2 {
+    font-size: 21px;
+  }
+
+  .supply__line {
+    width: 22px;
+  }
+
+  .supply__subtitle {
+    font-size: 13px;
+  }
+
+  .supply__brand {
+    height: 95px;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .supply__brand {
+    animation: none;
+    transition: none;
+  }
+
+  .supply__brand:hover {
+    transform: none;
+  }
+
+  .supply__brand:hover .supply__logo {
+    transform: none;
+  }
+
+}

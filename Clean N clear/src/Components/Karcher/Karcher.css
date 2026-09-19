@@ -1,0 +1,1011 @@
+/* =========================================================
+   CLEAN N CLEAR
+   KÄRCHER FALLING SLIDER
+   YELLOW + BLACK THEME
+========================================================= */
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+.karcher-slider-container,
+.karcher-slider-container * {
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   KÄRCHER PAGE
+========================================================= */
+
+.karcher-page {
+  width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+
+/* Remove the normal website navbar spacing */
+
+body:has(.karcher-page) {
+  margin: 0 !important;
+  padding-top: 0 !important;
+}
+
+
+/* =========================================================
+   SLIDER CONTAINER
+========================================================= */
+
+.karcher-slider-container {
+  width: 100%;
+
+  position: relative;
+
+  background: #000000;
+
+  overflow: hidden;
+
+  margin: 0 auto;
+
+  font-family:
+    Cambria,
+    Georgia,
+    serif;
+}
+
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
+@media (min-width: 769px) {
+
+  .karcher-slider-container {
+    height: 100vh;
+
+    min-height: 650px;
+
+    max-width: 1920px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .karcher-slider-container {
+    aspect-ratio: 16 / 9;
+
+    max-width: 100%;
+
+    min-height: 500px;
+
+    height: auto;
+  }
+}
+
+
+/* =========================================================
+   SLICES
+========================================================= */
+
+.karcher-slice {
+  position: absolute;
+
+  top: -100%;
+
+  height: 100%;
+
+  background-repeat: no-repeat;
+
+  background-position: center;
+
+  background-size: 500% 100%;
+
+  opacity: 0;
+
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+
+  transform: translateZ(0);
+
+  will-change:
+    transform,
+    top;
+
+  z-index: 1;
+}
+
+
+/* =========================================================
+   ACTIVE SLICE
+========================================================= */
+
+.karcher-slice.active {
+  animation:
+    karcher-fall
+    1.5s
+    ease-out
+    forwards;
+}
+
+
+/* =========================================================
+   DESKTOP
+   5 EXACT COLUMNS
+========================================================= */
+
+@media (min-width: 769px) {
+
+  .karcher-slice {
+    width: calc(100% / 5);
+  }
+
+
+  /* SLICE 1 */
+
+  .karcher-slice:nth-child(1) {
+    left: 0;
+
+    background-position: 0% 0%;
+
+    animation-delay: 0s;
+
+    margin-left: 0;
+
+    z-index: 1;
+  }
+
+
+  /* SLICE 2 */
+
+  .karcher-slice:nth-child(2) {
+    left: calc(100% / 5);
+
+    background-position: 25% 0%;
+
+    animation-delay: 0.15s;
+
+    margin-left: -0.5px;
+
+    z-index: 2;
+  }
+
+
+  /* SLICE 3 */
+
+  .karcher-slice:nth-child(3) {
+    left: calc(100% / 5 * 2);
+
+    background-position: 50% 0%;
+
+    animation-delay: 0.3s;
+
+    margin-left: -0.5px;
+
+    z-index: 3;
+  }
+
+
+  /* SLICE 4 */
+
+  .karcher-slice:nth-child(4) {
+    left: calc(100% / 5 * 3);
+
+    background-position: 75% 0%;
+
+    animation-delay: 0.45s;
+
+    margin-left: -0.5px;
+
+    z-index: 4;
+  }
+
+
+  /* SLICE 5 */
+
+  .karcher-slice:nth-child(5) {
+    left: calc(100% / 5 * 4);
+
+    background-position: 100% 0%;
+
+    animation-delay: 0.6s;
+
+    margin-left: -0.5px;
+
+    z-index: 5;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   3 EXACT COLUMNS
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .karcher-slice {
+    width: calc(100% / 3);
+  }
+
+
+  /* SLICE 1 */
+
+  .karcher-slice:nth-child(1) {
+    left: 0;
+
+    background-position: 0% 0%;
+
+    animation-delay: 0s;
+
+    margin-left: 0;
+
+    z-index: 1;
+  }
+
+
+  /* SLICE 2 */
+
+  .karcher-slice:nth-child(2) {
+    left: calc(100% / 3);
+
+    background-position: 50% 0%;
+
+    animation-delay: 0.2s;
+
+    margin-left: -0.5px;
+
+    z-index: 2;
+  }
+
+
+  /* SLICE 3 */
+
+  .karcher-slice:nth-child(3) {
+    left: calc(100% / 3 * 2);
+
+    background-position: 100% 0%;
+
+    animation-delay: 0.4s;
+
+    margin-left: -2px;
+
+    z-index: 3;
+
+    width: calc((100% / 3) + 2.5px);
+  }
+
+
+  /* HIDE SLICE 4 AND 5 */
+
+  .karcher-slice:nth-child(4),
+  .karcher-slice:nth-child(5) {
+    display: none;
+  }
+}
+
+
+/* =========================================================
+   FALLING ANIMATION
+========================================================= */
+
+@keyframes karcher-fall {
+
+  0% {
+    top: -100%;
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  100% {
+    top: 0%;
+    opacity: 1;
+  }
+}
+
+
+/* =========================================================
+   YELLOW + BLACK COLOR OVERLAY
+========================================================= */
+
+.karcher-color-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 6;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.78) 0%,
+      rgba(0, 0, 0, 0.58) 35%,
+      rgba(0, 0, 0, 0.18) 65%,
+      rgba(255, 213, 0, 0.15) 100%
+    );
+}
+
+
+/* =========================================================
+   CONTENT OVERLAY
+========================================================= */
+
+.karcher-content-overlay {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  transform:
+    translate(-50%, -50%);
+
+  text-align: left;
+
+  color: #ffffff;
+
+  z-index: 10;
+
+  opacity: 0;
+
+  width: 80%;
+
+  max-width: 1000px;
+
+  padding: 20px;
+}
+
+
+/* =========================================================
+   CONTENT SHOW
+========================================================= */
+
+.karcher-content-overlay.show {
+  animation:
+    karcher-fade-up
+    1s
+    ease-out
+    forwards;
+}
+
+
+/* =========================================================
+   CONTENT ANIMATION
+========================================================= */
+
+@keyframes karcher-fade-up {
+
+  0% {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -40%);
+  }
+
+  100% {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%);
+  }
+}
+
+
+/* =========================================================
+   KÄRCHER TAG
+========================================================= */
+
+.karcher-tag {
+  display: inline-flex;
+
+  align-items: center;
+
+  margin-bottom: 22px;
+
+  padding: 9px 15px;
+
+  background: #ffd500;
+
+  color: #111111;
+
+  border-left: 5px solid #ffffff;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   MAIN TITLE
+========================================================= */
+
+.karcher-content-overlay h1 {
+  margin: 0 0 15px;
+
+  color: #ffffff;
+
+  font-size:
+    clamp(
+      2.4rem,
+      7vw,
+      5.5rem
+    );
+
+  font-weight: 700;
+
+  line-height: 0.98;
+
+  letter-spacing: -2px;
+
+  text-shadow:
+    3px 3px 15px
+    rgba(0, 0, 0, 0.75);
+}
+
+
+/* =========================================================
+   SUBTITLE
+========================================================= */
+
+.karcher-content-overlay h2 {
+  margin: 0 0 18px;
+
+  color: #ffd500;
+
+  font-size:
+    clamp(
+      1.2rem,
+      3vw,
+      2rem
+    );
+
+  font-weight: 700;
+
+  line-height: 1.2;
+
+  letter-spacing: 0.5px;
+
+  text-shadow:
+    2px 2px 8px
+    rgba(0, 0, 0, 0.75);
+}
+
+
+/* =========================================================
+   PARAGRAPH
+========================================================= */
+
+.karcher-content-overlay p {
+  max-width: 700px;
+
+  margin: 0;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.92
+    );
+
+  font-size:
+    clamp(
+      0.95rem,
+      2vw,
+      1.2rem
+    );
+
+  line-height: 1.65;
+
+  font-weight: 400;
+
+  text-shadow:
+    1px 1px 6px
+    rgba(0, 0, 0, 0.8);
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.karcher-buttons {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  margin-top: 30px;
+}
+
+
+/* =========================================================
+   BUTTON COMMON
+========================================================= */
+
+.karcher-btn {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 12px;
+
+  min-height: 50px;
+
+  padding: 0 23px;
+
+  text-decoration: none;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.5px;
+
+  transition:
+    0.25s ease;
+}
+
+
+/* =========================================================
+   PRIMARY BUTTON
+========================================================= */
+
+.karcher-btn-primary {
+  background: #ffd500;
+
+  color: #111111;
+
+  border: 1px solid #ffd500;
+}
+
+.karcher-btn-primary:hover {
+  background: #ffffff;
+
+  border-color: #ffffff;
+
+  transform:
+    translateY(-3px);
+}
+
+
+/* =========================================================
+   SECONDARY BUTTON
+========================================================= */
+
+.karcher-btn-secondary {
+  background: rgba(0, 0, 0, 0.3);
+
+  color: #ffffff;
+
+  border: 1px solid #ffffff;
+}
+
+.karcher-btn-secondary:hover {
+  background: #ffffff;
+
+  color: #111111;
+
+  transform:
+    translateY(-3px);
+}
+
+
+/* =========================================================
+   BUTTON ARROW
+========================================================= */
+
+.karcher-btn span {
+  font-size: 19px;
+
+  line-height: 1;
+}
+
+
+/* =========================================================
+   SLIDE NUMBER
+========================================================= */
+
+.karcher-slide-number {
+  position: absolute;
+
+  right: 45px;
+  top: 50%;
+
+  transform:
+    translateY(-50%);
+
+  z-index: 12;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  color: #ffffff;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   SLIDE LINE
+========================================================= */
+
+.karcher-slide-line {
+  width: 45px;
+
+  height: 2px;
+
+  background: #ffd500;
+}
+
+
+/* =========================================================
+   BOTTOM INFO
+========================================================= */
+
+.karcher-bottom-info {
+  position: absolute;
+
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+
+  height: 55px;
+
+  padding:
+    0 8%;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 45px;
+
+  background: #ffd500;
+
+  color: #111111;
+
+  z-index: 15;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   DESKTOP SMALL
+========================================================= */
+
+@media (max-width: 1200px) {
+
+  .karcher-content-overlay {
+    width: 82%;
+  }
+
+  .karcher-slide-number {
+    right: 25px;
+  }
+
+  .karcher-content-overlay h1 {
+    font-size:
+      clamp(
+        2.5rem,
+        6vw,
+        4.8rem
+      );
+  }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .karcher-content-overlay {
+    width: 82%;
+
+    padding: 15px;
+  }
+
+  .karcher-content-overlay h1 {
+    font-size: 58px;
+  }
+
+  .karcher-content-overlay h2 {
+    font-size: 24px;
+  }
+
+  .karcher-content-overlay p {
+    max-width: 600px;
+
+    font-size: 17px;
+  }
+
+  .karcher-slide-number {
+    right: 20px;
+  }
+
+  .karcher-bottom-info {
+    padding: 0 6%;
+
+    gap: 30px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .karcher-slider-container {
+    min-height: 500px;
+  }
+
+  .karcher-color-overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.65) 0%,
+        rgba(0, 0, 0, 0.48) 55%,
+        rgba(0, 0, 0, 0.78) 100%
+      );
+  }
+
+  .karcher-content-overlay {
+    width: 90%;
+
+    padding: 15px;
+
+    text-align: center;
+  }
+
+  .karcher-tag {
+    margin-bottom: 16px;
+
+    padding: 7px 11px;
+
+    border-left-width: 3px;
+
+    font-size: 9px;
+
+    letter-spacing: 1.2px;
+  }
+
+  .karcher-content-overlay h1 {
+    font-size:
+      clamp(
+        2rem,
+        10vw,
+        3.5rem
+      );
+
+    line-height: 1;
+
+    letter-spacing: -1px;
+
+    margin-bottom: 12px;
+  }
+
+  .karcher-content-overlay h2 {
+    font-size:
+      clamp(
+        1rem,
+        5vw,
+        1.5rem
+      );
+
+    margin-bottom: 12px;
+  }
+
+  .karcher-content-overlay p {
+    max-width: 100%;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+  }
+
+  .karcher-buttons {
+    justify-content: center;
+
+    gap: 9px;
+
+    margin-top: 20px;
+  }
+
+  .karcher-btn {
+    min-height: 43px;
+
+    padding: 0 15px;
+
+    font-size: 11px;
+
+    gap: 8px;
+  }
+
+  .karcher-slide-number {
+    top: 20px;
+    right: 20px;
+
+    transform: none;
+
+    font-size: 9px;
+  }
+
+  .karcher-slide-line {
+    width: 30px;
+  }
+
+  .karcher-bottom-info {
+    height: 45px;
+
+    padding: 0 20px;
+
+    gap: 20px;
+
+    overflow: hidden;
+
+    white-space: nowrap;
+
+    font-size: 8px;
+
+    letter-spacing: 1.2px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+  .karcher-slider-container {
+    min-height: 520px;
+  }
+
+  .karcher-content-overlay {
+    width: 94%;
+
+    padding: 10px;
+  }
+
+  .karcher-tag {
+    font-size: 8px;
+
+    letter-spacing: 1px;
+
+    padding: 7px 9px;
+  }
+
+  .karcher-content-overlay h1 {
+    font-size: 38px;
+  }
+
+  .karcher-content-overlay h2 {
+    font-size: 18px;
+  }
+
+  .karcher-content-overlay p {
+    font-size: 13px;
+
+    line-height: 1.45;
+  }
+
+  .karcher-buttons {
+    flex-direction: column;
+
+    align-items: center;
+
+    margin-top: 17px;
+  }
+
+  .karcher-btn {
+    width: 190px;
+
+    min-height: 40px;
+  }
+
+  .karcher-bottom-info {
+    gap: 14px;
+
+    padding: 0 15px;
+
+    font-size: 7px;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 360px) {
+
+  .karcher-slider-container {
+    min-height: 500px;
+  }
+
+  .karcher-content-overlay h1 {
+    font-size: 33px;
+  }
+
+  .karcher-content-overlay h2 {
+    font-size: 16px;
+  }
+
+  .karcher-content-overlay p {
+    font-size: 12px;
+  }
+
+  .karcher-tag {
+    font-size: 7px;
+
+    letter-spacing: 0.8px;
+  }
+
+  .karcher-btn {
+    width: 175px;
+
+    min-height: 38px;
+
+    font-size: 10px;
+  }
+
+  .karcher-bottom-info {
+    gap: 10px;
+
+    font-size: 6.5px;
+  }
+}

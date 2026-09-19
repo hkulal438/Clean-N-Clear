@@ -1,0 +1,542 @@
+/* =========================================================
+   CLEAN N CLEAR — COMMITMENT SECTION
+   Compact + Centered Header
+   ========================================================= */
+
+.commitment {
+  --cmt-blue: #081fef;
+  --cmt-blue-deep: #050fa8;
+  --cmt-blue-ink: #0a1130;
+  --cmt-lime: #95d501;
+  --cmt-lime-soft: rgba(149, 213, 1, 0.16);
+
+  position: relative;
+  overflow: hidden;
+
+  /* REDUCED TOP WHITESPACE */
+  padding: 2rem clamp(1.25rem, 4vw, 3.5rem) 3rem;
+
+  background: #ffffff;
+  color: var(--cmt-blue-ink);
+  font-family: inherit;
+}
+
+
+/* =========================================================
+   BACKGROUND GLOW
+   ========================================================= */
+
+.commitment__glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+.commitment__glow--blue {
+  width: 30rem;
+  height: 30rem;
+  top: -15rem;
+  left: -12rem;
+  background: rgba(8, 31, 239, 0.08);
+}
+
+.commitment__glow--lime {
+  width: 26rem;
+  height: 26rem;
+  bottom: -16rem;
+  right: -10rem;
+  background: rgba(149, 213, 1, 0.2);
+}
+
+
+/* =========================================================
+   GRID BACKGROUND
+   ========================================================= */
+
+.commitment::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    linear-gradient(
+      rgba(8, 31, 239, 0.04) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(8, 31, 239, 0.04) 1px,
+      transparent 1px
+    );
+
+  background-size: 4.5rem 4.5rem;
+
+  -webkit-mask-image: radial-gradient(
+    80% 70% at 50% 30%,
+    #000 0%,
+    transparent 100%
+  );
+
+  mask-image: radial-gradient(
+    80% 70% at 50% 30%,
+    #000 0%,
+    transparent 100%
+  );
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   INNER
+   ========================================================= */
+
+.commitment__inner {
+  position: relative;
+  width: 100%;
+  max-width: 76rem;
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   HEADER — CENTERED
+   ========================================================= */
+
+.commitment__header {
+  width: 100%;
+  max-width: 850px;
+
+  margin: 0 auto 2.5rem;
+
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+/* =========================================================
+   EYEBROW
+   ========================================================= */
+
+.commitment__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+
+  color: var(--cmt-blue);
+
+  padding: 0.4rem 0.9rem;
+
+  border: 1px solid rgba(8, 31, 239, 0.18);
+  border-radius: 999px;
+
+  background: rgba(8, 31, 239, 0.04);
+}
+
+
+/* =========================================================
+   EYEBROW DOT
+   ========================================================= */
+
+.commitment__eyebrow-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+
+  border-radius: 50%;
+
+  background: var(--cmt-lime);
+
+  box-shadow:
+    0 0 0 3px var(--cmt-lime-soft);
+}
+
+
+/* =========================================================
+   TITLE — CENTERED
+   ========================================================= */
+
+.commitment__title {
+  width: 100%;
+
+  margin: 0.8rem 0 0;
+
+  text-align: center;
+
+  font-size: clamp(2.1rem, 4.5vw, 3.5rem);
+  line-height: 1.05;
+
+  font-weight: 800;
+  letter-spacing: -0.03em;
+
+  color: var(--cmt-blue-ink);
+}
+
+
+/* BLUE WORD */
+.commitment__title-accent {
+  color: var(--cmt-blue);
+
+  background: linear-gradient(
+    100deg,
+    var(--cmt-blue) 30%,
+    #4d6bff 100%
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+/* GREEN DOT */
+.commitment__title-dot {
+  color: var(--cmt-lime);
+}
+
+
+/* =========================================================
+   SUBTITLE — CENTERED
+   ========================================================= */
+
+.commitment__subtitle {
+  width: 100%;
+  max-width: 720px;
+
+  margin: 0.8rem auto 0;
+
+  text-align: center;
+
+  font-size: clamp(0.9rem, 1.2vw, 1rem);
+  line-height: 1.55;
+
+  color: rgba(10, 17, 48, 0.66);
+}
+
+
+/* =========================================================
+   CARDS GRID
+   ========================================================= */
+
+.commitment__grid {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 1rem;
+}
+
+
+/* =========================================================
+   CARD
+   ========================================================= */
+
+.commitment__card {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 1.35rem 1.35rem 1.6rem;
+
+  border-radius: 1rem;
+
+  border: 1px solid rgba(8, 31, 239, 0.12);
+
+  background: #ffffff;
+
+  box-shadow:
+    0 1px 2px rgba(8, 31, 239, 0.04),
+    0 18px 38px -25px rgba(8, 31, 239, 0.16);
+
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+
+  opacity: 0;
+
+  transform: translateY(18px);
+
+  animation:
+    cmt-rise 0.7s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+}
+
+
+/* =========================================================
+   CARD ANIMATION
+   ========================================================= */
+
+@keyframes cmt-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================================
+   CARD HOVER
+   ========================================================= */
+
+.commitment__card:hover {
+  transform: translateY(-6px);
+
+  border-color: rgba(149, 213, 1, 0.7);
+
+  box-shadow:
+    0 1px 2px rgba(8, 31, 239, 0.05),
+    0 28px 50px -25px rgba(8, 31, 239, 0.25),
+    0 0 0 3px rgba(149, 213, 1, 0.12);
+}
+
+
+/* =========================================================
+   CARD TOP
+   ========================================================= */
+
+.commitment__card-top {
+  display: flex;
+  align-items: center;
+
+  gap: 0.75rem;
+
+  margin-bottom: 1.6rem;
+}
+
+
+/* =========================================================
+   NUMBER
+   ========================================================= */
+
+.commitment__number {
+  font-size: 0.78rem;
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+
+  color: var(--cmt-blue-ink);
+
+  background: var(--cmt-lime);
+
+  padding: 0.25rem 0.55rem;
+
+  border-radius: 0.4rem;
+
+  box-shadow:
+    0 5px 15px -6px
+    rgba(149, 213, 1, 0.7);
+}
+
+
+/* =========================================================
+   CARD LINE
+   ========================================================= */
+
+.commitment__card-line {
+  flex: 1;
+
+  height: 1px;
+
+  background: linear-gradient(
+    90deg,
+    rgba(8, 31, 239, 0.18),
+    transparent
+  );
+}
+
+
+/* =========================================================
+   CARD TITLE
+   ========================================================= */
+
+.commitment__card-title {
+  margin: 0 0 0.55rem;
+
+  font-size: 1.1rem;
+
+  font-weight: 700;
+
+  letter-spacing: -0.01em;
+
+  color: var(--cmt-blue-ink);
+}
+
+
+/* =========================================================
+   CARD DESCRIPTION
+   ========================================================= */
+
+.commitment__card-description {
+  margin: 0;
+
+  font-size: 0.88rem;
+
+  line-height: 1.5;
+
+  color: rgba(10, 17, 48, 0.64);
+}
+
+
+/* =========================================================
+   ARROW
+   ========================================================= */
+
+.commitment__card-arrow {
+  position: absolute;
+
+  right: 1.15rem;
+  bottom: 1.1rem;
+
+  display: grid;
+  place-items: center;
+
+  width: 1.9rem;
+  height: 1.9rem;
+
+  border-radius: 50%;
+
+  color: var(--cmt-blue);
+
+  background: rgba(8, 31, 239, 0.06);
+
+  border: 1px solid rgba(8, 31, 239, 0.15);
+
+  opacity: 0;
+
+  transform: translate(-5px, 5px);
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s
+    cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+.commitment__card:hover .commitment__card-arrow {
+  opacity: 1;
+
+  transform: translate(0, 0);
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1024px) {
+
+  .commitment {
+    padding-top: 1.75rem;
+    padding-bottom: 2.75rem;
+  }
+
+  .commitment__header {
+    margin-bottom: 2rem;
+  }
+
+  .commitment__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .commitment__card {
+    padding: 1.3rem 1.25rem 1.5rem;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 620px) {
+
+  .commitment {
+    padding: 1.5rem 1rem 2.25rem;
+  }
+
+  .commitment__header {
+    margin-bottom: 1.75rem;
+  }
+
+  .commitment__eyebrow {
+    font-size: 0.68rem;
+    padding: 0.35rem 0.75rem;
+  }
+
+  .commitment__title {
+    font-size: 2.2rem;
+  }
+
+  .commitment__subtitle {
+    font-size: 0.9rem;
+  }
+
+  .commitment__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .commitment__card {
+    padding: 1.25rem 1.2rem 1.5rem;
+  }
+
+  .commitment__card-top {
+    margin-bottom: 1.35rem;
+  }
+
+  .commitment__card-title {
+    font-size: 1.05rem;
+  }
+
+  .commitment__card-description {
+    font-size: 0.86rem;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL SCREENS
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+  .commitment {
+    padding-top: 1.25rem;
+  }
+
+  .commitment__title {
+    font-size: 2rem;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .commitment__card {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .commitment__card:hover {
+    transform: none;
+  }
+}

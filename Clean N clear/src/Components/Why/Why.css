@@ -1,0 +1,376 @@
+/* =========================================================
+   CLEAN N CLEAR — WHAT WE SUPPLY
+   Clean Compact Card Section
+   ========================================================= */
+
+.why-section {
+  width: 100%;
+  background: #ffffff;
+
+  padding: 35px 0 40px;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
+.why-container {
+  width: 100%;
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  padding: 0 25px;
+}
+
+
+/* =========================================================
+   SECTION HEADING
+   ========================================================= */
+
+.why-heading {
+  width: 100%;
+
+  text-align: center;
+
+  margin: 0 auto 35px;
+
+  max-width: 720px;
+}
+
+.why-heading span {
+  display: inline-block;
+
+  margin-bottom: 8px;
+
+  color: #0b2350;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.14em;
+}
+
+.why-heading h2 {
+  margin: 0 0 8px;
+
+  color: #0b2350;
+
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+
+  line-height: 1.15;
+
+  font-weight: 700;
+
+  letter-spacing: -0.02em;
+}
+
+.why-heading p {
+  margin: 0 auto;
+
+  max-width: 620px;
+
+  color: #60718c;
+
+  font-size: 14px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   CARDS GRID
+   ========================================================= */
+
+.why-items {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 22px;
+}
+
+
+/* =========================================================
+   CARD WRAPPER
+   ========================================================= */
+
+.why-item-wrapper {
+  width: 100%;
+
+  padding: 0;
+}
+
+
+/* =========================================================
+   CARD
+   ========================================================= */
+
+.why-card {
+  width: 100%;
+
+  min-height: 245px;
+
+  padding: 32px 25px 28px;
+
+  background: #ffffff;
+
+  border: 1px solid #e1e8f0;
+
+  border-radius: 10px;
+
+  text-align: center;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: flex-start;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    border-width 0.25s ease;
+}
+
+
+/* =========================================================
+   CARD HOVER — DEEP BLUE BORDER
+   ========================================================= */
+
+.why-card:hover {
+  transform: translateY(-5px);
+
+  border: 3px solid #0b2350;
+
+  box-shadow:
+    0 14px 40px rgba(11, 35, 80, 0.18);
+}
+
+
+/* =========================================================
+   ICON
+   ========================================================= */
+
+.why-icon {
+  width: 72px;
+  height: 72px;
+
+  margin-bottom: 20px;
+
+  border-radius: 50%;
+
+  background: #eef3fa;
+
+  color: #0b2350;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+
+/* =========================================================
+   ICON HOVER
+   ========================================================= */
+
+.why-card:hover .why-icon {
+  background: #0b2350;
+
+  color: #ffffff;
+
+  transform: scale(1.05);
+}
+
+.why-icon svg {
+  display: block;
+}
+
+
+/* =========================================================
+   CARD CONTENT
+   ========================================================= */
+
+.why-card-content {
+  width: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+}
+
+
+/* =========================================================
+   CARD TITLE
+   ========================================================= */
+
+.why-card-content h3 {
+  margin: 0 0 10px;
+
+  color: #0b2350;
+
+  font-size: 17px;
+
+  line-height: 1.35;
+
+  font-weight: 650;
+
+  transition: color 0.25s ease;
+}
+
+
+/* =========================================================
+   TITLE HOVER
+   ========================================================= */
+
+.why-card:hover .why-card-content h3 {
+  color: #1769aa;
+}
+
+
+/* =========================================================
+   CARD DESCRIPTION
+   ========================================================= */
+
+.why-card-content p {
+  margin: 0;
+
+  max-width: 300px;
+
+  color: #60718c;
+
+  font-size: 13.5px;
+
+  line-height: 1.65;
+}
+
+
+/* =========================================================
+   LARGE TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+  .why-section {
+    padding: 30px 0 35px;
+  }
+
+  .why-container {
+    padding: 0 20px;
+  }
+
+  .why-items {
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 20px;
+  }
+
+  .why-card {
+    min-height: 235px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+  .why-section {
+    padding: 25px 0 30px;
+  }
+
+  .why-container {
+    padding: 0 15px;
+  }
+
+  .why-heading {
+    margin-bottom: 28px;
+  }
+
+  .why-heading h2 {
+    font-size: 1.8rem;
+  }
+
+  .why-heading p {
+    font-size: 13.5px;
+  }
+
+  .why-items {
+    grid-template-columns: 1fr;
+
+    gap: 16px;
+  }
+
+  .why-card {
+    min-height: auto;
+
+    padding: 28px 22px 25px;
+  }
+
+  .why-icon {
+    width: 68px;
+    height: 68px;
+
+    margin-bottom: 17px;
+  }
+
+  .why-card-content h3 {
+    font-size: 16px;
+  }
+
+  .why-card-content p {
+    font-size: 13px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+  .why-section {
+    padding: 22px 0 25px;
+  }
+
+  .why-heading h2 {
+    font-size: 1.65rem;
+  }
+
+  .why-heading span {
+    font-size: 11px;
+  }
+
+  .why-card {
+    padding: 25px 18px 23px;
+  }
+
+  .why-icon {
+    width: 64px;
+    height: 64px;
+  }
+}

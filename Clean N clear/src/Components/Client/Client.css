@@ -1,0 +1,861 @@
+/* =========================================================
+   TRUSTED CLIENTS — PREMIUM CLIENT SECTION
+   ========================================================= */
+
+.client {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 45px 30px 65px;
+
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #fafcfd 100%
+  );
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
+
+.client__container {
+  width: min(1200px, 100%);
+  margin: 0 auto;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   SECTION HEADING
+   ========================================================= */
+
+.client__heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 22px;
+
+  margin: 0 0 8px;
+}
+
+
+.client__heading h2 {
+  margin: 0;
+
+  font-family: "Cambria", "Times New Roman", serif;
+
+  font-size: 33px;
+  font-weight: 700;
+
+  line-height: 1.25;
+
+  letter-spacing: 1.5px;
+
+  color: #164c78;
+}
+
+
+/* =========================================================
+   GOLD LINES
+   ========================================================= */
+
+.client__line {
+  display: block;
+
+  width: 70px;
+  height: 2px;
+
+  flex-shrink: 0;
+
+  background: #d5a63c;
+
+  border-radius: 10px;
+}
+
+
+/* =========================================================
+   SUBTITLE
+   ========================================================= */
+
+.client__subtitle {
+  margin: 0 0 40px;
+
+  font-family: "Cambria", "Times New Roman", serif;
+
+  font-size: 17px;
+  font-weight: 400;
+
+  line-height: 1.5;
+
+  letter-spacing: 0.3px;
+
+  color: #68737c;
+}
+
+
+/* =========================================================
+   CLIENT GRID
+   ========================================================= */
+
+.client__grid {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 28px 32px;
+
+  align-items: stretch;
+}
+
+
+/* =========================================================
+   CLIENT CARD
+   ========================================================= */
+
+.client__card {
+  position: relative;
+
+  width: 100%;
+  min-height: 170px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 15px 20px;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+
+  border: 1px solid #e5ebef;
+
+  border-radius: 12px;
+
+  box-shadow:
+    0 6px 20px rgba(20, 50, 75, 0.055);
+
+  overflow: hidden;
+
+  animation:
+    clientFadeIn 0.65s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
+
+  animation-delay:
+    calc(var(--client-index) * 70ms);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+
+/* =========================================================
+   GOLD TOP ACCENT
+   ========================================================= */
+
+.client__card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 50%;
+
+  width: 0;
+  height: 3px;
+
+  background: #d5a63c;
+
+  transform: translateX(-50%);
+
+  transition: width 0.3s ease;
+}
+
+
+.client__card:hover::before {
+  width: 50%;
+}
+
+
+/* =========================================================
+   CARD HOVER
+   ========================================================= */
+
+.client__card:hover {
+  transform: translateY(-5px);
+
+  border-color: rgba(22, 76, 120, 0.18);
+
+  box-shadow:
+    0 14px 30px rgba(20, 50, 75, 0.10);
+}
+
+
+/* =========================================================
+   CLIENT LOGO
+   ========================================================= */
+
+.client__logo {
+  display: block;
+
+  width: auto;
+  height: auto;
+
+  max-width: 96%;
+  max-height: 130px;
+
+  object-fit: contain;
+
+  transition:
+    transform 0.3s ease;
+}
+
+
+/* =========================================================
+   LOGO HOVER
+   ========================================================= */
+
+.client__card:hover .client__logo {
+  transform: scale(1.05);
+}
+
+
+/* =========================================================
+   INDIVIDUAL DESKTOP LOGO SIZES
+   ========================================================= */
+
+.client__card:nth-child(1) .client__logo {
+  width: 235px;
+  max-width: 96%;
+}
+
+.client__card:nth-child(2) .client__logo {
+  width: 225px;
+  max-width: 96%;
+}
+
+.client__card:nth-child(3) .client__logo {
+  width: 225px;
+  max-width: 96%;
+}
+
+.client__card:nth-child(4) .client__logo {
+  width: 230px;
+  max-width: 96%;
+}
+
+.client__card:nth-child(5) .client__logo {
+  width: 230px;
+  max-width: 96%;
+}
+
+.client__card:nth-child(6) .client__logo {
+  width: 235px;
+  max-width: 96%;
+}
+
+.client__card:nth-child(7) .client__logo {
+  width: 215px;
+  max-width: 96%;
+}
+
+.client__card:nth-child(8) .client__logo {
+  width: 240px;
+  max-width: 96%;
+}
+
+.client__card:nth-child(9) .client__logo {
+  width: 235px;
+  max-width: 96%;
+}
+
+
+/* =========================================================
+   ENTRY ANIMATION
+   ========================================================= */
+
+@keyframes clientFadeIn {
+
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+
+/* =========================================================
+   CTA
+   ========================================================= */
+
+.client__cta {
+  position: relative;
+
+  margin-top: 50px;
+
+  padding: 30px 38px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 30px;
+
+  text-align: left;
+
+  background:
+    linear-gradient(
+      135deg,
+      #123f63 0%,
+      #195b88 100%
+    );
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 12px 30px rgba(20, 60, 90, 0.14);
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   CTA DECORATION
+   ========================================================= */
+
+.client__cta::before {
+  content: "";
+
+  position: absolute;
+
+  width: 260px;
+  height: 260px;
+
+  right: -100px;
+  top: -150px;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  box-shadow:
+    0 0 0 25px rgba(255, 255, 255, 0.025),
+    0 0 0 50px rgba(255, 255, 255, 0.02);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   CTA CONTENT
+   ========================================================= */
+
+.client__cta-content {
+  position: relative;
+
+  z-index: 1;
+}
+
+
+.client__cta-content h3 {
+  margin: 0 0 7px;
+
+  font-family: "Cambria", "Times New Roman", serif;
+
+  font-size: 26px;
+  font-weight: 700;
+
+  line-height: 1.25;
+
+  color: #ffffff;
+}
+
+
+.client__cta-content p {
+  margin: 0;
+
+  max-width: 600px;
+
+  font-family: "Cambria", "Times New Roman", serif;
+
+  font-size: 15px;
+
+  line-height: 1.55;
+
+  color: rgba(255, 255, 255, 0.80);
+}
+
+
+/* =========================================================
+   CTA BUTTON
+   ========================================================= */
+
+.client__button {
+  position: relative;
+
+  z-index: 1;
+
+  flex-shrink: 0;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  min-height: 50px;
+
+  padding: 0 25px;
+
+  border-radius: 7px;
+
+  background: #d5a63c;
+
+  color: #ffffff;
+
+  font-family: "Cambria", "Times New Roman", serif;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  letter-spacing: 0.3px;
+
+  text-decoration: none;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+.client__button span {
+  font-size: 21px;
+
+  line-height: 1;
+
+  transition:
+    transform 0.25s ease;
+}
+
+
+.client__button:hover {
+  transform: translateY(-2px);
+
+  background: #c4942e;
+
+  box-shadow:
+    0 7px 18px rgba(0, 0, 0, 0.18);
+}
+
+
+.client__button:hover span {
+  transform: translateX(4px);
+}
+
+
+/* =========================================================
+   LARGE TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+  .client {
+    padding: 42px 25px 60px;
+  }
+
+  .client__grid {
+    gap: 24px;
+  }
+
+  .client__card {
+    min-height: 160px;
+
+    padding: 15px;
+  }
+
+  .client__logo {
+    max-height: 120px;
+  }
+
+  .client__cta {
+    padding: 28px 30px;
+  }
+
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .client {
+    padding: 38px 22px 55px;
+  }
+
+  .client__heading {
+    gap: 16px;
+  }
+
+  .client__heading h2 {
+    font-size: 28px;
+  }
+
+  .client__line {
+    width: 50px;
+  }
+
+  .client__subtitle {
+    font-size: 16px;
+
+    margin-bottom: 32px;
+  }
+
+  .client__grid {
+    gap: 20px;
+  }
+
+  .client__card {
+    min-height: 145px;
+
+    padding: 12px;
+  }
+
+  .client__logo {
+    max-width: 96%;
+    max-height: 110px;
+  }
+
+  .client__cta {
+    margin-top: 40px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .client {
+    padding: 32px 18px 45px;
+  }
+
+  .client__heading {
+    gap: 12px;
+
+    margin-bottom: 7px;
+  }
+
+  .client__heading h2 {
+    font-size: 24px;
+
+    letter-spacing: 0.8px;
+  }
+
+  .client__line {
+    width: 35px;
+  }
+
+  .client__subtitle {
+    font-size: 15px;
+
+    margin-bottom: 27px;
+  }
+
+
+  /* Two-column mobile layout */
+
+  .client__grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
+  }
+
+
+  .client__card {
+    min-height: 125px;
+
+    padding: 10px;
+  }
+
+
+  .client__logo {
+    max-width: 96%;
+    max-height: 100px;
+  }
+
+
+  /* Mobile logo sizes */
+
+  .client__card:nth-child(1) .client__logo {
+    width: 195px;
+  }
+
+  .client__card:nth-child(2) .client__logo {
+    width: 190px;
+  }
+
+  .client__card:nth-child(3) .client__logo {
+    width: 190px;
+  }
+
+  .client__card:nth-child(4) .client__logo {
+    width: 195px;
+  }
+
+  .client__card:nth-child(5) .client__logo {
+    width: 195px;
+  }
+
+  .client__card:nth-child(6) .client__logo {
+    width: 195px;
+  }
+
+  .client__card:nth-child(7) .client__logo {
+    width: 180px;
+  }
+
+  .client__card:nth-child(8) .client__logo {
+    width: 200px;
+  }
+
+  .client__card:nth-child(9) .client__logo {
+    width: 195px;
+  }
+
+
+  /* CTA */
+
+  .client__cta {
+    margin-top: 32px;
+
+    padding: 24px 20px;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 20px;
+  }
+
+  .client__cta-content h3 {
+    font-size: 22px;
+  }
+
+  .client__cta-content p {
+    font-size: 14px;
+  }
+
+  .client__button {
+    width: 100%;
+
+    box-sizing: border-box;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 430px) {
+
+  .client {
+    padding: 28px 14px 40px;
+  }
+
+  .client__heading {
+    gap: 8px;
+  }
+
+  .client__heading h2 {
+    font-size: 21px;
+
+    letter-spacing: 0.5px;
+  }
+
+  .client__line {
+    width: 25px;
+  }
+
+  .client__subtitle {
+    font-size: 14px;
+
+    margin-bottom: 23px;
+  }
+
+  .client__grid {
+    gap: 12px;
+  }
+
+  .client__card {
+    min-height: 115px;
+
+    padding: 8px;
+  }
+
+  .client__logo {
+    max-width: 97%;
+    max-height: 90px;
+  }
+
+
+  /* Smaller mobile logo sizes */
+
+  .client__card:nth-child(1) .client__logo {
+    width: 175px;
+  }
+
+  .client__card:nth-child(2) .client__logo {
+    width: 170px;
+  }
+
+  .client__card:nth-child(3) .client__logo {
+    width: 170px;
+  }
+
+  .client__card:nth-child(4) .client__logo {
+    width: 175px;
+  }
+
+  .client__card:nth-child(5) .client__logo {
+    width: 175px;
+  }
+
+  .client__card:nth-child(6) .client__logo {
+    width: 175px;
+  }
+
+  .client__card:nth-child(7) .client__logo {
+    width: 160px;
+  }
+
+  .client__card:nth-child(8) .client__logo {
+    width: 180px;
+  }
+
+  .client__card:nth-child(9) .client__logo {
+    width: 175px;
+  }
+
+
+  /* CTA */
+
+  .client__cta {
+    margin-top: 27px;
+
+    padding: 21px 17px;
+  }
+
+  .client__cta-content h3 {
+    font-size: 20px;
+  }
+
+  .client__cta-content p {
+    font-size: 13.5px;
+  }
+
+  .client__button {
+    min-height: 45px;
+
+    font-size: 14px;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+  .client {
+    padding: 24px 10px 35px;
+  }
+
+  .client__heading {
+    gap: 7px;
+  }
+
+  .client__heading h2 {
+    font-size: 19px;
+  }
+
+  .client__line {
+    width: 20px;
+  }
+
+  .client__subtitle {
+    font-size: 13px;
+  }
+
+  .client__grid {
+    gap: 10px;
+  }
+
+  .client__card {
+    min-height: 105px;
+
+    padding: 7px;
+  }
+
+  .client__logo {
+    max-width: 98%;
+    max-height: 80px;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .client__card {
+    animation: none;
+
+    transition: none;
+  }
+
+  .client__card:hover {
+    transform: none;
+  }
+
+  .client__card:hover .client__logo {
+    transform: none;
+  }
+
+  .client__button {
+    transition: none;
+  }
+
+}
