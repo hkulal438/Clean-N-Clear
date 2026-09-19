@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+// Layout
 import Layout from "./Components/Layout/Layout";
 import Footer from "./Components/Footer/Footer";
 
@@ -17,12 +18,17 @@ import Committment from "./Components/Committment/Committment";
 
 // Kärcher
 import Karcher from "./Components/Karcher/Karcher";
+import WhyKarcher from "./Components/Whykarcher/Whykarcher";
+
+// Cleaning Chemicals
+import Cleaning from "./Components/Cleaning-chemicals/Cleaning";
 
 import "./App.css";
 
-/* =====================================================
-   HOME PAGE
-===================================================== */
+
+// --------------------------------------------------
+// HOME PAGE
+// --------------------------------------------------
 
 function Home() {
   return (
@@ -35,9 +41,10 @@ function Home() {
   );
 }
 
-/* =====================================================
-   ABOUT PAGE
-===================================================== */
+
+// --------------------------------------------------
+// ABOUT PAGE
+// --------------------------------------------------
 
 function AboutPage() {
   return (
@@ -49,29 +56,29 @@ function AboutPage() {
   );
 }
 
-/* =====================================================
-   TEMPORARY PAGE COMPONENT
-===================================================== */
+
+// --------------------------------------------------
+// SIMPLE PLACEHOLDER PAGE
+// --------------------------------------------------
 
 function Page({ title }) {
   return (
     <section
       style={{
-        minHeight: "65vh",
+        minHeight: "60vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        padding: "120px 30px 80px",
+        padding: "80px 20px",
+        fontFamily: "Cambria, Georgia, serif",
         textAlign: "center",
       }}
     >
       <h1
         style={{
-          margin: 0,
-          fontFamily: "Cambria, Georgia, serif",
           fontSize: "42px",
-          fontWeight: 700,
-          color: "#164c78",
+          color: "#081FEF",
+          margin: 0,
         }}
       >
         {title}
@@ -80,78 +87,74 @@ function Page({ title }) {
   );
 }
 
-/* =====================================================
-   KÄRCHER LAYOUT
 
-   No default Navbar
-   Kärcher page
-   Default Footer
-===================================================== */
+// --------------------------------------------------
+// KÄRCHER PAGE
+// --------------------------------------------------
 
 function KarcherLayout() {
   return (
     <>
-      <main className="karcher-page">
-        <Karcher />
-      </main>
-
+      <Karcher />
+      <WhyKarcher />
       <Footer />
     </>
   );
 }
 
-/* =====================================================
-   APP
-===================================================== */
+
+// --------------------------------------------------
+// APP
+// --------------------------------------------------
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
 
-        {/* =================================================
-            NORMAL WEBSITE LAYOUT
-
-            Navbar
-              ↓
-            Page
-              ↓
-            Footer
-        ================================================= */}
+        {/* ==========================================
+            MAIN WEBSITE WITH NAVBAR + FOOTER
+        ========================================== */}
 
         <Route element={<Layout />}>
 
-          {/* ================= HOME ================= */}
-
+          {/* HOME */}
           <Route
             path="/"
             element={<Home />}
           />
 
-          {/* ================= ABOUT ================= */}
-
+          {/* ABOUT */}
           <Route
             path="/about-us"
             element={<AboutPage />}
           />
 
-          {/* ================= PRODUCTS ================= */}
+
+          {/* ==========================================
+              PRODUCTS
+          ========================================== */}
 
           <Route
             path="/products"
             element={<Page title="Products" />}
           />
 
+          {/* CLEANING CHEMICALS */}
           <Route
             path="/products/cleaning-chemicals"
-            element={<Page title="Cleaning Chemicals" />}
+            element={<Cleaning />}
           />
 
+          {/* CLEANING TOOLS */}
           <Route
             path="/products/cleaning-tools"
-            element={<Page title="Cleaning Tools" />}
+            element={
+              <Page title="Cleaning Tools" />
+            }
           />
 
+          {/* PROFESSIONAL CLEANING EQUIPMENT */}
           <Route
             path="/products/professional-cleaning-equipment"
             element={
@@ -159,16 +162,23 @@ function App() {
             }
           />
 
+          {/* HYGIENE SUPPLIES */}
           <Route
             path="/products/hygiene-supplies"
-            element={<Page title="Hygiene Supplies" />}
+            element={
+              <Page title="Hygiene Supplies" />
+            }
           />
 
+          {/* HOUSEHOLD CLEANING */}
           <Route
             path="/products/household-cleaning"
-            element={<Page title="Household Cleaning" />}
+            element={
+              <Page title="Household Cleaning" />
+            }
           />
 
+          {/* COMMERCIAL & INSTITUTIONAL SUPPLIES */}
           <Route
             path="/products/commercial-institutional-supplies"
             element={
@@ -176,7 +186,10 @@ function App() {
             }
           />
 
-          {/* ================= SOLUTIONS ================= */}
+
+          {/* ==========================================
+              SOLUTIONS
+          ========================================== */}
 
           <Route
             path="/solutions"
@@ -208,7 +221,20 @@ function App() {
             element={<Page title="Wholesale Solutions" />}
           />
 
-          {/* ================= INDUSTRIES ================= */}
+
+          {/* ==========================================
+              KÄRCHER
+          ========================================== */}
+
+          <Route
+            path="/karcher"
+            element={<Page title="Kärcher" />}
+          />
+
+
+          {/* ==========================================
+              INDUSTRIES
+          ========================================== */}
 
           <Route
             path="/industries"
@@ -245,43 +271,46 @@ function App() {
             element={<Page title="Residential" />}
           />
 
-          {/* ================= BRANDS ================= */}
+
+          {/* ==========================================
+              BRANDS
+          ========================================== */}
 
           <Route
             path="/brands"
             element={<Page title="Brands" />}
           />
 
-          {/* ================= CONTACT ================= */}
+
+          {/* ==========================================
+              CONTACT
+          ========================================== */}
 
           <Route
             path="/contact"
-            element={<Page title="Contact" />}
+            element={<Page title="Contact Us" />}
           />
 
-          {/* ================= REQUEST A QUOTE ================= */}
+
+          {/* ==========================================
+              REQUEST QUOTE
+          ========================================== */}
 
           <Route
-            path="/request-a-quote"
+            path="/request-quote"
             element={<Page title="Request a Quote" />}
           />
 
         </Route>
 
-        {/* =================================================
-            KÄRCHER PAGE
 
-            IMPORTANT:
-            This route is OUTSIDE Layout.
-
-            Therefore:
-            ❌ Default Navbar
-            ✅ Kärcher Hero
-            ✅ Default Footer
-        ================================================= */}
+        {/* ==========================================
+            KÄRCHER DEDICATED PAGE
+            No normal Layout/Navbar
+        ========================================== */}
 
         <Route
-          path="/karcher"
+          path="/karcher-page"
           element={<KarcherLayout />}
         />
 
