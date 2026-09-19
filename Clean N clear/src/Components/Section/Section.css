@@ -1,304 +1,652 @@
 /* ============================================================
-   Clean N Clear — premium full-width range section
-   Brand colors: blue #081fef · green #95d501
+   CLEAN N CLEAR — PREMIUM RANGE SECTION
+   All class names are unique to this section
+   Brand colors: Blue #081fef · Green #95d501
    ============================================================ */
 
-.cnc-section {
-  --cnc-blue: #081fef;
-  --cnc-blue-deep: #0a1240;
-  --cnc-blue-soft: #3d51f2;
-  --cnc-green: #95d501;
-  --cnc-green-deep: #5f8c00;
-  --cnc-ink: #0d1330;
-  --cnc-muted: #565e7e;
-  --cnc-bg: #f5f7ff;
-  --cnc-card: #ffffff;
-  --cnc-radius: 22px;
+.clean-range-section {
+  --clean-range-blue: #081fef;
+  --clean-range-blue-deep: #0a1240;
+  --clean-range-blue-soft: #3d51f2;
+
+  --clean-range-green: #95d501;
+  --clean-range-green-deep: #5f8c00;
+
+  --clean-range-ink: #0d1330;
+  --clean-range-muted: #565e7e;
+
+  --clean-range-bg: #f5f7ff;
+  --clean-range-card: #ffffff;
+
+  --clean-range-radius: 22px;
 
   position: relative;
   overflow: hidden;
+
   width: 100%;
-  padding: clamp(1.75rem, 3.5vw, 2.75rem) clamp(1.25rem, 4vw, 4rem);
+
+  padding: clamp(1.75rem, 3.5vw, 2.75rem)
+    clamp(1.25rem, 4vw, 4rem);
+
   background:
-    radial-gradient(110% 90% at 8% 0%, rgba(8, 31, 239, 0.1), transparent 55%),
-    radial-gradient(90% 80% at 96% 100%, rgba(149, 213, 1, 0.16), transparent 60%),
-    var(--cnc-bg);
-  color: var(--cnc-ink);
-  font-family: "Inter", system-ui, -apple-system, sans-serif;
+    radial-gradient(
+      110% 90% at 8% 0%,
+      rgba(8, 31, 239, 0.1),
+      transparent 55%
+    ),
+    radial-gradient(
+      90% 80% at 96% 100%,
+      rgba(149, 213, 1, 0.16),
+      transparent 60%
+    ),
+    var(--clean-range-bg);
+
+  color: var(--clean-range-ink);
+
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
+
   -webkit-font-smoothing: antialiased;
 }
 
-/* soft floating light orbs */
-.cnc-section__glow {
-  pointer-events: none;
+
+/* ============================================================
+   FLOATING BACKGROUND GLOWS
+   ============================================================ */
+
+.clean-range-glow {
   position: absolute;
+
+  pointer-events: none;
+
   border-radius: 50%;
+
   filter: blur(110px);
+
   opacity: 0.45;
 }
-.cnc-section__glow--left {
+
+.clean-range-glow--left {
   top: -140px;
   left: -120px;
+
   width: 420px;
   height: 420px;
+
   background: rgba(8, 31, 239, 0.28);
 }
-.cnc-section__glow--right {
-  bottom: -180px;
+
+.clean-range-glow--right {
   right: -140px;
+  bottom: -180px;
+
   width: 480px;
   height: 480px;
+
   background: rgba(149, 213, 1, 0.32);
 }
 
-.cnc-section__inner {
+
+/* ============================================================
+   INNER CONTAINER
+   ============================================================ */
+
+.clean-range-inner {
   position: relative;
+
+  width: 100%;
   max-width: 1240px;
+
   margin: 0 auto;
 }
 
-/* ---------- header ---------- */
 
-.cnc-section__header {
-  text-align: center;
+/* ============================================================
+   HEADER
+   ============================================================ */
+
+.clean-range-header {
   max-width: 720px;
+
   margin: 0 auto clamp(1.75rem, 3.5vw, 2.75rem);
+
+  text-align: center;
 }
 
-.cnc-section__eyebrow {
+
+/* ============================================================
+   EYEBROW
+   ============================================================ */
+
+.clean-range-eyebrow {
   display: flex;
+
   align-items: center;
   justify-content: center;
+
   gap: 14px;
+
   margin: 0 0 1rem;
+
   font-size: 0.75rem;
   font-weight: 600;
+
   letter-spacing: 0.32em;
+
   text-transform: uppercase;
-  color: var(--cnc-blue);
+
+  color: var(--clean-range-blue);
 }
-.cnc-section__eyebrow-line {
+
+.clean-range-eyebrow-line {
   width: 42px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--cnc-green-deep));
-}
-.cnc-section__eyebrow-line:last-child {
-  background: linear-gradient(90deg, var(--cnc-green-deep), transparent);
+
+  flex-shrink: 0;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--clean-range-green-deep)
+  );
 }
 
-.cnc-section__title {
+.clean-range-eyebrow-line:last-child {
+  background: linear-gradient(
+    90deg,
+    var(--clean-range-green-deep),
+    transparent
+  );
+}
+
+
+/* ============================================================
+   MAIN TITLE
+   ============================================================ */
+
+.clean-range-title {
   margin: 0;
-  font-family: "Fraunces", Georgia, "Times New Roman", serif;
+
+  font-family:
+    "Fraunces",
+    Georgia,
+    "Times New Roman",
+    serif;
+
   font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+
   font-weight: 500;
+
   line-height: 1.14;
+
   letter-spacing: -0.015em;
-  color: var(--cnc-blue-deep);
+
+  color: var(--clean-range-blue-deep);
+
   text-wrap: balance;
 }
-.cnc-section__title em {
+
+.clean-range-title em {
   font-style: italic;
+
   font-weight: 400;
-  color: var(--cnc-blue);
+
+  color: var(--clean-range-blue);
 }
 
-.cnc-section__intro {
-  margin: 1rem auto 0;
+
+/* ============================================================
+   INTRO TEXT
+   ============================================================ */
+
+.clean-range-intro {
   max-width: 56ch;
+
+  margin: 1rem auto 0;
+
   font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+
   line-height: 1.65;
-  color: var(--cnc-muted);
+
+  color: var(--clean-range-muted);
 }
 
-/* ---------- card grid ---------- */
 
-.cnc-section__grid {
+/* ============================================================
+   CARD GRID
+   ============================================================ */
+
+.clean-range-grid {
   display: grid;
+
   grid-template-columns: repeat(3, 1fr);
+
   gap: clamp(1.1rem, 2.2vw, 1.75rem);
 }
 
+
+/* ============================================================
+   TABLET / MOBILE GRID
+   ============================================================ */
+
 @media (max-width: 960px) {
-  .cnc-section__grid {
+  .clean-range-grid {
     grid-template-columns: 1fr;
+
     max-width: 480px;
+
     margin: 0 auto;
   }
 }
 
-/* ---------- card ---------- */
 
-.cnc-card {
+/* ============================================================
+   CARD
+   ============================================================ */
+
+.clean-range-card {
   display: flex;
+
   flex-direction: column;
-  background: var(--cnc-card);
-  border-radius: var(--cnc-radius);
+
   overflow: hidden;
-  border-top: 3px solid var(--cnc-green);
+
+  background: var(--clean-range-card);
+
+  border-top: 3px solid var(--clean-range-green);
+
+  border-radius: var(--clean-range-radius);
+
   box-shadow:
     0 1px 2px rgba(10, 18, 64, 0.05),
     0 18px 44px -18px rgba(10, 18, 64, 0.18);
+
   transition:
     transform 0.35s cubic-bezier(0.22, 0.68, 0.32, 1),
     box-shadow 0.35s ease,
     border-color 0.35s ease;
 }
 
-.cnc-card:hover {
+
+/* ============================================================
+   CARD HOVER
+   ============================================================ */
+
+.clean-range-card:hover {
   transform: translateY(-8px);
-  border-top-color: var(--cnc-blue);
+
+  border-top-color: var(--clean-range-blue);
+
   box-shadow:
     0 2px 4px rgba(10, 18, 64, 0.06),
     0 32px 64px -22px rgba(10, 18, 64, 0.3);
 }
 
-.cnc-card__media {
+
+/* ============================================================
+   IMAGE AREA
+   ============================================================ */
+
+.clean-range-media {
   position: relative;
-  aspect-ratio: 3 / 2;
+
   overflow: hidden;
+
+  aspect-ratio: 3 / 2;
 }
 
-.cnc-card__media img {
+.clean-range-media img {
   display: block;
+
   width: 100%;
   height: 100%;
+
   object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.22, 0.68, 0.32, 1);
+
+  transition:
+    transform 0.6s cubic-bezier(0.22, 0.68, 0.32, 1);
 }
 
-.cnc-card:hover .cnc-card__media img {
+.clean-range-card:hover .clean-range-media img {
   transform: scale(1.06);
 }
 
-.cnc-card__media::after {
+
+/* ============================================================
+   IMAGE OVERLAY
+   ============================================================ */
+
+.clean-range-media::after {
   content: "";
+
   position: absolute;
+
   inset: 0;
-  background: linear-gradient(180deg, rgba(10, 18, 64, 0) 62%, rgba(10, 18, 64, 0.14));
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(10, 18, 64, 0) 62%,
+      rgba(10, 18, 64, 0.14)
+    );
+
   pointer-events: none;
 }
 
-.cnc-card__badge {
+
+/* ============================================================
+   KARCHER BADGE
+   ============================================================ */
+
+.clean-range-badge {
   position: absolute;
+
   top: 14px;
   right: 14px;
+
+  z-index: 2;
+
   padding: 6px 14px;
+
   border-radius: 999px;
+
   background: rgba(255, 255, 255, 0.9);
+
   backdrop-filter: blur(6px);
+
   font-size: 0.72rem;
+
   font-weight: 600;
+
   letter-spacing: 0.08em;
-  color: var(--cnc-blue-deep);
-  box-shadow: 0 4px 14px rgba(10, 18, 64, 0.18);
+
+  color: var(--clean-range-blue-deep);
+
+  box-shadow:
+    0 4px 14px rgba(10, 18, 64, 0.18);
 }
 
-.cnc-card__body {
+
+/* ============================================================
+   CARD BODY
+   ============================================================ */
+
+.clean-range-body {
   display: flex;
+
   flex-direction: column;
+
   flex: 1;
+
   padding: 1.3rem 1.4rem 1.45rem;
 }
 
-.cnc-card__index {
-  font-family: "Fraunces", Georgia, serif;
+
+/* ============================================================
+   CARD NUMBER
+   ============================================================ */
+
+.clean-range-index {
+  font-family:
+    "Fraunces",
+    Georgia,
+    serif;
+
   font-size: 0.85rem;
+
   font-weight: 600;
+
   letter-spacing: 0.18em;
-  color: var(--cnc-green-deep);
+
+  color: var(--clean-range-green-deep);
 }
 
-.cnc-card__title {
+
+/* ============================================================
+   CARD TITLE
+   ============================================================ */
+
+.clean-range-card-title {
   margin: 0.55rem 0 0;
-  font-family: "Fraunces", Georgia, "Times New Roman", serif;
+
+  font-family:
+    "Fraunces",
+    Georgia,
+    "Times New Roman",
+    serif;
+
   font-size: 1.3rem;
+
   font-weight: 500;
+
   line-height: 1.25;
+
   letter-spacing: -0.01em;
-  color: var(--cnc-blue-deep);
+
+  color: var(--clean-range-blue-deep);
 }
 
-.cnc-card__text {
-  margin: 0.6rem 0 0;
+
+/* ============================================================
+   CARD DESCRIPTION
+   ============================================================ */
+
+.clean-range-card-text {
   flex: 1;
+
+  margin: 0.6rem 0 0;
+
   font-size: 0.9rem;
+
   line-height: 1.6;
-  color: var(--cnc-muted);
+
+  color: var(--clean-range-muted);
 }
 
-/* ---------- CTA link ---------- */
 
-.cnc-card__link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 1.2rem;
-  align-self: flex-start;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--cnc-blue);
-  text-decoration: none;
+/* ============================================================
+   CTA LINK
+   ============================================================ */
+
+.clean-range-link {
   position: relative;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  align-self: flex-start;
+
+  gap: 8px;
+
+  margin-top: 1.2rem;
+
   padding-bottom: 3px;
+
+  font-size: 0.9rem;
+
+  font-weight: 600;
+
+  color: var(--clean-range-blue);
+
+  text-decoration: none;
 }
 
-.cnc-card__link::after {
+
+/* ============================================================
+   CTA UNDERLINE
+   ============================================================ */
+
+.clean-range-link::after {
   content: "";
+
   position: absolute;
+
   left: 0;
   bottom: 0;
+
   width: 100%;
   height: 1.5px;
-  background: linear-gradient(90deg, var(--cnc-blue), var(--cnc-green));
+
+  background: linear-gradient(
+    90deg,
+    var(--clean-range-blue),
+    var(--clean-range-green)
+  );
+
   transform: scaleX(0.35);
+
   transform-origin: left;
-  transition: transform 0.35s cubic-bezier(0.22, 0.68, 0.32, 1);
+
+  transition:
+    transform 0.35s cubic-bezier(0.22, 0.68, 0.32, 1);
 }
 
-.cnc-card__link:hover::after {
+.clean-range-link:hover::after {
   transform: scaleX(1);
 }
 
-.cnc-card__arrow {
-  transition: transform 0.3s ease;
+
+/* ============================================================
+   ARROW
+   ============================================================ */
+
+.clean-range-arrow {
+  transition:
+    transform 0.3s ease;
 }
 
-.cnc-card__link:hover .cnc-card__arrow {
+.clean-range-link:hover .clean-range-arrow {
   transform: translateX(5px);
 }
 
-/* ---------- entrance motion ---------- */
+
+/* ============================================================
+   ENTRANCE ANIMATION
+   ============================================================ */
 
 @media (prefers-reduced-motion: no-preference) {
-  .cnc-section__header,
-  .cnc-card {
-    animation: cnc-rise 0.7s cubic-bezier(0.22, 0.68, 0.32, 1) both;
+  .clean-range-header,
+  .clean-range-card {
+    animation:
+      clean-range-rise
+      0.7s
+      cubic-bezier(0.22, 0.68, 0.32, 1)
+      both;
   }
-  .cnc-card:nth-child(1) {
+
+  .clean-range-card:nth-child(1) {
     animation-delay: 0.08s;
   }
-  .cnc-card:nth-child(2) {
+
+  .clean-range-card:nth-child(2) {
     animation-delay: 0.18s;
   }
-  .cnc-card:nth-child(3) {
+
+  .clean-range-card:nth-child(3) {
     animation-delay: 0.28s;
   }
 }
 
-@keyframes cnc-rise {
+
+/* ============================================================
+   KEYFRAMES
+   ============================================================ */
+
+@keyframes clean-range-rise {
   from {
     opacity: 0;
+
     transform: translateY(22px);
   }
+
   to {
     opacity: 1;
+
     transform: translateY(0);
   }
 }
 
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
 @media (prefers-reduced-motion: reduce) {
-  .cnc-card,
-  .cnc-card__media img {
+  .clean-range-card,
+  .clean-range-media img {
     transition: none;
+  }
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 600px) {
+  .clean-range-section {
+    padding:
+      1.5rem
+      1rem;
+  }
+
+  .clean-range-header {
+    margin-bottom: 1.75rem;
+  }
+
+  .clean-range-eyebrow {
+    gap: 10px;
+
+    font-size: 0.68rem;
+
+    letter-spacing: 0.24em;
+  }
+
+  .clean-range-eyebrow-line {
+    width: 28px;
+  }
+
+  .clean-range-title {
+    font-size: clamp(1.55rem, 7vw, 2rem);
+
+    line-height: 1.18;
+  }
+
+  .clean-range-intro {
+    font-size: 0.9rem;
+
+    line-height: 1.6;
+  }
+
+  .clean-range-grid {
+    width: 100%;
+
+    max-width: none;
+
+    gap: 1rem;
+  }
+
+  .clean-range-card {
+    border-radius: 18px;
+  }
+
+  .clean-range-body {
+    padding: 1.15rem 1.2rem 1.3rem;
+  }
+
+  .clean-range-card-title {
+    font-size: 1.2rem;
+  }
+
+  .clean-range-card-text {
+    font-size: 0.88rem;
+  }
+
+  .clean-range-link {
+    font-size: 0.86rem;
   }
 }

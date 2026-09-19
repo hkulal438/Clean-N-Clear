@@ -1,8 +1,8 @@
 import "./Section.css";
+
 import chemicalsImg from "../../images/cleaning-chemicals.jpg";
 import toolsImg from "../../images/cleaning-tools.jpg";
 import equipmentImg from "../../images/professional-equipment.jpg";
-
 
 const categories = [
   {
@@ -33,32 +33,49 @@ const categories = [
 
 export default function Section() {
   return (
-    <section className="cnc-section" id="our-range">
-      <div className="cnc-section__glow cnc-section__glow--left" aria-hidden="true" />
-      <div className="cnc-section__glow cnc-section__glow--right" aria-hidden="true" />
+    <section className="clean-range-section" id="our-range">
+      <div
+        className="clean-range-glow clean-range-glow--left"
+        aria-hidden="true"
+      />
 
-      <div className="cnc-section__inner">
-        <header className="cnc-section__header">
-          <p className="cnc-section__eyebrow">
-            <span className="cnc-section__eyebrow-line" aria-hidden="true" />
+      <div
+        className="clean-range-glow clean-range-glow--right"
+        aria-hidden="true"
+      />
+
+      <div className="clean-range-inner">
+        <header className="clean-range-header">
+          <p className="clean-range-eyebrow">
+            <span
+              className="clean-range-eyebrow-line"
+              aria-hidden="true"
+            />
+
             Our Range
-            <span className="cnc-section__eyebrow-line" aria-hidden="true" />
+
+            <span
+              className="clean-range-eyebrow-line"
+              aria-hidden="true"
+            />
           </p>
-          <h2 className="cnc-section__title">
+
+          <h2 className="clean-range-title">
             Essential products &amp; professional equipment,{" "}
             <em>brought together.</em>
           </h2>
-          <p className="cnc-section__intro">
+
+          <p className="clean-range-intro">
             Clean N Clear brings together essential cleaning products and
             professional cleaning equipment to meet a wide range of cleaning
             and hygiene requirements.
           </p>
         </header>
 
-        <div className="cnc-section__grid">
+        <div className="clean-range-grid">
           {categories.map((cat) => (
-            <article className="cnc-card" key={cat.id}>
-              <div className="cnc-card__media">
+            <article className="clean-range-card" key={cat.id}>
+              <div className="clean-range-media">
                 <img
                   src={cat.image}
                   alt={cat.title}
@@ -66,17 +83,37 @@ export default function Section() {
                   width="1024"
                   height="768"
                 />
+
                 {cat.badge ? (
-                  <span className="cnc-card__badge">{cat.badge}</span>
+                  <span className="clean-range-badge">
+                    {cat.badge}
+                  </span>
                 ) : null}
               </div>
-              <div className="cnc-card__body">
-                <span className="cnc-card__index">{cat.index}</span>
-                <h3 className="cnc-card__title">{cat.title}</h3>
-                <p className="cnc-card__text">{cat.description}</p>
-                <a className="cnc-card__link" href={`#${cat.id}`}>
+
+              <div className="clean-range-body">
+                <span className="clean-range-index">
+                  {cat.index}
+                </span>
+
+                <h3 className="clean-range-card-title">
+                  {cat.title}
+                </h3>
+
+                <p className="clean-range-card-text">
+                  {cat.description}
+                </p>
+
+                <a
+                  className="clean-range-link"
+                  href={`#${cat.id}`}
+                >
                   {cat.cta}
-                  <span className="cnc-card__arrow" aria-hidden="true">
+
+                  <span
+                    className="clean-range-arrow"
+                    aria-hidden="true"
+                  >
                     &rarr;
                   </span>
                 </a>

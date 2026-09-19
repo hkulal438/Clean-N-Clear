@@ -6,9 +6,18 @@
 
 
 /* =========================================================
-   RESET
+   GLOBAL RESET FOR KÄRCHER PAGE
 ========================================================= */
 
+html,
+body,
+#root {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.karcher-page,
+.karcher-page *,
 .karcher-slider-container,
 .karcher-slider-container * {
   box-sizing: border-box;
@@ -20,17 +29,37 @@
 ========================================================= */
 
 .karcher-page {
+  position: relative;
+
   width: 100%;
+  max-width: 100%;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  top: 0;
+  left: 0;
+
+  display: block;
+
+  overflow: hidden;
+
+  font-family: Cambria, Georgia, serif;
+}
+
+
+/* =========================================================
+   REMOVE TOP SPACING
+========================================================= */
+
+body:has(.karcher-page) {
   margin: 0 !important;
   padding: 0 !important;
 }
 
-
-/* Remove the normal website navbar spacing */
-
-body:has(.karcher-page) {
+body:has(.karcher-page) #root {
   margin: 0 !important;
-  padding-top: 0 !important;
+  padding: 0 !important;
 }
 
 
@@ -39,20 +68,22 @@ body:has(.karcher-page) {
 ========================================================= */
 
 .karcher-slider-container {
-  width: 100%;
-
   position: relative;
+
+  width: 100%;
+  max-width: 1920px;
+
+  height: 100vh;
+  min-height: 650px;
+
+  margin: 0 auto !important;
+  padding: 0 !important;
 
   background: #000000;
 
   overflow: hidden;
 
-  margin: 0 auto;
-
-  font-family:
-    Cambria,
-    Georgia,
-    serif;
+  font-family: Cambria, Georgia, serif;
 }
 
 
@@ -63,30 +94,15 @@ body:has(.karcher-page) {
 @media (min-width: 769px) {
 
   .karcher-slider-container {
+    width: 100%;
+
     height: 100vh;
 
     min-height: 650px;
 
-    max-width: 1920px;
+    margin: 0 auto !important;
   }
-}
 
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 768px) {
-
-  .karcher-slider-container {
-    aspect-ratio: 16 / 9;
-
-    max-width: 100%;
-
-    min-height: 500px;
-
-    height: auto;
-  }
 }
 
 
@@ -114,9 +130,7 @@ body:has(.karcher-page) {
 
   transform: translateZ(0);
 
-  will-change:
-    transform,
-    top;
+  will-change: transform, top;
 
   z-index: 1;
 }
@@ -220,6 +234,7 @@ body:has(.karcher-page) {
 
     z-index: 5;
   }
+
 }
 
 
@@ -229,6 +244,19 @@ body:has(.karcher-page) {
 ========================================================= */
 
 @media (max-width: 768px) {
+
+  .karcher-slider-container {
+    width: 100%;
+
+    height: auto;
+
+    min-height: 500px;
+
+    aspect-ratio: 16 / 9;
+
+    margin: 0 !important;
+  }
+
 
   .karcher-slice {
     width: calc(100% / 3);
@@ -282,12 +310,13 @@ body:has(.karcher-page) {
   }
 
 
-  /* HIDE SLICE 4 AND 5 */
+  /* HIDE EXTRA SLICES */
 
   .karcher-slice:nth-child(4),
   .karcher-slice:nth-child(5) {
     display: none;
   }
+
 }
 
 
@@ -299,6 +328,7 @@ body:has(.karcher-page) {
 
   0% {
     top: -100%;
+
     opacity: 0;
   }
 
@@ -307,9 +337,11 @@ body:has(.karcher-page) {
   }
 
   100% {
-    top: 0%;
+    top: 0;
+
     opacity: 1;
   }
+
 }
 
 
@@ -321,6 +353,9 @@ body:has(.karcher-page) {
   position: absolute;
 
   inset: 0;
+
+  width: 100%;
+  height: 100%;
 
   z-index: 6;
 
@@ -347,8 +382,12 @@ body:has(.karcher-page) {
   top: 50%;
   left: 50%;
 
-  transform:
-    translate(-50%, -50%);
+  width: 80%;
+  max-width: 1000px;
+
+  padding: 20px;
+
+  transform: translate(-50%, -50%);
 
   text-align: left;
 
@@ -357,12 +396,6 @@ body:has(.karcher-page) {
   z-index: 10;
 
   opacity: 0;
-
-  width: 80%;
-
-  max-width: 1000px;
-
-  padding: 20px;
 }
 
 
@@ -398,6 +431,7 @@ body:has(.karcher-page) {
     transform:
       translate(-50%, -50%);
   }
+
 }
 
 
@@ -410,7 +444,7 @@ body:has(.karcher-page) {
 
   align-items: center;
 
-  margin-bottom: 22px;
+  margin: 0 0 22px;
 
   padding: 9px 15px;
 
@@ -569,7 +603,10 @@ body:has(.karcher-page) {
   letter-spacing: 0.5px;
 
   transition:
-    0.25s ease;
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
 }
 
 
@@ -584,6 +621,7 @@ body:has(.karcher-page) {
 
   border: 1px solid #ffd500;
 }
+
 
 .karcher-btn-primary:hover {
   background: #ffffff;
@@ -606,6 +644,7 @@ body:has(.karcher-page) {
 
   border: 1px solid #ffffff;
 }
+
 
 .karcher-btn-secondary:hover {
   background: #ffffff;
@@ -638,8 +677,7 @@ body:has(.karcher-page) {
   right: 45px;
   top: 50%;
 
-  transform:
-    translateY(-50%);
+  transform: translateY(-50%);
 
   z-index: 12;
 
@@ -688,11 +726,9 @@ body:has(.karcher-page) {
   bottom: 0;
 
   width: 100%;
-
   height: 55px;
 
-  padding:
-    0 8%;
+  padding: 0 8%;
 
   display: flex;
 
@@ -729,9 +765,11 @@ body:has(.karcher-page) {
     width: 82%;
   }
 
+
   .karcher-slide-number {
     right: 25px;
   }
+
 
   .karcher-content-overlay h1 {
     font-size:
@@ -741,6 +779,7 @@ body:has(.karcher-page) {
         4.8rem
       );
   }
+
 }
 
 
@@ -756,13 +795,16 @@ body:has(.karcher-page) {
     padding: 15px;
   }
 
+
   .karcher-content-overlay h1 {
     font-size: 58px;
   }
 
+
   .karcher-content-overlay h2 {
     font-size: 24px;
   }
+
 
   .karcher-content-overlay p {
     max-width: 600px;
@@ -770,15 +812,18 @@ body:has(.karcher-page) {
     font-size: 17px;
   }
 
+
   .karcher-slide-number {
     right: 20px;
   }
+
 
   .karcher-bottom-info {
     padding: 0 6%;
 
     gap: 30px;
   }
+
 }
 
 
@@ -789,8 +834,17 @@ body:has(.karcher-page) {
 @media (max-width: 768px) {
 
   .karcher-slider-container {
+    width: 100%;
+
     min-height: 500px;
+
+    height: auto;
+
+    aspect-ratio: 16 / 9;
+
+    margin: 0 !important;
   }
+
 
   .karcher-color-overlay {
     background:
@@ -802,6 +856,7 @@ body:has(.karcher-page) {
       );
   }
 
+
   .karcher-content-overlay {
     width: 90%;
 
@@ -809,6 +864,7 @@ body:has(.karcher-page) {
 
     text-align: center;
   }
+
 
   .karcher-tag {
     margin-bottom: 16px;
@@ -821,6 +877,7 @@ body:has(.karcher-page) {
 
     letter-spacing: 1.2px;
   }
+
 
   .karcher-content-overlay h1 {
     font-size:
@@ -837,6 +894,7 @@ body:has(.karcher-page) {
     margin-bottom: 12px;
   }
 
+
   .karcher-content-overlay h2 {
     font-size:
       clamp(
@@ -848,6 +906,7 @@ body:has(.karcher-page) {
     margin-bottom: 12px;
   }
 
+
   .karcher-content-overlay p {
     max-width: 100%;
 
@@ -856,6 +915,7 @@ body:has(.karcher-page) {
     line-height: 1.5;
   }
 
+
   .karcher-buttons {
     justify-content: center;
 
@@ -863,6 +923,7 @@ body:has(.karcher-page) {
 
     margin-top: 20px;
   }
+
 
   .karcher-btn {
     min-height: 43px;
@@ -874,8 +935,10 @@ body:has(.karcher-page) {
     gap: 8px;
   }
 
+
   .karcher-slide-number {
     top: 20px;
+
     right: 20px;
 
     transform: none;
@@ -883,9 +946,11 @@ body:has(.karcher-page) {
     font-size: 9px;
   }
 
+
   .karcher-slide-line {
     width: 30px;
   }
+
 
   .karcher-bottom-info {
     height: 45px;
@@ -902,6 +967,7 @@ body:has(.karcher-page) {
 
     letter-spacing: 1.2px;
   }
+
 }
 
 
@@ -915,11 +981,13 @@ body:has(.karcher-page) {
     min-height: 520px;
   }
 
+
   .karcher-content-overlay {
     width: 94%;
 
     padding: 10px;
   }
+
 
   .karcher-tag {
     font-size: 8px;
@@ -929,19 +997,23 @@ body:has(.karcher-page) {
     padding: 7px 9px;
   }
 
+
   .karcher-content-overlay h1 {
     font-size: 38px;
   }
 
+
   .karcher-content-overlay h2 {
     font-size: 18px;
   }
+
 
   .karcher-content-overlay p {
     font-size: 13px;
 
     line-height: 1.45;
   }
+
 
   .karcher-buttons {
     flex-direction: column;
@@ -951,11 +1023,13 @@ body:has(.karcher-page) {
     margin-top: 17px;
   }
 
+
   .karcher-btn {
     width: 190px;
 
     min-height: 40px;
   }
+
 
   .karcher-bottom-info {
     gap: 14px;
@@ -964,6 +1038,7 @@ body:has(.karcher-page) {
 
     font-size: 7px;
   }
+
 }
 
 
@@ -977,23 +1052,28 @@ body:has(.karcher-page) {
     min-height: 500px;
   }
 
+
   .karcher-content-overlay h1 {
     font-size: 33px;
   }
+
 
   .karcher-content-overlay h2 {
     font-size: 16px;
   }
 
+
   .karcher-content-overlay p {
     font-size: 12px;
   }
+
 
   .karcher-tag {
     font-size: 7px;
 
     letter-spacing: 0.8px;
   }
+
 
   .karcher-btn {
     width: 175px;
@@ -1003,9 +1083,11 @@ body:has(.karcher-page) {
     font-size: 10px;
   }
 
+
   .karcher-bottom-info {
     gap: 10px;
 
     font-size: 6.5px;
   }
+
 }

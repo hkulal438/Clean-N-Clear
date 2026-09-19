@@ -517,9 +517,7 @@ export default function Navbar() {
                   onMouseEnter={() => {
 
                     if (hasChildren) {
-                      setOpenDropdown(
-                        item.label
-                      );
+                      setOpenDropdown(item.label);
                     }
 
                   }}
@@ -532,49 +530,75 @@ export default function Navbar() {
                   }}
                 >
 
+                  {/* =================================================
+                      ITEMS WITH DROPDOWN
+                      ================================================= */}
+
                   {hasChildren ? (
 
-                    <button
-                      type="button"
-                      className="rt-navbar__link"
-                      aria-expanded={isOpen}
-                      onClick={() =>
-                        toggleDropdown(
-                          item.label
-                        )
-                      }
-                    >
+                    <div className="rt-navbar__dropdown-trigger">
 
-                      <span>
-                        {item.label}
-                      </span>
+                      {/* MAIN LINK */}
+
+                      <a
+                        href={item.href}
+                        className="rt-navbar__link rt-navbar__link--main"
+                        onClick={() => {
+                          setOpenDropdown(null);
+                          closeMobileMenu();
+                        }}
+                      >
+                        <span>
+                          {item.label}
+                        </span>
+                      </a>
 
 
-                      <svg
-                        className={`rt-navbar__caret${
-                          isOpen
-                            ? " is-open"
-                            : ""
-                        }`}
-                        width="9"
-                        height="6"
-                        viewBox="0 0 9 6"
-                        aria-hidden="true"
+                      {/* DROPDOWN ARROW */}
+
+                      <button
+                        type="button"
+                        className="rt-navbar__dropdown-button"
+                        aria-label={`Open ${item.label} menu`}
+                        aria-expanded={isOpen}
+                        onClick={(event) => {
+                          event.preventDefault();
+                          event.stopPropagation();
+                          toggleDropdown(item.label);
+                        }}
                       >
 
-                        <path
-                          d="M1 1l3.5 3.5L8 1"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          fill="none"
-                        />
+                        <svg
+                          className={`rt-navbar__caret${
+                            isOpen
+                              ? " is-open"
+                              : ""
+                          }`}
+                          width="9"
+                          height="6"
+                          viewBox="0 0 9 6"
+                          aria-hidden="true"
+                        >
 
-                      </svg>
+                          <path
+                            d="M1 1l3.5 3.5L8 1"
+                            stroke="currentColor"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            fill="none"
+                          />
 
-                    </button>
+                        </svg>
+
+                      </button>
+
+                    </div>
 
                   ) : (
+
+                    /* =================================================
+                       NORMAL LINK
+                       ================================================= */
 
                     <a
                       href={item.href}
@@ -583,9 +607,10 @@ export default function Navbar() {
                           ? " is-active"
                           : ""
                       }`}
-                      onClick={() =>
-                        setOpenDropdown(null)
-                      }
+                      onClick={() => {
+                        setOpenDropdown(null);
+                        closeMobileMenu();
+                      }}
                     >
                       {item.label}
                     </a>
@@ -616,11 +641,10 @@ export default function Navbar() {
 
                             <a
                               href={child.href}
-                              onClick={() =>
-                                setOpenDropdown(
-                                  null
-                                )
-                              }
+                              onClick={() => {
+                                setOpenDropdown(null);
+                                closeMobileMenu();
+                              }}
                             >
                               {child.label}
                             </a>
@@ -673,6 +697,10 @@ export default function Navbar() {
             <a
               href="/request-a-quote"
               className="rt-navbar__cta"
+              onClick={() => {
+                setOpenDropdown(null);
+                closeMobileMenu();
+              }}
             >
               Get a Quote
             </a>

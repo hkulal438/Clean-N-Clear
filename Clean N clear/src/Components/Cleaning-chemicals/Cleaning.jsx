@@ -49,12 +49,16 @@ const Cleaning = () => {
 
   return (
     <>
-      <section className="cleaning-section">
-        <div className="cleaning-container">
+      {/* =====================================================
+          J6 CLEANING CHEMICALS SECTION
+      ===================================================== */}
 
-          {/* Section Heading */}
-          <div className="cleaning-heading">
-            <span className="cleaning-label">
+      <section className="j6-cleaning-section">
+        <div className="j6-cleaning-container">
+
+          {/* HEADING */}
+          <div className="j6-cleaning-heading">
+            <span className="j6-cleaning-label">
               <FaFlask />
               Professional Cleaning Solutions
             </span>
@@ -71,34 +75,37 @@ const Cleaning = () => {
             </p>
           </div>
 
-          {/* Feature Strip */}
-          <div className="cleaning-features">
+          {/* FEATURES */}
+          <div className="j6-cleaning-features">
 
-            <div className="cleaning-feature">
-              <div className="feature-icon">
+            <div className="j6-cleaning-feature">
+              <div className="j6-feature-icon">
                 <FaCheckCircle />
               </div>
-              <div>
+
+              <div className="j6-feature-content">
                 <h4>Effective</h4>
                 <p>Powerful cleaning performance</p>
               </div>
             </div>
 
-            <div className="cleaning-feature">
-              <div className="feature-icon">
+            <div className="j6-cleaning-feature">
+              <div className="j6-feature-icon">
                 <FaShieldAlt />
               </div>
-              <div>
+
+              <div className="j6-feature-content">
                 <h4>Reliable</h4>
                 <p>Designed for professional use</p>
               </div>
             </div>
 
-            <div className="cleaning-feature">
-              <div className="feature-icon">
+            <div className="j6-cleaning-feature">
+              <div className="j6-feature-icon">
                 <FaFlask />
               </div>
-              <div>
+
+              <div className="j6-feature-content">
                 <h4>Professional</h4>
                 <p>Suitable for healthcare environments</p>
               </div>
@@ -106,11 +113,11 @@ const Cleaning = () => {
 
           </div>
 
-          {/* Gallery */}
-          <div className="cleaning-gallery">
+          {/* GALLERY */}
+          <div className="j6-cleaning-gallery">
             {chemicals.map((chemical, index) => (
               <div
-                className="cleaning-card"
+                className="j6-cleaning-card"
                 key={index}
                 onClick={() => setSelectedImage(chemical.image)}
               >
@@ -119,12 +126,12 @@ const Cleaning = () => {
                   alt={chemical.title}
                 />
 
-                <div className="cleaning-overlay">
-                  <div className="cleaning-plus">
+                <div className="j6-cleaning-overlay">
+                  <div className="j6-cleaning-plus">
                     <FaPlus />
                   </div>
 
-                  <div className="cleaning-card-title">
+                  <div className="j6-cleaning-card-title">
                     {chemical.title}
                   </div>
                 </div>
@@ -132,9 +139,10 @@ const Cleaning = () => {
             ))}
           </div>
 
-          {/* Bottom CTA */}
-          <div className="cleaning-bottom">
-            <div>
+          {/* CTA */}
+          <div className="j6-cleaning-bottom">
+
+            <div className="j6-cleaning-bottom-content">
               <h3>
                 Maintain a Cleaner, Safer Environment
               </h3>
@@ -145,23 +153,30 @@ const Cleaning = () => {
               </p>
             </div>
 
-            <a href="/contact" className="cleaning-btn">
+            <a
+              href="/contact"
+              className="j6-cleaning-btn"
+            >
               Explore Solutions
               <FaArrowRight />
             </a>
+
           </div>
 
         </div>
       </section>
 
-      {/* Image Popup */}
+      {/* =====================================================
+          IMAGE LIGHTBOX
+      ===================================================== */}
+
       {selectedImage && (
         <div
-          className="cleaning-lightbox"
+          className="j6-cleaning-lightbox"
           onClick={() => setSelectedImage(null)}
         >
           <button
-            className="cleaning-close"
+            className="j6-cleaning-close"
             onClick={() => setSelectedImage(null)}
             aria-label="Close image"
           >

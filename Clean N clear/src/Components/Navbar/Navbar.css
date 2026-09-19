@@ -29,11 +29,6 @@ html {
 
 body {
   overflow-x: hidden;
-
-  /*
-    Desktop:
-    Topbar 48px + Navbar 84px = 132px
-  */
   padding-top: 132px;
 }
 
@@ -44,16 +39,11 @@ body {
 
 .rt-header {
   position: fixed;
-
   top: 0;
   left: 0;
-
   width: 100%;
-
   background: #ffffff;
-
   z-index: 10000;
-
   margin: 0;
   padding: 0;
 }
@@ -65,23 +55,16 @@ body {
 
 .rt-topbar {
   width: 100%;
-
   min-height: 48px;
-
   background: #081fef;
-
   color: #ffffff;
 }
-
 
 .rt-topbar__inner {
   width: 100%;
   max-width: 1700px;
-
   min-height: 48px;
-
   margin: 0 auto;
-
   padding: 0 26px;
 
   display: flex;
@@ -99,11 +82,9 @@ body {
 .rt-topbar__info {
   display: flex;
   align-items: center;
-
   gap: 12px;
 
   min-width: 0;
-
   white-space: nowrap;
 
   font-family:
@@ -112,42 +93,32 @@ body {
     sans-serif;
 
   font-size: 13px;
-
   font-weight: 600;
 }
-
 
 .rt-topbar__item {
   display: inline-flex;
   align-items: center;
-
   white-space: nowrap;
 }
-
 
 .rt-topbar__item strong {
   font-weight: 700;
 }
 
-
 .rt-topbar__info a {
   color: #ffffff;
-
   text-decoration: none;
 }
-
 
 .rt-topbar__info a:hover {
   text-decoration: underline;
 }
 
-
 .rt-topbar__divider {
   opacity: 0.65;
-
   flex-shrink: 0;
 }
-
 
 .rt-topbar__cin {
   white-space: nowrap;
@@ -163,23 +134,18 @@ body {
 
   width: 300px;
   height: 38px;
-
   flex: 0 0 300px;
 
   display: flex;
   align-items: center;
 
   background: #ffffff;
-
   border: 1px solid rgba(255, 255, 255, 0.9);
-
   border-radius: 6px;
 
   color: #081fef;
-
   overflow: hidden;
 }
-
 
 .rt-company-selector__icon {
   width: 42px;
@@ -190,10 +156,8 @@ body {
   justify-content: center;
 
   color: #081fef;
-
   pointer-events: none;
 }
-
 
 .rt-company-selector__select {
   width: 100%;
@@ -208,7 +172,6 @@ body {
   -webkit-appearance: none;
 
   background: transparent;
-
   color: #081fef;
 
   font-family:
@@ -217,25 +180,19 @@ body {
     sans-serif;
 
   font-size: 14px;
-
   font-weight: 600;
 
   cursor: pointer;
 }
 
-
 .rt-company-selector__select option {
   color: #111827;
-
   background: #ffffff;
-
   font-size: 14px;
 }
 
-
 .rt-company-selector__arrow {
   position: absolute;
-
   right: 13px;
   top: 50%;
 
@@ -246,7 +203,6 @@ body {
   justify-content: center;
 
   color: #081fef;
-
   pointer-events: none;
 }
 
@@ -257,30 +213,24 @@ body {
 
 .rt-navbar {
   width: 100%;
-
   height: 84px;
 
   background: #ffffff;
-
   border-bottom: 1px solid #eeeeee;
 
   box-shadow:
     0 3px 12px rgba(0, 0, 0, 0.08);
 
   position: relative;
-
   z-index: 10001;
 }
-
 
 .rt-navbar__inner {
   width: 100%;
   max-width: 1700px;
-
   height: 84px;
 
   margin: 0 auto;
-
   padding: 0 22px;
 
   display: flex;
@@ -297,7 +247,6 @@ body {
 .rt-navbar__logo {
   width: 150px;
   height: 84px;
-
   flex: 0 0 150px;
 
   display: flex;
@@ -307,16 +256,13 @@ body {
   padding: 0;
 
   line-height: 0;
-
   text-decoration: none;
 }
-
 
 .rt-navbar__logo img {
   display: block;
 
   width: 150px;
-
   height: auto;
 
   max-width: 150px;
@@ -331,7 +277,6 @@ body {
 
 .rt-navbar__links {
   flex: 1;
-
   min-width: 0;
 
   display: flex;
@@ -345,7 +290,6 @@ body {
 
   list-style: none;
 }
-
 
 .rt-navbar__item {
   position: relative;
@@ -373,7 +317,6 @@ body {
   padding: 0 11px;
 
   border: 0;
-
   background: transparent;
 
   color: #081fef;
@@ -384,21 +327,17 @@ body {
     sans-serif;
 
   font-size: 17px;
-
   font-weight: 600;
 
   letter-spacing: 0.05px;
 
   white-space: nowrap;
-
   text-decoration: none;
 
   cursor: pointer;
 
-  transition:
-    color 0.2s ease;
+  transition: color 0.2s ease;
 }
-
 
 .rt-navbar__link:hover {
   color: #0619b8;
@@ -429,14 +368,95 @@ body {
 
 
 /* =========================================================
+   DROPDOWN TRIGGER
+   ========================================================= */
+
+.rt-navbar__dropdown-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 2px;
+}
+
+
+/* =========================================================
+   MAIN DROPDOWN LINK
+   ========================================================= */
+
+.rt-navbar__link--main {
+  display: inline-flex;
+  align-items: center;
+
+  padding-right: 4px;
+}
+
+
+/* =========================================================
+   DROPDOWN ARROW BUTTON
+   IMPORTANT:
+   Removes the default browser square box
+   ========================================================= */
+
+.rt-navbar__dropdown-button {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  width: 20px;
+  height: 20px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+  padding: 0;
+
+  border: none !important;
+  outline: none !important;
+
+  background: transparent !important;
+
+  color: #081fef;
+
+  cursor: pointer;
+
+  box-shadow: none !important;
+
+  border-radius: 0;
+
+  flex-shrink: 0;
+}
+
+
+/* Remove browser focus/active box */
+
+.rt-navbar__dropdown-button:hover,
+.rt-navbar__dropdown-button:active,
+.rt-navbar__dropdown-button:focus,
+.rt-navbar__dropdown-button:focus-visible {
+  border: none !important;
+  outline: none !important;
+
+  background: transparent !important;
+
+  box-shadow: none !important;
+}
+
+
+/* =========================================================
    CARET
    ========================================================= */
 
 .rt-navbar__caret {
-  transition:
-    transform 0.2s ease;
-}
+  display: block;
 
+  width: 9px;
+  height: 6px;
+
+  transition: transform 0.2s ease;
+}
 
 .rt-navbar__caret.is-open {
   transform: rotate(180deg);
@@ -463,14 +483,12 @@ body {
   background: #ffffff;
 
   border: 1px solid #081fef;
-
   border-radius: 6px;
 
   box-shadow:
     0 12px 28px rgba(0, 0, 0, 0.13);
 
   opacity: 0;
-
   visibility: hidden;
 
   transform: translateY(-6px);
@@ -483,16 +501,13 @@ body {
   z-index: 5000;
 }
 
-
 .rt-dropdown.is-open,
 .rt-navbar__item:hover > .rt-dropdown {
   opacity: 1;
-
   visibility: visible;
 
   transform: translateY(0);
 }
-
 
 .rt-dropdown li {
   width: 100%;
@@ -500,7 +515,6 @@ body {
   margin: 0;
   padding: 0;
 }
-
 
 .rt-dropdown li a {
   display: flex;
@@ -512,8 +526,12 @@ body {
 
   color: #081fef;
 
-  font-size: 14px;
+  font-family:
+    "Segoe UI",
+    Arial,
+    sans-serif;
 
+  font-size: 14px;
   font-weight: 500;
 
   text-decoration: none;
@@ -523,10 +541,8 @@ body {
     color 0.15s ease;
 }
 
-
 .rt-dropdown li a:hover {
   background: #081fef;
-
   color: #ffffff;
 }
 
@@ -565,10 +581,8 @@ body {
 
   border-radius: 50%;
 
-  transition:
-    transform 0.2s ease;
+  transition: transform 0.2s ease;
 }
-
 
 .rt-navbar__whatsapp img {
   display: block;
@@ -578,7 +592,6 @@ body {
 
   object-fit: contain;
 }
-
 
 .rt-navbar__whatsapp:hover {
   transform: scale(1.1);
@@ -603,13 +616,16 @@ body {
   background: #081fef;
 
   border: 1px solid #081fef;
-
   border-radius: 6px;
 
   color: #ffffff;
 
-  font-size: 15px;
+  font-family:
+    "Segoe UI",
+    Arial,
+    sans-serif;
 
+  font-size: 15px;
   font-weight: 700;
 
   text-decoration: none;
@@ -620,7 +636,6 @@ body {
     background 0.2s ease,
     transform 0.2s ease;
 }
-
 
 .rt-navbar__cta:hover {
   background: #0619b8;
@@ -654,12 +669,10 @@ body {
   background: #ffffff;
 
   border: 1.5px solid #081fef;
-
   border-radius: 5px;
 
   cursor: pointer;
 }
-
 
 .rt-hamburger span {
   width: 24px;
@@ -695,7 +708,6 @@ body {
 
   .rt-navbar__link {
     padding: 0 7px;
-
     font-size: 15px;
   }
 
@@ -715,7 +727,6 @@ body {
 
   .rt-company-selector {
     width: 250px;
-
     flex-basis: 250px;
   }
 }
@@ -754,9 +765,6 @@ body {
     margin-left: auto;
   }
 
-  /*
-    48px topbar + 78px navbar
-  */
   body {
     padding-top: 126px;
   }
@@ -771,23 +779,18 @@ body {
 
   .rt-topbar {
     min-height: 76px;
-
     padding: 8px 0;
   }
 
-
   .rt-topbar__inner {
-
     min-height: 60px;
 
     padding: 0 10px;
 
     display: flex;
-
     flex-direction: column;
 
     align-items: stretch;
-
     justify-content: center;
 
     gap: 7px;
@@ -796,26 +799,20 @@ body {
   }
 
 
-  /* -----------------------------------------
-     CONTACT INFORMATION
-     ----------------------------------------- */
+  /* CONTACT INFORMATION */
 
   .rt-topbar__info {
-
     width: 100%;
 
     min-width: 0;
 
     display: flex;
-
     align-items: center;
-
     justify-content: flex-start;
 
     gap: 8px;
 
     overflow-x: auto;
-
     overflow-y: hidden;
 
     white-space: nowrap;
@@ -823,38 +820,30 @@ body {
     scrollbar-width: none;
 
     font-size: 10px;
-
     line-height: 1;
 
     -webkit-overflow-scrolling: touch;
   }
 
-
   .rt-topbar__info::-webkit-scrollbar {
     display: none;
   }
 
-
   .rt-topbar__item {
     flex: 0 0 auto;
   }
-
 
   .rt-topbar__divider {
     flex: 0 0 auto;
   }
 
 
-  /* -----------------------------------------
-     COMPANY SELECTOR
-     ----------------------------------------- */
+  /* COMPANY SELECTOR */
 
   .rt-company-selector {
-
     width: 100%;
 
     height: 34px;
-
     min-height: 34px;
 
     flex: 0 0 auto;
@@ -862,35 +851,27 @@ body {
     border-radius: 5px;
   }
 
-
   .rt-company-selector__icon {
     width: 37px;
   }
 
-
   .rt-company-selector__select {
-
     font-size: 11px;
-
     font-weight: 600;
 
     padding-right: 34px;
   }
-
 
   .rt-company-selector__arrow {
     right: 10px;
   }
 
 
-  /* -----------------------------------------
-     MAIN NAV
-     ----------------------------------------- */
+  /* MAIN NAV */
 
   .rt-navbar {
     height: 76px;
   }
-
 
   .rt-navbar__inner {
     height: 76px;
@@ -900,27 +881,19 @@ body {
     gap: 0;
   }
 
-
   .rt-navbar__logo {
-
     width: 150px;
-
     height: 76px;
 
     flex: 0 0 150px;
   }
 
-
   .rt-navbar__logo img {
-
     width: 150px;
-
     max-width: 150px;
   }
 
-
   .rt-hamburger {
-
     display: flex;
 
     width: 45px;
@@ -931,10 +904,6 @@ body {
     margin-left: auto;
   }
 
-
-  /*
-    76px topbar + 76px navbar
-  */
   body {
     padding-top: 152px;
   }
@@ -949,13 +918,10 @@ body {
 
   .rt-topbar {
     min-height: 74px;
-
     padding: 7px 0;
   }
 
-
   .rt-topbar__inner {
-
     min-height: 60px;
 
     padding: 0 8px;
@@ -963,63 +929,55 @@ body {
     gap: 7px;
   }
 
-
   .rt-topbar__info {
-
     font-size: 9px;
-
     gap: 7px;
   }
-
 
   .rt-topbar__cin {
     display: inline-flex;
   }
 
-
   .rt-company-selector {
-
     height: 33px;
-
     min-height: 33px;
   }
-
 
   .rt-company-selector__select {
     font-size: 10.5px;
   }
 
-
   .rt-navbar {
     height: 72px;
   }
 
-
   .rt-navbar__inner {
     height: 72px;
-
     padding: 0 12px;
   }
 
-
   .rt-navbar__logo {
-
     width: 150px;
-
     height: 72px;
 
     flex-basis: 150px;
   }
 
-
   .rt-navbar__logo img {
     width: 150px;
   }
 
+  .rt-hamburger {
+    width: 43px;
+    height: 43px;
 
-  /*
-    74px topbar + 72px navbar
-  */
+    flex-basis: 43px;
+  }
+
+  .rt-hamburger span {
+    width: 22px;
+  }
+
   body {
     padding-top: 146px;
   }
@@ -1034,13 +992,10 @@ body {
 
   .rt-topbar {
     min-height: 72px;
-
     padding: 6px 0;
   }
 
-
   .rt-topbar__inner {
-
     min-height: 60px;
 
     padding: 0 7px;
@@ -1048,103 +1003,68 @@ body {
     gap: 6px;
   }
 
-
   .rt-topbar__info {
-
     font-size: 8.5px;
-
     gap: 6px;
   }
-
-
-  /*
-    IMPORTANT:
-    Do NOT hide Email or CIN.
-    They remain accessible by horizontal scrolling.
-  */
 
   .rt-topbar__cin {
     display: inline-flex;
   }
 
-
   .rt-company-selector {
-
     width: 100%;
 
     height: 32px;
-
     min-height: 32px;
   }
 
-
   .rt-company-selector__icon {
-
     width: 34px;
   }
 
-
   .rt-company-selector__icon svg {
-
     width: 15px;
     height: 15px;
   }
 
-
   .rt-company-selector__select {
-
     font-size: 10px;
-
     padding-right: 32px;
   }
-
 
   .rt-navbar {
     height: 70px;
   }
 
-
   .rt-navbar__inner {
-
     height: 70px;
 
     padding: 0 10px;
   }
 
-
   .rt-navbar__logo {
-
     width: 150px;
-
     height: 70px;
 
     flex-basis: 150px;
   }
 
-
   .rt-navbar__logo img {
     width: 150px;
   }
 
-
   .rt-hamburger {
-
     width: 43px;
-
     height: 43px;
 
     flex-basis: 43px;
   }
 
-
   .rt-hamburger span {
     width: 22px;
   }
 
-
-  /*
-    72px topbar + 70px navbar
-  */
   body {
     padding-top: 142px;
   }
@@ -1161,63 +1081,42 @@ body {
     min-height: 70px;
   }
 
-
   .rt-topbar__inner {
-
     min-height: 58px;
 
     padding: 0 6px;
   }
 
-
   .rt-topbar__info {
-
     font-size: 8px;
-
     gap: 5px;
   }
 
-
   .rt-company-selector {
-
     height: 31px;
-
     min-height: 31px;
   }
 
-
   .rt-company-selector__select {
-
     font-size: 9.5px;
   }
 
-
   .rt-navbar__logo {
-
     width: 150px;
-
     flex-basis: 150px;
   }
-
 
   .rt-navbar__logo img {
     width: 150px;
   }
 
-
   .rt-hamburger {
-
     width: 41px;
-
     height: 41px;
 
     flex-basis: 41px;
   }
 
-
-  /*
-    70px topbar + 70px navbar
-  */
   body {
     padding-top: 140px;
   }
