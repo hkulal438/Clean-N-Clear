@@ -178,12 +178,9 @@
   border-radius: 5px;
 
   cursor: pointer;
+
+  -webkit-tap-highlight-color: transparent;
 }
-
-
-/* =========================================================
-   CLOSE X
-   ========================================================= */
 
 .rt-sub-navbar__close span {
   position: absolute;
@@ -214,7 +211,7 @@
 
 
 /* =========================================================
-   SCROLL
+   SCROLL AREA
    ========================================================= */
 
 .rt-sub-navbar__scroll {
@@ -273,7 +270,7 @@
 
 
 /* =========================================================
-   MAIN LINK
+   NORMAL LINK
    ========================================================= */
 
 .rt-sub-navbar__link {
@@ -310,6 +307,8 @@
   transition:
     background 0.18s ease,
     color 0.18s ease;
+
+  -webkit-tap-highlight-color: transparent;
 }
 
 .rt-sub-navbar__link:hover {
@@ -320,10 +319,133 @@
 
 
 /* =========================================================
+   MAIN LINK + ARROW ROW
+   ========================================================= */
+
+.rt-sub-navbar__link-row {
+  width: 100%;
+
+  min-height: 64px;
+
+  display: flex;
+  align-items: stretch;
+
+  background: #ffffff;
+}
+
+
+/* =========================================================
+   MAIN PAGE LINK
+   ========================================================= */
+
+.rt-sub-navbar__link-row
+.rt-sub-navbar__link--main {
+  flex: 1;
+
+  min-width: 0;
+
+  width: auto;
+
+  min-height: 64px;
+
+  padding: 0 23px;
+
+  display: flex;
+  align-items: center;
+
+  background: #ffffff;
+
+  color: #171923;
+
+  text-decoration: none;
+
+  font-family: inherit;
+
+  font-size: 17px;
+
+  font-weight: 500;
+
+  line-height: 1.3;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    color 0.18s ease;
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+.rt-sub-navbar__link-row
+.rt-sub-navbar__link--main:hover {
+  color: #081fef;
+
+  background: #f7f8fc;
+}
+
+
+/* =========================================================
+   DROPDOWN ARROW BUTTON
+   ========================================================= */
+
+.rt-sub-navbar__dropdown-button {
+  width: 64px;
+
+  min-width: 64px;
+
+  height: 64px;
+
+  flex: 0 0 64px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin: 0;
+
+  padding: 0;
+
+  background: #ffffff;
+
+  border: 0;
+
+  color: #6d6f7a;
+
+  cursor: pointer;
+
+  -webkit-tap-highlight-color: transparent;
+
+  transition:
+    background 0.18s ease,
+    color 0.18s ease;
+}
+
+.rt-sub-navbar__dropdown-button:hover {
+  background: #f7f8fc;
+
+  color: #081fef;
+}
+
+.rt-sub-navbar__dropdown-button:focus {
+  outline: none;
+}
+
+.rt-sub-navbar__dropdown-button:active {
+  background: #f1f3ff;
+}
+
+
+/* =========================================================
    CHEVRON
    ========================================================= */
 
 .rt-sub-navbar__chevron {
+  display: block;
+
   flex-shrink: 0;
 
   color: #6d6f7a;
@@ -347,6 +469,7 @@
   width: 100%;
 
   margin: 0;
+
   padding: 0;
 
   list-style: none;
@@ -374,6 +497,7 @@
   width: 100%;
 
   margin: 0;
+
   padding: 0;
 }
 
@@ -385,6 +509,7 @@
   padding: 9px 20px 9px 40px;
 
   display: flex;
+
   align-items: center;
 
   background: #f7f8fc;
@@ -404,6 +529,8 @@
   transition:
     background 0.18s ease,
     color 0.18s ease;
+
+  -webkit-tap-highlight-color: transparent;
 }
 
 .rt-sub-navbar__submenu li a:hover {
@@ -423,6 +550,7 @@
   padding: 10px 14px 12px;
 
   display: flex;
+
   align-items: center;
 
   gap: 10px;
@@ -445,7 +573,9 @@
   height: 52px;
 
   display: flex;
+
   align-items: center;
+
   justify-content: center;
 
   background: #081fef;
@@ -463,6 +593,10 @@
   text-decoration: none;
 
   white-space: nowrap;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 .rt-sub-navbar__quote:hover {
@@ -471,17 +605,20 @@
 
 
 /* =========================================================
-   WHATSAPP IMAGE ONLY
+   WHATSAPP
    ========================================================= */
 
 .rt-sub-navbar__whatsapp {
   width: 72px;
+
   height: 52px;
 
   flex: 0 0 72px;
 
   display: flex;
+
   align-items: center;
+
   justify-content: center;
 
   background: #ffffff;
@@ -499,6 +636,7 @@
 
 .rt-sub-navbar__whatsapp img {
   width: 42px;
+
   height: 42px;
 
   object-fit: contain;
@@ -521,6 +659,7 @@
 
   .rt-sub-navbar__header {
     height: 80px;
+
     min-height: 80px;
 
     padding: 0 16px;
@@ -528,6 +667,7 @@
 
   .rt-sub-navbar__logo-link {
     width: 150px;
+
     height: 80px;
   }
 
@@ -537,6 +677,7 @@
 
   .rt-sub-navbar__close {
     width: 45px;
+
     height: 45px;
 
     flex-basis: 45px;
@@ -550,6 +691,26 @@
     font-size: 17px;
   }
 
+  .rt-sub-navbar__link-row {
+    min-height: 63px;
+  }
+
+  .rt-sub-navbar__link-row
+  .rt-sub-navbar__link--main {
+    min-height: 63px;
+
+    padding: 0 21px;
+
+    font-size: 17px;
+  }
+
+  .rt-sub-navbar__dropdown-button {
+    width: 60px;
+
+    min-width: 60px;
+
+    height: 63px;
+  }
 }
 
 
@@ -561,6 +722,7 @@
 
   .rt-sub-navbar__header {
     height: 76px;
+
     min-height: 76px;
 
     padding: 0 14px;
@@ -568,6 +730,7 @@
 
   .rt-sub-navbar__logo-link {
     width: 150px;
+
     height: 76px;
   }
 
@@ -577,6 +740,7 @@
 
   .rt-sub-navbar__close {
     width: 44px;
+
     height: 44px;
 
     flex-basis: 44px;
@@ -592,6 +756,27 @@
     padding: 0 20px;
 
     font-size: 16.5px;
+  }
+
+  .rt-sub-navbar__link-row {
+    min-height: 61px;
+  }
+
+  .rt-sub-navbar__link-row
+  .rt-sub-navbar__link--main {
+    min-height: 61px;
+
+    padding: 0 20px;
+
+    font-size: 16.5px;
+  }
+
+  .rt-sub-navbar__dropdown-button {
+    width: 56px;
+
+    min-width: 56px;
+
+    height: 61px;
   }
 
   .rt-sub-navbar__submenu li a {
@@ -616,6 +801,7 @@
 
   .rt-sub-navbar__whatsapp {
     width: 68px;
+
     height: 50px;
 
     flex-basis: 68px;
@@ -623,9 +809,9 @@
 
   .rt-sub-navbar__whatsapp img {
     width: 40px;
+
     height: 40px;
   }
-
 }
 
 
@@ -637,11 +823,13 @@
 
   .rt-sub-navbar__header {
     height: 72px;
+
     min-height: 72px;
   }
 
   .rt-sub-navbar__logo-link {
     width: 150px;
+
     height: 72px;
   }
 
@@ -651,6 +839,7 @@
 
   .rt-sub-navbar__close {
     width: 42px;
+
     height: 42px;
 
     flex-basis: 42px;
@@ -662,6 +851,27 @@
     padding: 0 18px;
 
     font-size: 16px;
+  }
+
+  .rt-sub-navbar__link-row {
+    min-height: 59px;
+  }
+
+  .rt-sub-navbar__link-row
+  .rt-sub-navbar__link--main {
+    min-height: 59px;
+
+    padding: 0 18px;
+
+    font-size: 16px;
+  }
+
+  .rt-sub-navbar__dropdown-button {
+    width: 52px;
+
+    min-width: 52px;
+
+    height: 59px;
   }
 
   .rt-sub-navbar__actions {
@@ -676,6 +886,7 @@
 
   .rt-sub-navbar__whatsapp {
     width: 65px;
+
     height: 48px;
 
     flex-basis: 65px;
@@ -683,7 +894,24 @@
 
   .rt-sub-navbar__whatsapp img {
     width: 38px;
+
     height: 38px;
   }
+}
 
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .rt-sub-navbar,
+  .rt-sub-overlay,
+  .rt-sub-navbar__submenu,
+  .rt-sub-navbar__chevron,
+  .rt-sub-navbar__link,
+  .rt-sub-navbar__link--main {
+    transition: none;
+  }
 }

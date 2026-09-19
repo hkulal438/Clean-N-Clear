@@ -3,18 +3,18 @@ import React, {
   useEffect,
 } from "react";
 
+import { Link } from "react-router-dom";
+
 import "./subNavbar.css";
 
 import logo from "../../images/CLEANNCLEAR_LOGO-01.png";
 import whatsappIcon from "../../images/WhatsApp.png";
-
 
 /* =========================================================
    MENU ITEMS
    ========================================================= */
 
 const MENU_ITEMS = [
-
   {
     label: "Home",
     href: "/",
@@ -27,7 +27,7 @@ const MENU_ITEMS = [
 
   {
     label: "Products",
-
+    href: "/products",
     children: [
       {
         label: "Cleaning Chemicals",
@@ -58,7 +58,7 @@ const MENU_ITEMS = [
 
   {
     label: "Solutions",
-
+    href: "/solutions",
     children: [
       {
         label: "Commercial",
@@ -90,7 +90,7 @@ const MENU_ITEMS = [
 
   {
     label: "Industries",
-
+    href: "/industries",
     children: [
       {
         label: "Healthcare",
@@ -128,12 +128,13 @@ const MENU_ITEMS = [
     label: "Contact",
     href: "/contact",
   },
-
 ];
 
+/* =========================================================
+   WHATSAPP
+   ========================================================= */
 
 const WHATSAPP_NUMBER = "919597812345";
-
 
 /* =========================================================
    SUB NAVBAR
@@ -143,26 +144,17 @@ export default function SubNavbar({
   isOpen,
   onClose,
 }) {
-
-  const [expanded, setExpanded] =
-    useState(null);
-
+  const [expanded, setExpanded] = useState(null);
 
   /* =======================================================
-     ESCAPE
+     ESCAPE KEY
      ======================================================= */
 
   useEffect(() => {
-
     const handleKeyDown = (event) => {
-
-      if (
-        event.key === "Escape" &&
-        isOpen
-      ) {
+      if (event.key === "Escape" && isOpen) {
         onClose?.();
       }
-
     };
 
     document.addEventListener(
@@ -176,68 +168,56 @@ export default function SubNavbar({
         handleKeyDown
       );
     };
-
   }, [isOpen, onClose]);
 
-
   /* =======================================================
-     RESET
+     RESET WHEN CLOSED
      ======================================================= */
 
   useEffect(() => {
-
     if (!isOpen) {
       setExpanded(null);
     }
-
   }, [isOpen]);
 
-
   /* =======================================================
-     TOGGLE
+     TOGGLE SUBMENU
      ======================================================= */
 
   const toggleSection = (label) => {
-
     setExpanded((previous) =>
       previous === label
         ? null
         : label
     );
-
   };
 
-
   /* =======================================================
-     CLOSE
+     CLOSE MENU
      ======================================================= */
 
   const handleClose = () => {
-
     setExpanded(null);
-
     onClose?.();
-
   };
 
+  /* =======================================================
+     RENDER
+     ======================================================= */
 
   return (
     <>
-
       {/* ===================================================
           OVERLAY
           =================================================== */}
 
       <div
         className={`rt-sub-overlay${
-          isOpen
-            ? " is-open"
-            : ""
+          isOpen ? " is-open" : ""
         }`}
         onClick={handleClose}
         aria-hidden="true"
       />
-
 
       {/* ===================================================
           DRAWER
@@ -246,13 +226,10 @@ export default function SubNavbar({
       <aside
         id="rt-sub-navbar"
         className={`rt-sub-navbar${
-          isOpen
-            ? " is-open"
-            : ""
+          isOpen ? " is-open" : ""
         }`}
         aria-hidden={!isOpen}
       >
-
 
         {/* =================================================
             HEADER
@@ -260,26 +237,22 @@ export default function SubNavbar({
 
         <div className="rt-sub-navbar__header">
 
-
           {/* LOGO */}
 
-          <a
-            href="/"
+          <Link
+            to="/"
             className="rt-sub-navbar__logo-link"
             onClick={handleClose}
             aria-label="Clean N Clear Home"
           >
-
             <img
               src={logo}
               alt="Clean N Clear"
               className="rt-sub-navbar__logo"
             />
+          </Link>
 
-          </a>
-
-
-          {/* CLOSE BUTTON */}
+          {/* CLOSE */}
 
           <button
             type="button"
@@ -287,14 +260,11 @@ export default function SubNavbar({
             aria-label="Close menu"
             onClick={handleClose}
           >
-
             <span />
             <span />
-
           </button>
 
         </div>
-
 
         {/* =================================================
             SCROLL AREA
@@ -308,13 +278,11 @@ export default function SubNavbar({
           <ul className="rt-sub-navbar__list">
 
             {MENU_ITEMS.map((item) => {
-
               const hasChildren =
                 Boolean(item.children);
 
               const isExpanded =
                 expanded === item.label;
-
 
               return (
                 <li
@@ -322,58 +290,69 @@ export default function SubNavbar({
                   className="rt-sub-navbar__item"
                 >
 
-
                   {/* =========================================
-                      ACCORDION
+                      ITEMS WITH SUBMENU
                       ========================================= */}
 
                   {hasChildren ? (
-
                     <>
+                      <div className="rt-sub-navbar__link-row">
 
-                      <button
-                        type="button"
-                        className="rt-sub-navbar__link rt-sub-navbar__link--toggle"
-                        aria-expanded={isExpanded}
-                        onClick={() =>
-                          toggleSection(
-                            item.label
-                          )
-                        }
-                      >
+                        {/* MAIN PAGE LINK */}
 
-                        <span>
-                          {item.label}
-                        </span>
-
-
-                        <svg
-                          className={`rt-sub-navbar__chevron${
-                            isExpanded
-                              ? " is-open"
-                              : ""
-                          }`}
-                          width="14"
-                          height="8"
-                          viewBox="0 0 14 8"
-                          aria-hidden="true"
+                        <Link
+                          to={item.href}
+                          className="rt-sub-navbar__link rt-sub-navbar__link--main"
+                          onClick={handleClose}
                         >
+                          <span>
+                            {item.label}
+                          </span>
+                        </Link>
 
-                          <path
-                            d="M1 1L7 7L13 1"
-                            stroke="currentColor"
-                            strokeWidth="1.8"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            fill="none"
-                          />
+                        {/* ARROW BUTTON */}
 
-                        </svg>
+                        <button
+                          type="button"
+                          className="rt-sub-navbar__dropdown-button"
+                          aria-label={`Open ${item.label} menu`}
+                          aria-expanded={isExpanded}
+                          onClick={(event) => {
+                            event.preventDefault();
+                            event.stopPropagation();
 
-                      </button>
+                            toggleSection(
+                              item.label
+                            );
+                          }}
+                        >
+                          <svg
+                            className={`rt-sub-navbar__chevron${
+                              isExpanded
+                                ? " is-open"
+                                : ""
+                            }`}
+                            width="14"
+                            height="8"
+                            viewBox="0 0 14 8"
+                            aria-hidden="true"
+                          >
+                            <path
+                              d="M1 1L7 7L13 1"
+                              stroke="currentColor"
+                              strokeWidth="1.8"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              fill="none"
+                            />
+                          </svg>
+                        </button>
 
+                      </div>
 
-                      {/* SUBMENU */}
+                      {/* =====================================
+                          SUBMENU
+                          ===================================== */}
 
                       <ul
                         className={`rt-sub-navbar__submenu${
@@ -382,87 +361,72 @@ export default function SubNavbar({
                             : ""
                         }`}
                         style={{
-                          maxHeight:
-                            isExpanded
-                              ? `${
-                                  item.children.length *
-                                    48 +
-                                  10
-                                }px`
-                              : "0px",
+                          maxHeight: isExpanded
+                            ? `${
+                                item.children.length *
+                                  48 +
+                                10
+                              }px`
+                            : "0px",
                         }}
                       >
-
                         {item.children.map(
                           (child) => (
-
                             <li
                               key={child.label}
                             >
-
-                              <a
-                                href={child.href}
+                              <Link
+                                to={child.href}
                                 onClick={handleClose}
                               >
                                 {child.label}
-                              </a>
-
+                              </Link>
                             </li>
-
                           )
                         )}
-
                       </ul>
-
                     </>
-
                   ) : (
 
                     /* =========================================
                        NORMAL LINK
                        ========================================= */
 
-                    <a
-                      href={item.href}
+                    <Link
+                      to={item.href}
                       className="rt-sub-navbar__link"
                       onClick={handleClose}
                     >
-
                       <span>
                         {item.label}
                       </span>
-
-                    </a>
+                    </Link>
 
                   )}
 
                 </li>
               );
-
             })}
 
           </ul>
 
-
           {/* =================================================
-              BOTTOM BUTTONS
+              BOTTOM ACTIONS
               ================================================= */}
 
           <div className="rt-sub-navbar__actions">
 
-
             {/* GET A QUOTE */}
 
-            <a
-              href="/request-a-quote"
+            <Link
+              to="/request-a-quote"
               className="rt-sub-navbar__quote"
               onClick={handleClose}
             >
               Get a Quote
-            </a>
+            </Link>
 
-
-            {/* WHATSAPP IMAGE ONLY */}
+            {/* WHATSAPP */}
 
             <a
               href={`https://wa.me/${WHATSAPP_NUMBER}`}
@@ -471,12 +435,10 @@ export default function SubNavbar({
               className="rt-sub-navbar__whatsapp"
               aria-label="WhatsApp"
             >
-
               <img
                 src={whatsappIcon}
                 alt="WhatsApp"
               />
-
             </a>
 
           </div>
@@ -484,7 +446,6 @@ export default function SubNavbar({
         </nav>
 
       </aside>
-
     </>
   );
 }
