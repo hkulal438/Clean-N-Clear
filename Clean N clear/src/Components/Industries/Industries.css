@@ -1,0 +1,953 @@
+/* =========================================================
+   CLEAN N CLEAR
+   PREMIUM INDUSTRIES SECTION
+   =========================================================
+
+   PRIMARY BLUE : #081FEF
+   ACCENT GREEN  : #95D501
+   BACKGROUND    : #FFFFFF
+
+   All classes are uniquely prefixed with
+   cnc-industries- to prevent conflicts.
+========================================================= */
+
+
+/* =========================================================
+   PREMIUM FONTS
+========================================================= */
+
+@import url(
+  "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+);
+
+
+/* =========================================================
+   MAIN INDUSTRIES SECTION
+========================================================= */
+
+.cnc-industries-section {
+  position: relative;
+
+  width: 100%;
+
+  /*
+   IMPORTANT:
+   Moves the COMPLETE section below the fixed header.
+  */
+  margin-top: 90px;
+
+  padding: 45px 0 72px;
+
+  background: #ffffff;
+
+  overflow: hidden;
+
+  font-family: "DM Sans", Arial, sans-serif;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   SECTION HEADER
+========================================================= */
+
+.cnc-industries-heading {
+  width: min(1150px, 90%);
+
+  margin: 0 auto 42px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   INDUSTRIES LABEL
+========================================================= */
+
+.cnc-industries-label {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 16px;
+
+  margin-bottom: 18px;
+
+  color: #081fef;
+
+  font-family: "DM Sans", Arial, sans-serif;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  letter-spacing: 4px;
+
+  line-height: 1;
+
+  text-transform: uppercase;
+}
+
+
+/* GREEN LINES */
+
+.cnc-industries-label-line {
+  width: 40px;
+
+  height: 2px;
+
+  flex-shrink: 0;
+
+  background: #95d501;
+
+  border-radius: 10px;
+}
+
+
+/* =========================================================
+   MAIN HEADING
+========================================================= */
+
+.cnc-industries-title {
+  width: 100%;
+
+  margin: 0;
+
+  padding: 0;
+}
+
+.cnc-industries-title h2 {
+  margin: 0;
+
+  padding: 0;
+
+  color: #172033;
+
+  font-family: "Playfair Display", Georgia, serif;
+
+  font-size: clamp(44px, 5vw, 68px);
+
+  font-weight: 600;
+
+  line-height: 1.08;
+
+  letter-spacing: -1.8px;
+}
+
+
+/* BLUE SECOND LINE */
+
+.cnc-industries-title h2 span {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #081fef;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   INTRODUCTION
+========================================================= */
+
+.cnc-industries-intro {
+  width: 100%;
+
+  max-width: 680px;
+
+  margin-top: 18px;
+
+  margin-left: auto;
+
+  margin-right: auto;
+}
+
+.cnc-industries-intro p {
+  margin: 0;
+
+  padding: 0;
+
+  color: #697386;
+
+  font-family: "DM Sans", Arial, sans-serif;
+
+  font-size: 14px;
+
+  font-weight: 400;
+
+  line-height: 1.75;
+
+  letter-spacing: 0.1px;
+}
+
+
+/* =========================================================
+   MAIN EXPLORE ALL INDUSTRIES LINK
+========================================================= */
+
+.cnc-industries-main-link {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 11px;
+
+  margin-top: 18px;
+
+  color: #081fef;
+
+  font-family: "DM Sans", Arial, sans-serif;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.2px;
+
+  line-height: 1;
+
+  text-decoration: none;
+
+  text-transform: uppercase;
+
+  transition:
+    gap 0.3s ease,
+    color 0.3s ease;
+}
+
+
+/* MAIN CTA ARROW */
+
+.cnc-industries-main-link svg {
+  font-size: 11px;
+
+  transition:
+    transform 0.3s ease;
+}
+
+
+/* MAIN CTA HOVER */
+
+.cnc-industries-main-link:hover {
+  gap: 16px;
+
+  color: #0619c7;
+}
+
+.cnc-industries-main-link:hover svg {
+  transform: translateX(4px);
+}
+
+
+/* =========================================================
+   INDUSTRIES GRID
+========================================================= */
+
+.cnc-industries-grid {
+  width: min(1300px, 90%);
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 17px;
+}
+
+
+/* =========================================================
+   INDUSTRY CARD
+========================================================= */
+
+.cnc-industries-card {
+  position: relative;
+
+  height: 315px;
+
+  overflow: hidden;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  border: 1px solid #e2e7ef;
+
+  border-radius: 15px;
+
+  background: #f5f7fa;
+
+  isolation: isolate;
+
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+}
+
+
+/* CARD HOVER */
+
+.cnc-industries-card:hover {
+  transform: translateY(-5px);
+
+  border-color: rgba(8, 31, 239, 0.18);
+
+  box-shadow:
+    0 18px 40px rgba(8, 31, 239, 0.11);
+}
+
+
+/* =========================================================
+   CARD IMAGE
+========================================================= */
+
+.cnc-industries-image {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+
+  height: 100%;
+
+  overflow: hidden;
+
+  z-index: 1;
+}
+
+.cnc-industries-image img {
+  display: block;
+
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: cover;
+
+  object-position: center;
+
+  transition:
+    transform 0.7s ease;
+}
+
+
+/* IMAGE HOVER */
+
+.cnc-industries-card:hover
+.cnc-industries-image img {
+  transform: scale(1.055);
+}
+
+
+/* =========================================================
+   TRANSPARENT BLUE OVERLAY
+========================================================= */
+
+.cnc-industries-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 2;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(8, 31, 239, 0.58) 0%,
+      rgba(8, 31, 239, 0.28) 38%,
+      rgba(8, 31, 239, 0.08) 68%,
+      rgba(8, 31, 239, 0) 100%
+    );
+
+  transition:
+    background 0.45s ease;
+}
+
+
+/* HOVER OVERLAY */
+
+.cnc-industries-card:hover
+.cnc-industries-overlay {
+  background:
+    linear-gradient(
+      to top,
+      rgba(8, 31, 239, 0.64) 0%,
+      rgba(8, 31, 239, 0.31) 40%,
+      rgba(8, 31, 239, 0.08) 72%,
+      rgba(8, 31, 239, 0) 100%
+    );
+}
+
+
+/* =========================================================
+   VERTICAL INDUSTRY LABEL
+========================================================= */
+
+.cnc-industries-side-label {
+  position: absolute;
+
+  top: 0;
+
+  left: -43px;
+
+  width: 43px;
+
+  height: 100%;
+
+  z-index: 6;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: rgba(8, 31, 239, 0.82);
+
+  color: #ffffff;
+
+  font-family: "DM Sans", Arial, sans-serif;
+
+  font-size: 8.5px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.5px;
+
+  line-height: 1.2;
+
+  writing-mode: vertical-rl;
+
+  transform: rotate(180deg);
+
+  transition:
+    left 0.4s ease;
+}
+
+
+/* SIDE LABEL TEXT */
+
+.cnc-industries-side-label span {
+  white-space: nowrap;
+}
+
+
+/* SHOW LABEL ON DESKTOP HOVER */
+
+.cnc-industries-card:hover
+.cnc-industries-side-label {
+  left: 0;
+}
+
+
+/* =========================================================
+   CARD CONTENT
+========================================================= */
+
+.cnc-industries-content {
+  position: relative;
+
+  z-index: 5;
+
+  width: 100%;
+
+  padding: 22px 30px 24px;
+
+  text-align: center;
+
+  color: #ffffff;
+
+  transform: translateY(5px);
+
+  transition:
+    transform 0.4s ease;
+}
+
+
+/* CONTENT HOVER */
+
+.cnc-industries-card:hover
+.cnc-industries-content {
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   CARD HEADING
+========================================================= */
+
+.cnc-industries-content h3 {
+  margin: 0 0 8px;
+
+  padding: 0;
+
+  color: #ffffff;
+
+  font-family: "Playfair Display", Georgia, serif;
+
+  font-size: 25px;
+
+  font-weight: 600;
+
+  line-height: 1.12;
+
+  letter-spacing: -0.3px;
+
+  text-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.22);
+}
+
+
+/* =========================================================
+   CARD DESCRIPTION
+========================================================= */
+
+.cnc-industries-content p {
+  width: 100%;
+
+  max-width: 360px;
+
+  margin: 0 auto;
+
+  padding: 0;
+
+  color: rgba(255, 255, 255, 0.92);
+
+  font-family: "DM Sans", Arial, sans-serif;
+
+  font-size: 11.5px;
+
+  font-weight: 400;
+
+  line-height: 1.65;
+
+  text-shadow:
+    0 1px 7px rgba(0, 0, 0, 0.18);
+}
+
+
+/* =========================================================
+   CARD EXPLORE LINK
+========================================================= */
+
+.cnc-industries-card-link {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  margin-top: 13px;
+
+  color: #ffffff;
+
+  font-family: "DM Sans", Arial, sans-serif;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 1px;
+
+  line-height: 1;
+
+  text-decoration: none;
+
+  text-transform: uppercase;
+
+  opacity: 0;
+
+  transform: translateY(7px);
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    gap 0.3s ease;
+}
+
+
+/* CARD LINK ARROW */
+
+.cnc-industries-card-link svg {
+  font-size: 8px;
+
+  transition:
+    transform 0.3s ease;
+}
+
+
+/* SHOW CARD LINK */
+
+.cnc-industries-card:hover
+.cnc-industries-card-link {
+  opacity: 1;
+
+  transform: translateY(0);
+}
+
+
+/* CARD LINK HOVER */
+
+.cnc-industries-card-link:hover {
+  gap: 13px;
+}
+
+.cnc-industries-card-link:hover svg {
+  transform: translateX(3px);
+}
+
+
+/* =========================================================
+   GREEN BOTTOM ACCENT
+========================================================= */
+
+.cnc-industries-accent {
+  position: absolute;
+
+  bottom: 0;
+
+  left: 50%;
+
+  width: 0;
+
+  height: 3px;
+
+  z-index: 8;
+
+  background: #95d501;
+
+  border-radius: 5px;
+
+  transform: translateX(-50%);
+
+  transition:
+    width 0.4s ease;
+}
+
+
+/* ACCENT HOVER */
+
+.cnc-industries-card:hover
+.cnc-industries-accent {
+  width: 65px;
+}
+
+
+/* =========================================================
+   LARGE TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .cnc-industries-section {
+    margin-top: 90px;
+
+    padding-top: 42px;
+  }
+
+  .cnc-industries-grid {
+    width: 92%;
+
+    gap: 15px;
+  }
+
+  .cnc-industries-card {
+    height: 305px;
+  }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .cnc-industries-section {
+    margin-top: 85px;
+
+    padding-top: 40px;
+  }
+
+  .cnc-industries-grid {
+    grid-template-columns: repeat(2, 1fr);
+
+    width: 90%;
+  }
+
+  .cnc-industries-card {
+    height: 300px;
+  }
+
+  .cnc-industries-title h2 {
+    font-size: 52px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+  .cnc-industries-section {
+    /*
+      Header-safe spacing
+    */
+    margin-top: 75px;
+
+    padding: 35px 0 55px;
+  }
+
+
+  /* HEADER */
+
+  .cnc-industries-heading {
+    width: 90%;
+
+    margin-bottom: 32px;
+  }
+
+
+  /* LABEL */
+
+  .cnc-industries-label {
+    gap: 11px;
+
+    margin-bottom: 15px;
+
+    font-size: 11px;
+
+    letter-spacing: 3px;
+  }
+
+  .cnc-industries-label-line {
+    width: 27px;
+
+    height: 2px;
+  }
+
+
+  /* HEADING */
+
+  .cnc-industries-title h2 {
+    font-size: 40px;
+
+    line-height: 1.1;
+
+    letter-spacing: -1px;
+  }
+
+
+  /* INTRO */
+
+  .cnc-industries-intro {
+    margin-top: 14px;
+  }
+
+  .cnc-industries-intro p {
+    font-size: 12px;
+
+    line-height: 1.7;
+  }
+
+
+  /* MAIN CTA */
+
+  .cnc-industries-main-link {
+    margin-top: 15px;
+
+    font-size: 11px;
+
+    letter-spacing: 1px;
+  }
+
+
+  /* GRID */
+
+  .cnc-industries-grid {
+    width: 90%;
+
+    grid-template-columns: 1fr;
+
+    gap: 14px;
+  }
+
+
+  /* CARD */
+
+  .cnc-industries-card {
+    height: 295px;
+
+    border-radius: 13px;
+  }
+
+
+  /* CONTENT */
+
+  .cnc-industries-content {
+    padding: 20px 22px 23px;
+  }
+
+
+  /* CARD HEADING */
+
+  .cnc-industries-content h3 {
+    font-size: 23px;
+
+    line-height: 1.15;
+  }
+
+
+  /* DESCRIPTION */
+
+  .cnc-industries-content p {
+    font-size: 11px;
+
+    line-height: 1.6;
+  }
+
+
+  /* MOBILE CTA ALWAYS VISIBLE */
+
+  .cnc-industries-card-link {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+
+
+  /* MOBILE SIDE LABEL */
+
+  .cnc-industries-side-label {
+    left: 0;
+
+    width: 38px;
+
+    font-size: 8px;
+
+    letter-spacing: 1.3px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+  .cnc-industries-section {
+    margin-top: 70px;
+
+    padding-top: 30px;
+
+    padding-bottom: 50px;
+  }
+
+
+  .cnc-industries-heading {
+    width: 91%;
+  }
+
+
+  .cnc-industries-label {
+    gap: 9px;
+
+    font-size: 10px;
+
+    letter-spacing: 2.5px;
+  }
+
+
+  .cnc-industries-label-line {
+    width: 22px;
+  }
+
+
+  .cnc-industries-title h2 {
+    font-size: 34px;
+
+    letter-spacing: -0.8px;
+  }
+
+
+  .cnc-industries-intro p {
+    font-size: 11.5px;
+  }
+
+
+  .cnc-industries-main-link {
+    font-size: 10px;
+  }
+
+
+  .cnc-industries-card {
+    height: 280px;
+
+    border-radius: 12px;
+  }
+
+
+  .cnc-industries-content {
+    padding: 18px 19px 21px;
+  }
+
+
+  .cnc-industries-content h3 {
+    font-size: 21px;
+  }
+
+
+  .cnc-industries-content p {
+    font-size: 10.5px;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL DEVICES
+========================================================= */
+
+@media (max-width: 340px) {
+
+  .cnc-industries-section {
+    margin-top: 65px;
+  }
+
+  .cnc-industries-title h2 {
+    font-size: 31px;
+  }
+
+  .cnc-industries-card {
+    height: 265px;
+  }
+
+}

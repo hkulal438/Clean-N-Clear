@@ -1,7 +1,7 @@
 /* =========================================================
    CLEAN N CLEAR
    HERO SLIDER
-   FINAL RESPONSIVE VERSION
+   RESPONSIVE / NO EXCESSIVE TOP SPACE
    ========================================================= */
 
 
@@ -21,14 +21,8 @@
   min-height: 0 !important;
   max-height: none !important;
 
-  /*
-   * Desktop header clearance
-   */
-  margin-top: 90px !important;
-
-  margin-right: 0 !important;
-  margin-bottom: 0 !important;
-  margin-left: 0 !important;
+  /* Desktop header clearance */
+  margin: 90px 0 0 0 !important;
 
   padding: 0 !important;
 
@@ -321,6 +315,7 @@
 
 /* =========================================================
    LARGE DESKTOP
+   1600px+
    ========================================================= */
 
 @media (min-width: 1600px) {
@@ -352,6 +347,7 @@
 
 /* =========================================================
    DESKTOP
+   1201px - 1599px
    ========================================================= */
 
 @media (min-width: 1201px) and (max-width: 1599px) {
@@ -378,13 +374,17 @@
 
 
 /* =========================================================
-   LAPTOP / TABLET
+   TABLET
+   769px - 1200px
+
+   IMPORTANT:
+   Reduced from 90px/large clearance depending on header.
    ========================================================= */
 
 @media (min-width: 769px) and (max-width: 1200px) {
 
   .cnc-hero-slider {
-    margin-top: 90px !important;
+    margin-top: 70px !important;
   }
 
   .cnc-hero-slider__arrow {
@@ -410,129 +410,27 @@
 
 /* =========================================================
    MOBILE
-   FULL HEADER CLEARANCE
+   481px - 768px
+
+   Header is approximately:
+   top bar + search + navbar
+
+   Reduced clearance prevents large blank space.
    ========================================================= */
 
-@media (max-width: 768px) {
+@media (min-width: 481px) and (max-width: 768px) {
 
   .cnc-hero-slider {
-    position: relative !important;
-
-    width: 100% !important;
-    max-width: 100% !important;
-
-    height: auto !important;
-    min-height: 0 !important;
-    max-height: none !important;
-
-    /*
-     * TOP HEADER + SEARCH + NAVBAR
-     *
-     * Approximate combined height:
-     * 30px + 60px + 85px
-     *
-     * = 175px
-     */
-    margin-top: 175px !important;
-
-    margin-right: 0 !important;
-    margin-bottom: 0 !important;
-    margin-left: 0 !important;
-
-    padding: 0 !important;
-
-    overflow: hidden !important;
-
-    background: #ffffff !important;
+    margin-top: 145px !important;
   }
-
-
-  /* =======================================================
-     MOBILE SLIDER
-     ======================================================= */
-
-  .cnc-hero-slider__slides {
-    position: relative !important;
-
-    display: block !important;
-
-    width: 100% !important;
-    max-width: 100% !important;
-
-    height: auto !important;
-    min-height: 0 !important;
-    max-height: none !important;
-
-    margin: 0 !important;
-    padding: 0 !important;
-
-    overflow: hidden !important;
-  }
-
-
-  /* =======================================================
-     MOBILE SLIDE
-     ======================================================= */
-
-  .cnc-hero-slider__slide {
-    position: relative !important;
-
-    width: 100% !important;
-    max-width: 100% !important;
-
-    height: auto !important;
-    min-height: 0 !important;
-    max-height: none !important;
-
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-
-  /* =======================================================
-     MOBILE ACTIVE
-     ======================================================= */
-
-  .cnc-hero-slider__slide--active {
-    display: block !important;
-
-    position: relative !important;
-
-    width: 100% !important;
-
-    height: auto !important;
-    min-height: 0 !important;
-  }
-
-
-  /* =======================================================
-     MOBILE IMAGE
-     ======================================================= */
 
   .cnc-hero-slider__image {
-    display: block !important;
-
     width: 100% !important;
-    max-width: 100% !important;
-
     height: auto !important;
-
-    min-width: 0 !important;
-    min-height: 0 !important;
-
-    max-height: none !important;
-
-    margin: 0 !important;
-    padding: 0 !important;
 
     object-fit: contain !important;
     object-position: center center !important;
   }
-
-
-  /* =======================================================
-     MOBILE ARROWS
-     ======================================================= */
 
   .cnc-hero-slider__arrow {
     width: 34px !important;
@@ -549,14 +447,8 @@
     right: 8px !important;
   }
 
-
-  /* =======================================================
-     MOBILE DOTS
-     ======================================================= */
-
   .cnc-hero-slider__pagination {
     bottom: 7px !important;
-
     gap: 6px !important;
   }
 
@@ -573,34 +465,24 @@
 
 /* =========================================================
    SMALL MOBILE
+   381px - 480px
+
+   DO NOT increase this back to 175px.
    ========================================================= */
 
-@media (max-width: 480px) {
+@media (min-width: 381px) and (max-width: 480px) {
 
   .cnc-hero-slider {
-    /*
-     * Keep complete header clearance.
-     */
-    margin-top: 145px !important;
-
-    width: 100% !important;
-    max-width: 100% !important;
-
-    height: auto !important;
-    min-height: 0 !important;
+    margin-top: 140px !important;
   }
-
 
   .cnc-hero-slider__image {
     width: 100% !important;
-    max-width: 100% !important;
-
     height: auto !important;
 
     object-fit: contain !important;
     object-position: center center !important;
   }
-
 
   .cnc-hero-slider__arrow {
     width: 30px !important;
@@ -609,29 +491,23 @@
     font-size: 20px !important;
   }
 
-
   .cnc-hero-slider__arrow--prev {
     left: 6px !important;
   }
-
 
   .cnc-hero-slider__arrow--next {
     right: 6px !important;
   }
 
-
   .cnc-hero-slider__pagination {
     bottom: 6px !important;
-
     gap: 5px !important;
   }
-
 
   .cnc-hero-slider__dot {
     width: 6px !important;
     height: 6px !important;
   }
-
 
   .cnc-hero-slider__dot--active {
     width: 20px !important;
@@ -641,14 +517,24 @@
 
 /* =========================================================
    VERY SMALL MOBILE
+   380px AND BELOW
+
+   Keep clearance compact.
    ========================================================= */
 
 @media (max-width: 380px) {
 
   .cnc-hero-slider {
-    margin-top: 175px !important;
+    margin-top: 135px !important;
   }
 
+  .cnc-hero-slider__image {
+    width: 100% !important;
+    height: auto !important;
+
+    object-fit: contain !important;
+    object-position: center center !important;
+  }
 
   .cnc-hero-slider__arrow {
     width: 28px !important;
@@ -657,19 +543,26 @@
     font-size: 18px !important;
   }
 
-
   .cnc-hero-slider__arrow--prev {
     left: 5px !important;
   }
-
 
   .cnc-hero-slider__arrow--next {
     right: 5px !important;
   }
 
-
   .cnc-hero-slider__pagination {
     bottom: 5px !important;
+    gap: 5px !important;
+  }
+
+  .cnc-hero-slider__dot {
+    width: 6px !important;
+    height: 6px !important;
+  }
+
+  .cnc-hero-slider__dot--active {
+    width: 18px !important;
   }
 }
 

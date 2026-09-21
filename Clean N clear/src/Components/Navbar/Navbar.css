@@ -10,7 +10,6 @@
   box-sizing: border-box;
 }
 
-
 /* =========================================================
    HTML / BODY
    ========================================================= */
@@ -32,9 +31,8 @@ body {
   padding-top: 132px;
 }
 
-
 /* =========================================================
-   HEADER — FIXED
+   HEADER
    ========================================================= */
 
 .rt-header {
@@ -42,12 +40,14 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  background: #ffffff;
-  z-index: 10000;
+
   margin: 0;
   padding: 0;
-}
 
+  background: #ffffff;
+
+  z-index: 10000;
+}
 
 /* =========================================================
    TOP INFORMATION BAR
@@ -56,6 +56,7 @@ body {
 .rt-topbar {
   width: 100%;
   min-height: 48px;
+
   background: #081fef;
   color: #ffffff;
 }
@@ -64,6 +65,7 @@ body {
   width: 100%;
   max-width: 1700px;
   min-height: 48px;
+
   margin: 0 auto;
   padding: 0 26px;
 
@@ -74,7 +76,6 @@ body {
   gap: 25px;
 }
 
-
 /* =========================================================
    CONTACT INFORMATION
    ========================================================= */
@@ -82,9 +83,11 @@ body {
 .rt-topbar__info {
   display: flex;
   align-items: center;
+
   gap: 12px;
 
   min-width: 0;
+
   white-space: nowrap;
 
   font-family:
@@ -99,6 +102,7 @@ body {
 .rt-topbar__item {
   display: inline-flex;
   align-items: center;
+
   white-space: nowrap;
 }
 
@@ -124,9 +128,8 @@ body {
   white-space: nowrap;
 }
 
-
 /* =========================================================
-   COMPANY SEARCH / SELECTOR
+   COMPANY SELECTOR
    ========================================================= */
 
 .rt-company-selector {
@@ -134,16 +137,19 @@ body {
 
   width: 300px;
   height: 38px;
+
   flex: 0 0 300px;
 
   display: flex;
   align-items: center;
 
   background: #ffffff;
+
   border: 1px solid rgba(255, 255, 255, 0.9);
   border-radius: 6px;
 
   color: #081fef;
+
   overflow: hidden;
 }
 
@@ -156,6 +162,7 @@ body {
   justify-content: center;
 
   color: #081fef;
+
   pointer-events: none;
 }
 
@@ -172,6 +179,7 @@ body {
   -webkit-appearance: none;
 
   background: transparent;
+
   color: #081fef;
 
   font-family:
@@ -193,6 +201,7 @@ body {
 
 .rt-company-selector__arrow {
   position: absolute;
+
   right: 13px;
   top: 50%;
 
@@ -203,9 +212,9 @@ body {
   justify-content: center;
 
   color: #081fef;
+
   pointer-events: none;
 }
-
 
 /* =========================================================
    MAIN NAVBAR
@@ -216,18 +225,25 @@ body {
   height: 84px;
 
   background: #ffffff;
+
   border-bottom: 1px solid #eeeeee;
 
   box-shadow:
     0 3px 12px rgba(0, 0, 0, 0.08);
 
   position: relative;
+
   z-index: 10001;
+
+  transition:
+    opacity 0.2s ease,
+    visibility 0.2s ease;
 }
 
 .rt-navbar__inner {
   width: 100%;
   max-width: 1700px;
+
   height: 84px;
 
   margin: 0 auto;
@@ -239,7 +255,6 @@ body {
   gap: 20px;
 }
 
-
 /* =========================================================
    LOGO
    ========================================================= */
@@ -247,6 +262,7 @@ body {
 .rt-navbar__logo {
   width: 150px;
   height: 84px;
+
   flex: 0 0 150px;
 
   display: flex;
@@ -256,6 +272,7 @@ body {
   padding: 0;
 
   line-height: 0;
+
   text-decoration: none;
 }
 
@@ -269,7 +286,6 @@ body {
 
   object-fit: contain;
 }
-
 
 /* =========================================================
    DESKTOP NAVIGATION
@@ -298,7 +314,6 @@ body {
   padding: 0;
 }
 
-
 /* =========================================================
    NAVIGATION LINKS
    ========================================================= */
@@ -317,6 +332,7 @@ body {
   padding: 0 11px;
 
   border: 0;
+
   background: transparent;
 
   color: #081fef;
@@ -343,7 +359,6 @@ body {
   color: #0619b8;
 }
 
-
 /* =========================================================
    ACTIVE LINK
    ========================================================= */
@@ -366,7 +381,6 @@ body {
   border-radius: 10px;
 }
 
-
 /* =========================================================
    DROPDOWN TRIGGER
    ========================================================= */
@@ -379,7 +393,6 @@ body {
   gap: 2px;
 }
 
-
 /* =========================================================
    MAIN DROPDOWN LINK
    ========================================================= */
@@ -391,11 +404,8 @@ body {
   padding-right: 4px;
 }
 
-
 /* =========================================================
    DROPDOWN ARROW BUTTON
-   IMPORTANT:
-   Removes the default browser square box
    ========================================================= */
 
 .rt-navbar__dropdown-button {
@@ -429,9 +439,6 @@ body {
   flex-shrink: 0;
 }
 
-
-/* Remove browser focus/active box */
-
 .rt-navbar__dropdown-button:hover,
 .rt-navbar__dropdown-button:active,
 .rt-navbar__dropdown-button:focus,
@@ -443,7 +450,6 @@ body {
 
   box-shadow: none !important;
 }
-
 
 /* =========================================================
    CARET
@@ -461,7 +467,6 @@ body {
 .rt-navbar__caret.is-open {
   transform: rotate(180deg);
 }
-
 
 /* =========================================================
    DESKTOP DROPDOWN
@@ -546,7 +551,6 @@ body {
   color: #ffffff;
 }
 
-
 /* =========================================================
    ACTIONS
    ========================================================= */
@@ -561,7 +565,6 @@ body {
 
   margin-left: 8px;
 }
-
 
 /* =========================================================
    WHATSAPP
@@ -597,14 +600,12 @@ body {
   transform: scale(1.1);
 }
 
-
 /* =========================================================
    GET A QUOTE
    ========================================================= */
 
 .rt-navbar__cta {
   height: 48px;
-
   min-width: 145px;
 
   padding: 0 20px;
@@ -643,7 +644,6 @@ body {
   transform: translateY(-1px);
 }
 
-
 /* =========================================================
    HAMBURGER
    ========================================================= */
@@ -663,7 +663,7 @@ body {
 
   gap: 5px;
 
-  margin: 0;
+  margin: 0 0 0 auto;
   padding: 0;
 
   background: #ffffff;
@@ -671,7 +671,39 @@ body {
   border: 1.5px solid #081fef;
   border-radius: 5px;
 
+  color: #081fef;
+
   cursor: pointer;
+
+  position: relative;
+
+  z-index: 10005;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  outline: none;
+
+  box-shadow: none;
+
+  visibility: visible;
+  opacity: 1;
+
+  transition:
+    opacity 0.2s ease,
+    visibility 0.2s ease;
+}
+
+.rt-hamburger:hover {
+  background: #f5f7ff;
+}
+
+.rt-hamburger:focus,
+.rt-hamburger:focus-visible,
+.rt-hamburger:active {
+  outline: none;
+  box-shadow: none;
+  background: #ffffff;
 }
 
 .rt-hamburger span {
@@ -683,25 +715,35 @@ body {
   background: #081fef;
 
   border-radius: 5px;
+
+  flex-shrink: 0;
 }
 
-
 /* =========================================================
-   MOBILE MENU OPEN
+   IMPORTANT:
+   HIDE NORMAL HEADER WHEN MOBILE DRAWER IS OPEN
    ========================================================= */
 
 .rt-header--menu-open .rt-topbar,
 .rt-header--menu-open .rt-navbar {
   visibility: hidden;
+  opacity: 0;
+
+  pointer-events: none;
 }
 
+.rt-header--menu-open .rt-hamburger {
+  visibility: hidden;
+  opacity: 0;
+
+  pointer-events: none;
+}
 
 /* =========================================================
    LARGE TABLET
    ========================================================= */
 
 @media (max-width: 1200px) {
-
   .rt-navbar__links {
     gap: 4px;
   }
@@ -731,13 +773,11 @@ body {
   }
 }
 
-
 /* =========================================================
-   TABLET
+   TABLET / MOBILE
    ========================================================= */
 
 @media (max-width: 1100px) {
-
   .rt-navbar__links,
   .rt-navbar__actions {
     display: none;
@@ -753,6 +793,8 @@ body {
     padding: 0 18px;
 
     justify-content: space-between;
+
+    gap: 0;
   }
 
   .rt-navbar__logo {
@@ -761,8 +803,6 @@ body {
 
   .rt-hamburger {
     display: flex;
-
-    margin-left: auto;
   }
 
   body {
@@ -770,13 +810,11 @@ body {
   }
 }
 
-
 /* =========================================================
    MOBILE TOPBAR
    ========================================================= */
 
 @media (max-width: 768px) {
-
   .rt-topbar {
     min-height: 76px;
     padding: 8px 0;
@@ -798,12 +836,8 @@ body {
     overflow: visible;
   }
 
-
-  /* CONTACT INFORMATION */
-
   .rt-topbar__info {
     width: 100%;
-
     min-width: 0;
 
     display: flex;
@@ -837,12 +871,8 @@ body {
     flex: 0 0 auto;
   }
 
-
-  /* COMPANY SELECTOR */
-
   .rt-company-selector {
     width: 100%;
-
     height: 34px;
     min-height: 34px;
 
@@ -866,9 +896,6 @@ body {
     right: 10px;
   }
 
-
-  /* MAIN NAV */
-
   .rt-navbar {
     height: 76px;
   }
@@ -879,6 +906,8 @@ body {
     padding: 0 14px;
 
     gap: 0;
+
+    justify-content: space-between;
   }
 
   .rt-navbar__logo {
@@ -899,7 +928,7 @@ body {
     width: 45px;
     height: 45px;
 
-    flex-basis: 45px;
+    flex: 0 0 45px;
 
     margin-left: auto;
   }
@@ -909,13 +938,11 @@ body {
   }
 }
 
-
 /* =========================================================
    MOBILE 600px
    ========================================================= */
 
 @media (max-width: 600px) {
-
   .rt-topbar {
     min-height: 74px;
     padding: 7px 0;
@@ -924,7 +951,7 @@ body {
   .rt-topbar__inner {
     min-height: 60px;
 
-    padding: 0 8px;
+    padding: 4px 8px;
 
     gap: 7px;
   }
@@ -953,7 +980,10 @@ body {
 
   .rt-navbar__inner {
     height: 72px;
+
     padding: 0 12px;
+
+    justify-content: space-between;
   }
 
   .rt-navbar__logo {
@@ -968,10 +998,14 @@ body {
   }
 
   .rt-hamburger {
+    display: flex;
+
     width: 43px;
     height: 43px;
 
     flex-basis: 43px;
+
+    margin-left: auto;
   }
 
   .rt-hamburger span {
@@ -983,13 +1017,11 @@ body {
   }
 }
 
-
 /* =========================================================
    MOBILE 480px
    ========================================================= */
 
 @media (max-width: 480px) {
-
   .rt-topbar {
     min-height: 72px;
     padding: 6px 0;
@@ -1030,6 +1062,7 @@ body {
 
   .rt-company-selector__select {
     font-size: 10px;
+
     padding-right: 32px;
   }
 
@@ -1041,6 +1074,8 @@ body {
     height: 70px;
 
     padding: 0 10px;
+
+    justify-content: space-between;
   }
 
   .rt-navbar__logo {
@@ -1055,10 +1090,14 @@ body {
   }
 
   .rt-hamburger {
+    display: flex;
+
     width: 43px;
     height: 43px;
 
     flex-basis: 43px;
+
+    margin-left: auto;
   }
 
   .rt-hamburger span {
@@ -1070,13 +1109,11 @@ body {
   }
 }
 
-
 /* =========================================================
    VERY SMALL MOBILE
    ========================================================= */
 
 @media (max-width: 380px) {
-
   .rt-topbar {
     min-height: 70px;
   }
@@ -1111,10 +1148,18 @@ body {
   }
 
   .rt-hamburger {
+    display: flex;
+
     width: 41px;
     height: 41px;
 
     flex-basis: 41px;
+
+    margin-left: auto;
+  }
+
+  .rt-hamburger span {
+    width: 21px;
   }
 
   body {
@@ -1122,22 +1167,22 @@ body {
   }
 }
 
-
 /* =========================================================
    REDUCED MOTION
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-
   html {
     scroll-behavior: auto;
   }
 
+  .rt-navbar,
   .rt-navbar__link,
   .rt-navbar__caret,
   .rt-dropdown,
   .rt-navbar__whatsapp,
-  .rt-navbar__cta {
+  .rt-navbar__cta,
+  .rt-hamburger {
     transition: none;
   }
 }

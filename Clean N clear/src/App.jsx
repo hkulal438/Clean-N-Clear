@@ -43,6 +43,16 @@ import Cleaning from "./Components/Cleaning-chemicals/Cleaning";
 
 import Karcher from "./Components/Karcher/Karcher";
 import WhyKarcher from "./Components/Whykarcher/Whykarcher";
+import ProductCategory from "./Components/ProductCategory/ProductCategory";
+// import Appointment from "./Components/Appointment/Appointment";
+
+//industries
+
+import Industries from "./Components/Industries/Industries";
+
+// contact
+
+import Contact from "./Components/Contact/Contact";
 
 // ======================================================
 // APP CSS
@@ -91,6 +101,8 @@ function KarcherPage() {
     <>
       <Karcher />
       <WhyKarcher />
+      <ProductCategory />
+      {/* <Appointment /> */}
       <Footer />
     </>
   );
@@ -274,7 +286,7 @@ function App() {
           <Route
             path="/industries"
             element={
-              <Page title="Industries" />
+              <Industries />
             }
           />
 
@@ -340,7 +352,7 @@ function App() {
           <Route
             path="/contact"
             element={
-              <Page title="Contact Us" />
+              <Contact />
             }
           />
 

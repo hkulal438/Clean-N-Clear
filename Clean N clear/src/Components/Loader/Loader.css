@@ -1,0 +1,198 @@
+/* =========================================================
+   CLEAN N CLEAR - INTRO LOADER
+   ========================================================= */
+
+.clean-n-clear-loader {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+
+  margin: 0;
+  padding: 0;
+
+  background: #081FEF;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  z-index: 999999;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   LOADER IMAGE - DESKTOP
+   ========================================================= */
+
+.clean-n-clear-loader-frame {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+
+  margin: 0;
+  padding: 0;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center center;
+
+  border: 0;
+  outline: 0;
+
+  user-select: none;
+  pointer-events: none;
+
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+
+  image-rendering: auto;
+
+  backface-visibility: hidden;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media screen and (min-width: 601px) and (max-width: 1024px) {
+
+  .clean-n-clear-loader {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+  }
+
+  .clean-n-clear-loader-frame {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+
+    object-fit: cover;
+    object-position: center center;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media screen and (max-width: 600px) {
+
+  .clean-n-clear-loader {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+
+    min-width: 100vw;
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    background: #081FEF;
+
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .clean-n-clear-loader-frame {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+
+    transform: translate(-50%, -50%);
+
+    object-fit: cover;
+    object-position: center center;
+
+    max-width: none;
+    max-height: none;
+
+    margin: 0;
+    padding: 0;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media screen and (max-width: 390px) {
+
+  .clean-n-clear-loader {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+  }
+
+  .clean-n-clear-loader-frame {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+
+    object-fit: cover;
+    object-position: center center;
+
+    transform: translate(-50%, -50%);
+  }
+}
+
+
+/* =========================================================
+   LANDSCAPE MOBILE
+   ========================================================= */
+
+@media screen and (max-width: 900px) and (orientation: landscape) {
+
+  .clean-n-clear-loader {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+  }
+
+  .clean-n-clear-loader-frame {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+
+    object-fit: cover;
+    object-position: center center;
+  }
+}
+
+
+/* =========================================================
+   PREVENT PAGE SCROLL WHILE LOADER IS SHOWING
+   ========================================================= */
+
+body:has(.clean-n-clear-loader) {
+  overflow: hidden;
+}

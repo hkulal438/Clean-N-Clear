@@ -9,7 +9,6 @@
   box-sizing: border-box;
 }
 
-
 /* =========================================================
    OVERLAY
    ========================================================= */
@@ -26,7 +25,6 @@
   background: rgba(0, 0, 0, 0.38);
 
   opacity: 0;
-
   visibility: hidden;
 
   pointer-events: none;
@@ -35,7 +33,7 @@
     opacity 0.25s ease,
     visibility 0.25s ease;
 
-  z-index: 9998;
+  z-index: 10010;
 }
 
 .rt-sub-overlay.is-open {
@@ -45,7 +43,6 @@
 
   pointer-events: auto;
 }
-
 
 /* =========================================================
    DRAWER
@@ -74,11 +71,13 @@
 
   visibility: hidden;
 
+  pointer-events: none;
+
   transition:
     transform 0.28s ease,
     visibility 0.28s ease;
 
-  z-index: 9999;
+  z-index: 10020;
 
   overflow: hidden;
 
@@ -92,8 +91,9 @@
   transform: translateX(0);
 
   visibility: visible;
-}
 
+  pointer-events: auto;
+}
 
 /* =========================================================
    HEADER
@@ -117,7 +117,6 @@
 
   flex-shrink: 0;
 }
-
 
 /* =========================================================
    LOGO
@@ -151,7 +150,6 @@
   object-fit: contain;
 }
 
-
 /* =========================================================
    CLOSE BUTTON
    ========================================================= */
@@ -180,6 +178,9 @@
   cursor: pointer;
 
   -webkit-tap-highlight-color: transparent;
+
+  transition:
+    background 0.2s ease;
 }
 
 .rt-sub-navbar__close span {
@@ -191,6 +192,9 @@
   background: #081fef;
 
   border-radius: 5px;
+
+  transition:
+    background 0.2s ease;
 }
 
 .rt-sub-navbar__close span:first-child {
@@ -209,6 +213,10 @@
   background: #ffffff;
 }
 
+.rt-sub-navbar__close:focus,
+.rt-sub-navbar__close:focus-visible {
+  outline: none;
+}
 
 /* =========================================================
    SCROLL AREA
@@ -236,7 +244,6 @@
     transparent;
 }
 
-
 /* =========================================================
    MENU LIST
    ========================================================= */
@@ -252,7 +259,6 @@
   flex-shrink: 0;
 }
 
-
 /* =========================================================
    ITEM
    ========================================================= */
@@ -267,7 +273,6 @@
 
   background: #ffffff;
 }
-
 
 /* =========================================================
    NORMAL LINK
@@ -317,7 +322,6 @@
   background: #f7f8fc;
 }
 
-
 /* =========================================================
    MAIN LINK + ARROW ROW
    ========================================================= */
@@ -333,13 +337,11 @@
   background: #ffffff;
 }
 
-
 /* =========================================================
    MAIN PAGE LINK
    ========================================================= */
 
-.rt-sub-navbar__link-row
-.rt-sub-navbar__link--main {
+.rt-sub-navbar__link-row .rt-sub-navbar__link--main {
   flex: 1;
 
   min-width: 0;
@@ -378,13 +380,11 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.rt-sub-navbar__link-row
-.rt-sub-navbar__link--main:hover {
+.rt-sub-navbar__link-row .rt-sub-navbar__link--main:hover {
   color: #081fef;
 
   background: #f7f8fc;
 }
-
 
 /* =========================================================
    DROPDOWN ARROW BUTTON
@@ -392,7 +392,6 @@
 
 .rt-sub-navbar__dropdown-button {
   width: 64px;
-
   min-width: 64px;
 
   height: 64px;
@@ -400,13 +399,10 @@
   flex: 0 0 64px;
 
   display: flex;
-
   align-items: center;
-
   justify-content: center;
 
   margin: 0;
-
   padding: 0;
 
   background: #ffffff;
@@ -430,14 +426,14 @@
   color: #081fef;
 }
 
-.rt-sub-navbar__dropdown-button:focus {
+.rt-sub-navbar__dropdown-button:focus,
+.rt-sub-navbar__dropdown-button:focus-visible {
   outline: none;
 }
 
 .rt-sub-navbar__dropdown-button:active {
   background: #f1f3ff;
 }
-
 
 /* =========================================================
    CHEVRON
@@ -451,7 +447,8 @@
   color: #6d6f7a;
 
   transition:
-    transform 0.2s ease;
+    transform 0.2s ease,
+    color 0.2s ease;
 }
 
 .rt-sub-navbar__chevron.is-open {
@@ -459,7 +456,6 @@
 
   color: #081fef;
 }
-
 
 /* =========================================================
    SUBMENU
@@ -469,7 +465,6 @@
   width: 100%;
 
   margin: 0;
-
   padding: 0;
 
   list-style: none;
@@ -488,7 +483,6 @@
   overflow: hidden;
 }
 
-
 /* =========================================================
    SUBMENU LINKS
    ========================================================= */
@@ -497,7 +491,6 @@
   width: 100%;
 
   margin: 0;
-
   padding: 0;
 }
 
@@ -509,7 +502,6 @@
   padding: 9px 20px 9px 40px;
 
   display: flex;
-
   align-items: center;
 
   background: #f7f8fc;
@@ -539,7 +531,6 @@
   color: #081fef;
 }
 
-
 /* =========================================================
    BOTTOM ACTIONS
    ========================================================= */
@@ -550,7 +541,6 @@
   padding: 10px 14px 12px;
 
   display: flex;
-
   align-items: center;
 
   gap: 10px;
@@ -562,7 +552,6 @@
   flex-shrink: 0;
 }
 
-
 /* =========================================================
    GET QUOTE
    ========================================================= */
@@ -573,9 +562,7 @@
   height: 52px;
 
   display: flex;
-
   align-items: center;
-
   justify-content: center;
 
   background: #081fef;
@@ -585,6 +572,11 @@
   border-radius: 6px;
 
   color: #ffffff;
+
+  font-family:
+    "Segoe UI",
+    Arial,
+    sans-serif;
 
   font-size: 15px;
 
@@ -601,8 +593,9 @@
 
 .rt-sub-navbar__quote:hover {
   background: #0619b8;
-}
 
+  transform: translateY(-1px);
+}
 
 /* =========================================================
    WHATSAPP
@@ -610,15 +603,12 @@
 
 .rt-sub-navbar__whatsapp {
   width: 72px;
-
   height: 52px;
 
   flex: 0 0 72px;
 
   display: flex;
-
   align-items: center;
-
   justify-content: center;
 
   background: #ffffff;
@@ -636,7 +626,6 @@
 
 .rt-sub-navbar__whatsapp img {
   width: 42px;
-
   height: 42px;
 
   object-fit: contain;
@@ -650,16 +639,24 @@
   background: #f7f8fc;
 }
 
+/* =========================================================
+   DESKTOP
+   ========================================================= */
+
+@media (min-width: 1101px) {
+  .rt-sub-navbar,
+  .rt-sub-overlay {
+    display: none;
+  }
+}
 
 /* =========================================================
    600px
    ========================================================= */
 
 @media (max-width: 600px) {
-
   .rt-sub-navbar__header {
     height: 80px;
-
     min-height: 80px;
 
     padding: 0 16px;
@@ -667,7 +664,6 @@
 
   .rt-sub-navbar__logo-link {
     width: 150px;
-
     height: 80px;
   }
 
@@ -677,7 +673,6 @@
 
   .rt-sub-navbar__close {
     width: 45px;
-
     height: 45px;
 
     flex-basis: 45px;
@@ -695,8 +690,7 @@
     min-height: 63px;
   }
 
-  .rt-sub-navbar__link-row
-  .rt-sub-navbar__link--main {
+  .rt-sub-navbar__link-row .rt-sub-navbar__link--main {
     min-height: 63px;
 
     padding: 0 21px;
@@ -706,23 +700,19 @@
 
   .rt-sub-navbar__dropdown-button {
     width: 60px;
-
     min-width: 60px;
 
     height: 63px;
   }
 }
 
-
 /* =========================================================
    480px
    ========================================================= */
 
 @media (max-width: 480px) {
-
   .rt-sub-navbar__header {
     height: 76px;
-
     min-height: 76px;
 
     padding: 0 14px;
@@ -730,7 +720,6 @@
 
   .rt-sub-navbar__logo-link {
     width: 150px;
-
     height: 76px;
   }
 
@@ -740,7 +729,6 @@
 
   .rt-sub-navbar__close {
     width: 44px;
-
     height: 44px;
 
     flex-basis: 44px;
@@ -762,8 +750,7 @@
     min-height: 61px;
   }
 
-  .rt-sub-navbar__link-row
-  .rt-sub-navbar__link--main {
+  .rt-sub-navbar__link-row .rt-sub-navbar__link--main {
     min-height: 61px;
 
     padding: 0 20px;
@@ -773,7 +760,6 @@
 
   .rt-sub-navbar__dropdown-button {
     width: 56px;
-
     min-width: 56px;
 
     height: 61px;
@@ -801,7 +787,6 @@
 
   .rt-sub-navbar__whatsapp {
     width: 68px;
-
     height: 50px;
 
     flex-basis: 68px;
@@ -809,27 +794,22 @@
 
   .rt-sub-navbar__whatsapp img {
     width: 40px;
-
     height: 40px;
   }
 }
-
 
 /* =========================================================
    380px
    ========================================================= */
 
 @media (max-width: 380px) {
-
   .rt-sub-navbar__header {
     height: 72px;
-
     min-height: 72px;
   }
 
   .rt-sub-navbar__logo-link {
     width: 150px;
-
     height: 72px;
   }
 
@@ -839,7 +819,6 @@
 
   .rt-sub-navbar__close {
     width: 42px;
-
     height: 42px;
 
     flex-basis: 42px;
@@ -857,8 +836,7 @@
     min-height: 59px;
   }
 
-  .rt-sub-navbar__link-row
-  .rt-sub-navbar__link--main {
+  .rt-sub-navbar__link-row .rt-sub-navbar__link--main {
     min-height: 59px;
 
     padding: 0 18px;
@@ -868,7 +846,6 @@
 
   .rt-sub-navbar__dropdown-button {
     width: 52px;
-
     min-width: 52px;
 
     height: 59px;
@@ -886,7 +863,6 @@
 
   .rt-sub-navbar__whatsapp {
     width: 65px;
-
     height: 48px;
 
     flex-basis: 65px;
@@ -894,24 +870,22 @@
 
   .rt-sub-navbar__whatsapp img {
     width: 38px;
-
     height: 38px;
   }
 }
-
 
 /* =========================================================
    REDUCED MOTION
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-
   .rt-sub-navbar,
   .rt-sub-overlay,
   .rt-sub-navbar__submenu,
   .rt-sub-navbar__chevron,
   .rt-sub-navbar__link,
-  .rt-sub-navbar__link--main {
+  .rt-sub-navbar__link--main,
+  .rt-navbar {
     transition: none;
   }
 }

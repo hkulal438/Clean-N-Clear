@@ -329,8 +329,8 @@ export default function Navbar() {
 
               <strong>Phone :</strong>{" "}
 
-              <a href="tel:+919597812345">
-                +91 95978 12345
+              <a href="tel:++91 81473 04734">
+                +91 81473 04734
               </a>
 
             </span>
@@ -345,25 +345,12 @@ export default function Navbar() {
 
               <strong>Email :</strong>{" "}
 
-              <a href="mailto:rmclsales@rootsemail.com">
-                rmclsales@rootsemail.com
+              <a href="mailto:cleannclear.ind@gmail.com">
+                cleannclear.ind@gmail.com
               </a>
 
             </span>
 
-
-            <span className="rt-topbar__divider">
-              |
-            </span>
-
-
-            <span className="rt-topbar__item rt-topbar__cin">
-
-              <strong>CIN :</strong>{" "}
-
-              U36999TZ1992PLC003662
-
-            </span>
 
           </div>
 
