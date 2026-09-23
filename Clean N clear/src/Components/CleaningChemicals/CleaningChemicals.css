@@ -1,0 +1,1983 @@
+/* =========================================================
+   CLEAN N CLEAR
+   CLEANING CHEMICALS ORDER SYSTEM
+   PREMIUM RESPONSIVE VERSION
+   ALL CLASSES USE ccq- PREFIX
+   ========================================================= */
+
+
+/* =========================================================
+   BASE
+   ========================================================= */
+
+.ccq-section,
+.ccq-section * {
+  box-sizing: border-box;
+}
+
+.ccq-section {
+  --ccq-blue: #081fef;
+  --ccq-blue-dark: #0618c4;
+  --ccq-text: #151515;
+  --ccq-muted: #687083;
+  --ccq-border: #e4e7ef;
+
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  min-height: 100vh;
+
+  /*
+    IMPORTANT:
+    Header is fixed/sticky.
+    This top padding keeps the section below the header.
+  */
+  padding: 155px 6% 90px;
+
+  background: #ffffff;
+  color: var(--ccq-text);
+
+  font-family: Cambria, Georgia, serif;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   SUBTLE BACKGROUND DECORATION
+   ========================================================= */
+
+.ccq-section::before {
+  content: "";
+
+  position: absolute;
+
+  width: 300px;
+  height: 300px;
+
+  top: -170px;
+  right: -100px;
+
+  border: 1px solid rgba(8, 31, 239, 0.07);
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+.ccq-section::after {
+  content: "";
+
+  position: absolute;
+
+  width: 220px;
+  height: 220px;
+
+  bottom: -130px;
+  left: -90px;
+
+  border: 1px solid rgba(8, 31, 239, 0.06);
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.ccq-header {
+  position: relative;
+  z-index: 2;
+
+  max-width: 900px;
+
+  margin: 0 auto 42px;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   PREMIUM LABEL
+   ========================================================= */
+
+.ccq-label {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  margin-bottom: 16px;
+
+  color: var(--ccq-blue);
+
+  font-family: Cambria, Georgia, serif;
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.ccq-label::before {
+  content: "";
+
+  width: 38px;
+  height: 1px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--ccq-blue)
+  );
+}
+
+.ccq-label::after {
+  content: "";
+
+  width: 38px;
+  height: 1px;
+
+  background: linear-gradient(
+    90deg,
+    var(--ccq-blue),
+    transparent
+  );
+}
+
+
+/* =========================================================
+   MAIN HEADING
+   ========================================================= */
+
+.ccq-title {
+  position: relative;
+
+  margin: 0;
+
+  color: #111827;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: clamp(38px, 4.3vw, 56px);
+  font-weight: 700;
+
+  line-height: 1.08;
+
+  letter-spacing: -1.2px;
+}
+
+.ccq-title span {
+  position: relative;
+
+  display: inline-block;
+
+  color: var(--ccq-blue);
+}
+
+.ccq-title span::after {
+  content: "";
+
+  position: absolute;
+
+  left: 3px;
+  right: 3px;
+  bottom: -7px;
+
+  height: 3px;
+
+  border-radius: 10px;
+
+  background: linear-gradient(
+    90deg,
+    var(--ccq-blue) 0%,
+    rgba(8, 31, 239, 0.35) 65%,
+    transparent 100%
+  );
+}
+
+
+/* =========================================================
+   SUBHEADING
+   ========================================================= */
+
+.ccq-intro {
+  position: relative;
+
+  max-width: 690px;
+
+  margin: 22px auto 0;
+
+  color: var(--ccq-muted);
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 17px;
+  font-weight: 400;
+
+  line-height: 1.75;
+
+  letter-spacing: 0.15px;
+}
+
+.ccq-intro::before {
+  content: "";
+
+  display: inline-block;
+
+  width: 5px;
+  height: 5px;
+
+  margin-right: 8px;
+
+  vertical-align: middle;
+
+  border-radius: 50%;
+
+  background: var(--ccq-blue);
+}
+
+
+/* =========================================================
+   CART BUTTON
+   ========================================================= */
+
+.ccq-cart-button {
+  position: relative;
+  z-index: 3;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  margin: 0 0 25px auto;
+
+  padding: 12px 18px;
+
+  border: 1px solid var(--ccq-blue);
+  border-radius: 50px;
+
+  background: var(--ccq-blue);
+  color: #ffffff;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow: 0 8px 20px rgba(8, 31, 239, 0.15);
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.ccq-cart-button:hover {
+  background: var(--ccq-blue-dark);
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 12px 25px rgba(8, 31, 239, 0.2);
+}
+
+.ccq-cart-button strong {
+  width: 26px;
+  height: 26px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+  color: var(--ccq-blue);
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   PRODUCT GRID
+   ========================================================= */
+
+.ccq-grid {
+  position: relative;
+  z-index: 2;
+
+  display: grid;
+
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 24px;
+}
+
+
+/* =========================================================
+   PRODUCT CARD
+   ========================================================= */
+
+.ccq-card {
+  position: relative;
+
+  overflow: hidden;
+
+  border: 1px solid var(--ccq-border);
+  border-radius: 18px;
+
+  background: #ffffff;
+
+  box-shadow: 0 5px 18px rgba(17, 24, 39, 0.035);
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.ccq-card:hover {
+  transform: translateY(-5px);
+
+  border-color: rgba(8, 31, 239, 0.22);
+
+  box-shadow: 0 18px 38px rgba(8, 31, 239, 0.09);
+}
+
+
+/* =========================================================
+   PRODUCT IMAGE
+   ========================================================= */
+
+.ccq-image-button {
+  position: relative;
+
+  width: 100%;
+  height: 250px;
+
+  padding: 22px;
+
+  border: none;
+
+  background: linear-gradient(
+    145deg,
+    #f9faff,
+    #f2f4ff
+  );
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  overflow: hidden;
+}
+
+.ccq-image-button::before {
+  content: "";
+
+  position: absolute;
+
+  width: 150px;
+  height: 150px;
+
+  top: -70px;
+  right: -55px;
+
+  border-radius: 50%;
+
+  background: rgba(8, 31, 239, 0.06);
+
+  transition: transform 0.4s ease;
+}
+
+.ccq-card:hover .ccq-image-button::before {
+  transform: scale(1.25);
+}
+
+.ccq-product-image {
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  transition: transform 0.3s ease;
+}
+
+.ccq-card:hover .ccq-product-image {
+  transform: scale(1.04);
+}
+
+.ccq-image-button::after {
+  content: "VIEW PRODUCT";
+
+  position: absolute;
+  z-index: 2;
+
+  left: 50%;
+  bottom: 13px;
+
+  transform: translate(-50%, 8px);
+
+  padding: 7px 14px;
+
+  border-radius: 30px;
+
+  background: rgba(8, 31, 239, 0.94);
+
+  color: #ffffff;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 1.2px;
+
+  opacity: 0;
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.ccq-card:hover .ccq-image-button::after {
+  opacity: 1;
+
+  transform: translate(-50%, 0);
+}
+
+
+/* =========================================================
+   CARD CONTENT
+   ========================================================= */
+
+.ccq-card-content {
+  padding: 20px;
+}
+
+
+/* =========================================================
+   CATEGORY
+   ========================================================= */
+
+.ccq-category {
+  display: inline-block;
+
+  margin-bottom: 8px;
+
+  color: var(--ccq-blue);
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 1.2px;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   PRODUCT NAME
+   ========================================================= */
+
+.ccq-product-name {
+  min-height: 55px;
+
+  margin: 0;
+
+  color: #151515;
+
+  font-size: 19px;
+  font-weight: 700;
+
+  line-height: 1.3;
+}
+
+
+/* =========================================================
+   PRICE
+   ========================================================= */
+
+.ccq-price {
+  margin: 15px 0;
+
+  color: var(--ccq-blue);
+
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.ccq-price span {
+  color: #777777;
+
+  font-size: 13px;
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   ORDERED QUANTITY
+   ========================================================= */
+
+.ccq-ordered,
+.ccq-product-ordered {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin: 12px 0 15px;
+
+  padding: 9px 12px;
+
+  border: 1px solid #e2e5f0;
+
+  border-radius: 8px;
+
+  background: #f8f9ff;
+}
+
+.ccq-ordered span,
+.ccq-product-ordered span {
+  color: #666666;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.ccq-ordered strong,
+.ccq-product-ordered strong {
+  color: var(--ccq-blue);
+
+  font-size: 15px;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.ccq-add-button,
+.ccq-add-large,
+.ccq-checkout-button,
+.ccq-submit,
+.ccq-success-button {
+  width: 100%;
+
+  padding: 13px 18px;
+
+  border: 1px solid var(--ccq-blue);
+
+  border-radius: 9px;
+
+  background: var(--ccq-blue);
+  color: #ffffff;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.ccq-add-button:hover,
+.ccq-add-large:hover,
+.ccq-checkout-button:hover,
+.ccq-submit:hover:not(:disabled),
+.ccq-success-button:hover {
+  background: var(--ccq-blue-dark);
+
+  transform: translateY(-1px);
+
+  box-shadow: 0 8px 18px rgba(8, 31, 239, 0.14);
+}
+
+.ccq-submit:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed;
+
+  transform: none;
+
+  box-shadow: none;
+}
+
+
+/* =========================================================
+   OVERLAY
+   ========================================================= */
+
+.ccq-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 99999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 25px;
+
+  overflow-y: auto;
+
+  background: rgba(5, 10, 25, 0.62);
+
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  animation: ccqFadeIn 0.2s ease;
+}
+
+@keyframes ccqFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+   ========================================================= */
+
+.ccq-close {
+  position: absolute;
+
+  top: 16px;
+  right: 18px;
+
+  z-index: 10;
+
+  width: 38px;
+  height: 38px;
+
+  border: 1px solid #e1e4ed;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+  color: #111111;
+
+  font-size: 24px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.ccq-close:hover {
+  background: var(--ccq-blue);
+
+  color: #ffffff;
+
+  transform: rotate(8deg);
+}
+
+
+/* =========================================================
+   PRODUCT MODAL
+   ========================================================= */
+
+.ccq-product-modal {
+  position: relative;
+
+  width: min(900px, 100%);
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  overflow: hidden;
+
+  border-radius: 20px;
+
+  background: #ffffff;
+
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+
+  animation: ccqModalIn 0.25s ease;
+}
+
+@keyframes ccqModalIn {
+  from {
+    opacity: 0;
+
+    transform:
+      scale(0.97)
+      translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      scale(1)
+      translateY(0);
+  }
+}
+
+
+/* =========================================================
+   MODAL IMAGE
+   ========================================================= */
+
+.ccq-modal-image-wrap {
+  min-height: 500px;
+
+  padding: 35px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: radial-gradient(
+    circle at center,
+    #fafbff 0%,
+    #f1f3ff 100%
+  );
+}
+
+.ccq-modal-image {
+  width: 100%;
+  height: 100%;
+
+  max-height: 470px;
+
+  object-fit: contain;
+}
+
+
+/* =========================================================
+   MODAL CONTENT
+   ========================================================= */
+
+.ccq-modal-content {
+  padding: 55px 40px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ccq-modal-content h2 {
+  margin: 0 0 15px;
+
+  color: #111111;
+
+  font-size: 32px;
+  font-weight: 700;
+
+  line-height: 1.2;
+}
+
+.ccq-modal-price {
+  margin-bottom: 20px;
+
+  color: var(--ccq-blue);
+
+  font-size: 23px;
+  font-weight: 700;
+}
+
+.ccq-modal-content p {
+  margin: 0;
+
+  color: #666666;
+
+  font-size: 16px;
+
+  line-height: 1.7;
+}
+
+.ccq-modal-unit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding: 15px 0;
+
+  margin: 10px 0 25px;
+
+  border-top: 1px solid #eeeeee;
+  border-bottom: 1px solid #eeeeee;
+
+  color: #222222;
+}
+
+.ccq-modal-unit strong {
+  color: var(--ccq-blue);
+
+  font-size: 14px;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   CART DRAWER
+   ========================================================= */
+
+.ccq-cart-drawer {
+  position: relative;
+
+  width: min(560px, 100%);
+
+  height: min(90vh, 850px);
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  border-radius: 20px;
+
+  background: #ffffff;
+
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+
+  animation: ccqModalIn 0.25s ease;
+}
+
+
+/* =========================================================
+   CART HEADER
+   ========================================================= */
+
+.ccq-cart-header {
+  position: relative;
+
+  padding: 25px;
+
+  border-bottom: 1px solid #eeeeee;
+}
+
+.ccq-cart-header span {
+  color: var(--ccq-blue);
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 1.8px;
+
+  text-transform: uppercase;
+}
+
+.ccq-cart-header h2 {
+  margin: 6px 0 0;
+
+  color: #111111;
+
+  font-size: 28px;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   CART ITEMS
+   ========================================================= */
+
+.ccq-cart-items {
+  flex: 1;
+
+  overflow-y: auto;
+
+  padding: 20px;
+}
+
+.ccq-cart-item {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns: 85px 1fr auto;
+
+  gap: 15px;
+
+  padding: 15px 0;
+
+  border-bottom: 1px solid #eeeeee;
+}
+
+.ccq-cart-item img {
+  width: 85px;
+  height: 85px;
+
+  object-fit: contain;
+
+  border-radius: 10px;
+
+  background: #f7f8ff;
+}
+
+.ccq-cart-item-info {
+  min-width: 0;
+}
+
+.ccq-cart-item-info h3 {
+  margin: 0 0 6px;
+
+  color: #151515;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  line-height: 1.3;
+}
+
+.ccq-cart-item-info > span {
+  color: var(--ccq-blue);
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.ccq-cart-item-info small {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #777777;
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   QUANTITY
+   ========================================================= */
+
+.ccq-quantity {
+  width: max-content;
+
+  display: flex;
+  align-items: center;
+
+  margin-top: 12px;
+
+  overflow: hidden;
+
+  border: 1px solid #dddddd;
+
+  border-radius: 7px;
+}
+
+.ccq-quantity button {
+  width: 30px;
+  height: 30px;
+
+  border: none;
+
+  background: #f4f5fa;
+
+  color: #111111;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 17px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.ccq-quantity button:hover {
+  background: var(--ccq-blue);
+
+  color: #ffffff;
+}
+
+.ccq-quantity strong {
+  width: 35px;
+
+  color: #222222;
+
+  font-size: 14px;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   REMOVE
+   ========================================================= */
+
+.ccq-remove {
+  align-self: flex-start;
+
+  border: none;
+
+  background: transparent;
+
+  color: #d33;
+
+  font-family: inherit;
+
+  font-size: 12px;
+
+  cursor: pointer;
+}
+
+.ccq-remove:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================================================
+   CART FOOTER
+   ========================================================= */
+
+.ccq-cart-footer {
+  padding: 20px;
+
+  border-top: 1px solid #eeeeee;
+
+  background: #ffffff;
+}
+
+.ccq-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 10px;
+}
+
+.ccq-total span {
+  color: #666666;
+}
+
+.ccq-total strong {
+  color: var(--ccq-blue);
+
+  font-size: 22px;
+}
+
+.ccq-payment-note {
+  margin: 10px 0 18px;
+
+  color: #777777;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   EMPTY CART
+   ========================================================= */
+
+.ccq-empty {
+  margin: auto;
+
+  padding: 40px;
+
+  text-align: center;
+}
+
+.ccq-empty-icon {
+  margin-bottom: 15px;
+
+  color: var(--ccq-blue);
+
+  font-size: 45px;
+}
+
+.ccq-empty h3 {
+  margin: 0 0 8px;
+
+  color: #222222;
+}
+
+.ccq-empty p {
+  margin: 0;
+
+  color: #777777;
+}
+
+
+/* =========================================================
+   CHECKOUT
+   ========================================================= */
+
+.ccq-checkout {
+  position: relative;
+
+  width: min(760px, 100%);
+
+  max-height: 92vh;
+
+  overflow-y: auto;
+
+  padding: 45px;
+
+  border-radius: 20px;
+
+  background: #ffffff;
+
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+
+  animation: ccqModalIn 0.25s ease;
+}
+
+
+/* =========================================================
+   CHECKOUT HEADING
+   ========================================================= */
+
+.ccq-checkout-heading {
+  margin-bottom: 30px;
+}
+
+.ccq-checkout-heading span {
+  color: var(--ccq-blue);
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 1.8px;
+
+  text-transform: uppercase;
+}
+
+.ccq-checkout-heading h2 {
+  margin: 6px 0 10px;
+
+  color: #111111;
+
+  font-size: 32px;
+
+  font-weight: 700;
+}
+
+.ccq-checkout-heading p {
+  margin: 0;
+
+  color: #666666;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.ccq-form {
+  display: flex;
+  flex-direction: column;
+
+  gap: 20px;
+}
+
+.ccq-form-grid {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 18px;
+}
+
+.ccq-field {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.ccq-field label {
+  color: #333333;
+
+  font-size: 14px;
+
+  font-weight: 700;
+}
+
+.ccq-field input,
+.ccq-field textarea {
+  width: 100%;
+
+  padding: 13px 14px;
+
+  border: 1px solid #dfe1eb;
+
+  border-radius: 8px;
+
+  outline: none;
+
+  background: #ffffff;
+
+  color: #222222;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 15px;
+
+  resize: vertical;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.ccq-field input:focus,
+.ccq-field textarea:focus {
+  border-color: var(--ccq-blue);
+
+  box-shadow: 0 0 0 3px rgba(8, 31, 239, 0.07);
+}
+
+
+/* =========================================================
+   FINAL SUMMARY
+   ========================================================= */
+
+.ccq-final-summary {
+  display: flex;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 18px;
+
+  border: 1px solid #e1e5ff;
+
+  border-radius: 10px;
+
+  background: #f5f7ff;
+}
+
+.ccq-final-summary div {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+.ccq-final-summary span {
+  color: #666666;
+
+  font-size: 13px;
+}
+
+.ccq-final-summary strong {
+  color: var(--ccq-blue);
+
+  font-size: 20px;
+}
+
+
+/* =========================================================
+   NO PAYMENT
+   ========================================================= */
+
+.ccq-no-payment {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+
+  padding: 15px;
+
+  border-left: 4px solid var(--ccq-blue);
+
+  background: #f7f8ff;
+}
+
+.ccq-no-payment strong {
+  color: var(--ccq-blue);
+}
+
+.ccq-no-payment span {
+  color: #666666;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   ERROR
+   ========================================================= */
+
+.ccq-error {
+  padding: 13px 15px;
+
+  border: 1px solid #f0caca;
+
+  border-radius: 8px;
+
+  background: #fff5f5;
+
+  color: #b42318;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   FORM ACTIONS
+   ========================================================= */
+
+.ccq-form-actions {
+  display: flex;
+
+  gap: 12px;
+
+  margin-top: 5px;
+}
+
+.ccq-back-button,
+.ccq-submit {
+  flex: 1;
+
+  min-height: 48px;
+
+  padding: 13px 18px;
+
+  border-radius: 9px;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.ccq-back-button {
+  border: 1px solid #dfe3ed;
+
+  background: #f1f3f8;
+
+  color: var(--ccq-blue);
+}
+
+.ccq-back-button:hover {
+  background: #e7eaf2;
+
+  transform: translateY(-1px);
+}
+
+.ccq-submit {
+  border: none;
+
+  background: var(--ccq-blue);
+
+  color: #ffffff;
+}
+
+.ccq-submit:hover:not(:disabled) {
+  background: var(--ccq-blue-dark);
+
+  transform: translateY(-1px);
+
+  box-shadow: 0 8px 18px rgba(8, 31, 239, 0.14);
+}
+
+.ccq-submit:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+
+/* =========================================================
+   SUCCESS
+   ========================================================= */
+
+.ccq-success {
+  width: min(500px, 100%);
+
+  padding: 45px 35px;
+
+  border-radius: 20px;
+
+  background: #ffffff;
+
+  text-align: center;
+
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+
+  animation: ccqModalIn 0.25s ease;
+}
+
+.ccq-success-icon {
+  width: 70px;
+  height: 70px;
+
+  margin: 0 auto 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--ccq-blue);
+
+  color: #ffffff;
+
+  font-size: 35px;
+}
+
+.ccq-success > span {
+  color: var(--ccq-blue);
+
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 1.5px;
+}
+
+.ccq-success h2 {
+  margin: 8px 0;
+
+  color: #111111;
+
+  font-size: 36px;
+}
+
+.ccq-success p {
+  color: #666666;
+
+  line-height: 1.6;
+}
+
+.ccq-order-number {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+
+  margin: 25px 0;
+
+  padding: 18px;
+
+  border-radius: 10px;
+
+  background: #f5f7ff;
+}
+
+.ccq-order-number small {
+  color: #777777;
+}
+
+.ccq-order-number strong {
+  color: var(--ccq-blue);
+
+  font-size: 22px;
+
+  letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .ccq-section {
+    padding-top: 150px;
+  }
+
+  .ccq-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+
+/* =========================================================
+   SMALL TABLET
+   ========================================================= */
+
+@media (max-width: 800px) {
+  .ccq-section {
+    /*
+      Header is taller on tablet/mobile.
+      Keep the content completely below it.
+    */
+    padding: 165px 5% 65px;
+  }
+
+  .ccq-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+  }
+
+  .ccq-image-button {
+    height: 210px;
+  }
+
+  .ccq-product-modal {
+    grid-template-columns: 1fr;
+
+    max-height: 92vh;
+
+    overflow-y: auto;
+  }
+
+  .ccq-modal-image-wrap {
+    min-height: 300px;
+  }
+
+  .ccq-modal-content {
+    padding: 30px;
+  }
+
+  .ccq-cart-drawer {
+    height: 94vh;
+  }
+
+  .ccq-title {
+    font-size: 43px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+  .ccq-section {
+    /*
+      MAIN MOBILE HEADER FIX
+      -----------------------------------------
+      The mobile navbar is fixed and taller.
+      This pushes the entire Cleaning Chemicals
+      section below the navbar.
+    */
+    padding-top: 180px;
+    padding-right: 4%;
+    padding-bottom: 55px;
+    padding-left: 4%;
+
+    /*
+      Prevent accidental horizontal overflow.
+    */
+    overflow-x: hidden;
+  }
+
+  .ccq-header {
+    margin-bottom: 32px;
+  }
+
+  .ccq-label {
+    gap: 8px;
+
+    margin-bottom: 13px;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+  }
+
+  .ccq-label::before,
+  .ccq-label::after {
+    width: 24px;
+  }
+
+  .ccq-title {
+    font-size: 34px;
+
+    line-height: 1.12;
+
+    letter-spacing: -0.6px;
+  }
+
+  .ccq-title span::after {
+    bottom: -5px;
+
+    height: 2px;
+  }
+
+  .ccq-intro {
+    max-width: 95%;
+
+    margin-top: 18px;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+  }
+
+
+  /* -----------------------------------------
+     CART
+     ----------------------------------------- */
+
+  .ccq-cart-button {
+    margin-bottom: 20px;
+
+    padding: 11px 16px;
+
+    font-size: 14px;
+  }
+
+
+  /* -----------------------------------------
+     PRODUCTS
+     ----------------------------------------- */
+
+  .ccq-grid {
+    grid-template-columns: 1fr;
+
+    gap: 18px;
+  }
+
+  .ccq-image-button {
+    height: 260px;
+  }
+
+  .ccq-card-content {
+    padding: 18px;
+  }
+
+  .ccq-product-name {
+    min-height: auto;
+
+    font-size: 18px;
+  }
+
+  .ccq-price {
+    margin: 13px 0;
+
+    font-size: 18px;
+  }
+
+  .ccq-ordered,
+  .ccq-product-ordered {
+    margin: 11px 0 14px;
+  }
+
+
+  /* -----------------------------------------
+     MODAL
+     ----------------------------------------- */
+
+  .ccq-overlay {
+    align-items: flex-start;
+
+    padding: 15px;
+
+    padding-top: 155px;
+  }
+
+  .ccq-product-modal {
+    width: 100%;
+
+    max-height: calc(100vh - 170px);
+
+    border-radius: 16px;
+  }
+
+  .ccq-modal-image-wrap {
+    min-height: 260px;
+
+    padding: 20px;
+  }
+
+  .ccq-modal-image {
+    max-height: 240px;
+  }
+
+  .ccq-modal-content {
+    padding: 25px 20px 30px;
+  }
+
+  .ccq-modal-content h2 {
+    font-size: 27px;
+  }
+
+  .ccq-modal-price {
+    font-size: 21px;
+  }
+
+  .ccq-modal-unit {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 7px;
+  }
+
+
+  /* -----------------------------------------
+     CART DRAWER
+     ----------------------------------------- */
+
+  .ccq-cart-drawer {
+    width: 100%;
+
+    height: calc(100vh - 30px);
+
+    max-height: calc(100vh - 30px);
+
+    border-radius: 16px;
+  }
+
+  .ccq-cart-header {
+    padding: 22px 20px;
+  }
+
+  .ccq-cart-header h2 {
+    font-size: 25px;
+  }
+
+  .ccq-cart-items {
+    padding: 15px;
+  }
+
+  .ccq-cart-item {
+    grid-template-columns: 70px 1fr;
+
+    gap: 12px;
+  }
+
+  .ccq-cart-item img {
+    width: 70px;
+    height: 70px;
+  }
+
+  .ccq-remove {
+    grid-column: 2;
+
+    justify-self: start;
+
+    margin-top: -5px;
+  }
+
+
+  /* -----------------------------------------
+     CHECKOUT
+     ----------------------------------------- */
+
+  .ccq-checkout {
+    width: 100%;
+
+    max-height: calc(100vh - 30px);
+
+    padding: 35px 22px;
+
+    border-radius: 15px;
+  }
+
+  .ccq-checkout-heading {
+    margin-bottom: 24px;
+  }
+
+  .ccq-checkout-heading h2 {
+    font-size: 27px;
+  }
+
+  .ccq-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ccq-final-summary {
+    flex-direction: column;
+  }
+
+  .ccq-form-actions {
+    flex-direction: column;
+  }
+
+  .ccq-back-button,
+  .ccq-submit {
+    width: 100%;
+  }
+
+
+  /* -----------------------------------------
+     SUCCESS
+     ----------------------------------------- */
+
+  .ccq-success {
+    width: 100%;
+
+    padding: 35px 22px;
+
+    border-radius: 16px;
+  }
+
+  .ccq-success h2 {
+    font-size: 30px;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 380px) {
+  .ccq-section {
+    /*
+      Extra protection for smaller phones
+      where the header can be taller.
+    */
+    padding-top: 190px;
+
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  .ccq-title {
+    font-size: 29px;
+  }
+
+  .ccq-intro {
+    font-size: 14px;
+  }
+
+  .ccq-image-button {
+    height: 220px;
+  }
+
+  .ccq-card-content {
+    padding: 17px;
+  }
+
+  .ccq-cart-item {
+    grid-template-columns: 60px 1fr;
+  }
+
+  .ccq-cart-item img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .ccq-modal-content h2 {
+    font-size: 24px;
+  }
+
+  .ccq-overlay {
+    padding-top: 150px;
+  }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+.ccq-cart-button:focus-visible,
+.ccq-image-button:focus-visible,
+.ccq-add-button:focus-visible,
+.ccq-add-large:focus-visible,
+.ccq-checkout-button:focus-visible,
+.ccq-submit:focus-visible,
+.ccq-success-button:focus-visible,
+.ccq-close:focus-visible,
+.ccq-back-button:focus-visible,
+.ccq-quantity button:focus-visible,
+.ccq-remove:focus-visible {
+  outline: 3px solid rgba(8, 31, 239, 0.25);
+
+  outline-offset: 2px;
+}
+
+
+/* =========================================================
+   CUSTOM SCROLLBARS
+   ========================================================= */
+
+.ccq-cart-items::-webkit-scrollbar,
+.ccq-checkout::-webkit-scrollbar,
+.ccq-product-modal::-webkit-scrollbar {
+  width: 6px;
+}
+
+.ccq-cart-items::-webkit-scrollbar-track,
+.ccq-checkout::-webkit-scrollbar-track,
+.ccq-product-modal::-webkit-scrollbar-track {
+  background: #f5f6fa;
+}
+
+.ccq-cart-items::-webkit-scrollbar-thumb,
+.ccq-checkout::-webkit-scrollbar-thumb,
+.ccq-product-modal::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+
+  background: #cfd4e3;
+}
+
+.ccq-cart-items::-webkit-scrollbar-thumb:hover,
+.ccq-checkout::-webkit-scrollbar-thumb:hover,
+.ccq-product-modal::-webkit-scrollbar-thumb:hover {
+  background: var(--ccq-blue);
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .ccq-card,
+  .ccq-product-image,
+  .ccq-image-button::before,
+  .ccq-image-button::after,
+  .ccq-cart-button,
+  .ccq-add-button,
+  .ccq-add-large,
+  .ccq-checkout-button,
+  .ccq-submit,
+  .ccq-success-button,
+  .ccq-close,
+  .ccq-overlay,
+  .ccq-product-modal,
+  .ccq-cart-drawer,
+  .ccq-checkout,
+  .ccq-success {
+    animation: none;
+
+    transition: none;
+  }
+}

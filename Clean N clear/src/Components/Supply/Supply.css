@@ -1,270 +1,454 @@
 /* =========================================================
-   WE SUPPLY — PREMIUM PROFESSIONAL SECTION
-   ========================================================= */
+   CLEAN N CLEAR
+   WE SUPPLY — PREMIUM BRAND SECTION
+========================================================= */
 
 .supply {
   width: 100%;
   box-sizing: border-box;
+  padding: 70px 30px 85px;
 
-  /* Reduced top whitespace */
-  padding: 25px 30px 60px;
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #fafcff 55%,
+    #f6f9fc 100%
+  );
 
-  background: #ffffff;
+  overflow: hidden;
 }
 
 
 /* =========================================================
-   MAIN CONTAINER
-   ========================================================= */
+   CONTAINER
+========================================================= */
 
 .supply__container {
-  width: min(1180px, 100%);
+  width: min(1320px, 100%);
   margin: 0 auto;
-
   text-align: center;
 }
 
 
 /* =========================================================
-   SECTION HEADING
-   ========================================================= */
+   MAIN HEADING
+========================================================= */
 
 .supply__heading {
   display: flex;
   align-items: center;
   justify-content: center;
 
-  gap: 22px;
-
-  margin: 0 0 8px;
+  gap: 24px;
+  margin-bottom: 10px;
 }
-
 
 .supply__heading h2 {
   margin: 0;
 
-  font-family: "Cambria", "Times New Roman", serif;
-
-  font-size: 34px;
+  font-family: Cambria, "Times New Roman", serif;
+  font-size: 40px;
   font-weight: 700;
 
+  letter-spacing: 3px;
   line-height: 1.2;
-
-  letter-spacing: 2px;
 
   color: #164c78;
 }
 
-
-/* Gold lines beside heading */
-
 .supply__line {
-  display: block;
-
-  width: 70px;
+  width: 85px;
   height: 2px;
 
-  background: #d5a63c;
+  display: block;
 
-  border-radius: 2px;
+  background: #d5a63c;
+  border-radius: 5px;
 }
 
 
 /* =========================================================
-   SUBTITLE
-   ========================================================= */
+   MAIN SUBTITLE
+========================================================= */
 
 .supply__subtitle {
-  margin: 0 0 32px;
+  margin: 0 auto;
+  max-width: 700px;
 
-  font-family: "Cambria", "Times New Roman", serif;
+  font-family: Cambria, "Times New Roman", serif;
+  font-size: 18px;
+  line-height: 1.6;
 
-  font-size: 17px;
-  font-weight: 400;
-
-  line-height: 1.5;
-
+  color: #6b737b;
   letter-spacing: 0.3px;
-
-  color: #6c747c;
 }
 
 
 /* =========================================================
-   SUPPLIER LOGO GRID
-   ========================================================= */
+   GROUP
+========================================================= */
 
-.supply__logos {
+.supply__group {
+  margin-top: 55px;
+}
+
+
+/* =========================================================
+   GROUP HEADING
+========================================================= */
+
+.supply__group-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.supply__group-heading h3 {
+  margin: 0;
+
+  font-family: Cambria, "Times New Roman", serif;
+  font-size: 18px;
+  font-weight: 700;
+
+  letter-spacing: 2.5px;
+  color: #164c78;
+
+  white-space: nowrap;
+}
+
+.supply__group-line {
+  width: 45px;
+  height: 1px;
+
+  background: #d5a63c;
+}
+
+
+/* =========================================================
+   AUTHORIZED PARTNERS
+========================================================= */
+
+.supply__authorized {
+  width: 100%;
+  max-width: 1050px;
+
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 30px;
+}
+
+
+/* =========================================================
+   AUTHORIZED CARD
+========================================================= */
+
+.supply__authorized-card {
+  position: relative;
+
+  min-height: 235px;
+  padding: 30px 35px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background: #ffffff;
+
+  border: 1px solid #e5eaf0;
+  border-radius: 16px;
+
+  box-shadow: 0 10px 35px rgba(20, 50, 75, 0.07);
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+
+  animation: supplyReveal 0.7s ease both;
+  animation-delay: calc(var(--brand-index) * 120ms);
+}
+
+.supply__authorized-card:hover {
+  transform: translateY(-7px);
+
+  border-color: rgba(22, 76, 120, 0.22);
+
+  box-shadow: 0 18px 45px rgba(20, 50, 75, 0.12);
+}
+
+
+/* =========================================================
+   AUTHORIZED LOGO
+========================================================= */
+
+.supply__authorized-logo {
+  width: 100%;
+  height: 140px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.supply__authorized-logo img {
+  display: block;
+
+  width: auto;
+  height: auto;
+
+  max-width: 90%;
+  max-height: 125px;
+
+  object-fit: contain;
+
+  transition: transform 0.35s ease;
+}
+
+.supply__authorized-card:hover
+.supply__authorized-logo img {
+  transform: scale(1.06);
+}
+
+
+/* =========================================================
+   AUTHORIZED LOGO SIZES
+========================================================= */
+
+.supply__authorized-card--karcher
+.supply__authorized-logo img {
+  width: 285px;
+}
+
+.supply__authorized-card--revachem
+.supply__authorized-logo img {
+  width: 230px;
+}
+
+
+/* =========================================================
+   AUTHORIZED NAME
+========================================================= */
+
+.supply__authorized-name {
+  margin-top: 4px;
+
+  font-family: Cambria, "Times New Roman", serif;
+  font-size: 16px;
+  font-weight: 600;
+
+  color: #53616d;
+  letter-spacing: 0.5px;
+}
+
+
+/* =========================================================
+   BRANDS SECTION
+========================================================= */
+
+.supply__group--brands {
+  margin-top: 65px;
+}
+
+.supply__group-description {
+  max-width: 650px;
+
+  margin: -8px auto 32px;
+
+  font-family: Cambria, "Times New Roman", serif;
+  font-size: 16px;
+  line-height: 1.6;
+
+  color: #737b83;
+}
+
+
+/* =========================================================
+   BRANDS GRID
+========================================================= */
+
+.supply__brands {
   width: 100%;
 
   display: grid;
 
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr));
 
-  column-gap: 45px;
-  row-gap: 28px;
+  gap: 20px;
 
-  align-items: center;
+  align-items: stretch;
 }
 
 
 /* =========================================================
-   SUPPLIER LOGO CARD
-   ========================================================= */
+   BRAND CARD
+========================================================= */
 
 .supply__brand {
   position: relative;
 
-  width: 100%;
-  height: 135px;
+  min-height: 175px;
+  padding: 20px;
 
   display: flex;
-
   align-items: center;
   justify-content: center;
 
-  padding: 18px;
-
-  box-sizing: border-box;
-
   background: #ffffff;
 
-  border: 1px solid #edf0f3;
+  border: 1px solid #e7ebef;
+  border-radius: 14px;
 
-  border-radius: 12px;
-
-  box-shadow:
-    0 5px 18px rgba(20, 50, 75, 0.05);
+  box-shadow: 0 7px 24px rgba(20, 50, 75, 0.045);
 
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease,
     border-color 0.3s ease;
 
-  animation: supplyFade 0.65s ease both;
-
-  animation-delay: calc(var(--brand-index) * 80ms);
+  animation: supplyReveal 0.65s ease both;
+  animation-delay: calc(var(--brand-index) * 90ms);
 }
 
-
-/* =========================================================
-   HOVER EFFECT
-   ========================================================= */
-
 .supply__brand:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px);
 
   border-color: rgba(22, 76, 120, 0.18);
 
-  box-shadow:
-    0 10px 25px rgba(20, 50, 75, 0.09);
+  box-shadow: 0 15px 35px rgba(20, 50, 75, 0.09);
 }
 
 
 /* =========================================================
-   LOGO
-   ========================================================= */
+   BRAND LOGOS
+========================================================= */
 
-.supply__logo {
+.supply__brand img {
   display: block;
-
-  max-width: 100%;
-  max-height: 100%;
 
   width: auto;
   height: auto;
 
+  max-width: 100%;
+  max-height: 125px;
+
   object-fit: contain;
 
-  transition: transform 0.3s ease;
+  transition: transform 0.35s ease;
 }
 
-
-/* Logo hover */
-
-.supply__brand:hover .supply__logo {
-  transform: scale(1.04);
+.supply__brand:hover img {
+  transform: scale(1.06);
 }
 
 
 /* =========================================================
-   INDIVIDUAL LOGO SIZES
-   ========================================================= */
+   INDIVIDUAL BRAND SIZES
+========================================================= */
 
-.supply__logo--karcher {
+.supply__brand--taski img {
   width: 175px;
 }
 
-.supply__logo--revachem {
-  width: 105px;
+.supply__brand--diversey img {
+  width: 235px;
 }
 
-.supply__logo--iclean {
-  width: 180px;
+.supply__brand--miraclean img {
+  width: 200px;
 }
 
-.supply__logo--taski {
-  width: 125px;
+.supply__brand--aristo img {
+  width: 210px;
 }
 
-.supply__logo--aristo {
+.supply__brand--iclean img {
   width: 190px;
-}
-
-.supply__logo--diversey {
-  width: 205px;
 }
 
 
 /* =========================================================
-   LOGO ENTRY ANIMATION
-   ========================================================= */
+   TOP ACCENT
+========================================================= */
 
-@keyframes supplyFade {
+.supply__authorized-card::before,
+.supply__brand::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 50%;
+
+  width: 0;
+  height: 2px;
+
+  transform: translateX(-50%);
+
+  background: #d5a63c;
+
+  transition: width 0.35s ease;
+}
+
+.supply__authorized-card:hover::before,
+.supply__brand:hover::before {
+  width: 55%;
+}
+
+
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+@keyframes supplyReveal {
   from {
     opacity: 0;
-
-    transform: translateY(12px);
+    transform: translateY(18px);
   }
 
   to {
     opacity: 1;
-
     transform: translateY(0);
   }
 }
 
 
 /* =========================================================
-   TABLET — 901px to 1200px
-   ========================================================= */
+   LARGE TABLET
+========================================================= */
 
-@media (max-width: 1200px) {
+@media (max-width: 1100px) {
 
   .supply {
-    padding: 25px 25px 55px;
+    padding: 60px 25px 75px;
   }
 
-  .supply__container {
-    width: min(1050px, 100%);
+  .supply__brands {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
   }
 
-  .supply__logos {
-    column-gap: 30px;
-    row-gap: 25px;
+  .supply__authorized {
+    max-width: 900px;
   }
-
 }
 
 
 /* =========================================================
-   TABLET — 701px to 900px
-   ========================================================= */
+   TABLET
+========================================================= */
 
-@media (max-width: 900px) {
+@media (max-width: 800px) {
 
   .supply {
-    padding: 20px 25px 50px;
+    padding: 50px 22px 65px;
   }
 
   .supply__heading {
@@ -272,257 +456,249 @@
   }
 
   .supply__heading h2 {
-    font-size: 31px;
+    font-size: 34px;
   }
 
   .supply__line {
-    width: 55px;
+    width: 60px;
   }
 
   .supply__subtitle {
-    font-size: 16px;
-
-    margin-bottom: 28px;
+    font-size: 17px;
   }
 
-  .supply__logos {
-    column-gap: 22px;
-    row-gap: 22px;
+  .supply__authorized {
+    grid-template-columns:
+      1fr 1fr;
+
+    gap: 20px;
+  }
+
+  .supply__authorized-card {
+    min-height: 215px;
+    padding: 28px 20px;
+  }
+
+  .supply__authorized-card--karcher
+  .supply__authorized-logo img {
+    width: 230px;
+  }
+
+  .supply__authorized-card--revachem
+  .supply__authorized-logo img {
+    width: 195px;
+  }
+
+  .supply__brands {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
   }
 
   .supply__brand {
-    height: 125px;
+    min-height: 155px;
   }
-
-  .supply__logo--karcher {
-    width: 155px;
-  }
-
-  .supply__logo--revachem {
-    width: 95px;
-  }
-
-  .supply__logo--iclean {
-    width: 160px;
-  }
-
-  .supply__logo--taski {
-    width: 110px;
-  }
-
-  .supply__logo--aristo {
-    width: 165px;
-  }
-
-  .supply__logo--diversey {
-    width: 175px;
-  }
-
 }
 
 
 /* =========================================================
-   MOBILE — UP TO 700px
-   ========================================================= */
+   MOBILE
+========================================================= */
 
-@media (max-width: 700px) {
+@media (max-width: 600px) {
 
   .supply {
-    padding: 15px 18px 45px;
+    padding: 42px 16px 55px;
   }
 
   .supply__heading {
-    gap: 14px;
-
-    margin-bottom: 7px;
+    gap: 12px;
   }
 
   .supply__heading h2 {
-    font-size: 27px;
+    font-size: 29px;
+    letter-spacing: 2px;
+  }
 
+  .supply__line {
+    width: 38px;
+  }
+
+  .supply__subtitle {
+    max-width: 350px;
+    font-size: 15px;
+  }
+
+  .supply__group {
+    margin-top: 42px;
+  }
+
+  .supply__group-heading {
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+
+  .supply__group-heading h3 {
+    font-size: 14px;
+    letter-spacing: 1.7px;
+  }
+
+  .supply__group-line {
+    width: 25px;
+  }
+
+
+  /* Authorized Partners */
+
+  .supply__authorized {
+    grid-template-columns: 1fr;
+
+    gap: 18px;
+
+    max-width: 430px;
+  }
+
+  .supply__authorized-card {
+    min-height: 210px;
+  }
+
+  .supply__authorized-logo {
+    height: 120px;
+  }
+
+  .supply__authorized-card--karcher
+  .supply__authorized-logo img {
+    width: 240px;
+  }
+
+  .supply__authorized-card--revachem
+  .supply__authorized-logo img {
+    width: 210px;
+  }
+
+
+  /* Brands */
+
+  .supply__group--brands {
+    margin-top: 48px;
+  }
+
+  .supply__group-description {
+    font-size: 14px;
+    margin-bottom: 25px;
+  }
+
+  .supply__brands {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 14px;
+  }
+
+  .supply__brand {
+    min-height: 135px;
+    padding: 14px;
+    border-radius: 11px;
+  }
+
+  .supply__brand img {
+    max-height: 100px;
+  }
+
+  .supply__brand--taski img {
+    width: 145px;
+  }
+
+  .supply__brand--diversey img {
+    width: 175px;
+  }
+
+  .supply__brand--miraclean img {
+    width: 155px;
+  }
+
+  .supply__brand--aristo img {
+    width: 165px;
+  }
+
+  .supply__brand--iclean img {
+    width: 150px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+  .supply {
+    padding: 35px 12px 45px;
+  }
+
+  .supply__heading {
+    gap: 8px;
+  }
+
+  .supply__heading h2 {
+    font-size: 25px;
     letter-spacing: 1.5px;
   }
 
   .supply__line {
-    width: 40px;
-    height: 2px;
-  }
-
-  .supply__subtitle {
-    font-size: 15px;
-
-    line-height: 1.5;
-
-    margin-bottom: 25px;
-  }
-
-  .supply__logos {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-
-    column-gap: 16px;
-    row-gap: 16px;
-  }
-
-  .supply__brand {
-    height: 110px;
-
-    padding: 14px;
-
-    border-radius: 10px;
-  }
-
-
-  /* Mobile logo sizes */
-
-  .supply__logo--karcher {
-    width: 135px;
-  }
-
-  .supply__logo--revachem {
-    width: 80px;
-  }
-
-  .supply__logo--iclean {
-    width: 140px;
-  }
-
-  .supply__logo--taski {
-    width: 95px;
-  }
-
-  .supply__logo--aristo {
-    width: 145px;
-  }
-
-  .supply__logo--diversey {
-    width: 155px;
-  }
-
-}
-
-
-/* =========================================================
-   SMALL MOBILE — UP TO 430px
-   ========================================================= */
-
-@media (max-width: 430px) {
-
-  .supply {
-    padding: 10px 14px 40px;
-  }
-
-  .supply__heading {
-    gap: 10px;
-
-    margin-bottom: 6px;
-  }
-
-  .supply__heading h2 {
-    font-size: 24px;
-
-    letter-spacing: 1px;
-  }
-
-  .supply__line {
-    width: 28px;
-    height: 2px;
+    width: 25px;
   }
 
   .supply__subtitle {
     font-size: 14px;
-
-    margin-bottom: 22px;
   }
 
-  .supply__logos {
-    grid-template-columns: 1fr;
-
-    gap: 14px;
+  .supply__authorized-card {
+    min-height: 195px;
   }
 
-  .supply__brand {
-    height: 100px;
-
-    padding: 14px;
+  .supply__authorized-logo {
+    height: 110px;
   }
 
-  .supply__logo--karcher {
-    width: 145px;
-  }
-
-  .supply__logo--revachem {
-    width: 85px;
-  }
-
-  .supply__logo--iclean {
-    width: 150px;
-  }
-
-  .supply__logo--taski {
-    width: 100px;
-  }
-
-  .supply__logo--aristo {
-    width: 155px;
-  }
-
-  .supply__logo--diversey {
-    width: 165px;
-  }
-
-}
-
-
-/* =========================================================
-   VERY SMALL DEVICES — UP TO 360px
-   ========================================================= */
-
-@media (max-width: 360px) {
-
-  .supply {
-    padding: 8px 10px 35px;
-  }
-
-  .supply__heading {
-    gap: 7px;
-  }
-
-  .supply__heading h2 {
-    font-size: 21px;
-  }
-
-  .supply__line {
-    width: 22px;
-  }
-
-  .supply__subtitle {
-    font-size: 13px;
+  .supply__brands {
+    gap: 10px;
   }
 
   .supply__brand {
-    height: 95px;
+    min-height: 120px;
+    padding: 10px;
   }
 
+  .supply__brand img {
+    max-width: 95%;
+    max-height: 85px;
+  }
 }
 
 
 /* =========================================================
    REDUCED MOTION
-   ========================================================= */
+========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
 
+  .supply__authorized-card,
   .supply__brand {
     animation: none;
     transition: none;
   }
 
+  .supply__authorized-card:hover,
   .supply__brand:hover {
     transform: none;
   }
 
-  .supply__brand:hover .supply__logo {
+  .supply__authorized-card:hover
+  .supply__authorized-logo img,
+  .supply__brand:hover img {
     transform: none;
   }
-
 }

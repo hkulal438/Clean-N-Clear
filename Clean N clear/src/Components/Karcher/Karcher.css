@@ -88,6 +88,68 @@ body:has(.karcher-page) #root {
 
 
 /* =========================================================
+   BACK TO HOME
+   ONLY NEW ADDITION
+========================================================= */
+
+.karcher-back-home {
+  position: absolute;
+
+  top: 25px;
+  left: 30px;
+
+  z-index: 50;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 9px 15px;
+
+  color: #ffffff;
+
+  text-decoration: none;
+
+  font-family: inherit;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  background: rgba(0, 0, 0, 0.18);
+
+  border: 1px solid rgba(255, 255, 255, 0.55);
+
+  border-radius: 4px;
+
+  backdrop-filter: blur(4px);
+
+  -webkit-backdrop-filter: blur(4px);
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.karcher-back-home:hover {
+  color: #ffd500;
+
+  background: rgba(0, 0, 0, 0.35);
+
+  border-color: #ffd500;
+}
+
+.karcher-back-arrow {
+  font-size: 18px;
+
+  line-height: 1;
+}
+
+
+/* =========================================================
    DESKTOP
 ========================================================= */
 
@@ -126,6 +188,7 @@ body:has(.karcher-page) #root {
   opacity: 0;
 
   -webkit-backface-visibility: hidden;
+
   backface-visibility: hidden;
 
   transform: translateZ(0);
@@ -966,6 +1029,19 @@ body:has(.karcher-page) #root {
     font-size: 8px;
 
     letter-spacing: 1.2px;
+  }
+
+
+  /* BACK BUTTON */
+
+  .karcher-back-home {
+    top: 18px;
+
+    left: 18px;
+
+    padding: 8px 12px;
+
+    font-size: 13px;
   }
 
 }

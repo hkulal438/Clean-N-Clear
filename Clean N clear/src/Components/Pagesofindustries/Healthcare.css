@@ -1,0 +1,1543 @@
+
+/* =========================================================
+   CLEAN N CLEAR
+   HEALTHCARE / HOSPITALITY
+   PREMIUM RESPONSIVE CSS
+   Shared by Healthcare.jsx and Hospitality.jsx
+   ========================================================= */
+
+
+/* =========================================================
+   MAIN SECTION
+   ========================================================= */
+
+.h6-wrap {
+  position: relative;
+
+  width: 100%;
+  max-width: 1380px;
+
+  margin: 0 auto;
+
+  /*
+    Desktop header clearance
+  */
+  padding: 110px 45px 90px;
+
+  box-sizing: border-box;
+
+  background:
+    radial-gradient(
+      circle at 8% 12%,
+      rgba(8, 31, 239, 0.055),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 92% 75%,
+      rgba(8, 31, 239, 0.045),
+      transparent 28%
+    ),
+    #ffffff;
+
+  color: #222222;
+
+  font-family:
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   DECORATIVE BACKGROUND
+   ========================================================= */
+
+.h6-wrap::before {
+  content: "";
+
+  position: absolute;
+
+  width: 260px;
+  height: 260px;
+
+  top: -130px;
+  right: -100px;
+
+  border:
+    1px solid rgba(8, 31, 239, 0.08);
+
+  border-radius: 50%;
+
+  animation:
+    h6Rotate 18s linear infinite;
+
+  pointer-events: none;
+}
+
+.h6-wrap::after {
+  content: "";
+
+  position: absolute;
+
+  width: 180px;
+  height: 180px;
+
+  bottom: -90px;
+  left: -70px;
+
+  border:
+    1px solid rgba(8, 31, 239, 0.07);
+
+  border-radius: 50%;
+
+  animation:
+    h6Float 7s ease-in-out infinite;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.h6-title {
+  position: relative;
+  z-index: 20;
+
+  width: fit-content;
+
+  margin:
+    0
+    auto
+    12px;
+
+  color: #081fef;
+
+  font-size:
+    clamp(2rem, 4vw, 3rem);
+
+  font-weight: 800;
+
+  letter-spacing: 2px;
+
+  line-height: 1.15;
+
+  text-align: center;
+
+  visibility: visible;
+  opacity: 1;
+}
+
+
+/* =========================================================
+   TITLE UNDERLINE
+   ========================================================= */
+
+.h6-title::after {
+  content: "";
+
+  display: block;
+
+  width: 55px;
+  height: 4px;
+
+  margin:
+    9px
+    auto
+    0;
+
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #081fef,
+      #6679ff
+    );
+
+  animation:
+    h6LineGrow 1s ease forwards;
+}
+
+
+/* =========================================================
+   IMAGE WRAPPER
+   ========================================================= */
+
+.h6-image-wrap {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  margin:
+    0
+    0
+    32px;
+
+  padding: 0;
+
+  overflow: visible;
+}
+
+
+/* =========================================================
+   IMAGE GLOW
+   ========================================================= */
+
+.h6-image-wrap::before {
+  content: "";
+
+  position: absolute;
+
+  width: 92%;
+  height: 92%;
+
+  border-radius: 24px;
+
+  background:
+    rgba(8, 31, 239, 0.065);
+
+  filter: blur(25px);
+
+  z-index: -1;
+
+  animation:
+    h6ImageGlow 5s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   MAIN IMAGE
+   NO CROP
+   NO STRETCH
+   FULL IMAGE VISIBLE
+   ========================================================= */
+
+.h6-image {
+  display: block;
+
+  width: 100%;
+  max-width: 100%;
+
+  height: auto;
+
+  object-fit: contain;
+  object-position: center;
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 20px 50px rgba(8, 31, 239, 0.10),
+    0 5px 20px rgba(0, 0, 0, 0.06);
+
+  animation:
+    h6ImageReveal 1.1s ease both;
+
+  transition:
+    transform 0.6s ease,
+    box-shadow 0.6s ease;
+}
+
+.h6-image:hover {
+  transform:
+    translateY(-6px);
+
+  box-shadow:
+    0 28px 65px rgba(8, 31, 239, 0.14),
+    0 8px 25px rgba(0, 0, 0, 0.07);
+}
+
+
+/* =========================================================
+   BUTTON WRAPPER
+   ========================================================= */
+
+.h6-btn-wrap {
+  position: relative;
+  z-index: 3;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  margin:
+    30px
+    0
+    48px;
+}
+
+
+/* =========================================================
+   PREMIUM BUTTON
+   ========================================================= */
+
+.h6-book-btn {
+  position: relative;
+
+  display: inline-flex;
+
+  justify-content: center;
+  align-items: center;
+
+  min-width: 190px;
+
+  padding:
+    14px
+    32px;
+
+  overflow: hidden;
+
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #081fef,
+      #2746ff
+    );
+
+  border: none;
+
+  border-radius: 50px;
+
+  text-decoration: none;
+
+  font-size: 0.9rem;
+
+  font-weight: 700;
+
+  letter-spacing: 1.2px;
+
+  box-shadow:
+    0 10px 25px
+    rgba(8, 31, 239, 0.22);
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.h6-book-btn::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: -100%;
+
+  width: 70%;
+  height: 100%;
+
+  background:
+    linear-gradient(
+      100deg,
+      transparent,
+      rgba(255, 255, 255, 0.35),
+      transparent
+    );
+
+  transform:
+    skewX(-20deg);
+
+  transition:
+    left 0.7s ease;
+}
+
+.h6-book-btn:hover::before {
+  left: 140%;
+}
+
+.h6-book-btn:hover {
+  transform:
+    translateY(-4px);
+
+  box-shadow:
+    0 16px 35px
+    rgba(8, 31, 239, 0.30);
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.h6-description {
+  position: relative;
+  z-index: 2;
+
+  max-width: 1100px;
+
+  margin: 0 auto;
+
+  padding:
+    35px
+    40px;
+
+  background:
+    rgba(255, 255, 255, 0.92);
+
+  border:
+    1px solid rgba(8, 31, 239, 0.08);
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 15px 40px
+    rgba(8, 31, 239, 0.06);
+
+  backdrop-filter:
+    blur(8px);
+
+  animation:
+    h6FadeUp 0.8s ease both;
+}
+
+.h6-description p {
+  position: relative;
+
+  margin:
+    0
+    0
+    18px;
+
+  padding-left: 20px;
+
+  color: #4a4a4a;
+
+  font-size: 1.05rem;
+
+  line-height: 1.8;
+
+  text-align: left;
+}
+
+.h6-description p:last-child {
+  margin-bottom: 0;
+}
+
+.h6-description p::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 8px;
+
+  width: 3px;
+  height: 65%;
+
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      #081fef,
+      #6b7cff
+    );
+}
+
+
+/* =========================================================
+   INFORMATION LIST
+   ========================================================= */
+
+.h6-list {
+  position: relative;
+  z-index: 2;
+
+  max-width: 1100px;
+
+  margin:
+    30px
+    auto
+    55px;
+
+  padding: 0;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap:
+    14px
+    20px;
+
+  list-style: none;
+}
+
+
+/* =========================================================
+   INFORMATION CARD
+   ========================================================= */
+
+.h6-list li {
+  position: relative;
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 12px;
+
+  padding:
+    17px
+    18px;
+
+  background: #ffffff;
+
+  border:
+    1px solid rgba(8, 31, 239, 0.07);
+
+  border-radius: 12px;
+
+  color: #444444;
+
+  font-size: 0.96rem;
+
+  line-height: 1.55;
+
+  box-shadow:
+    0 6px 20px
+    rgba(8, 31, 239, 0.045);
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.h6-list li:hover {
+  transform:
+    translateY(-4px);
+
+  border-color:
+    rgba(8, 31, 239, 0.18);
+
+  box-shadow:
+    0 14px 30px
+    rgba(8, 31, 239, 0.10);
+}
+
+
+/* =========================================================
+   CHECK ICON
+   ========================================================= */
+
+.h6-check {
+  flex-shrink: 0;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  width: 25px;
+  height: 25px;
+
+  margin-top: 1px;
+
+  border-radius: 50%;
+
+  background: #081fef;
+
+  color: #ffffff;
+
+  font-size: 0.75rem;
+
+  font-weight: 800;
+
+  box-shadow:
+    0 5px 12px
+    rgba(8, 31, 239, 0.18);
+
+  animation:
+    h6Pulse 2.5s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   SOLUTIONS SECTION
+   ========================================================= */
+
+.h6-amenities {
+  position: relative;
+  z-index: 2;
+
+  margin-top: 20px;
+
+  padding:
+    50px
+    35px
+    45px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #f5f7ff 0%,
+      #ffffff 50%,
+      #f2f5ff 100%
+    );
+
+  border:
+    1px solid rgba(8, 31, 239, 0.08);
+
+  border-radius: 24px;
+
+  box-shadow:
+    0 20px 50px
+    rgba(8, 31, 239, 0.07);
+
+  overflow: hidden;
+}
+
+.h6-amenities::before {
+  content: "";
+
+  position: absolute;
+
+  width: 220px;
+  height: 220px;
+
+  top: -120px;
+  right: -80px;
+
+  border:
+    1px solid rgba(8, 31, 239, 0.08);
+
+  border-radius: 50%;
+
+  animation:
+    h6Float 6s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   SOLUTIONS TITLE
+   ========================================================= */
+
+.h6-amenities-title {
+  position: relative;
+  z-index: 2;
+
+  margin:
+    0
+    0
+    35px;
+
+  text-align: center;
+
+  color: #081fef;
+
+  font-size: 1.7rem;
+
+  font-weight: 800;
+
+  letter-spacing: 1px;
+}
+
+.h6-amenities-title::after {
+  content: "";
+
+  display: block;
+
+  width: 40px;
+  height: 3px;
+
+  margin:
+    12px
+    auto
+    0;
+
+  border-radius: 10px;
+
+  background: #081fef;
+}
+
+
+/* =========================================================
+   ICON GRID
+   ========================================================= */
+
+.h6-icons-grid {
+  position: relative;
+  z-index: 2;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr));
+
+  gap: 18px;
+
+  width: 100%;
+}
+
+
+/* =========================================================
+   ICON CARD
+   ========================================================= */
+
+.h6-icon-item {
+  position: relative;
+
+  min-height: 165px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  padding:
+    22px
+    12px;
+
+  background:
+    rgba(255, 255, 255, 0.94);
+
+  border:
+    1px solid rgba(8, 31, 239, 0.07);
+
+  border-radius: 18px;
+
+  text-align: center;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 8px 25px
+    rgba(8, 31, 239, 0.055);
+
+  transition:
+    transform 0.4s cubic-bezier(
+      0.2,
+      0.8,
+      0.2,
+      1
+    ),
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+}
+
+.h6-icon-item::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 50%;
+
+  width: 0;
+  height: 3px;
+
+  transform:
+    translateX(-50%);
+
+  background:
+    linear-gradient(
+      90deg,
+      #081fef,
+      #6679ff
+    );
+
+  transition:
+    width 0.4s ease;
+}
+
+.h6-icon-item:hover::before {
+  width: 65%;
+}
+
+.h6-icon-item:hover {
+  transform:
+    translateY(-9px);
+
+  border-color:
+    rgba(8, 31, 239, 0.16);
+
+  box-shadow:
+    0 18px 38px
+    rgba(8, 31, 239, 0.12);
+}
+
+
+/* =========================================================
+   ICON
+   ========================================================= */
+
+.h6-icon {
+  position: relative;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  width: 62px;
+  height: 62px;
+
+  margin-bottom: 15px;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      145deg,
+      #eef1ff,
+      #f8f9ff
+    );
+
+  color: #081fef;
+
+  font-size: 1.9rem;
+
+  box-shadow:
+    inset 0 0 0 1px
+    rgba(8, 31, 239, 0.06);
+
+  transition:
+    transform 0.4s ease,
+    background 0.4s ease,
+    color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.h6-icon-item:hover .h6-icon {
+  transform:
+    scale(1.12)
+    rotate(3deg);
+
+  background:
+    linear-gradient(
+      145deg,
+      #081fef,
+      #3853ff
+    );
+
+  color: #ffffff;
+
+  box-shadow:
+    0 10px 25px
+    rgba(8, 31, 239, 0.25);
+}
+
+
+/* =========================================================
+   LABEL
+   ========================================================= */
+
+.h6-label {
+  display: block;
+
+  max-width: 150px;
+
+  color: #303030;
+
+  font-size: 0.92rem;
+
+  font-weight: 700;
+
+  line-height: 1.4;
+
+  text-align: center;
+
+  transition:
+    color 0.3s ease;
+}
+
+.h6-icon-item:hover .h6-label {
+  color: #081fef;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes h6FadeUp {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(35px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+}
+
+
+@keyframes h6ImageReveal {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(30px)
+      scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+
+@keyframes h6ImageGlow {
+  0%,
+  100% {
+    opacity: 0.55;
+
+    transform:
+      scale(0.96);
+  }
+
+  50% {
+    opacity: 0.9;
+
+    transform:
+      scale(1);
+  }
+}
+
+
+@keyframes h6LineGrow {
+  from {
+    width: 0;
+
+    opacity: 0;
+  }
+
+  to {
+    width: 55px;
+
+    opacity: 1;
+  }
+}
+
+
+@keyframes h6Pulse {
+  0%,
+  100% {
+    transform:
+      scale(1);
+  }
+
+  50% {
+    transform:
+      scale(1.08);
+  }
+}
+
+
+@keyframes h6Float {
+  0%,
+  100% {
+    transform:
+      translateY(0);
+  }
+
+  50% {
+    transform:
+      translateY(-15px);
+  }
+}
+
+
+@keyframes h6Rotate {
+  from {
+    transform:
+      rotate(0deg);
+  }
+
+  to {
+    transform:
+      rotate(360deg);
+  }
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+   ========================================================= */
+
+@media (min-width: 1400px) {
+  .h6-wrap {
+    padding-top: 120px;
+  }
+
+  .h6-image {
+    max-width: 1280px;
+  }
+}
+
+
+/* =========================================================
+   TABLET / SMALL DESKTOP
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .h6-wrap {
+    padding:
+      105px
+      30px
+      75px;
+  }
+
+  .h6-icons-grid {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+
+  .h6-image {
+    width: 100%;
+
+    height: auto;
+  }
+}
+
+
+/* =========================================================
+   TABLET
+   IMPORTANT HEADER CLEARANCE
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .h6-wrap {
+    width: 100%;
+    max-width: 100%;
+
+    margin: 0;
+
+    /*
+      Increased mobile/tablet header clearance.
+    */
+    padding:
+      145px
+      25px
+      65px;
+
+    box-sizing: border-box;
+  }
+
+  .h6-title {
+    position: relative;
+    z-index: 20;
+
+    display: block;
+
+    margin:
+      0
+      auto
+      10px;
+
+    font-size: 2rem;
+
+    line-height: 1.2;
+
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .h6-title::after {
+    display: block;
+
+    margin:
+      8px
+      auto
+      0;
+  }
+
+  .h6-image-wrap {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+
+    margin:
+      0
+      0
+      25px;
+
+    padding: 0;
+  }
+
+  .h6-image {
+    display: block;
+
+    width: 100%;
+    max-width: 100%;
+
+    height: auto;
+
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .h6-btn-wrap {
+    margin:
+      25px
+      0
+      35px;
+  }
+
+  .h6-description {
+    padding: 30px;
+  }
+
+  .h6-list {
+    grid-template-columns: 1fr;
+  }
+
+  .h6-amenities {
+    padding:
+      40px
+      25px;
+  }
+
+  .h6-icons-grid {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+  .h6-wrap {
+    width: 100%;
+
+    margin: 0;
+
+    /*
+      FIX:
+      Gives enough room for the fixed mobile header.
+      Heading will no longer hide behind navbar.
+    */
+    padding:
+      135px
+      15px
+      55px;
+
+    box-sizing: border-box;
+  }
+
+  .h6-title {
+    position: relative;
+    z-index: 20;
+
+    display: block;
+
+    width: fit-content;
+    max-width: 100%;
+
+    margin:
+      0
+      auto
+      7px;
+
+    font-size: 1.8rem;
+
+    line-height: 1.2;
+
+    letter-spacing: 1.2px;
+
+    text-align: center;
+
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .h6-title::after {
+    width: 45px;
+    height: 3px;
+
+    margin-top: 7px;
+  }
+
+
+  /* =======================================================
+     IMAGE
+     ======================================================= */
+
+  .h6-image-wrap {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+
+    margin:
+      0
+      0
+      25px;
+
+    padding: 0;
+
+    overflow: visible;
+  }
+
+  .h6-image {
+    display: block;
+
+    width: 100%;
+    max-width: 100%;
+
+    height: auto;
+
+    object-fit: contain;
+    object-position: center;
+
+    border-radius: 14px;
+  }
+
+
+  /* =======================================================
+     BUTTON
+     ======================================================= */
+
+  .h6-btn-wrap {
+    width: 100%;
+
+    margin:
+      25px
+      0
+      35px;
+  }
+
+  .h6-book-btn {
+    min-width: 175px;
+
+    padding:
+      13px
+      25px;
+
+    font-size: 0.82rem;
+  }
+
+
+  /* =======================================================
+     DESCRIPTION
+     ======================================================= */
+
+  .h6-description {
+    width: 100%;
+
+    padding:
+      24px
+      20px;
+
+    box-sizing: border-box;
+
+    border-radius: 16px;
+  }
+
+  .h6-description p {
+    padding-left: 15px;
+
+    font-size: 0.95rem;
+
+    line-height: 1.7;
+  }
+
+
+  /* =======================================================
+     INFORMATION LIST
+     ======================================================= */
+
+  .h6-list {
+    width: 100%;
+
+    margin:
+      25px
+      auto
+      40px;
+
+    gap: 11px;
+  }
+
+  .h6-list li {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 14px;
+
+    font-size: 0.9rem;
+
+    border-radius: 11px;
+  }
+
+  .h6-check {
+    width: 23px;
+    height: 23px;
+
+    font-size: 0.7rem;
+  }
+
+
+  /* =======================================================
+     SOLUTIONS
+     ======================================================= */
+
+  .h6-amenities {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding:
+      35px
+      14px;
+
+    border-radius: 18px;
+  }
+
+  .h6-amenities-title {
+    margin-bottom: 28px;
+
+    font-size: 1.3rem;
+
+    line-height: 1.35;
+  }
+
+  .h6-icons-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+  }
+
+
+  /* =======================================================
+     ICON CARD
+     ======================================================= */
+
+  .h6-icon-item {
+    min-height: 145px;
+
+    padding:
+      17px
+      8px;
+
+    border-radius: 15px;
+  }
+
+  .h6-icon {
+    width: 52px;
+    height: 52px;
+
+    margin-bottom: 11px;
+
+    font-size: 1.55rem;
+  }
+
+  .h6-label {
+    max-width: 125px;
+
+    font-size: 0.82rem;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 380px) {
+  .h6-wrap {
+    width: 100%;
+
+    /*
+      Still enough clearance for the mobile navbar.
+    */
+    padding:
+      125px
+      12px
+      50px;
+  }
+
+  .h6-title {
+    margin-bottom: 5px;
+
+    font-size: 1.6rem;
+
+    line-height: 1.2;
+  }
+
+  .h6-title::after {
+    width: 42px;
+
+    margin-top: 6px;
+  }
+
+  .h6-image-wrap {
+    margin-bottom: 22px;
+  }
+
+  .h6-image {
+    border-radius: 12px;
+  }
+
+  .h6-btn-wrap {
+    margin:
+      22px
+      0
+      30px;
+  }
+
+  .h6-book-btn {
+    min-width: 160px;
+
+    padding:
+      12px
+      22px;
+  }
+
+  .h6-description {
+    padding:
+      20px
+      16px;
+  }
+
+  .h6-description p {
+    font-size: 0.9rem;
+
+    line-height: 1.65;
+  }
+
+  .h6-list {
+    margin-top: 22px;
+  }
+
+  .h6-list li {
+    font-size: 0.85rem;
+
+    line-height: 1.5;
+  }
+
+  .h6-check {
+    width: 21px;
+    height: 21px;
+  }
+
+  .h6-amenities {
+    padding:
+      30px
+      10px;
+  }
+
+  .h6-amenities-title {
+    font-size: 1.15rem;
+  }
+
+  .h6-icons-grid {
+    gap: 9px;
+  }
+
+  .h6-icon-item {
+    min-height: 130px;
+
+    padding:
+      14px
+      6px;
+  }
+
+  .h6-icon {
+    width: 46px;
+    height: 46px;
+
+    margin-bottom: 9px;
+
+    font-size: 1.4rem;
+  }
+
+  .h6-label {
+    max-width: 110px;
+
+    font-size: 0.76rem;
+  }
+}
+
+
+/* =========================================================
+   EXTRA SMALL WIDTHS
+   ========================================================= */
+
+@media (max-width: 320px) {
+  .h6-wrap {
+    padding:
+      120px
+      10px
+      45px;
+  }
+
+  .h6-title {
+    font-size: 1.45rem;
+  }
+
+  .h6-title::after {
+    width: 38px;
+  }
+
+  .h6-icons-grid {
+    gap: 7px;
+  }
+
+  .h6-icon-item {
+    min-height: 120px;
+  }
+
+  .h6-icon {
+    width: 42px;
+    height: 42px;
+
+    font-size: 1.25rem;
+  }
+
+  .h6-label {
+    font-size: 0.7rem;
+  }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .h6-wrap *,
+  .h6-wrap::before,
+  .h6-wrap::after {
+    animation-duration:
+      0.01ms !important;
+
+    animation-iteration-count:
+      1 !important;
+
+    transition-duration:
+      0.01ms !important;
+  }
+}

@@ -1,8 +1,8 @@
 import "./Section.css";
 
-import chemicalsImg from "../../images/cleaning-chemicals.jpg";
-import toolsImg from "../../images/cleaning-tools.jpg";
-import equipmentImg from "../../images/professional-equipment.jpg";
+import chemicalsImg from "../../images/cleaning-chemicals.png";
+import toolsImg from "../../images/cleaning-tools.png";
+import equipmentImg from "../../images/professional-equipment.png";
 
 const categories = [
   {

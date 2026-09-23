@@ -1,0 +1,1542 @@
+/* =========================================================
+   CLEAN N CLEAR
+   ADMIN ORDERS DASHBOARD
+   PREMIUM ELEGANT UI
+   UNIQUE PREFIX: cnc-admin-
+   ========================================================= */
+
+.cnc-admin-page,
+.cnc-admin-page * {
+  box-sizing: border-box;
+}
+
+.cnc-admin-page {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 8% 0%, rgba(8, 31, 239, 0.08), transparent 28%),
+    radial-gradient(circle at 100% 0%, rgba(81, 103, 255, 0.08), transparent 25%),
+    #f5f7fc;
+  color: #172033;
+  font-family: Cambria, Georgia, serif;
+}
+
+/* =========================================================
+   BACKGROUND DECORATION
+   ========================================================= */
+
+.cnc-admin-page::before {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  top: -230px;
+  right: -120px;
+  border-radius: 50%;
+  background: rgba(8, 31, 239, 0.045);
+  pointer-events: none;
+}
+
+.cnc-admin-page::after {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  bottom: -280px;
+  left: -180px;
+  border-radius: 50%;
+  background: rgba(8, 31, 239, 0.035);
+  pointer-events: none;
+}
+
+.cnc-admin-container {
+  position: relative;
+  z-index: 1;
+  width: min(1500px, 94%);
+  margin: 0 auto;
+  padding: 42px 0 70px;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.cnc-admin-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.cnc-admin-heading {
+  min-width: 0;
+}
+
+.cnc-admin-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 10px;
+  color: #081fef;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.cnc-admin-eyebrow::before {
+  content: "";
+  width: 25px;
+  height: 2px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #081fef, #7180ff);
+}
+
+.cnc-admin-heading h1 {
+  margin: 0;
+  color: #11192d;
+  font-size: clamp(32px, 4vw, 46px);
+  font-weight: 700;
+  line-height: 1.08;
+}
+
+.cnc-admin-heading p {
+  max-width: 600px;
+  margin: 10px 0 0;
+  color: #697386;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* =========================================================
+   REFRESH
+   ========================================================= */
+
+.cnc-admin-refresh {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-width: 125px;
+  height: 44px;
+  padding: 0 18px;
+  border: 1px solid #dce1ee;
+  border-radius: 9px;
+  background: #ffffff;
+  color: #172033;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(20, 35, 70, 0.06);
+  transition: 0.25s ease;
+}
+
+.cnc-admin-refresh:hover {
+  border-color: #081fef;
+  background: #081fef;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(8, 31, 239, 0.18);
+}
+
+.cnc-admin-refresh:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.cnc-admin-refresh-icon {
+  display: inline-block;
+  font-size: 18px;
+}
+
+.cnc-admin-spin {
+  animation: cnc-admin-spin 0.8s linear infinite;
+}
+
+@keyframes cnc-admin-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   ERROR
+   ========================================================= */
+
+.cnc-admin-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  margin-bottom: 24px;
+  padding: 15px 17px;
+  border: 1px solid #f0cccc;
+  border-radius: 10px;
+  background: #fff7f7;
+  color: #a32929;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 5px 18px rgba(150, 30, 30, 0.05);
+}
+
+.cnc-admin-error > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 25px;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #b72d2d;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.cnc-admin-error strong {
+  display: block;
+  margin-bottom: 3px;
+  font-size: 13px;
+}
+
+.cnc-admin-error p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.cnc-admin-error button {
+  margin-left: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #9c4141;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* =========================================================
+   STATISTICS
+   ========================================================= */
+
+.cnc-admin-stats {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.cnc-admin-stat-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 105px;
+  padding: 20px;
+  overflow: hidden;
+  border: 1px solid #e1e6f0;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow:
+    0 8px 25px rgba(23, 35, 62, 0.055),
+    0 1px 3px rgba(23, 35, 62, 0.03);
+  transition: 0.3s ease;
+}
+
+.cnc-admin-stat-card::after {
+  content: "";
+  position: absolute;
+  right: -30px;
+  bottom: -35px;
+  width: 105px;
+  height: 105px;
+  border-radius: 50%;
+  background: rgba(8, 31, 239, 0.035);
+  transition: 0.35s ease;
+}
+
+.cnc-admin-stat-card:hover {
+  border-color: rgba(8, 31, 239, 0.18);
+  transform: translateY(-5px);
+  box-shadow:
+    0 16px 35px rgba(23, 35, 62, 0.09),
+    0 3px 8px rgba(23, 35, 62, 0.04);
+}
+
+.cnc-admin-stat-card:hover::after {
+  transform: scale(1.35);
+}
+
+.cnc-admin-stat-icon {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 46px;
+  width: 46px;
+  height: 46px;
+  border: 1px solid #dce3ff;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #edf1ff, #f7f8ff);
+  color: #081fef;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  transition: 0.3s ease;
+}
+
+.cnc-admin-stat-card:hover .cnc-admin-stat-icon {
+  transform: scale(1.08) rotate(-3deg);
+  box-shadow: 0 7px 18px rgba(8, 31, 239, 0.12);
+}
+
+.cnc-admin-stat-card span {
+  position: relative;
+  z-index: 1;
+  display: block;
+  margin-bottom: 5px;
+  color: #7a8496;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.cnc-admin-stat-card strong {
+  position: relative;
+  z-index: 1;
+  display: block;
+  color: #172033;
+  font-size: 27px;
+  line-height: 1;
+}
+
+/* =========================================================
+   TOOLBAR
+   ========================================================= */
+
+.cnc-admin-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 12px;
+  padding: 15px;
+  border: 1px solid #e1e6f0;
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 7px 24px rgba(23, 35, 62, 0.045);
+}
+
+.cnc-admin-search {
+  position: relative;
+  flex: 1;
+  max-width: 650px;
+}
+
+.cnc-admin-search-icon {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  color: #8b95a8;
+  font-family: Arial, sans-serif;
+  font-size: 19px;
+  transform: translateY(-52%);
+  pointer-events: none;
+}
+
+.cnc-admin-search input {
+  width: 100%;
+  height: 43px;
+  padding: 0 42px;
+  border: 1px solid #dfe4ec;
+  border-radius: 8px;
+  outline: none;
+  background: #fafbfe;
+  color: #1c2638;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  transition: 0.25s ease;
+}
+
+.cnc-admin-search input:focus {
+  border-color: #7e8cff;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(8, 31, 239, 0.06);
+}
+
+.cnc-admin-search input::placeholder {
+  color: #a0a7b4;
+}
+
+.cnc-admin-clear-search {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #8790a0;
+  font-size: 20px;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.cnc-admin-filter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cnc-admin-filter label {
+  color: #657083;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.cnc-admin-filter select {
+  min-width: 150px;
+  height: 43px;
+  padding: 0 35px 0 13px;
+  border: 1px solid #dfe4ec;
+  border-radius: 8px;
+  outline: none;
+  background: #fafbfe;
+  color: #1c2638;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.cnc-admin-filter select:focus {
+  border-color: #7e8cff;
+  box-shadow: 0 0 0 4px rgba(8, 31, 239, 0.06);
+}
+
+/* =========================================================
+   RESULTS
+   ========================================================= */
+
+.cnc-admin-results-info {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+  padding: 0 2px;
+  color: #7b8596;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+}
+
+.cnc-admin-results-info strong {
+  color: #283348;
+}
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.cnc-admin-table-card {
+  overflow: hidden;
+  border: 1px solid #e1e6f0;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow:
+    0 10px 30px rgba(23, 35, 62, 0.055),
+    0 2px 5px rgba(23, 35, 62, 0.025);
+}
+
+.cnc-admin-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.cnc-admin-table-wrap::-webkit-scrollbar {
+  height: 6px;
+}
+
+.cnc-admin-table-wrap::-webkit-scrollbar-track {
+  background: #f3f5f9;
+}
+
+.cnc-admin-table-wrap::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #c9d0df;
+}
+
+.cnc-admin-table {
+  width: 100%;
+  min-width: 1050px;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.cnc-admin-table thead {
+  background: linear-gradient(135deg, #f8f9fd, #f3f5fb);
+}
+
+.cnc-admin-table th {
+  padding: 15px 16px;
+  border-bottom: 1px solid #e2e6ed;
+  color: #687286;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.cnc-admin-table td {
+  padding: 17px 16px;
+  border-bottom: 1px solid #edf0f4;
+  vertical-align: middle;
+}
+
+.cnc-admin-table tbody tr {
+  transition: 0.2s ease;
+}
+
+.cnc-admin-table tbody tr:hover {
+  background: #fafbff;
+}
+
+.cnc-admin-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* =========================================================
+   ORDER ID
+   ========================================================= */
+
+.cnc-admin-order-id {
+  color: #081fef;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   CUSTOMER
+   ========================================================= */
+
+.cnc-admin-customer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 140px;
+}
+
+.cnc-admin-customer strong {
+  color: #202a3d;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+}
+
+.cnc-admin-customer span {
+  color: #8a93a2;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+}
+
+/* =========================================================
+   CONTACT
+   ========================================================= */
+
+.cnc-admin-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 145px;
+}
+
+.cnc-admin-contact span {
+  color: #4f5a6e;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   PRODUCTS
+   ========================================================= */
+
+.cnc-admin-products-count {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  padding: 6px 10px;
+  border-radius: 7px;
+  background: #f4f6ff;
+}
+
+.cnc-admin-products-count strong {
+  color: #273249;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+.cnc-admin-products-count span {
+  color: #8992a1;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+}
+
+/* =========================================================
+   TOTAL
+   ========================================================= */
+
+.cnc-admin-total {
+  color: #172033;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   DATE
+   ========================================================= */
+
+.cnc-admin-date {
+  display: block;
+  min-width: 125px;
+  color: #697386;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.cnc-admin-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 84px;
+  padding: 7px 11px;
+  border-radius: 30px;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  white-space: nowrap;
+  transition: 0.2s ease;
+}
+
+.cnc-admin-status:hover {
+  transform: translateY(-1px);
+}
+
+.cnc-admin-status-new {
+  border: 1px solid #dce4ff;
+  background: #eef2ff;
+  color: #1935c7;
+}
+
+.cnc-admin-status-processing {
+  border: 1px solid #f3dfb2;
+  background: #fff6e4;
+  color: #9a6400;
+}
+
+.cnc-admin-status-completed {
+  border: 1px solid #ccebd7;
+  background: #ebf8ef;
+  color: #20703b;
+}
+
+.cnc-admin-status-cancelled {
+  border: 1px solid #f0d0d0;
+  background: #fceded;
+  color: #a72e2e;
+}
+
+/* =========================================================
+   VIEW BUTTON
+   ========================================================= */
+
+.cnc-admin-view-btn {
+  min-width: 66px;
+  height: 34px;
+  padding: 0 14px;
+  border: 1px solid #d5daf0;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #081fef;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.cnc-admin-view-btn:hover {
+  border-color: #081fef;
+  background: #081fef;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 7px 18px rgba(8, 31, 239, 0.18);
+}
+
+/* =========================================================
+   EMPTY
+   ========================================================= */
+
+.cnc-admin-empty {
+  padding: 90px 25px;
+  border: 1px solid #e3e7ee;
+  border-radius: 14px;
+  background: #ffffff;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(25, 39, 80, 0.045);
+}
+
+.cnc-admin-empty-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 70px;
+  margin-bottom: 18px;
+  border-radius: 50%;
+  background: #eef1ff;
+  font-size: 30px;
+}
+
+.cnc-admin-empty h2 {
+  margin: 0;
+  color: #263147;
+  font-size: 26px;
+}
+
+.cnc-admin-empty p {
+  max-width: 450px;
+  margin: 10px auto 22px;
+  color: #7a8495;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.cnc-admin-empty button {
+  height: 39px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 7px;
+  background: linear-gradient(135deg, #081fef, #3048ff);
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(8, 31, 239, 0.18);
+}
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.cnc-admin-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 70vh;
+  padding: 30px;
+  text-align: center;
+}
+
+.cnc-admin-spinner {
+  width: 42px;
+  height: 42px;
+  margin-bottom: 18px;
+  border: 3px solid #dfe4f5;
+  border-top-color: #081fef;
+  border-right-color: #7180ff;
+  border-radius: 50%;
+  animation: cnc-admin-spin 0.8s linear infinite;
+}
+
+.cnc-admin-loading h2 {
+  margin: 0;
+  color: #253047;
+  font-size: 24px;
+}
+
+.cnc-admin-loading p {
+  margin: 8px 0 0;
+  color: #7c8595;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   PREMIUM MODAL OVERLAY
+   ========================================================= */
+
+.cnc-admin-modal-overlay {
+  position: fixed;
+  z-index: 99999;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  background: rgba(8, 16, 35, 0.66);
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+  animation: cnc-admin-fade-in 0.25s ease;
+}
+
+@keyframes cnc-admin-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* =========================================================
+   PREMIUM MODAL
+   ========================================================= */
+
+.cnc-admin-modal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(820px, 100%);
+  max-height: calc(100vh - 60px);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow:
+    0 35px 100px rgba(0, 0, 0, 0.28),
+    0 10px 35px rgba(8, 31, 239, 0.08);
+  animation: cnc-admin-modal-in 0.3s ease;
+}
+
+@keyframes cnc-admin-modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* =========================================================
+   MODAL HEADER
+   ========================================================= */
+
+.cnc-admin-modal-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  min-height: 135px;
+  padding: 27px 32px;
+  overflow: hidden;
+  border-bottom: 1px solid #e8ebf2;
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(8, 31, 239, 0.10),
+      transparent 32%
+    ),
+    linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #f7f9ff 100%
+    );
+}
+
+.cnc-admin-modal-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    #081fef,
+    #5268ff,
+    #8b99ff
+  );
+}
+
+.cnc-admin-modal-header::after {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  right: -70px;
+  top: -100px;
+  border-radius: 50%;
+  border: 30px solid rgba(8, 31, 239, 0.035);
+  pointer-events: none;
+}
+
+.cnc-admin-modal-label {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  color: #7180a0;
+  font-family: Arial, sans-serif;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.cnc-admin-modal-label::before {
+  content: "";
+  width: 18px;
+  height: 2px;
+  border-radius: 5px;
+  background: #081fef;
+}
+
+.cnc-admin-modal-header h2 {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: #101b35;
+  font-family: Cambria, Georgia, serif;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.cnc-admin-modal-header p {
+  position: relative;
+  z-index: 1;
+  margin: 8px 0 0;
+  color: #71809b;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+}
+
+.cnc-admin-modal-close {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 1px solid #dce2ee;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #61708c;
+  font-size: 21px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(30, 45, 80, 0.05);
+  transition: 0.25s ease;
+}
+
+.cnc-admin-modal-close:hover {
+  border-color: #081fef;
+  background: #081fef;
+  color: #ffffff;
+  transform: rotate(4deg) scale(1.04);
+  box-shadow: 0 8px 20px rgba(8, 31, 239, 0.2);
+}
+
+.cnc-admin-modal-close:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+
+/* =========================================================
+   MODAL BODY
+   ========================================================= */
+
+.cnc-admin-modal-body {
+  overflow-y: auto;
+  padding: 28px 32px;
+  background: #ffffff;
+  scrollbar-width: thin;
+  scrollbar-color: #c8cfdd transparent;
+}
+
+.cnc-admin-modal-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.cnc-admin-modal-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cnc-admin-modal-body::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #c8cfdd;
+}
+
+
+/* =========================================================
+   DETAIL SECTION
+   ========================================================= */
+
+.cnc-admin-detail-section {
+  margin-bottom: 30px;
+}
+
+.cnc-admin-detail-section:last-child {
+  margin-bottom: 0;
+}
+
+.cnc-admin-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  color: #263249;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.cnc-admin-section-title::before {
+  content: "";
+  width: 4px;
+  height: 17px;
+  border-radius: 10px;
+  background: linear-gradient(
+    180deg,
+    #081fef,
+    #7180ff
+  );
+  box-shadow: 0 2px 8px rgba(8, 31, 239, 0.22);
+}
+
+
+/* =========================================================
+   CUSTOMER INFORMATION
+   ========================================================= */
+
+.cnc-admin-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid #e1e6ef;
+  border-radius: 12px;
+  background: #e1e6ef;
+  box-shadow: 0 5px 18px rgba(30, 45, 80, 0.035);
+}
+
+.cnc-admin-detail-item {
+  position: relative;
+  min-width: 0;
+  min-height: 83px;
+  padding: 15px 18px;
+  background: #ffffff;
+  transition: 0.2s ease;
+}
+
+.cnc-admin-detail-item:hover {
+  background: #fafbff;
+}
+
+.cnc-admin-detail-item span {
+  display: block;
+  margin-bottom: 8px;
+  color: #8a94a8;
+  font-family: Arial, sans-serif;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.cnc-admin-detail-item strong {
+  display: block;
+  overflow-wrap: anywhere;
+  color: #26344e;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.cnc-admin-detail-full {
+  grid-column: 1 / -1;
+}
+
+
+/* =========================================================
+   ORDER ITEMS
+   ========================================================= */
+
+.cnc-admin-items {
+  overflow: hidden;
+  border: 1px solid #e1e6ef;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 5px 18px rgba(30, 45, 80, 0.035);
+}
+
+.cnc-admin-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 80px 110px;
+  align-items: center;
+  gap: 18px;
+  min-height: 82px;
+  padding: 15px 18px;
+  border-bottom: 1px solid #edf0f5;
+  transition: 0.22s ease;
+}
+
+.cnc-admin-item:hover {
+  background: #fafbff;
+  padding-left: 22px;
+}
+
+.cnc-admin-item:last-child {
+  border-bottom: 0;
+}
+
+.cnc-admin-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.cnc-admin-item-info strong {
+  color: #26344e;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.cnc-admin-item-info span {
+  color: #8a94a8;
+  font-family: Arial, sans-serif;
+  font-size: 9px;
+}
+
+.cnc-admin-item-qty {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 42px;
+  padding: 6px 8px;
+  border-radius: 7px;
+  background: #f3f5ff;
+  color: #52607b;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.cnc-admin-item-price {
+  color: #17233e;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  text-align: right;
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   GRAND TOTAL
+   ========================================================= */
+
+.cnc-admin-grand-total {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 13px;
+  padding: 17px 18px;
+  overflow: hidden;
+  border: 1px solid #dce3ff;
+  border-radius: 11px;
+  background:
+    radial-gradient(
+      circle at 100% 50%,
+      rgba(8, 31, 239, 0.09),
+      transparent 38%
+    ),
+    #f5f7ff;
+}
+
+.cnc-admin-grand-total::after {
+  content: "";
+  position: absolute;
+  right: -30px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 20px solid rgba(8, 31, 239, 0.035);
+}
+
+.cnc-admin-grand-total span {
+  position: relative;
+  z-index: 1;
+  color: #56647e;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cnc-admin-grand-total strong {
+  position: relative;
+  z-index: 1;
+  color: #081fef;
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+}
+
+
+/* =========================================================
+   NOTES
+   ========================================================= */
+
+.cnc-admin-notes {
+  padding: 15px 17px;
+  border: 1px solid #e1e6ef;
+  border-radius: 10px;
+  background: #fafbfc;
+  color: #566175;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   STATUS CONTROL
+   ========================================================= */
+
+.cnc-admin-status-control {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cnc-admin-status-control select {
+  width: 220px;
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid #dfe4ec;
+  border-radius: 8px;
+  outline: none;
+  background: #ffffff;
+  color: #273249;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.cnc-admin-status-control select:focus {
+  border-color: #7180ff;
+  box-shadow: 0 0 0 4px rgba(8, 31, 239, 0.06);
+}
+
+.cnc-admin-status-control select:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.cnc-admin-status-control span {
+  color: #7c8594;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   MODAL FOOTER
+   ========================================================= */
+
+.cnc-admin-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 14px 32px;
+  border-top: 1px solid #e8ebf2;
+  background: #fafbfe;
+}
+
+.cnc-admin-close-btn {
+  min-width: 90px;
+  height: 38px;
+  padding: 0 17px;
+  border: 1px solid #d7ddea;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #46536c;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.cnc-admin-close-btn:hover {
+  border-color: #081fef;
+  background: #081fef;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 7px 18px rgba(8, 31, 239, 0.15);
+}
+
+.cnc-admin-close-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .cnc-admin-stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .cnc-admin-container {
+    width: 94%;
+    padding: 28px 0 50px;
+  }
+
+  .cnc-admin-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .cnc-admin-refresh {
+    width: 100%;
+  }
+
+  .cnc-admin-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .cnc-admin-stat-card {
+    min-height: 86px;
+    padding: 14px;
+  }
+
+  .cnc-admin-stat-icon {
+    flex-basis: 36px;
+    width: 36px;
+    height: 36px;
+  }
+
+  .cnc-admin-stat-card strong {
+    font-size: 22px;
+  }
+
+  .cnc-admin-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+    padding: 13px;
+  }
+
+  .cnc-admin-search {
+    max-width: none;
+  }
+
+  .cnc-admin-filter {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .cnc-admin-filter select {
+    width: 100%;
+  }
+
+  .cnc-admin-results-info {
+    justify-content: flex-start;
+  }
+
+  /* Modal becomes bottom sheet */
+  .cnc-admin-modal-overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .cnc-admin-modal {
+    width: 100%;
+    max-height: 94vh;
+    border-radius: 18px 18px 0 0;
+  }
+
+  .cnc-admin-modal-header {
+    min-height: 120px;
+    padding: 22px 20px;
+  }
+
+  .cnc-admin-modal-header h2 {
+    font-size: 24px;
+  }
+
+  .cnc-admin-modal-body {
+    padding: 22px 20px;
+  }
+
+  .cnc-admin-modal-footer {
+    padding: 13px 20px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+  .cnc-admin-container {
+    width: 92%;
+  }
+
+  .cnc-admin-heading h1 {
+    font-size: 29px;
+  }
+
+  .cnc-admin-heading p {
+    font-size: 12px;
+  }
+
+  .cnc-admin-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cnc-admin-stat-card {
+    gap: 9px;
+    padding: 12px;
+  }
+
+  .cnc-admin-stat-card span {
+    font-size: 9px;
+  }
+
+  .cnc-admin-stat-card strong {
+    font-size: 20px;
+  }
+
+  .cnc-admin-stat-icon {
+    display: none;
+  }
+
+  .cnc-admin-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cnc-admin-detail-full {
+    grid-column: auto;
+  }
+
+  .cnc-admin-item {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px;
+  }
+
+  .cnc-admin-item-qty {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .cnc-admin-item-price {
+    grid-column: 1 / -1;
+    text-align: left;
+  }
+
+  .cnc-admin-status-control {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .cnc-admin-status-control select {
+    width: 100%;
+  }
+
+  .cnc-admin-modal-header {
+    padding: 20px 17px;
+  }
+
+  .cnc-admin-modal-header h2 {
+    font-size: 22px;
+  }
+
+  .cnc-admin-modal-body {
+    padding: 20px 17px;
+  }
+
+  .cnc-admin-modal-footer {
+    padding: 12px 17px;
+  }
+
+  .cnc-admin-detail-item {
+    min-height: 76px;
+  }
+
+  .cnc-admin-item {
+    min-height: 76px;
+    padding: 13px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .cnc-admin-page *,
+  .cnc-admin-page *::before,
+  .cnc-admin-page *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -35,7 +35,8 @@ import Product from "./Components/Product/Product";
 // CLEANING CHEMICALS
 // ======================================================
 
-import Cleaning from "./Components/Cleaning-chemicals/Cleaning";
+import CleaningChemicals from "./Components/CleaningChemicals/CleaningChemicals";
+import AdminOrders from "./Components/pages/AdminOrders/AdminOrders";
 
 // ======================================================
 // KÄRCHER
@@ -49,6 +50,12 @@ import ProductCategory from "./Components/ProductCategory/ProductCategory";
 //industries
 
 import Industries from "./Components/Industries/Industries";
+import Healthcare from "./Components/Pagesofindustries/Healthcare";
+import Hospitality from "./Components/Pagesofindustries/Hospitality";
+import Education from "./Components/Pagesofindustries/Education";
+import Office from "./Components/Pagesofindustries/Office";
+import Industrial from "./Components/Pagesofindustries/Industrial";
+import Residential from "./Components/Pagesofindustries/Residential";
 
 // contact
 
@@ -193,8 +200,16 @@ function App() {
 
           <Route
             path="/products/cleaning-chemicals"
-            element={<Cleaning />}
+            element={<CleaningChemicals />}
           />
+
+           <Route
+          path="/admin/orders"
+          element={<AdminOrders />}
+        />
+
+
+
 
           <Route
             path="/products/cleaning-tools"
@@ -293,42 +308,42 @@ function App() {
           <Route
             path="/industries/healthcare"
             element={
-              <Page title="Healthcare" />
+              <Healthcare />
             }
           />
 
           <Route
             path="/industries/hospitality"
             element={
-              <Page title="Hospitality" />
+              <Hospitality />
             }
           />
 
           <Route
             path="/industries/education"
             element={
-              <Page title="Education" />
+              <Education />
             }
           />
 
           <Route
             path="/industries/offices-commercial"
             element={
-              <Page title="Offices & Commercial" />
+              <Office />
             }
           />
 
           <Route
             path="/industries/industrial"
             element={
-              <Page title="Industrial" />
+              <Industrial />
             }
           />
 
           <Route
             path="/industries/residential"
             element={
-              <Page title="Residential" />
+              <Residential />
             }
           />
 
