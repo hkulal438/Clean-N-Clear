@@ -38,6 +38,9 @@ import Product from "./Components/Product/Product";
 import CleaningChemicals from "./Components/CleaningChemicals/CleaningChemicals";
 import CleaningTools from "./Components/CleaningChemicals/CleaningTools";
 import ProffessionalEquiment from "./Components/CleaningChemicals/ProffessionalEquiment";
+import HygieneSupplies from "./Components/CleaningChemicals/HygieneSupplies";
+import HouseholdCleaning from "./Components/CleaningChemicals/HouseholdCleaning";
+import CommercialSupplies from "./Components/CleaningChemicals/CommercialSupplies";
 import AdminOrders from "./Components/pages/AdminOrders/AdminOrders";
 
 // ======================================================
@@ -230,21 +233,21 @@ function App() {
           <Route
             path="/products/hygiene-supplies"
             element={
-              <Page title="Hygiene Supplies" />
+              <HygieneSupplies />
             }
           />
 
           <Route
             path="/products/household-cleaning"
             element={
-              <Page title="Household Cleaning" />
+              <HouseholdCleaning />
             }
           />
 
           <Route
             path="/products/commercial-institutional-supplies"
             element={
-              <Page title="Commercial & Institutional Supplies" />
+              <CommercialSupplies />
             }
           />
 
