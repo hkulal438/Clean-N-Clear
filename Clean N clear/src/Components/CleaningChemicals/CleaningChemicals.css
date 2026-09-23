@@ -2,7 +2,9 @@
    CLEAN N CLEAR
    CLEANING CHEMICALS ORDER SYSTEM
    PREMIUM RESPONSIVE VERSION
+
    ALL CLASSES USE ccq- PREFIX
+   ORDER MODALS ALWAYS STAY BELOW FIXED HEADER
    ========================================================= */
 
 
@@ -29,9 +31,7 @@
   min-height: 100vh;
 
   /*
-    IMPORTANT:
-    Header is fixed/sticky.
-    This top padding keeps the section below the header.
+    Main page content starts below fixed header.
   */
   padding: 155px 6% 90px;
 
@@ -117,10 +117,12 @@
   color: var(--ccq-blue);
 
   font-family: Cambria, Georgia, serif;
+
   font-size: 12px;
   font-weight: 700;
 
   letter-spacing: 3px;
+
   text-transform: uppercase;
 }
 
@@ -165,6 +167,7 @@
   font-family: Cambria, Georgia, serif;
 
   font-size: clamp(38px, 4.3vw, 56px);
+
   font-weight: 700;
 
   line-height: 1.08;
@@ -187,6 +190,7 @@
 
   left: 3px;
   right: 3px;
+
   bottom: -7px;
 
   height: 3px;
@@ -436,7 +440,6 @@
   border-radius: 30px;
 
   background: rgba(8, 31, 239, 0.94);
-
   color: #ffffff;
 
   font-size: 10px;
@@ -543,7 +546,6 @@
   padding: 9px 12px;
 
   border: 1px solid #e2e5f0;
-
   border-radius: 8px;
 
   background: #f8f9ff;
@@ -580,7 +582,6 @@
   padding: 13px 18px;
 
   border: 1px solid var(--ccq-blue);
-
   border-radius: 9px;
 
   background: var(--ccq-blue);
@@ -623,21 +624,30 @@
 
 
 /* =========================================================
-   OVERLAY
+   ORDER OVERLAY
+   IMPORTANT:
+   ALL ORDER DIALOGS START BELOW FIXED HEADER
    ========================================================= */
 
 .ccq-overlay {
   position: fixed;
 
-  inset: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 
   z-index: 99999;
 
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 
-  padding: 25px;
+  /*
+    Desktop header clearance.
+    Dialog begins below the fixed navbar.
+  */
+  padding: 155px 25px 25px;
 
   overflow-y: auto;
 
@@ -676,7 +686,6 @@
   height: 38px;
 
   border: 1px solid #e1e4ed;
-
   border-radius: 50%;
 
   background: #ffffff;
@@ -724,6 +733,11 @@
   box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
 
   animation: ccqModalIn 0.25s ease;
+
+  /*
+    Prevent modal from touching the bottom.
+  */
+  margin-bottom: 10px;
 }
 
 @keyframes ccqModalIn {
@@ -838,7 +852,6 @@
   color: var(--ccq-blue);
 
   font-size: 14px;
-
   font-weight: 700;
 }
 
@@ -898,7 +911,6 @@
   color: #111111;
 
   font-size: 28px;
-
   font-weight: 700;
 }
 
@@ -999,7 +1011,6 @@
   border: none;
 
   background: #f4f5fa;
-
   color: #111111;
 
   font-family: Cambria, Georgia, serif;
@@ -1138,7 +1149,7 @@
 
   width: min(760px, 100%);
 
-  max-height: 92vh;
+  max-height: calc(100vh - 180px);
 
   overflow-y: auto;
 
@@ -1151,6 +1162,8 @@
   box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
 
   animation: ccqModalIn 0.25s ease;
+
+  margin-bottom: 10px;
 }
 
 
@@ -1179,7 +1192,6 @@
   color: #111111;
 
   font-size: 32px;
-
   font-weight: 700;
 }
 
@@ -1198,6 +1210,7 @@
 
 .ccq-form {
   display: flex;
+
   flex-direction: column;
 
   gap: 20px;
@@ -1213,6 +1226,7 @@
 
 .ccq-field {
   display: flex;
+
   flex-direction: column;
 
   gap: 7px;
@@ -1222,7 +1236,6 @@
   color: #333333;
 
   font-size: 14px;
-
   font-weight: 700;
 }
 
@@ -1239,7 +1252,6 @@
   outline: none;
 
   background: #ffffff;
-
   color: #222222;
 
   font-family: Cambria, Georgia, serif;
@@ -1267,6 +1279,7 @@
 
 .ccq-final-summary {
   display: flex;
+
   justify-content: space-between;
 
   gap: 20px;
@@ -1282,6 +1295,7 @@
 
 .ccq-final-summary div {
   display: flex;
+
   flex-direction: column;
 
   gap: 5px;
@@ -1306,6 +1320,7 @@
 
 .ccq-no-payment {
   display: flex;
+
   flex-direction: column;
 
   gap: 5px;
@@ -1444,6 +1459,8 @@
   box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
 
   animation: ccqModalIn 0.25s ease;
+
+  margin-bottom: 10px;
 }
 
 .ccq-success-icon {
@@ -1490,6 +1507,7 @@
 
 .ccq-order-number {
   display: flex;
+
   flex-direction: column;
 
   gap: 5px;
@@ -1539,7 +1557,7 @@
   .ccq-section {
     /*
       Header is taller on tablet/mobile.
-      Keep the content completely below it.
+      Keep the main page completely below it.
     */
     padding: 165px 5% 65px;
   }
@@ -1557,7 +1575,7 @@
   .ccq-product-modal {
     grid-template-columns: 1fr;
 
-    max-height: 92vh;
+    max-height: calc(100vh - 185px);
 
     overflow-y: auto;
   }
@@ -1571,11 +1589,29 @@
   }
 
   .ccq-cart-drawer {
-    height: 94vh;
+    height: calc(100vh - 180px);
+
+    max-height: calc(100vh - 180px);
   }
 
   .ccq-title {
     font-size: 43px;
+  }
+
+  /*
+    Tablet order dialogs stay below navbar.
+  */
+  .ccq-overlay {
+    align-items: flex-start;
+
+    padding-top: 155px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+  }
+
+  .ccq-checkout {
+    max-height: calc(100vh - 180px);
   }
 }
 
@@ -1588,19 +1624,14 @@
   .ccq-section {
     /*
       MAIN MOBILE HEADER FIX
-      -----------------------------------------
-      The mobile navbar is fixed and taller.
-      This pushes the entire Cleaning Chemicals
-      section below the navbar.
+      Content starts below fixed mobile navbar.
     */
     padding-top: 180px;
+
     padding-right: 4%;
     padding-bottom: 55px;
     padding-left: 4%;
 
-    /*
-      Prevent accidental horizontal overflow.
-    */
     overflow-x: hidden;
   }
 
@@ -1648,9 +1679,9 @@
   }
 
 
-  /* -----------------------------------------
+  /* ---------------------------------------------------------
      CART
-     ----------------------------------------- */
+     --------------------------------------------------------- */
 
   .ccq-cart-button {
     margin-bottom: 20px;
@@ -1661,9 +1692,9 @@
   }
 
 
-  /* -----------------------------------------
+  /* ---------------------------------------------------------
      PRODUCTS
-     ----------------------------------------- */
+     --------------------------------------------------------- */
 
   .ccq-grid {
     grid-template-columns: 1fr;
@@ -1697,17 +1728,31 @@
   }
 
 
-  /* -----------------------------------------
-     MODAL
-     ----------------------------------------- */
+  /* ---------------------------------------------------------
+     ORDER OVERLAY
+     ALWAYS BELOW MOBILE HEADER
+     --------------------------------------------------------- */
 
   .ccq-overlay {
     align-items: flex-start;
+    justify-content: center;
 
-    padding: 15px;
-
+    /*
+      Mobile navbar clearance.
+    */
     padding-top: 155px;
+
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+
+    overflow-y: auto;
   }
+
+
+  /* ---------------------------------------------------------
+     PRODUCT MODAL
+     --------------------------------------------------------- */
 
   .ccq-product-modal {
     width: 100%;
@@ -1715,6 +1760,8 @@
     max-height: calc(100vh - 170px);
 
     border-radius: 16px;
+
+    overflow-y: auto;
   }
 
   .ccq-modal-image-wrap {
@@ -1748,16 +1795,19 @@
   }
 
 
-  /* -----------------------------------------
+  /* ---------------------------------------------------------
      CART DRAWER
-     ----------------------------------------- */
+     --------------------------------------------------------- */
 
   .ccq-cart-drawer {
     width: 100%;
 
-    height: calc(100vh - 30px);
+    /*
+      Keeps drawer completely below navbar.
+    */
+    height: calc(100vh - 170px);
 
-    max-height: calc(100vh - 30px);
+    max-height: calc(100vh - 170px);
 
     border-radius: 16px;
   }
@@ -1794,14 +1844,14 @@
   }
 
 
-  /* -----------------------------------------
+  /* ---------------------------------------------------------
      CHECKOUT
-     ----------------------------------------- */
+     --------------------------------------------------------- */
 
   .ccq-checkout {
     width: 100%;
 
-    max-height: calc(100vh - 30px);
+    max-height: calc(100vh - 170px);
 
     padding: 35px 22px;
 
@@ -1834,9 +1884,9 @@
   }
 
 
-  /* -----------------------------------------
+  /* ---------------------------------------------------------
      SUCCESS
-     ----------------------------------------- */
+     --------------------------------------------------------- */
 
   .ccq-success {
     width: 100%;
@@ -1859,8 +1909,7 @@
 @media (max-width: 380px) {
   .ccq-section {
     /*
-      Extra protection for smaller phones
-      where the header can be taller.
+      Extra protection for smaller phones.
     */
     padding-top: 190px;
 
@@ -1897,8 +1946,29 @@
     font-size: 24px;
   }
 
+  /*
+    Very small mobile header clearance.
+  */
   .ccq-overlay {
-    padding-top: 150px;
+    padding-top: 160px;
+
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+  }
+
+  .ccq-product-modal {
+    max-height: calc(100vh - 175px);
+  }
+
+  .ccq-cart-drawer {
+    height: calc(100vh - 175px);
+
+    max-height: calc(100vh - 175px);
+  }
+
+  .ccq-checkout {
+    max-height: calc(100vh - 175px);
   }
 }
 

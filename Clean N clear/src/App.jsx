@@ -36,6 +36,8 @@ import Product from "./Components/Product/Product";
 // ======================================================
 
 import CleaningChemicals from "./Components/CleaningChemicals/CleaningChemicals";
+import CleaningTools from "./Components/CleaningChemicals/CleaningTools";
+import ProffessionalEquiment from "./Components/CleaningChemicals/ProffessionalEquiment";
 import AdminOrders from "./Components/pages/AdminOrders/AdminOrders";
 
 // ======================================================
@@ -214,14 +216,14 @@ function App() {
           <Route
             path="/products/cleaning-tools"
             element={
-              <Page title="Cleaning Tools" />
+              <CleaningTools />
             }
           />
 
           <Route
             path="/products/professional-cleaning-equipment"
             element={
-              <Page title="Professional Cleaning Equipment" />
+              <ProffessionalEquiment />
             }
           />
 

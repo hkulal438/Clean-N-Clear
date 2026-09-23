@@ -159,7 +159,104 @@ const products = {
     price: 240,
     unit: "Unit",
   },
+  // =========================================================
+// CLEANING TOOLS
+// =========================================================
+
+"aroma-toilet-brush": {
+  id: "aroma-toilet-brush",
+  name: "Aroma Toilet Brush with Stand",
+  category: "Cleaning Tools",
+  price: 120,
+  unit: "Piece",
+},
+
+"jazz-spin-mop-bucket": {
+  id: "jazz-spin-mop-bucket",
+  name: "Jazz Spin Mop Bucket",
+  category: "Cleaning Tools",
+  price: 850,
+  unit: "Set",
+},
+
+"magik-spin-mop-bucket": {
+  id: "magik-spin-mop-bucket",
+  name: "Magik Spin Mop Bucket",
+  category: "Cleaning Tools",
+  price: 750,
+  unit: "Set",
+},
+
+"plunger": {
+  id: "plunger",
+  name: "Plunger",
+  category: "Cleaning Tools",
+  price: 180,
+  unit: "Piece",
+},
+
+"sparkle-microfiber-flat-mop": {
+  id: "sparkle-microfiber-flat-mop",
+  name: "Sparkle Microfiber Flat Mop",
+  category: "Cleaning Tools",
+  price: 350,
+  unit: "Piece",
+},
+
+"wonder-kitchen-wiper": {
+  id: "wonder-kitchen-wiper",
+  name: "Wonder Kitchen Wiper",
+  category: "Cleaning Tools",
+  price: 150,
+  unit: "Piece",
+},
+// =========================================================
+// PROFESSIONAL EQUIPMENT
+// =========================================================
+
+"high-speed-polisher": {
+  name: "High Speed Polisher",
+  category: "Professional Equipment",
+  price: 18500,
+  unit: "Unit",
+},
+
+"mini-ride-on-sweeper-bol": {
+  name: "Mini Ride on Sweeper BOL",
+  category: "Professional Equipment",
+  price: 125000,
+  unit: "Unit",
+},
+
+"mini-scrubber-cable": {
+  name: "Mini Scrubber (Cable)",
+  category: "Professional Equipment",
+  price: 45000,
+  unit: "Unit",
+},
+
+"ride-on-scrubber-dryer-110l": {
+  name: "Ride on Scrubber Dryer 110L",
+  category: "Professional Equipment",
+  price: 285000,
+  unit: "Unit",
+},
+
+"ride-on-sweeper-18cl": {
+  name: "Ride on Sweeper 18CL",
+  category: "Professional Equipment",
+  price: 225000,
+  unit: "Unit",
+},
+
+"steam-vacuum-cleaner": {
+  name: "Steam Vacuum Cleaner",
+  category: "Professional Equipment",
+  price: 65000,
+  unit: "Unit",
+},
 };
+
 
 // ======================================================
 // READ ORDERS
