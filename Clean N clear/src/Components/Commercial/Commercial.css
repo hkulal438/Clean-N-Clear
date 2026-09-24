@@ -1,0 +1,813 @@
+/* =========================================================
+   CLEAN N CLEAR
+   COMMERCIAL CLEANING SOLUTIONS
+   ========================================================= */
+
+.cnc-commercial-page {
+  width: 100%;
+  overflow: hidden;
+  background: #ffffff;
+  color: #111111;
+  font-family: Cambria, Georgia, serif;
+}
+
+.cnc-commercial-page *,
+.cnc-commercial-page *::before,
+.cnc-commercial-page *::after {
+  box-sizing: border-box;
+}
+
+.cnc-commercial-container {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.cnc-commercial-hero {
+  position: relative;
+  min-height: 620px;
+
+  display: flex;
+  align-items: center;
+
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(5, 14, 65, 0.96) 0%,
+      rgba(8, 31, 239, 0.78) 48%,
+      rgba(8, 31, 239, 0.18) 100%
+    ),
+    url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=2000&q=90");
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.cnc-commercial-hero-overlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.04),
+      rgba(0, 0, 0, 0.15)
+    );
+}
+
+.cnc-commercial-hero-content {
+  position: relative;
+  z-index: 2;
+
+  width: min(1180px, calc(100% - 40px));
+
+  margin: 0 auto;
+
+  padding: 100px 0;
+
+  color: #ffffff;
+}
+
+.cnc-commercial-eyebrow {
+  display: inline-block;
+
+  margin-bottom: 20px;
+
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 3px;
+
+  color: #ffffff;
+}
+
+.cnc-commercial-hero h1 {
+  max-width: 780px;
+
+  margin: 0;
+
+  font-size: clamp(46px, 6vw, 82px);
+  line-height: 0.98;
+
+  font-weight: 700;
+
+  letter-spacing: -2px;
+}
+
+.cnc-commercial-hero h2 {
+  max-width: 700px;
+
+  margin: 28px 0 14px;
+
+  font-size: clamp(23px, 3vw, 36px);
+  line-height: 1.15;
+
+  font-weight: 600;
+}
+
+.cnc-commercial-hero p {
+  max-width: 680px;
+
+  margin: 0;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 17px;
+  line-height: 1.7;
+
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* =========================================================
+   HERO BUTTONS
+   ========================================================= */
+
+.cnc-commercial-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 14px;
+
+  margin-top: 34px;
+}
+
+.cnc-commercial-btn {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 52px;
+
+  padding: 0 27px;
+
+  text-decoration: none;
+
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+.cnc-commercial-btn:hover {
+  transform: translateY(-2px);
+}
+
+.cnc-commercial-btn-primary {
+  background: #ffffff;
+  color: #081fef;
+}
+
+.cnc-commercial-btn-primary:hover {
+  background: #081fef;
+  color: #ffffff;
+}
+
+.cnc-commercial-btn-outline {
+  border: 1px solid rgba(255, 255, 255, 0.85);
+
+  color: #ffffff;
+
+  background: transparent;
+}
+
+.cnc-commercial-btn-outline:hover {
+  background: #ffffff;
+  color: #081fef;
+}
+
+/* =========================================================
+   SECTION HEADING
+   ========================================================= */
+
+.cnc-commercial-section-heading {
+  max-width: 700px;
+
+  margin-bottom: 52px;
+}
+
+.cnc-commercial-section-heading > span {
+  display: block;
+
+  margin-bottom: 12px;
+
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 2.5px;
+
+  color: #081fef;
+}
+
+.cnc-commercial-section-heading h2 {
+  margin: 0;
+
+  font-size: clamp(34px, 4vw, 52px);
+
+  line-height: 1.05;
+
+  font-weight: 700;
+
+  letter-spacing: -1px;
+}
+
+.cnc-commercial-section-heading p {
+  margin: 18px 0 0;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 15px;
+  line-height: 1.7;
+
+  color: #626262;
+}
+
+/* =========================================================
+   BUSINESS NEEDS
+   ========================================================= */
+
+.cnc-commercial-needs {
+  padding: 100px 0 105px;
+
+  background: #ffffff;
+}
+
+.cnc-commercial-needs-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 18px;
+}
+
+.cnc-commercial-need-card {
+  position: relative;
+
+  min-height: 290px;
+
+  padding: 30px 26px;
+
+  border: 1px solid #e7e9f1;
+
+  background: #ffffff;
+
+  overflow: hidden;
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.cnc-commercial-need-card:hover {
+  transform: translateY(-5px);
+
+  border-color: #081fef;
+
+  box-shadow:
+    0 14px 35px rgba(8, 31, 239, 0.08);
+}
+
+.cnc-commercial-card-number {
+  position: absolute;
+
+  top: 20px;
+  right: 22px;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  color: #b6b9c4;
+}
+
+.cnc-commercial-card-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 54px;
+  height: 54px;
+
+  margin-bottom: 34px;
+
+  background: #081fef;
+
+  color: #ffffff;
+
+  font-size: 23px;
+}
+
+.cnc-commercial-need-card h3 {
+  margin: 0 0 13px;
+
+  font-size: 23px;
+
+  line-height: 1.15;
+}
+
+.cnc-commercial-need-card p {
+  margin: 0;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+
+  color: #686868;
+}
+
+.cnc-commercial-card-line {
+  display: block;
+
+  width: 42px;
+  height: 2px;
+
+  margin-top: 27px;
+
+  background: #081fef;
+}
+
+/* =========================================================
+   PRODUCT CATEGORIES
+   ========================================================= */
+
+.cnc-commercial-products {
+  padding: 105px 0;
+
+  background: #08133f;
+
+  color: #ffffff;
+}
+
+.cnc-commercial-heading-light > span {
+  color: #91dc00;
+}
+
+.cnc-commercial-heading-light p {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.cnc-commercial-category-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 20px;
+}
+
+.cnc-commercial-category-card {
+  position: relative;
+
+  min-height: 360px;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 30px;
+
+  text-decoration: none;
+
+  color: #ffffff;
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+
+  background: rgba(255, 255, 255, 0.045);
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.cnc-commercial-category-card:hover {
+  transform: translateY(-6px);
+
+  background: #081fef;
+
+  border-color: #081fef;
+}
+
+.cnc-commercial-category-top {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  color: #91dc00;
+}
+
+.cnc-commercial-arrow {
+  font-size: 24px;
+
+  color: #ffffff;
+}
+
+.cnc-commercial-category-content {
+  margin-top: auto;
+
+  padding-top: 70px;
+}
+
+.cnc-commercial-category-content h3 {
+  margin: 0 0 13px;
+
+  font-size: 29px;
+
+  line-height: 1.1;
+}
+
+.cnc-commercial-category-content p {
+  max-width: 330px;
+
+  margin: 0;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.cnc-commercial-category-bottom {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 32px;
+
+  padding-top: 18px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+
+  font-family: Arial, sans-serif;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 0.4px;
+}
+
+.cnc-commercial-category-bottom > span:last-child {
+  font-size: 19px;
+}
+
+/* =========================================================
+   SUITABLE FOR
+   ========================================================= */
+
+.cnc-commercial-sectors {
+  padding: 105px 0;
+
+  background: #f6f7fa;
+}
+
+.cnc-commercial-sector-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 18px;
+}
+
+.cnc-commercial-sector-card {
+  position: relative;
+
+  min-height: 330px;
+
+  overflow: hidden;
+
+  background: #111111;
+}
+
+.cnc-commercial-sector-image {
+  position: absolute;
+
+  inset: 0;
+
+  background: #172044;
+}
+
+.cnc-commercial-sector-image img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  transition:
+    transform 0.6s ease;
+}
+
+.cnc-commercial-sector-card:hover
+.cnc-commercial-sector-image img {
+  transform: scale(1.06);
+}
+
+.cnc-commercial-sector-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 1;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.02) 25%,
+      rgba(0, 0, 0, 0.82) 100%
+    );
+}
+
+.cnc-commercial-sector-content {
+  position: absolute;
+
+  z-index: 2;
+
+  left: 24px;
+  right: 24px;
+  bottom: 23px;
+
+  color: #ffffff;
+}
+
+.cnc-commercial-sector-content span {
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  color: #91dc00;
+}
+
+.cnc-commercial-sector-content h3 {
+  margin: 0;
+
+  font-size: 24px;
+
+  line-height: 1.1;
+}
+
+/* =========================================================
+   FINAL CTA
+   ========================================================= */
+
+.cnc-commercial-cta {
+  padding: 80px 20px;
+
+  background: #081fef;
+}
+
+.cnc-commercial-cta-inner {
+  width: min(1180px, 100%);
+
+  margin: 0 auto;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 50px;
+}
+
+.cnc-commercial-cta-text {
+  color: #ffffff;
+}
+
+.cnc-commercial-cta-text > span {
+  display: block;
+
+  margin-bottom: 13px;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 2.5px;
+
+  color: #91dc00;
+}
+
+.cnc-commercial-cta-text h2 {
+  margin: 0;
+
+  font-size: clamp(35px, 4vw, 56px);
+
+  line-height: 1.05;
+}
+
+.cnc-commercial-cta-text p {
+  max-width: 620px;
+
+  margin: 18px 0 0;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 15px;
+
+  line-height: 1.7;
+
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.cnc-commercial-cta-button {
+  flex-shrink: 0;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 24px;
+
+  min-height: 58px;
+
+  padding: 0 25px;
+
+  background: #ffffff;
+
+  color: #081fef;
+
+  text-decoration: none;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+}
+
+.cnc-commercial-cta-button:hover {
+  transform: translateY(-3px);
+
+  background: #91dc00;
+}
+
+.cnc-commercial-cta-button > span:last-child {
+  font-size: 21px;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+  .cnc-commercial-needs-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cnc-commercial-category-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cnc-commercial-category-card {
+    min-height: 300px;
+  }
+
+  .cnc-commercial-sector-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cnc-commercial-hero {
+    min-height: 560px;
+  }
+
+  .cnc-commercial-cta-inner {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+  .cnc-commercial-container {
+    width: calc(100% - 28px);
+  }
+
+  .cnc-commercial-hero {
+    min-height: 620px;
+
+    background-position: 62% center;
+  }
+
+  .cnc-commercial-hero-content {
+    width: calc(100% - 28px);
+
+    padding: 80px 0;
+  }
+
+  .cnc-commercial-hero h1 {
+    font-size: 45px;
+
+    letter-spacing: -1px;
+  }
+
+  .cnc-commercial-hero h2 {
+    font-size: 24px;
+
+    line-height: 1.2;
+  }
+
+  .cnc-commercial-hero p {
+    font-size: 14px;
+
+    line-height: 1.65;
+  }
+
+  .cnc-commercial-hero-actions {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .cnc-commercial-btn {
+    width: 100%;
+  }
+
+  .cnc-commercial-needs,
+  .cnc-commercial-products,
+  .cnc-commercial-sectors {
+    padding: 70px 0;
+  }
+
+  .cnc-commercial-section-heading {
+    margin-bottom: 35px;
+  }
+
+  .cnc-commercial-section-heading h2 {
+    font-size: 35px;
+  }
+
+  .cnc-commercial-needs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cnc-commercial-need-card {
+    min-height: 250px;
+  }
+
+  .cnc-commercial-category-card {
+    min-height: 330px;
+
+    padding: 25px;
+  }
+
+  .cnc-commercial-sector-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cnc-commercial-sector-card {
+    min-height: 280px;
+  }
+
+  .cnc-commercial-cta {
+    padding: 65px 14px;
+  }
+
+  .cnc-commercial-cta-inner {
+    gap: 30px;
+  }
+
+  .cnc-commercial-cta-text h2 {
+    font-size: 37px;
+  }
+
+  .cnc-commercial-cta-button {
+    width: 100%;
+  }
+}

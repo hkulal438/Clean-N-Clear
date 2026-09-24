@@ -155,7 +155,7 @@ const Footer = () => {
             <p className="contact-address">
               Shop No. 1 &amp; 2, Lower Ground, KRR Road,
               <br />
-              Opp. Sympony Mahendra Arcade,
+              Opp. Symphony Mahendra Arcade,
               <br />
               Near Radha Medical, PVS,
               <br />

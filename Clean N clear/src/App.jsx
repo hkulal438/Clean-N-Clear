@@ -62,6 +62,11 @@ import Office from "./Components/Pagesofindustries/Office";
 import Industrial from "./Components/Pagesofindustries/Industrial";
 import Residential from "./Components/Pagesofindustries/Residential";
 
+
+//Solutions
+
+import Commercial from "./Components/Commercial/Commercial"
+
 // contact
 
 import Contact from "./Components/Contact/Contact";
@@ -266,7 +271,7 @@ function App() {
           <Route
             path="/solutions/commercial"
             element={
-              <Page title="Commercial Solutions" />
+              <Commercial />
             }
           />
 
