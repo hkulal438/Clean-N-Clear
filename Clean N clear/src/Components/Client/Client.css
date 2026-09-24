@@ -1,20 +1,24 @@
-
 /* =========================================================
    CLEAN N CLEAR
    TRUSTED CLIENTS — PREMIUM LOGO SHOWCASE
-========================================================= */
+   ========================================================= */
+
+
+/* =========================================================
+   SECTION
+   ========================================================= */
 
 .client {
   width: 100%;
   box-sizing: border-box;
+
   padding: 70px 30px 80px;
 
-  background:
-    linear-gradient(
-      180deg,
-      #ffffff 0%,
-      #f8fafc 100%
-    );
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #f8fafc 100%
+  );
 
   overflow: hidden;
 }
@@ -22,10 +26,11 @@
 
 /* =========================================================
    CONTAINER
-========================================================= */
+   ========================================================= */
 
 .client__container {
   width: min(1320px, 100%);
+
   margin: 0 auto;
 
   text-align: center;
@@ -34,14 +39,16 @@
 
 /* =========================================================
    SECTION HEADING
-========================================================= */
+   ========================================================= */
 
 .client__heading {
   display: flex;
+
   align-items: center;
   justify-content: center;
 
   gap: 24px;
+
   margin-bottom: 10px;
 }
 
@@ -49,10 +56,12 @@
   margin: 0;
 
   font-family: Cambria, "Times New Roman", serif;
+
   font-size: 38px;
   font-weight: 700;
 
   line-height: 1.2;
+
   letter-spacing: 2px;
 
   color: #164c78;
@@ -65,13 +74,14 @@
   flex-shrink: 0;
 
   background: #d5a63c;
+
   border-radius: 10px;
 }
 
 
 /* =========================================================
    SUBTITLE
-========================================================= */
+   ========================================================= */
 
 .client__subtitle {
   max-width: 700px;
@@ -79,10 +89,12 @@
   margin: 0 auto 48px;
 
   font-family: Cambria, "Times New Roman", serif;
+
   font-size: 18px;
   font-weight: 400;
 
   line-height: 1.6;
+
   letter-spacing: 0.3px;
 
   color: #68737c;
@@ -91,7 +103,7 @@
 
 /* =========================================================
    CLIENT GRID
-========================================================= */
+   ========================================================= */
 
 .client__grid {
   width: 100%;
@@ -109,17 +121,22 @@
 
 /* =========================================================
    CLIENT CARD
-========================================================= */
+   ========================================================= */
 
 .client__card {
   position: relative;
 
   width: 100%;
-  min-height: 215px;
 
-  padding: 25px;
+  /*
+    Give the logos more usable space
+  */
+  min-height: 225px;
+
+  padding: 18px;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
@@ -128,7 +145,8 @@
   background: #ffffff;
 
   border: 1px solid #e1e7ec;
-  border-radius: 18px;
+
+  border-radius: 16px;
 
   box-shadow:
     0 8px 25px rgba(20, 50, 75, 0.06);
@@ -151,8 +169,8 @@
 
 
 /* =========================================================
-   SUBTLE INNER HIGHLIGHT
-========================================================= */
+   INNER BORDER
+   ========================================================= */
 
 .client__card::after {
   content: "";
@@ -163,7 +181,7 @@
 
   border: 1px solid rgba(22, 76, 120, 0.035);
 
-  border-radius: 13px;
+  border-radius: 12px;
 
   pointer-events: none;
 }
@@ -171,7 +189,7 @@
 
 /* =========================================================
    GOLD TOP ACCENT
-========================================================= */
+   ========================================================= */
 
 .client__card::before {
   content: "";
@@ -200,10 +218,10 @@
 
 /* =========================================================
    CARD HOVER
-========================================================= */
+   ========================================================= */
 
 .client__card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-7px);
 
   border-color: rgba(22, 76, 120, 0.20);
 
@@ -214,21 +232,40 @@
 
 /* =========================================================
    LOGO AREA
-========================================================= */
+   ========================================================= */
+
+/*
+   IMPORTANT:
+
+   Instead of forcing every logo to a fixed width,
+   the image is allowed to occupy almost the entire
+   card while preserving its original proportions.
+*/
 
 .client__logo {
   position: relative;
+
   z-index: 2;
 
   display: block;
 
   width: auto;
+
   height: auto;
 
+  /*
+    Use most of the card width
+  */
   max-width: 94%;
-  max-height: 170px;
+
+  /*
+    Use most of the card height
+  */
+  max-height: 185px;
 
   object-fit: contain;
+
+  object-position: center;
 
   filter: none;
 
@@ -239,66 +276,95 @@
 
 /* =========================================================
    LOGO HOVER
-========================================================= */
+   ========================================================= */
 
 .client__card:hover .client__logo {
-  transform: scale(1.08);
+  transform: scale(1.06);
 }
 
 
 /* =========================================================
-   LARGE DESKTOP LOGO SIZES
-========================================================= */
+   INDIVIDUAL LOGO SIZING
+   ========================================================= */
 
+/*
+   These are intentionally larger than your previous
+   values.
+
+   They allow logos like Bright Globe to actually use
+   the available card space.
+*/
+
+
+/* Bright Globe */
 .client__card:nth-child(1) .client__logo {
-  width: 275px;
+  width: 310px;
 }
 
+
+/* Falther Mullar */
 .client__card:nth-child(2) .client__logo {
-  width: 270px;
+  width: 300px;
 }
 
+
+/* Gold */
 .client__card:nth-child(3) .client__logo {
-  width: 270px;
+  width: 300px;
 }
 
+
+/* Indiana */
 .client__card:nth-child(4) .client__logo {
-  width: 275px;
+  width: 310px;
 }
 
+
+/* Paint */
 .client__card:nth-child(5) .client__logo {
-  width: 275px;
+  width: 310px;
 }
 
+
+/* Shree Devi */
 .client__card:nth-child(6) .client__logo {
-  width: 280px;
+  width: 315px;
 }
 
+
+/* ST */
 .client__card:nth-child(7) .client__logo {
-  width: 260px;
+  width: 295px;
 }
 
+
+/* UnifyCX */
 .client__card:nth-child(8) .client__logo {
-  width: 285px;
+  width: 320px;
 }
 
+
+/* Winman */
 .client__card:nth-child(9) .client__logo {
-  width: 275px;
+  width: 310px;
 }
 
 
 /* =========================================================
    LOGO ENTRY ANIMATION
-========================================================= */
+   ========================================================= */
 
 @keyframes clientFadeIn {
+
   from {
     opacity: 0;
+
     transform: translateY(18px);
   }
 
   to {
     opacity: 1;
+
     transform: translateY(0);
   }
 }
@@ -306,7 +372,7 @@
 
 /* =========================================================
    CTA
-========================================================= */
+   ========================================================= */
 
 .client__cta {
   position: relative;
@@ -316,6 +382,7 @@
   padding: 32px 40px;
 
   display: flex;
+
   align-items: center;
   justify-content: space-between;
 
@@ -341,7 +408,7 @@
 
 /* =========================================================
    CTA DECORATION
-========================================================= */
+   ========================================================= */
 
 .client__cta::before {
   content: "";
@@ -368,10 +435,11 @@
 
 /* =========================================================
    CTA CONTENT
-========================================================= */
+   ========================================================= */
 
 .client__cta-content {
   position: relative;
+
   z-index: 1;
 }
 
@@ -396,6 +464,7 @@
   font-family: Cambria, "Times New Roman", serif;
 
   font-size: 15px;
+
   line-height: 1.55;
 
   color: rgba(255, 255, 255, 0.82);
@@ -404,10 +473,11 @@
 
 /* =========================================================
    CTA BUTTON
-========================================================= */
+   ========================================================= */
 
 .client__button {
   position: relative;
+
   z-index: 1;
 
   flex-shrink: 0;
@@ -417,6 +487,7 @@
   padding: 0 28px;
 
   display: inline-flex;
+
   align-items: center;
   justify-content: center;
 
@@ -445,6 +516,7 @@
 
 .client__button span {
   font-size: 21px;
+
   line-height: 1;
 
   transition:
@@ -467,7 +539,7 @@
 
 /* =========================================================
    LARGE TABLET
-========================================================= */
+   ========================================================= */
 
 @media (max-width: 1100px) {
 
@@ -480,23 +552,29 @@
   }
 
   .client__card {
-    min-height: 200px;
-    padding: 20px;
+    min-height: 215px;
+
+    padding: 16px;
   }
 
   .client__logo {
-    max-height: 155px;
+    max-width: 96%;
+
+    max-height: 175px;
   }
 
+  /*
+    Allow every logo to become larger
+  */
   .client__card:nth-child(n) .client__logo {
-    width: 250px;
+    width: 285px;
   }
 }
 
 
 /* =========================================================
    TABLET
-========================================================= */
+   ========================================================= */
 
 @media (max-width: 900px) {
 
@@ -518,6 +596,7 @@
 
   .client__subtitle {
     font-size: 16px;
+
     margin-bottom: 38px;
   }
 
@@ -529,21 +608,24 @@
   }
 
   .client__card {
-    min-height: 195px;
-    padding: 20px;
+    min-height: 205px;
+
+    padding: 14px;
   }
 
   .client__logo {
-    max-width: 95%;
-    max-height: 145px;
+    max-width: 97%;
+
+    max-height: 165px;
   }
 
   .client__card:nth-child(n) .client__logo {
-    width: 245px;
+    width: 275px;
   }
 
   .client__cta {
     margin-top: 42px;
+
     padding: 28px 30px;
   }
 }
@@ -551,7 +633,7 @@
 
 /* =========================================================
    MOBILE
-========================================================= */
+   ========================================================= */
 
 @media (max-width: 700px) {
 
@@ -565,6 +647,7 @@
 
   .client__heading h2 {
     font-size: 25px;
+
     letter-spacing: 1px;
   }
 
@@ -574,11 +657,14 @@
 
   .client__subtitle {
     font-size: 15px;
+
     margin-bottom: 30px;
   }
 
 
-  /* Logo grid */
+  /* -------------------------------------------------------
+     LOGO GRID
+     ------------------------------------------------------- */
 
   .client__grid {
     grid-template-columns:
@@ -588,28 +674,39 @@
   }
 
 
-  /* Larger mobile cards */
+  /* -------------------------------------------------------
+     MOBILE CARD
+     ------------------------------------------------------- */
 
   .client__card {
-    min-height: 165px;
-    padding: 14px;
+    min-height: 175px;
+
+    padding: 10px;
+
     border-radius: 14px;
   }
 
 
-  /* Larger mobile logos */
+  /* -------------------------------------------------------
+     MOBILE LOGO
+     ------------------------------------------------------- */
 
   .client__logo {
-    max-width: 98%;
-    max-height: 125px;
+    width: auto;
+
+    max-width: 100%;
+
+    max-height: 145px;
   }
 
   .client__card:nth-child(n) .client__logo {
-    width: 210px;
+    width: 235px;
   }
 
 
-  /* CTA */
+  /* -------------------------------------------------------
+     CTA
+     ------------------------------------------------------- */
 
   .client__cta {
     margin-top: 35px;
@@ -633,6 +730,7 @@
 
   .client__button {
     width: 100%;
+
     box-sizing: border-box;
   }
 }
@@ -640,7 +738,7 @@
 
 /* =========================================================
    SMALL MOBILE
-========================================================= */
+   ========================================================= */
 
 @media (max-width: 430px) {
 
@@ -654,6 +752,7 @@
 
   .client__heading h2 {
     font-size: 21px;
+
     letter-spacing: 0.5px;
   }
 
@@ -663,34 +762,55 @@
 
   .client__subtitle {
     font-size: 14px;
+
     margin-bottom: 26px;
   }
 
+
+  /* -------------------------------------------------------
+     GRID
+     ------------------------------------------------------- */
 
   .client__grid {
     gap: 11px;
   }
 
 
+  /* -------------------------------------------------------
+     CARD
+     ------------------------------------------------------- */
+
   .client__card {
-    min-height: 145px;
-    padding: 9px;
+    min-height: 155px;
+
+    padding: 7px;
+
     border-radius: 12px;
   }
 
 
+  /* -------------------------------------------------------
+     LOGO
+     ------------------------------------------------------- */
+
   .client__logo {
     max-width: 100%;
-    max-height: 112px;
+
+    max-height: 130px;
   }
 
   .client__card:nth-child(n) .client__logo {
-    width: 190px;
+    width: 210px;
   }
 
 
+  /* -------------------------------------------------------
+     CTA
+     ------------------------------------------------------- */
+
   .client__cta {
     margin-top: 28px;
+
     padding: 22px 16px;
   }
 
@@ -704,6 +824,7 @@
 
   .client__button {
     min-height: 46px;
+
     font-size: 14px;
   }
 }
@@ -711,7 +832,7 @@
 
 /* =========================================================
    VERY SMALL MOBILE
-========================================================= */
+   ========================================================= */
 
 @media (max-width: 360px) {
 
@@ -736,28 +857,32 @@
   }
 
   .client__card {
-    min-height: 130px;
-    padding: 7px;
+    min-height: 140px;
+
+    padding: 6px;
   }
 
   .client__logo {
-    max-height: 100px;
+    max-width: 100%;
+
+    max-height: 118px;
   }
 
   .client__card:nth-child(n) .client__logo {
-    width: 175px;
+    width: 195px;
   }
 }
 
 
 /* =========================================================
    REDUCED MOTION
-========================================================= */
+   ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
 
   .client__card {
     animation: none;
+
     transition: none;
   }
 
