@@ -80,7 +80,7 @@ import Contact from "./Components/Contact/Contact";
 // ======================================================
 
 import "./App.css";
-import ScrollAnimation from "./Components/ScrollAnimation/ScrollAnimation";
+// import ScrollAnimation from "./Components/ScrollAnimation/ScrollAnimation";
 
 
 // ======================================================
@@ -169,7 +169,7 @@ function Page({ title }) {
 function App() {
   return (
     <BrowserRouter>
-              <ScrollAnimation />
+              {/* <ScrollAnimation /> */}
       <Routes>
 
         {/* ==================================================
