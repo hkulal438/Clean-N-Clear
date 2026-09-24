@@ -66,6 +66,10 @@ import Residential from "./Components/Pagesofindustries/Residential";
 //Solutions
 
 import Commercial from "./Components/Commercial/Commercial"
+import House from "./Components/House/House"
+import Institute from "./Components/Institute/Institute"
+import Retail from "./Components/Retail/Retail"
+import Wholesale from "./Components/Wholesale/Wholesale"
 
 // contact
 
@@ -76,6 +80,7 @@ import Contact from "./Components/Contact/Contact";
 // ======================================================
 
 import "./App.css";
+import ScrollAnimation from "./Components/ScrollAnimation/ScrollAnimation";
 
 
 // ======================================================
@@ -164,7 +169,7 @@ function Page({ title }) {
 function App() {
   return (
     <BrowserRouter>
-
+              <ScrollAnimation />
       <Routes>
 
         {/* ==================================================
@@ -213,10 +218,10 @@ function App() {
             element={<CleaningChemicals />}
           />
 
-           <Route
-          path="/admin/orders"
-          element={<AdminOrders />}
-        />
+          <Route
+            path="/admin/orders"
+            element={<AdminOrders />}
+          />
 
 
 
@@ -278,28 +283,28 @@ function App() {
           <Route
             path="/solutions/household"
             element={
-              <Page title="Household Solutions" />
+              <House />
             }
           />
 
           <Route
             path="/solutions/institutional"
             element={
-              <Page title="Institutional Solutions" />
+              <Institute />
             }
           />
 
           <Route
             path="/solutions/retail"
             element={
-              <Page title="Retail Solutions" />
+              <Retail />
             }
           />
 
           <Route
             path="/solutions/wholesale"
             element={
-              <Page title="Wholesale Solutions" />
+              <Wholesale />
             }
           />
 
@@ -364,10 +369,9 @@ function App() {
 
           <Route
             path="/brands"
-            element={
-              <Page title="Brands" />
-            }
+            element={<Supply />}
           />
+
 
 
           {/* ==================================================

@@ -1,0 +1,1206 @@
+/* =========================================================
+   CLEAN N CLEAR
+   INSTITUTIONAL CLEANING PAGE
+   PREMIUM / CLEAN / RESPONSIVE
+   ========================================================= */
+
+
+/* =========================================================
+   ROOT PAGE
+   ========================================================= */
+
+.cnc-institute-page {
+  width: 100%;
+  min-height: 100vh;
+
+  margin: 0;
+  padding: 0;
+
+  font-family: Cambria, Georgia, serif;
+
+  color: #071642;
+  background: #ffffff;
+
+  overflow-x: hidden;
+}
+
+
+/* =========================================================
+   COMMON CONTAINER
+   ========================================================= */
+
+.cnc-institute-container {
+  width: min(1200px, calc(100% - 48px));
+
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.cnc-institute-hero {
+  position: relative;
+
+  width: 100%;
+  min-height: 570px;
+
+  margin-top: 132px;
+
+  display: flex;
+  align-items: center;
+
+  background:
+    url("https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1800&q=90")
+    center center / cover no-repeat;
+
+  overflow: visible;
+}
+
+
+/* HERO DARK OVERLAY */
+
+.cnc-institute-hero-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 1;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(4, 18, 55, 0.94) 0%,
+      rgba(4, 18, 55, 0.82) 42%,
+      rgba(4, 18, 55, 0.48) 72%,
+      rgba(4, 18, 55, 0.25) 100%
+    );
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   HERO CONTENT
+   ========================================================= */
+
+.cnc-institute-hero-content {
+  position: relative;
+
+  z-index: 5;
+
+  width: min(1200px, calc(100% - 48px));
+
+  margin: 0 auto;
+
+  padding: 70px 0 65px;
+
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   HERO EYEBROW
+   ========================================================= */
+
+.cnc-institute-eyebrow {
+  display: inline-block;
+
+  margin: 0 0 16px;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  letter-spacing: 2.2px;
+  line-height: 1.2;
+
+  color: #91dc00;
+}
+
+
+/* =========================================================
+   HERO MAIN HEADING
+   ========================================================= */
+
+.cnc-institute-hero-content h1 {
+  margin: 0 0 16px;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: clamp(38px, 4.5vw, 68px);
+
+  font-weight: 700;
+
+  line-height: 1.05;
+
+  letter-spacing: -0.5px;
+
+  color: #ffffff;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   HERO SECONDARY HEADING
+   ========================================================= */
+
+.cnc-institute-hero-content h2 {
+  margin: 0 0 17px;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: clamp(22px, 2.2vw, 32px);
+
+  font-weight: 600;
+
+  line-height: 1.2;
+
+  color: #ffffff;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   HERO DESCRIPTION
+   ========================================================= */
+
+.cnc-institute-hero-content p {
+  width: 100%;
+  max-width: 680px;
+
+  margin: 0 0 28px;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 17px;
+
+  font-weight: 400;
+
+  line-height: 1.6;
+
+  color: rgba(255, 255, 255, 0.91);
+}
+
+
+/* =========================================================
+   HERO CTA WRAPPER
+   ========================================================= */
+
+.cnc-institute-hero-actions {
+  position: relative;
+
+  z-index: 20;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  width: 100%;
+
+  margin-top: 8px;
+}
+
+
+/* =========================================================
+   HERO BUTTON BASE
+   ========================================================= */
+
+.cnc-institute-btn {
+  position: relative;
+
+  z-index: 25;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-width: 170px;
+
+  min-height: 50px;
+
+  padding: 0 24px;
+
+  border: 2px solid transparent;
+
+  outline: none;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  line-height: 1;
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+
+/* =========================================================
+   PRIMARY BUTTON
+   ========================================================= */
+
+.cnc-institute-btn-primary {
+  background: #91dc00;
+
+  color: #071642;
+
+  border-color: #91dc00;
+}
+
+
+.cnc-institute-btn-primary:hover {
+  background: #ffffff;
+
+  color: #071642;
+
+  border-color: #ffffff;
+
+  transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   OUTLINE BUTTON
+   ========================================================= */
+
+.cnc-institute-btn-outline {
+  background: transparent;
+
+  color: #ffffff;
+
+  border-color: #ffffff;
+}
+
+
+.cnc-institute-btn-outline:hover {
+  background: #ffffff;
+
+  color: #071642;
+
+  border-color: #ffffff;
+
+  transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   CLEANING AREAS SECTION
+   ========================================================= */
+
+.cnc-institute-areas {
+  width: 100%;
+
+  padding: 68px 0 72px;
+
+  background: #ffffff;
+}
+
+
+/* =========================================================
+   SECTION HEADING
+   ========================================================= */
+
+.cnc-institute-section-heading {
+  width: 100%;
+
+  margin-bottom: 32px;
+
+  text-align: left;
+}
+
+
+/* SMALL LABEL */
+
+.cnc-institute-section-heading > span {
+  display: block;
+
+  margin-bottom: 9px;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  letter-spacing: 2px;
+
+  color: #081fef;
+}
+
+
+/* SECTION HEADING */
+
+.cnc-institute-section-heading h2 {
+  margin: 0 0 12px;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: clamp(30px, 3vw, 43px);
+
+  font-weight: 700;
+
+  line-height: 1.15;
+
+  letter-spacing: -0.3px;
+
+  color: #071642;
+
+  white-space: nowrap;
+}
+
+
+/* SECTION DESCRIPTION */
+
+.cnc-institute-section-heading p {
+  max-width: 760px;
+
+  margin: 0;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 16px;
+
+  line-height: 1.6;
+
+  color: #5b6475;
+}
+
+
+/* =========================================================
+   CLEANING AREA GRID
+   ========================================================= */
+
+.cnc-institute-area-grid {
+  display: grid;
+
+  grid-template-columns: repeat(12, 1fr);
+
+  gap: 18px;
+
+  width: 100%;
+}
+
+
+/* =========================================================
+   CLEANING AREA CARD
+   ========================================================= */
+
+.cnc-institute-area-card {
+  position: relative;
+
+  grid-column: span 4;
+
+  min-height: 320px;
+
+  overflow: hidden;
+
+  background: #071642;
+
+  border: 1px solid rgba(7, 22, 66, 0.08);
+
+  border-radius: 2px;
+}
+
+
+/* FIRST TWO CARDS */
+
+.cnc-institute-area-card:nth-child(1),
+.cnc-institute-area-card:nth-child(2) {
+  grid-column: span 6;
+
+  min-height: 350px;
+}
+
+
+/* =========================================================
+   AREA IMAGE
+   ========================================================= */
+
+.cnc-institute-area-image {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+}
+
+
+.cnc-institute-area-image img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  object-position: center;
+
+  transition: transform 0.45s ease;
+}
+
+
+/* IMAGE HOVER */
+
+.cnc-institute-area-card:hover
+.cnc-institute-area-image img {
+  transform: scale(1.045);
+}
+
+
+/* =========================================================
+   AREA CARD OVERLAY
+   ========================================================= */
+
+.cnc-institute-area-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 1;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(7, 22, 66, 0.05) 15%,
+      rgba(7, 22, 66, 0.28) 42%,
+      rgba(7, 22, 66, 0.94) 100%
+    );
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   AREA CARD CONTENT
+   ========================================================= */
+
+.cnc-institute-area-content {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  z-index: 3;
+
+  padding: 25px 26px 24px;
+
+  color: #ffffff;
+}
+
+
+/* NUMBER */
+
+.cnc-institute-area-content > span {
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  letter-spacing: 2px;
+
+  color: #91dc00;
+}
+
+
+/* CARD TITLE */
+
+.cnc-institute-area-content h3 {
+  margin: 0 0 8px;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 22px;
+
+  font-weight: 700;
+
+  line-height: 1.15;
+
+  color: #ffffff;
+
+  white-space: nowrap;
+}
+
+
+/* CARD DESCRIPTION */
+
+.cnc-institute-area-content p {
+  max-width: 480px;
+
+  margin: 0;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+
+  color: rgba(255, 255, 255, 0.88);
+}
+
+
+/* =========================================================
+   CTA SECTION
+   ========================================================= */
+
+.cnc-institute-cta {
+  width: 100%;
+
+  padding: 0;
+
+  background: #081fef;
+}
+
+
+/* CTA INNER */
+
+.cnc-institute-cta-inner {
+  width: min(1200px, calc(100% - 48px));
+
+  min-height: 230px;
+
+  margin: 0 auto;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 40px;
+
+  padding: 42px 0;
+}
+
+
+/* =========================================================
+   CTA TEXT
+   ========================================================= */
+
+.cnc-institute-cta-text {
+  flex: 1;
+
+  min-width: 0;
+}
+
+
+/* CTA LABEL */
+
+.cnc-institute-cta-text > span {
+  display: block;
+
+  margin-bottom: 9px;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  letter-spacing: 2px;
+
+  color: #91dc00;
+}
+
+
+/* CTA HEADING */
+
+.cnc-institute-cta-text h2 {
+  margin: 0 0 10px;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: clamp(28px, 3vw, 42px);
+
+  font-weight: 700;
+
+  line-height: 1.15;
+
+  color: #ffffff;
+
+  white-space: nowrap;
+}
+
+
+/* CTA DESCRIPTION */
+
+.cnc-institute-cta-text p {
+  max-width: 650px;
+
+  margin: 0;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 16px;
+
+  line-height: 1.55;
+
+  color: rgba(255, 255, 255, 0.9);
+}
+
+
+/* =========================================================
+   CTA ACTION
+   ========================================================= */
+
+.cnc-institute-cta-action {
+  flex-shrink: 0;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 18px;
+
+  min-width: 205px;
+
+  min-height: 56px;
+
+  padding: 0 22px;
+
+  background: #91dc00;
+
+  color: #071642;
+
+  border: 2px solid #91dc00;
+
+  text-decoration: none;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+
+.cnc-institute-cta-action:hover {
+  background: #ffffff;
+
+  color: #071642;
+
+  border-color: #ffffff;
+
+  transform: translateY(-2px);
+}
+
+
+/* CTA ARROW */
+
+.cnc-institute-cta-action strong {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 21px;
+
+  font-weight: 400;
+
+  line-height: 1;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+  .cnc-institute-hero {
+    min-height: 540px;
+
+    margin-top: 132px;
+  }
+
+
+  .cnc-institute-hero-content {
+    width: calc(100% - 48px);
+
+    padding: 65px 0;
+  }
+
+
+  .cnc-institute-hero-content h1 {
+    font-size: clamp(34px, 5vw, 52px);
+  }
+
+
+  .cnc-institute-hero-content h2 {
+    font-size: 25px;
+  }
+
+
+  .cnc-institute-section-heading h2 {
+    font-size: 34px;
+  }
+
+
+  .cnc-institute-area-card,
+  .cnc-institute-area-card:nth-child(1),
+  .cnc-institute-area-card:nth-child(2) {
+    grid-column: span 6;
+
+    min-height: 320px;
+  }
+
+
+  .cnc-institute-cta-inner {
+    gap: 25px;
+  }
+
+
+  .cnc-institute-cta-text h2 {
+    font-size: 32px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  /* -------------------------------------------------------
+     PAGE
+     ------------------------------------------------------- */
+
+  .cnc-institute-page {
+    width: 100%;
+  }
+
+
+  /* -------------------------------------------------------
+     CONTAINER
+     ------------------------------------------------------- */
+
+  .cnc-institute-container {
+    width: calc(100% - 32px);
+  }
+
+
+  /* -------------------------------------------------------
+     HERO
+     ------------------------------------------------------- */
+
+  .cnc-institute-hero {
+    min-height: 650px;
+
+    margin-top: 150px;
+
+    align-items: center;
+
+    background-position: center center;
+  }
+
+
+  /* HERO OVERLAY */
+
+  .cnc-institute-hero-overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(4, 18, 55, 0.76) 0%,
+        rgba(4, 18, 55, 0.87) 60%,
+        rgba(4, 18, 55, 0.96) 100%
+      );
+  }
+
+
+  /* HERO CONTENT */
+
+  .cnc-institute-hero-content {
+    width: calc(100% - 32px);
+
+    padding: 58px 0 55px;
+  }
+
+
+  /* EYEBROW */
+
+  .cnc-institute-eyebrow {
+    margin-bottom: 13px;
+
+    font-size: 12px;
+
+    letter-spacing: 1.7px;
+  }
+
+
+  /* MAIN HEADING */
+
+  .cnc-institute-hero-content h1 {
+    margin-bottom: 14px;
+
+    font-size: 38px;
+
+    line-height: 1.08;
+
+    white-space: normal;
+  }
+
+
+  /* SECOND HEADING */
+
+  .cnc-institute-hero-content h2 {
+    margin-bottom: 14px;
+
+    font-size: 23px;
+
+    line-height: 1.25;
+
+    white-space: normal;
+  }
+
+
+  /* DESCRIPTION */
+
+  .cnc-institute-hero-content p {
+    max-width: 100%;
+
+    margin-bottom: 26px;
+
+    font-size: 15.5px;
+
+    line-height: 1.55;
+  }
+
+
+  /* -------------------------------------------------------
+     HERO CTA
+     ------------------------------------------------------- */
+
+  .cnc-institute-hero-actions {
+    position: relative;
+
+    z-index: 20;
+
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 11px;
+
+    margin-top: 8px;
+  }
+
+
+  .cnc-institute-btn {
+    position: relative;
+
+    z-index: 25;
+
+    width: 100%;
+
+    min-width: 0;
+
+    min-height: 50px;
+
+    padding: 0 20px;
+
+    font-size: 15px;
+  }
+
+
+  /* -------------------------------------------------------
+     CLEANING AREAS
+     ------------------------------------------------------- */
+
+  .cnc-institute-areas {
+    padding: 52px 0 55px;
+  }
+
+
+  /* SECTION HEADING */
+
+  .cnc-institute-section-heading {
+    margin-bottom: 25px;
+  }
+
+
+  .cnc-institute-section-heading > span {
+    margin-bottom: 7px;
+
+    font-size: 12px;
+
+    letter-spacing: 1.7px;
+  }
+
+
+  .cnc-institute-section-heading h2 {
+    margin-bottom: 10px;
+
+    font-size: 30px;
+
+    line-height: 1.15;
+
+    white-space: normal;
+  }
+
+
+  .cnc-institute-section-heading p {
+    font-size: 15px;
+
+    line-height: 1.55;
+  }
+
+
+  /* -------------------------------------------------------
+     AREA GRID
+     ------------------------------------------------------- */
+
+  .cnc-institute-area-grid {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 14px;
+  }
+
+
+  /* ALL CARDS */
+
+  .cnc-institute-area-card,
+  .cnc-institute-area-card:nth-child(1),
+  .cnc-institute-area-card:nth-child(2) {
+    grid-column: span 1;
+
+    min-height: 285px;
+  }
+
+
+  /* IMAGE */
+
+  .cnc-institute-area-image img {
+    object-position: center;
+  }
+
+
+  /* CARD CONTENT */
+
+  .cnc-institute-area-content {
+    padding: 22px 20px 20px;
+  }
+
+
+  .cnc-institute-area-content > span {
+    margin-bottom: 7px;
+
+    font-size: 12px;
+
+    letter-spacing: 1.7px;
+  }
+
+
+  .cnc-institute-area-content h3 {
+    margin-bottom: 7px;
+
+    font-size: 20px;
+
+    white-space: normal;
+  }
+
+
+  .cnc-institute-area-content p {
+    font-size: 14px;
+
+    line-height: 1.45;
+  }
+
+
+  /* -------------------------------------------------------
+     CTA
+     ------------------------------------------------------- */
+
+  .cnc-institute-cta-inner {
+    width: calc(100% - 32px);
+
+    min-height: auto;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 25px;
+
+    padding: 42px 0 44px;
+  }
+
+
+  .cnc-institute-cta-text {
+    width: 100%;
+  }
+
+
+  .cnc-institute-cta-text > span {
+    margin-bottom: 8px;
+
+    font-size: 12px;
+
+    letter-spacing: 1.7px;
+  }
+
+
+  .cnc-institute-cta-text h2 {
+    margin-bottom: 10px;
+
+    font-size: 29px;
+
+    line-height: 1.15;
+
+    white-space: normal;
+  }
+
+
+  .cnc-institute-cta-text p {
+    font-size: 15px;
+
+    line-height: 1.55;
+  }
+
+
+  /* CTA BUTTON */
+
+  .cnc-institute-cta-action {
+    width: 100%;
+
+    min-width: 0;
+
+    min-height: 52px;
+
+    padding: 0 20px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+  .cnc-institute-hero {
+    min-height: 670px;
+
+    margin-top: 150px;
+  }
+
+
+  .cnc-institute-hero-content {
+    width: calc(100% - 28px);
+
+    padding: 52px 0;
+  }
+
+
+  .cnc-institute-hero-content h1 {
+    font-size: 34px;
+  }
+
+
+  .cnc-institute-hero-content h2 {
+    font-size: 21px;
+  }
+
+
+  .cnc-institute-hero-content p {
+    font-size: 15px;
+  }
+
+
+  .cnc-institute-container {
+    width: calc(100% - 28px);
+  }
+
+
+  .cnc-institute-section-heading h2 {
+    font-size: 27px;
+  }
+
+
+  .cnc-institute-area-card,
+  .cnc-institute-area-card:nth-child(1),
+  .cnc-institute-area-card:nth-child(2) {
+    min-height: 270px;
+  }
+
+
+  .cnc-institute-cta-inner {
+    width: calc(100% - 28px);
+  }
+
+
+  .cnc-institute-cta-text h2 {
+    font-size: 27px;
+  }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY / TOUCH
+   ========================================================= */
+
+.cnc-institute-btn:focus-visible,
+.cnc-institute-cta-action:focus-visible {
+  outline: 3px solid #91dc00;
+
+  outline-offset: 3px;
+}
+
+
+/* =========================================================
+   REDUCE MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .cnc-institute-area-image img,
+  .cnc-institute-btn,
+  .cnc-institute-cta-action {
+    transition: none;
+  }
+}

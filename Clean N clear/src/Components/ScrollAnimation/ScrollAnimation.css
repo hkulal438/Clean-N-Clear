@@ -1,0 +1,83 @@
+/* =========================================================
+   CLEAN N CLEAR
+   GLOBAL SCROLL ANIMATION
+   ========================================================= */
+
+
+/* =========================================
+   AOS BASE
+   ========================================= */
+
+[data-aos] {
+  pointer-events: auto;
+}
+
+
+/* =========================================
+   SMOOTH FADE UP
+   ========================================= */
+
+[data-aos="fade-up"] {
+  transform: translate3d(0, 28px, 0);
+}
+
+[data-aos="fade-up"].aos-animate {
+  transform: translate3d(0, 0, 0);
+}
+
+
+/* =========================================
+   SMOOTH FADE RIGHT
+   ========================================= */
+
+[data-aos="fade-right"] {
+  transform: translate3d(-28px, 0, 0);
+}
+
+[data-aos="fade-right"].aos-animate {
+  transform: translate3d(0, 0, 0);
+}
+
+
+/* =========================================
+   IMAGE TRANSITION
+   ========================================= */
+
+main img[data-aos] {
+  will-change: transform, opacity;
+}
+
+
+/* =========================================
+   CARD TRANSITION
+   ========================================= */
+
+main article[data-aos],
+main [class*="card"][data-aos] {
+  will-change: transform, opacity;
+}
+
+
+/* =========================================
+   PREVENT ANIMATION FROM AFFECTING
+   HERO POSITIONING
+   ========================================= */
+
+main section:first-child {
+  overflow: visible;
+}
+
+
+/* =========================================
+   REDUCED MOTION
+   ========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  [data-aos],
+  [data-aos].aos-animate {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

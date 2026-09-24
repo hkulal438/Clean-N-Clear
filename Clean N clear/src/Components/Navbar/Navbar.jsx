@@ -120,10 +120,10 @@ const NAV_LINKS = [
     ],
   },
 
-  {
-    label: "Brands",
-    href: "/brands",
-  },
+ {
+  label: "Brands",
+  href: "/brands",
+},
 
   {
     label: "Contact",

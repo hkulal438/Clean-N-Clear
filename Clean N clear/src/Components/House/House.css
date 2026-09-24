@@ -1,0 +1,1360 @@
+/* =========================================================
+   CLEAN N CLEAR
+   HOUSEHOLD PAGE
+   PREMIUM / COMPACT / CAMBRIA
+   ========================================================= */
+
+
+/* =========================================================
+   PAGE BASE
+   ========================================================= */
+
+.cnc-house-page {
+  --cnc-house-blue: #081fef;
+  --cnc-house-dark-blue: #071642;
+  --cnc-house-navy: #061337;
+  --cnc-house-lime: #91dc00;
+
+  --cnc-house-text: #171717;
+  --cnc-house-muted: #666666;
+  --cnc-house-light: #f5f6f9;
+  --cnc-house-border: #e2e4e9;
+  --cnc-house-white: #ffffff;
+
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+
+  margin: 0;
+  padding: 0;
+
+  background: #ffffff;
+  color: var(--cnc-house-text);
+
+  font-family: Cambria, Georgia, serif;
+}
+
+
+/* =========================================================
+   BOX SIZING
+   ========================================================= */
+
+.cnc-house-page *,
+.cnc-house-page *::before,
+.cnc-house-page *::after {
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   TYPOGRAPHY
+   ========================================================= */
+
+.cnc-house-page h1,
+.cnc-house-page h2,
+.cnc-house-page h3,
+.cnc-house-page h4,
+.cnc-house-page p,
+.cnc-house-page span,
+.cnc-house-page a,
+.cnc-house-page button {
+  font-family: Cambria, Georgia, serif;
+}
+
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
+.cnc-house-container {
+  width: min(1160px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.cnc-house-hero {
+  position: relative;
+
+  width: 100%;
+  min-height: 500px;
+
+  margin-top: 132px;
+
+  display: flex;
+  align-items: center;
+
+  overflow: hidden;
+
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(4, 13, 52, 0.96) 0%,
+      rgba(6, 25, 95, 0.87) 40%,
+      rgba(8, 31, 239, 0.48) 72%,
+      rgba(8, 31, 239, 0.10) 100%
+    ),
+    url("https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=2000&q=90");
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+
+/* =========================================================
+   OPTIONAL HERO OVERLAY
+   ========================================================= */
+
+.cnc-house-hero-overlay {
+  position: absolute;
+  inset: 0;
+
+  z-index: 1;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(4, 13, 52, 0.08) 0%,
+      rgba(4, 13, 52, 0.18) 100%
+    );
+}
+
+
+/* =========================================================
+   HERO CONTENT
+   ========================================================= */
+
+.cnc-house-hero-content {
+  position: relative;
+  z-index: 2;
+
+  width: min(1160px, calc(100% - 48px));
+
+  margin: 0 auto;
+
+  padding: 62px 0 58px;
+
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   HERO EYEBROW
+   ========================================================= */
+
+.cnc-house-eyebrow {
+  position: relative;
+
+  display: inline-block;
+
+  margin: 0 0 14px;
+  padding-left: 35px;
+
+  font-size: 12px !important;
+  line-height: 1.2;
+
+  font-weight: 700;
+
+  letter-spacing: 2px;
+
+  color: #ffffff;
+}
+
+
+.cnc-house-eyebrow::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 50%;
+
+  width: 24px;
+  height: 2px;
+
+  transform: translateY(-50%);
+
+  background: var(--cnc-house-lime);
+}
+
+
+/* =========================================================
+   HERO H1
+   ========================================================= */
+
+.cnc-house-hero h1 {
+  max-width: 720px;
+
+  margin: 0;
+  padding: 0;
+
+  font-family: Cambria, Georgia, serif !important;
+
+  font-size: clamp(42px, 5vw, 68px) !important;
+
+  line-height: 0.98 !important;
+
+  font-weight: 700;
+
+  letter-spacing: -1.5px;
+
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   HERO H2
+   ========================================================= */
+
+.cnc-house-hero h2 {
+  max-width: 590px;
+
+  margin: 20px 0 10px;
+  padding: 0;
+
+  font-family: Cambria, Georgia, serif !important;
+
+  font-size: clamp(20px, 2.2vw, 28px) !important;
+
+  line-height: 1.2 !important;
+
+  font-weight: 600;
+
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   HERO DESCRIPTION
+   ========================================================= */
+
+.cnc-house-hero p {
+  max-width: 590px;
+
+  margin: 0;
+  padding: 0;
+
+  font-family: Cambria, Georgia, serif !important;
+
+  font-size: 15px !important;
+
+  line-height: 1.55 !important;
+
+  color: rgba(255, 255, 255, 0.82);
+}
+
+
+/* =========================================================
+   HERO ACTIONS
+   ========================================================= */
+
+.cnc-house-hero-actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-top: 25px;
+}
+
+
+/* =========================================================
+   HERO BUTTON
+   ========================================================= */
+
+.cnc-house-btn {
+  min-height: 45px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 22px;
+
+  border: 1px solid transparent;
+
+  font-family: Cambria, Georgia, serif !important;
+
+  font-size: 14px !important;
+
+  font-weight: 700;
+
+  line-height: 1;
+
+  text-decoration: none;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+
+.cnc-house-btn:hover {
+  transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   PRIMARY BUTTON
+   ========================================================= */
+
+.cnc-house-btn-primary {
+  background: #ffffff;
+
+  color: var(--cnc-house-blue);
+}
+
+
+.cnc-house-btn-primary:hover {
+  background: var(--cnc-house-lime);
+
+  color: var(--cnc-house-dark-blue);
+}
+
+
+/* =========================================================
+   OUTLINE BUTTON
+   ========================================================= */
+
+.cnc-house-btn-outline {
+  border-color: rgba(255, 255, 255, 0.55);
+
+  background: rgba(255, 255, 255, 0.04);
+
+  color: #ffffff;
+}
+
+
+.cnc-house-btn-outline:hover {
+  border-color: #ffffff;
+
+  background: #ffffff;
+
+  color: var(--cnc-house-blue);
+}
+
+
+/* =========================================================
+   COMMON SECTION HEADING
+   ========================================================= */
+
+.cnc-house-section-heading {
+  max-width: 650px;
+
+  margin-bottom: 32px;
+}
+
+
+.cnc-house-section-heading > span {
+  position: relative;
+
+  display: inline-block;
+
+  margin-bottom: 9px;
+
+  padding-left: 30px;
+
+  font-family: Cambria, Georgia, serif !important;
+
+  font-size: 11px !important;
+
+  font-weight: 700;
+
+  letter-spacing: 1.8px;
+
+  color: var(--cnc-house-blue);
+}
+
+
+.cnc-house-section-heading > span::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 50%;
+
+  width: 21px;
+  height: 2px;
+
+  transform: translateY(-50%);
+
+  background: var(--cnc-house-lime);
+}
+
+
+.cnc-house-section-heading h2 {
+  margin: 0;
+  padding: 0;
+
+  font-family: Cambria, Georgia, serif !important;
+
+  font-size: clamp(30px, 3.5vw, 44px) !important;
+
+  line-height: 1.08 !important;
+
+  font-weight: 700;
+
+  letter-spacing: -0.7px;
+
+  color: var(--cnc-house-text);
+}
+
+
+.cnc-house-section-heading p {
+  max-width: 580px;
+
+  margin: 10px 0 0;
+
+  font-family: Cambria, Georgia, serif !important;
+
+  font-size: 14px !important;
+
+  line-height: 1.55 !important;
+
+  color: var(--cnc-house-muted);
+}
+
+
+/* =========================================================
+   HOME AREAS SECTION
+   ========================================================= */
+
+.cnc-house-areas {
+  padding: 62px 0 66px;
+
+  background: #ffffff;
+}
+
+
+/* =========================================================
+   HOME AREA GRID
+   ========================================================= */
+
+.cnc-house-area-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 13px;
+}
+
+
+/* =========================================================
+   HOME AREA CARD
+   ========================================================= */
+
+.cnc-house-area-card {
+  position: relative;
+
+  min-height: 250px;
+
+  overflow: hidden;
+
+  background: #0b1438;
+}
+
+
+/* =========================================================
+   AREA IMAGE
+   ========================================================= */
+
+.cnc-house-area-image {
+  position: absolute;
+
+  inset: 0;
+}
+
+
+.cnc-house-area-image img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  transition: transform 0.5s ease;
+}
+
+
+.cnc-house-area-card:hover
+.cnc-house-area-image img {
+  transform: scale(1.05);
+}
+
+
+/* =========================================================
+   AREA OVERLAY
+   ========================================================= */
+
+.cnc-house-area-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(4, 10, 35, 0.02) 10%,
+      rgba(4, 10, 35, 0.88) 100%
+    );
+}
+
+
+/* =========================================================
+   AREA CONTENT
+   ========================================================= */
+
+.cnc-house-area-content {
+  position: absolute;
+
+  z-index: 2;
+
+  left: 19px;
+  right: 19px;
+  bottom: 19px;
+
+  color: #ffffff;
+}
+
+
+.cnc-house-area-content > span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  font-size: 10px !important;
+
+  font-weight: 700;
+
+  letter-spacing: 1.4px;
+
+  color: var(--cnc-house-lime);
+}
+
+
+.cnc-house-area-content h3 {
+  margin: 0;
+
+  font-family: Cambria, Georgia, serif !important;
+
+  font-size: 22px !important;
+
+  line-height: 1.1 !important;
+
+  font-weight: 700;
+
+  color: #ffffff;
+}
+
+
+.cnc-house-area-content p {
+  max-width: 260px;
+
+  margin: 6px 0 0;
+
+  font-family: Cambria, Georgia, serif !important;
+
+  font-size: 12px !important;
+
+  line-height: 1.45 !important;
+
+  color: rgba(255, 255, 255, 0.76);
+}
+
+
+/* =========================================================
+   HOUSEHOLD RANGE SECTION
+   ========================================================= */
+
+.cnc-house-range {
+  padding: 65px 0 68px;
+
+  background: var(--cnc-house-navy);
+
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   RANGE HEADING
+   ========================================================= */
+
+.cnc-house-range .cnc-house-section-heading > span {
+  color: var(--cnc-house-lime);
+}
+
+
+.cnc-house-range .cnc-house-section-heading h2 {
+  color: #ffffff;
+}
+
+
+.cnc-house-range .cnc-house-section-heading p {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+
+/* =========================================================
+   RANGE LIST
+   ========================================================= */
+
+.cnc-house-range-list {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 10px;
+}
+
+
+/* =========================================================
+   RANGE ROW
+   ========================================================= */
+
+.cnc-house-range-row {
+  position: relative;
+
+  min-height: 175px;
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 20px;
+
+  padding: 23px;
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+
+  background: rgba(255, 255, 255, 0.04);
+
+  color: #ffffff;
+
+  text-decoration: none;
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+
+.cnc-house-range-row:hover {
+  transform: translateY(-3px);
+
+  border-color: var(--cnc-house-blue);
+
+  background: var(--cnc-house-blue);
+}
+
+
+/* =========================================================
+   RANGE NUMBER
+   ========================================================= */
+
+.cnc-house-range-number {
+  flex-shrink: 0;
+
+  font-size: 11px !important;
+
+  font-weight: 700;
+
+  letter-spacing: 1px;
+
+  color: var(--cnc-house-lime);
+}
+
+
+/* =========================================================
+   RANGE CONTENT
+   ========================================================= */
+
+.cnc-house-range-content {
+  flex: 1;
+
+  padding-right: 22px;
+}
+
+
+.cnc-house-range-content h3 {
+  margin: 0 0 8px;
+
+  font-family: Cambria, Georgia, serif !important;
+
+  font-size: 22px !important;
+
+  line-height: 1.15 !important;
+
+  font-weight: 700;
+
+  color: #ffffff;
+}
+
+
+.cnc-house-range-content p {
+  max-width: 310px;
+
+  margin: 0;
+
+  font-family: Cambria, Georgia, serif !important;
+
+  font-size: 13px !important;
+
+  line-height: 1.5 !important;
+
+  color: rgba(255, 255, 255, 0.68);
+}
+
+
+/* =========================================================
+   RANGE ARROW
+   ========================================================= */
+
+.cnc-house-range-arrow {
+  flex-shrink: 0;
+
+  font-size: 22px !important;
+
+  line-height: 1;
+
+  color: #ffffff;
+
+  transition: transform 0.25s ease;
+}
+
+
+.cnc-house-range-row:hover
+.cnc-house-range-arrow {
+  transform: translate(3px, -3px);
+}
+
+
+/* =========================================================
+   PRODUCT SECTION
+   ========================================================= */
+
+.cnc-house-products {
+  padding: 64px 0 68px;
+
+  background: #f5f6f9;
+}
+
+
+/* =========================================================
+   PRODUCT GRID
+   ========================================================= */
+
+.cnc-house-product-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 13px;
+}
+
+
+/* =========================================================
+   PRODUCT CARD
+   ========================================================= */
+
+.cnc-house-product-card {
+  position: relative;
+
+  overflow: hidden;
+
+  background: #ffffff;
+
+  border: 1px solid var(--cnc-house-border);
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+.cnc-house-product-card:hover {
+  transform: translateY(-3px);
+
+  border-color: rgba(8, 31, 239, 0.30);
+
+  box-shadow: 0 10px 25px rgba(8, 31, 239, 0.07);
+}
+
+
+/* =========================================================
+   PRODUCT IMAGE
+   ========================================================= */
+
+.cnc-house-product-image {
+  position: relative;
+
+  width: 100%;
+  height: 220px;
+
+  overflow: hidden;
+
+  background: #f7f7f7;
+}
+
+
+.cnc-house-product-image img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: contain;
+
+  padding: 18px;
+
+  transition: transform 0.4s ease;
+}
+
+
+.cnc-house-product-card:hover
+.cnc-house-product-image img {
+  transform: scale(1.04);
+}
+
+
+/* =========================================================
+   PRODUCT CONTENT
+   ========================================================= */
+
+.cnc-house-product-content {
+  padding: 19px 20px 20px;
+}
+
+
+.cnc-house-product-content h3 {
+  margin: 0 0 7px;
+
+  font-family: Cambria, Georgia, serif !important;
+
+  font-size: 20px !important;
+
+  line-height: 1.15 !important;
+
+  font-weight: 700;
+
+  color: #171717;
+}
+
+
+.cnc-house-product-content p {
+  min-height: 40px;
+
+  margin: 0;
+
+  font-family: Cambria, Georgia, serif !important;
+
+  font-size: 12.5px !important;
+
+  line-height: 1.5 !important;
+
+  color: var(--cnc-house-muted);
+}
+
+
+/* =========================================================
+   PRODUCT LINK
+   ========================================================= */
+
+.cnc-house-product-link {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-top: 16px;
+
+  padding-top: 12px;
+
+  border-top: 1px solid var(--cnc-house-border);
+
+  color: var(--cnc-house-blue);
+
+  font-family: Cambria, Georgia, serif !important;
+
+  font-size: 12px !important;
+
+  font-weight: 700;
+
+  text-decoration: none;
+}
+
+
+.cnc-house-product-link span {
+  font-size: 17px !important;
+
+  transition: transform 0.25s ease;
+}
+
+
+.cnc-house-product-card:hover
+.cnc-house-product-link span {
+  transform: translateX(4px);
+}
+
+
+/* =========================================================
+   FINAL CTA
+   ========================================================= */
+
+.cnc-house-cta {
+  padding: 49px 24px;
+
+  background: var(--cnc-house-blue);
+}
+
+
+.cnc-house-cta-inner {
+  width: min(1160px, 100%);
+
+  margin: 0 auto;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 35px;
+}
+
+
+/* =========================================================
+   CTA TEXT
+   ========================================================= */
+
+.cnc-house-cta-text {
+  color: #ffffff;
+}
+
+
+.cnc-house-cta-text > span {
+  display: block;
+
+  margin-bottom: 7px;
+
+  font-size: 10px !important;
+
+  font-weight: 700;
+
+  letter-spacing: 1.8px;
+
+  color: var(--cnc-house-lime);
+}
+
+
+.cnc-house-cta-text h2 {
+  max-width: 650px;
+
+  margin: 0;
+
+  font-family: Cambria, Georgia, serif !important;
+
+  font-size: clamp(29px, 3.3vw, 42px) !important;
+
+  line-height: 1.08 !important;
+
+  font-weight: 700;
+
+  letter-spacing: -0.5px;
+
+  color: #ffffff;
+}
+
+
+.cnc-house-cta-text p {
+  max-width: 560px;
+
+  margin: 10px 0 0;
+
+  font-family: Cambria, Georgia, serif !important;
+
+  font-size: 13px !important;
+
+  line-height: 1.5 !important;
+
+  color: rgba(255, 255, 255, 0.76);
+}
+
+
+/* =========================================================
+   CTA ACTION
+   ========================================================= */
+
+.cnc-house-cta-action {
+  flex-shrink: 0;
+
+  min-height: 47px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 25px;
+
+  padding: 0 20px;
+
+  background: #ffffff;
+
+  color: var(--cnc-house-blue);
+
+  text-decoration: none;
+
+  font-family: Cambria, Georgia, serif !important;
+
+  font-size: 13px !important;
+
+  font-weight: 700;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+
+.cnc-house-cta-action:hover {
+  transform: translateY(-2px);
+
+  background: var(--cnc-house-lime);
+
+  color: var(--cnc-house-dark-blue);
+}
+
+
+.cnc-house-cta-action strong {
+  font-size: 18px !important;
+
+  font-weight: 700;
+
+  line-height: 1;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1050px) {
+
+  .cnc-house-area-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cnc-house-range-list {
+    grid-template-columns: 1fr;
+  }
+
+  .cnc-house-product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  /* -------------------------------------------------------
+     HERO
+     ------------------------------------------------------- */
+
+  .cnc-house-hero {
+    margin-top: 150px;
+
+    min-height: 530px;
+
+    background-position: 65% center;
+  }
+
+
+  .cnc-house-container {
+    width: calc(100% - 28px);
+  }
+
+
+  .cnc-house-hero-content {
+    width: calc(100% - 28px);
+
+    padding: 55px 0 50px;
+  }
+
+
+  .cnc-house-eyebrow {
+    margin-bottom: 12px;
+
+    padding-left: 29px;
+
+    font-size: 10px !important;
+
+    letter-spacing: 1.6px;
+  }
+
+
+  .cnc-house-eyebrow::before {
+    width: 21px;
+  }
+
+
+  .cnc-house-hero h1 {
+    max-width: 500px;
+
+    font-size: 39px !important;
+
+    line-height: 1 !important;
+
+    letter-spacing: -0.8px;
+  }
+
+
+  .cnc-house-hero h2 {
+    max-width: 480px;
+
+    margin-top: 16px;
+
+    font-size: 20px !important;
+
+    line-height: 1.2 !important;
+  }
+
+
+  .cnc-house-hero p {
+    max-width: 470px;
+
+    font-size: 13px !important;
+
+    line-height: 1.5 !important;
+  }
+
+
+  .cnc-house-hero-actions {
+    align-items: stretch;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    margin-top: 21px;
+  }
+
+
+  .cnc-house-btn {
+    width: 100%;
+
+    min-height: 44px;
+  }
+
+
+  /* -------------------------------------------------------
+     SECTIONS
+     ------------------------------------------------------- */
+
+  .cnc-house-areas,
+  .cnc-house-range,
+  .cnc-house-products {
+    padding: 50px 0;
+  }
+
+
+  .cnc-house-section-heading {
+    margin-bottom: 25px;
+  }
+
+
+  .cnc-house-section-heading h2 {
+    font-size: 30px !important;
+
+    line-height: 1.08 !important;
+  }
+
+
+  .cnc-house-section-heading p {
+    font-size: 13px !important;
+  }
+
+
+  /* -------------------------------------------------------
+     HOME AREAS
+     ------------------------------------------------------- */
+
+  .cnc-house-area-grid {
+    grid-template-columns: 1fr;
+
+    gap: 9px;
+  }
+
+
+  .cnc-house-area-card {
+    min-height: 215px;
+  }
+
+
+  .cnc-house-area-content {
+    left: 17px;
+    right: 17px;
+    bottom: 17px;
+  }
+
+
+  .cnc-house-area-content h3 {
+    font-size: 20px !important;
+  }
+
+
+  /* -------------------------------------------------------
+     HOUSEHOLD RANGE
+     ------------------------------------------------------- */
+
+  .cnc-house-range-list {
+    grid-template-columns: 1fr;
+
+    gap: 9px;
+  }
+
+
+  .cnc-house-range-row {
+    min-height: 150px;
+
+    gap: 15px;
+
+    padding: 20px;
+  }
+
+
+  .cnc-house-range-content {
+    padding-right: 5px;
+  }
+
+
+  .cnc-house-range-content h3 {
+    font-size: 20px !important;
+  }
+
+
+  .cnc-house-range-content p {
+    font-size: 12px !important;
+  }
+
+
+  .cnc-house-range-arrow {
+    font-size: 20px !important;
+  }
+
+
+  /* -------------------------------------------------------
+     PRODUCTS
+     ------------------------------------------------------- */
+
+  .cnc-house-product-grid {
+    grid-template-columns: 1fr;
+
+    gap: 9px;
+  }
+
+
+  .cnc-house-product-image {
+    height: 215px;
+  }
+
+
+  .cnc-house-product-content {
+    padding: 18px;
+  }
+
+
+  .cnc-house-product-content h3 {
+    font-size: 19px !important;
+  }
+
+
+  /* -------------------------------------------------------
+     CTA
+     ------------------------------------------------------- */
+
+  .cnc-house-cta {
+    padding: 43px 14px;
+  }
+
+
+  .cnc-house-cta-inner {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 22px;
+  }
+
+
+  .cnc-house-cta-text h2 {
+    font-size: 30px !important;
+  }
+
+
+  .cnc-house-cta-text p {
+    font-size: 12.5px !important;
+  }
+
+
+  .cnc-house-cta-action {
+    width: 100%;
+  }
+}
+
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+  .cnc-house-hero {
+    margin-top: 155px;
+  }
+
+
+  .cnc-house-hero h1 {
+    font-size: 35px !important;
+  }
+
+
+  .cnc-house-hero h2 {
+    font-size: 18px !important;
+  }
+
+
+  .cnc-house-section-heading h2 {
+    font-size: 28px !important;
+  }
+
+
+  .cnc-house-product-image {
+    height: 200px;
+  }
+
+
+  .cnc-house-range-row {
+    padding: 17px;
+  }
+}
