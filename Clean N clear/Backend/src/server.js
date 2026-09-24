@@ -255,6 +255,145 @@ const products = {
   price: 65000,
   unit: "Unit",
 },
+/* =========================================================
+   COMMERCIAL SUPPLIES
+   ========================================================= */
+
+"furniture-shine-maintainer-5l-x4": {
+  name: "Furniture Shine Maintainer 5L X 4",
+  category: "Commercial Supplies",
+  price: 2400,
+  unit: "Pack",
+},
+
+"gemini-no-dust-broom": {
+  name: "GEMINI NO DUST BROOM",
+  category: "Commercial Supplies",
+  price: 450,
+  unit: "Unit",
+},
+
+"hard-surface-cleaner-1l-x4": {
+  name: "Hard Surface Cleaner 1L X 4",
+  category: "Commercial Supplies",
+  price: 1100,
+  unit: "Pack",
+},
+
+"hrt-dispenser-sensor-based": {
+  name: "HRT Dispenser Sensor Based",
+  category: "Commercial Supplies",
+  price: 3500,
+  unit: "Unit",
+},
+
+"jazz-spin-mop-bucket": {
+  name: "JAZZ SPIN MOP BUCKET",
+  category: "Commercial Supplies",
+  price: 1250,
+  unit: "Unit",
+},
+
+"vacuum-sweeper": {
+  name: "Vacuum Sweeper",
+  category: "Commercial Supplies",
+  price: 18500,
+  unit: "Unit",
+},
+
+
+/* =========================================================
+   HOUSEHOLD CLEANING
+   ========================================================= */
+
+"household-cleaner-product": {
+  name: "Cleaner Product",
+  category: "Household Cleaning",
+  price: 350,
+  unit: "Unit",
+},
+
+"household-cleaning-acid-5ltr": {
+  name: "Cleaning Acid 5Ltr",
+  category: "Household Cleaning",
+  price: 650,
+  unit: "5 Litre",
+},
+
+"household-floor-cleaner": {
+  name: "Floor Cleaner",
+  category: "Household Cleaning",
+  price: 450,
+  unit: "Unit",
+},
+
+"push-sweeper-s4-twin": {
+  name: "Push Sweeper S 4 Twin",
+  category: "Household Cleaning",
+  price: 18500,
+  unit: "Unit",
+},
+
+"spray-extraction-cleaner-se4001": {
+  name: "Spray Extraction Cleaner SE 4001",
+  category: "Household Cleaning",
+  price: 28500,
+  unit: "Unit",
+},
+
+"household-toilet-cleaner-5ltr": {
+  name: "Toilet Cleaner 5Ltr",
+  category: "Household Cleaning",
+  price: 600,
+  unit: "5 Litre",
+},
+
+
+/* =========================================================
+   HYGIENE SUPPLIES
+   ========================================================= */
+
+"liquid-perfume-5l-x4": {
+  name: "Liquid Perfume 5L X 4",
+  category: "Hygiene Supplies",
+  price: 2800,
+  unit: "Pack",
+},
+
+"mediclean-foaming-soap-500ml-x4": {
+  name: "Mediclean Foaming Soap 500ml X 4",
+  category: "Hygiene Supplies",
+  price: 850,
+  unit: "Pack",
+},
+
+"pressurepro-machine-protector-advance-rm110": {
+  name: "PressurePro Machine Protector Advance 1 RM 110",
+  category: "Hygiene Supplies",
+  price: 1450,
+  unit: "1 Litre",
+},
+
+"pressurepro-machine-protector-rm110": {
+  name: "PressurePro Machine Protector RM 110",
+  category: "Hygiene Supplies",
+  price: 1250,
+  unit: "1 Litre",
+},
+
+"reva-hand-rub-plus-5l": {
+  name: "Reva Hand Rub Plus 5 Litre",
+  category: "Hygiene Supplies",
+  price: 1100,
+  unit: "5 Litre",
+},
+
+"reva-hand-sanitizer": {
+  name: "Reva Hand Sanitizer",
+  category: "Hygiene Supplies",
+  price: 450,
+  unit: "Unit",
+},
 };
 
 
