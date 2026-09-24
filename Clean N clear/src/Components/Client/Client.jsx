@@ -1,8 +1,8 @@
 import "./Client.css";
 
-import brightLogo from "../../images/bright.jpg";
+import brightLogo from "../../images/bright.png";
 import faltherMullarLogo from "../../images/Falther mullar.png";
-import goldLogo from "../../images/gold.jpg";
+import goldLogo from "../../images/gold.png";
 import indianaLogo from "../../images/indiana.png";
 import paintLogo from "../../images/paint.png";
 import shreeDeviLogo from "../../images/shree devi.jpg";
