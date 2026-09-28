@@ -4,6 +4,10 @@
    Navbar-safe spacing
    ========================================================= */
 
+   :root {
+  color-scheme: light;
+}
+
 .cnc-about-section,
 .cnc-about-section *,
 .cnc-about-section *::before,
