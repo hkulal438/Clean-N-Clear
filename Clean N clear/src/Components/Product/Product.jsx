@@ -1,4 +1,5 @@
-
+import React from "react";
+import { Link } from "react-router-dom";
 import "./Product.css";
 
 import catChemicals from "../../images/cat-chemicals.jpg";
@@ -28,7 +29,7 @@ const PRODUCT_CATEGORIES = [
     number: "03",
     title: "Cleaning Equipment",
     cta: "View Equipment",
-    href: "/products/equipment",
+    href: "/products/professional-cleaning-equipment",
     image: catEquipment,
   },
   {
@@ -36,7 +37,7 @@ const PRODUCT_CATEGORIES = [
     number: "04",
     title: "Hygiene Supplies",
     cta: "View Category",
-    href: "/products/hygiene",
+    href: "/products/hygiene-supplies",
     image: catHygiene,
   },
 ];
@@ -76,9 +77,9 @@ function Product() {
 
         <div className="cnc-product-section__grid">
           {PRODUCT_CATEGORIES.map((category) => (
-            <a
+            <Link
               key={category.id}
-              href={category.href}
+              to={category.href}
               className="cnc-product-card"
               aria-label={`${category.title} — ${category.cta}`}
             >
@@ -128,14 +129,12 @@ function Product() {
                   </span>
                 </span>
               </span>
-            </a>
+            </Link>
           ))}
         </div>
-
       </div>
     </section>
   );
 }
 
 export default Product;
-

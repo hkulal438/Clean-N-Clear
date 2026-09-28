@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import "../CleaningChemicals/CleaningChemicals.css";
+import "./CleaningChemicals.css";
 
 import {
   getOrderCart,
@@ -104,7 +104,9 @@ const CleaningTools = () => {
   // CUSTOMER
   // ====================================================
 
-  const [customer, setCustomer] = useState(emptyCustomer);
+  const [customer, setCustomer] = useState({
+    ...emptyCustomer,
+  });
 
   // ====================================================
   // ORDER STATES
@@ -121,7 +123,7 @@ const CleaningTools = () => {
   const [orderedQuantities, setOrderedQuantities] = useState({});
 
   // ====================================================
-  // SYNC SHARED ORDER CART
+  // SYNC SHARED CART
   // ====================================================
 
   useEffect(() => {
@@ -266,7 +268,8 @@ const CleaningTools = () => {
           };
         })
         .filter(
-          (item) => Number(item.quantity || 0) > 0
+          (item) =>
+            Number(item.quantity || 0) > 0
         )
     );
   };
@@ -398,7 +401,7 @@ const CleaningTools = () => {
     }
 
     // ----------------------------------------------
-    // START SUBMIT
+    // SUBMIT
     // ----------------------------------------------
 
     setSubmitting(true);
@@ -464,16 +467,14 @@ const CleaningTools = () => {
 
       setSuccessOrder(data.order || data);
 
-      // Clear shared cart
       setCart([]);
 
-      // Clear customer form
-      setCustomer({ ...emptyCustomer });
+      setCustomer({
+        ...emptyCustomer,
+      });
 
-      // Close order modal
       setShowOrder(false);
 
-      // Clear error
       setErrorMessage("");
 
       // --------------------------------------------
@@ -546,130 +547,133 @@ const CleaningTools = () => {
   // ====================================================
 
   return (
-    <main className="ccq-page">
+    <main className="ccq-section">
 
       {/* =================================================
-          PAGE HEADER
+          HEADER
       ================================================= */}
 
-      <section className="ccq-page-header">
-        <div className="ccq-page-header-inner">
-          <span className="ccq-eyebrow">
-            CLEAN N CLEAR
-          </span>
+      <header className="ccq-header">
 
-          <h1>Cleaning Tools</h1>
+        <span className="ccq-label">
+          CLEAN N CLEAR
+        </span>
 
-          <p>
-            Reliable cleaning tools designed
-            for household, commercial and
-            institutional cleaning
-            requirements.
-          </p>
-        </div>
-      </section>
+        <h1 className="ccq-title">
+          Cleaning Tools &amp;{" "}
+          <span>Accessories</span>
+        </h1>
+
+        <p className="ccq-intro">
+          Reliable cleaning tools designed for
+          household, commercial and institutional
+          cleaning requirements.
+        </p>
+
+      </header>
 
       {/* =================================================
-          PRODUCT SECTION
+          CART BUTTON
       ================================================= */}
 
-      <section className="ccq-products-section">
-        <div className="ccq-products-container">
+      {cartCount > 0 && (
+        <button
+          type="button"
+          className="ccq-cart-button"
+          onClick={() => {
+            setErrorMessage("");
+            setShowOrder(true);
+          }}
+        >
+          <span>My Order</span>
 
-          <div className="ccq-section-heading">
-            <div>
-              <span className="ccq-section-label">
-                OUR PRODUCTS
-              </span>
+          <strong>{cartCount}</strong>
+        </button>
+      )}
 
-              <h2>
-                Cleaning Tools &amp; Accessories
-              </h2>
-            </div>
+      {/* =================================================
+          PRODUCT GRID
+      ================================================= */}
 
-            {cartCount > 0 && (
+      <div className="ccq-grid">
+
+        {products.map((product) => {
+          const ordered = Number(
+            orderedQuantities[product.id] || 0
+          );
+
+          return (
+            <article
+              className="ccq-card"
+              key={product.id}
+            >
+
+              {/* PRODUCT IMAGE */}
+
               <button
                 type="button"
-                className="ccq-order-top-button"
-                onClick={() => {
-                  setErrorMessage("");
-                  setShowOrder(true);
-                }}
+                className="ccq-image-button"
+                onClick={() =>
+                  setShowProduct(product)
+                }
+                aria-label={`View ${product.name}`}
               >
-                My Order
-                <span>{cartCount}</span>
+                <img
+                  className="ccq-product-image"
+                  src={product.image}
+                  alt={product.name}
+                />
               </button>
-            )}
-          </div>
 
-          {/* =================================================
-              PRODUCT GRID
-          ================================================= */}
+              {/* PRODUCT CONTENT */}
 
-          <div className="ccq-product-grid">
-            {products.map((product) => {
-              const ordered = Number(
-                orderedQuantities[product.id] || 0
-              );
+              <div className="ccq-card-content">
 
-              return (
-                <article
-                  className="ccq-product-card"
-                  key={product.id}
-                >
-                  {/* IMAGE */}
+                <span className="ccq-category">
+                  Cleaning Tools
+                </span>
 
-                  <button
-                    type="button"
-                    className="ccq-product-image-button"
-                    onClick={() =>
-                      setShowProduct(product)
-                    }
-                    aria-label={`View ${product.name}`}
-                  >
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                    />
-                  </button>
+                <h2 className="ccq-product-name">
+                  {product.name}
+                </h2>
 
-                  {/* CONTENT */}
+                <div className="ccq-price">
+                  {formatPrice(product.price)}
 
-                  <div className="ccq-product-content">
-                    <h3>{product.name}</h3>
+                  <span>
+                    {" "}
+                    / {product.unit}
+                  </span>
+                </div>
 
-                    <div className="ccq-product-price">
-                      <strong>
-                        {formatPrice(product.price)}
-                      </strong>
+                {ordered > 0 && (
+                  <div className="ccq-product-ordered">
+                    <span>
+                      Ordered
+                    </span>
 
-                      <span>
-                        / {product.unit}
-                      </span>
-                    </div>
-
-                    {ordered > 0 && (
-                      <div className="ccq-ordered-count">
-                        Ordered: {ordered}
-                      </div>
-                    )}
-
-                    <button
-                      type="button"
-                      className="ccq-add-button"
-                      onClick={() =>
-                        addToCart(product)
-                      }
-                    >
-                      Add to Order
-                    </button>
+                    <strong>
+                      {ordered}
+                    </strong>
                   </div>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+                )}
+
+                <button
+                  type="button"
+                  className="ccq-add-button"
+                  onClick={() =>
+                    addToCart(product)
+                  }
+                >
+                  Add to Order
+                </button>
+
+              </div>
+            </article>
+          );
+        })}
+
+      </div>
 
       {/* =================================================
           PRODUCT MODAL
@@ -680,61 +684,83 @@ const CleaningTools = () => {
           className="ccq-overlay"
           onClick={() => setShowProduct(null)}
         >
+
           <div
-            className="ccq-dialog ccq-product-dialog"
+            className="ccq-product-modal"
             onClick={(event) =>
               event.stopPropagation()
             }
           >
+
+            {/* CLOSE */}
+
             <button
               type="button"
-              className="ccq-close-button"
+              className="ccq-close"
               onClick={() =>
                 setShowProduct(null)
               }
-              aria-label="Close"
+              aria-label="Close product"
             >
               ×
             </button>
 
-            <div className="ccq-product-dialog-image">
+            {/* IMAGE */}
+
+            <div className="ccq-modal-image-wrap">
               <img
+                className="ccq-modal-image"
                 src={showProduct.image}
                 alt={showProduct.name}
               />
             </div>
 
-            <div className="ccq-product-dialog-content">
-              <span className="ccq-dialog-label">
+            {/* CONTENT */}
+
+            <div className="ccq-modal-content">
+
+              <span className="ccq-label">
                 CLEAN N CLEAR
               </span>
 
-              <h2>{showProduct.name}</h2>
+              <h2>
+                {showProduct.name}
+              </h2>
 
-              <div className="ccq-dialog-price">
-                {formatPrice(showProduct.price)}
+              <div className="ccq-modal-price">
+                {formatPrice(
+                  showProduct.price
+                )}
+              </div>
 
+              <div className="ccq-modal-unit">
                 <span>
-                  / {showProduct.unit}
+                  Unit
                 </span>
+
+                <strong>
+                  {showProduct.unit}
+                </strong>
               </div>
 
               <button
                 type="button"
-                className="ccq-primary-button"
+                className="ccq-add-large"
                 onClick={() =>
                   addToCart(showProduct)
                 }
               >
                 Add to Order
               </button>
+
             </div>
+
           </div>
         </div>
       )}
 
       {/* =================================================
-          ORDER MODAL
+          ORDER / CHECKOUT MODAL
       ================================================= */}
 
       {showOrder && (
@@ -742,53 +768,70 @@ const CleaningTools = () => {
           className="ccq-overlay"
           onClick={() => setShowOrder(false)}
         >
+
           <div
-            className="ccq-dialog ccq-order-dialog"
+            className="ccq-checkout"
             onClick={(event) =>
               event.stopPropagation()
             }
           >
+
+            {/* CLOSE */}
+
             <button
               type="button"
-              className="ccq-close-button"
+              className="ccq-close"
               onClick={() =>
                 setShowOrder(false)
               }
-              aria-label="Close"
+              aria-label="Close order"
             >
               ×
             </button>
 
-            {/* HEADER */}
+            {/* =================================================
+                CHECKOUT HEADING
+            ================================================= */}
 
-            <div className="ccq-order-header">
-              <span className="ccq-dialog-label">
+            <div className="ccq-checkout-heading">
+
+              <span>
                 CLEAN N CLEAR
               </span>
 
-              <h2>My Order</h2>
+              <h2>
+                My Order
+              </h2>
 
               <p>
-                Review your selected
-                products and submit
-                your enquiry.
+                Review your selected products
+                and submit your enquiry.
               </p>
+
             </div>
 
-            {/* CART */}
+            {/* =================================================
+                CART ITEMS
+            ================================================= */}
 
-            <div className="ccq-cart-list">
+            <div className="ccq-cart-items">
+
               {cart.length === 0 ? (
-                <div className="ccq-empty-cart">
+                <div className="ccq-empty">
+
+                  <div className="ccq-empty-icon">
+                    🛒
+                  </div>
+
                   <h3>
                     Your order is empty
                   </h3>
 
                   <p>
-                    Add products from
-                    the catalogue to
-                    continue.
+                    Add products from the
+                    catalogue to continue.
                   </p>
+
                 </div>
               ) : (
                 cart.map((item) => (
@@ -796,23 +839,32 @@ const CleaningTools = () => {
                     className="ccq-cart-item"
                     key={item.id}
                   >
-                    <div className="ccq-cart-image">
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                      />
-                    </div>
 
-                    <div className="ccq-cart-info">
-                      <h3>{item.name}</h3>
+                    {/* IMAGE */}
+
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                    />
+
+                    {/* INFO */}
+
+                    <div className="ccq-cart-item-info">
+
+                      <h3>
+                        {item.name}
+                      </h3>
 
                       <span>
                         {formatPrice(item.price)}
-                        {" / "}
-                        {item.unit}
                       </span>
 
-                      <div className="ccq-quantity-row">
+                      <small>
+                        / {item.unit}
+                      </small>
+
+                      <div className="ccq-quantity">
+
                         <button
                           type="button"
                           onClick={() =>
@@ -842,66 +894,69 @@ const CleaningTools = () => {
                         >
                           +
                         </button>
+
                       </div>
+
                     </div>
 
-                    <div className="ccq-cart-item-right">
-                      <strong>
-                        {formatPrice(
-                          Number(item.price) *
-                            Number(item.quantity)
-                        )}
-                      </strong>
+                    {/* REMOVE */}
 
-                      <button
-                        type="button"
-                        className="ccq-remove-button"
-                        onClick={() =>
-                          removeFromCart(
-                            item.id
-                          )
-                        }
-                      >
-                        Remove
-                      </button>
-                    </div>
+                    <button
+                      type="button"
+                      className="ccq-remove"
+                      onClick={() =>
+                        removeFromCart(item.id)
+                      }
+                    >
+                      Remove
+                    </button>
+
                   </div>
                 ))
               )}
+
             </div>
 
-            {/* TOTAL + FORM */}
+            {/* =================================================
+                TOTAL
+            ================================================= */}
 
             {cart.length > 0 && (
               <>
-                <div className="ccq-cart-total">
-                  <span>
-                    Estimated Total
-                  </span>
+                <div className="ccq-final-summary">
 
-                  <strong>
-                    {formatPrice(cartTotal)}
-                  </strong>
+                  <div>
+                    <span>
+                      Items
+                    </span>
+
+                    <strong>
+                      {cartCount}
+                    </strong>
+                  </div>
+
+                  <div>
+                    <span>
+                      Estimated Total
+                    </span>
+
+                    <strong>
+                      {formatPrice(cartTotal)}
+                    </strong>
+                  </div>
+
                 </div>
 
-                {/* CUSTOMER FORM */}
+                {/* =================================================
+                    CUSTOMER FORM
+                ================================================= */}
 
                 <form
-                  className="ccq-order-form"
+                  className="ccq-form"
                   onSubmit={handleSubmitOrder}
                 >
-                  <div className="ccq-form-title">
-                    <h3>
-                      Customer Details
-                    </h3>
 
-                    <p>
-                      Please provide
-                      your details for
-                      our team to
-                      contact you.
-                    </p>
-                  </div>
+                  {/* FORM GRID */}
 
                   <div className="ccq-form-grid">
 
@@ -985,7 +1040,7 @@ const CleaningTools = () => {
 
                     {/* LOCATION */}
 
-                    <div className="ccq-field ccq-field-full">
+                    <div className="ccq-field">
                       <label htmlFor="tools-location">
                         Location *
                       </label>
@@ -1005,7 +1060,7 @@ const CleaningTools = () => {
 
                     {/* NOTES */}
 
-                    <div className="ccq-field ccq-field-full">
+                    <div className="ccq-field">
                       <label htmlFor="tools-notes">
                         Additional Requirements
                       </label>
@@ -1021,39 +1076,63 @@ const CleaningTools = () => {
                         rows="4"
                       />
                     </div>
+
                   </div>
 
                   {/* ERROR */}
 
                   {errorMessage && (
-                    <div className="ccq-error-message">
+                    <div className="ccq-error">
                       {errorMessage}
                     </div>
                   )}
 
-                  {/* NO PAYMENT MESSAGE */}
+                  {/* NO PAYMENT */}
 
-                  <div className="ccq-payment-note">
-                    No online payment is required.
-                    Final pricing, availability
-                    and delivery details will be
-                    confirmed by our team.
+                  <div className="ccq-no-payment">
+
+                    <strong>
+                      No online payment required
+                    </strong>
+
+                    <span>
+                      Final pricing, availability
+                      and delivery details will be
+                      confirmed by our team.
+                    </span>
+
                   </div>
 
-                  {/* SUBMIT */}
+                  {/* FORM ACTIONS */}
 
-                  <button
-                    type="submit"
-                    className="ccq-submit-button"
-                    disabled={submitting}
-                  >
-                    {submitting
-                      ? "Submitting..."
-                      : "Submit Order"}
-                  </button>
+                  <div className="ccq-form-actions">
+
+                    <button
+                      type="button"
+                      className="ccq-back-button"
+                      onClick={() =>
+                        setShowOrder(false)
+                      }
+                    >
+                      Continue Shopping
+                    </button>
+
+                    <button
+                      type="submit"
+                      className="ccq-submit"
+                      disabled={submitting}
+                    >
+                      {submitting
+                        ? "Submitting..."
+                        : "Submit Order"}
+                    </button>
+
+                  </div>
+
                 </form>
               </>
             )}
+
           </div>
         </div>
       )}
@@ -1064,50 +1143,57 @@ const CleaningTools = () => {
 
       {successOrder && (
         <div className="ccq-overlay">
-          <div className="ccq-dialog ccq-success-dialog">
+
+          <div className="ccq-success">
 
             <div className="ccq-success-icon">
               ✓
             </div>
 
-            <span className="ccq-dialog-label">
+            <span>
               ORDER RECEIVED
             </span>
 
-            <h2>Thank You!</h2>
+            <h2>
+              Thank You!
+            </h2>
 
             <p>
-              Your order has been
-              submitted successfully.
-              Our team will review
-              your requirement and
-              contact you shortly.
+              Your order has been submitted
+              successfully. Our team will review
+              your requirement and contact you
+              shortly.
             </p>
 
             {(successOrder?.id ||
               successOrder?.orderId) && (
               <div className="ccq-order-number">
-                <span>
+
+                <small>
                   Order Number
-                </span>
+                </small>
 
                 <strong>
                   {successOrder.id ||
                     successOrder.orderId}
                 </strong>
+
               </div>
             )}
 
             <button
               type="button"
-              className="ccq-primary-button"
+              className="ccq-success-button"
               onClick={closeSuccess}
             >
               Continue Shopping
             </button>
+
           </div>
+
         </div>
       )}
+
     </main>
   );
 };
