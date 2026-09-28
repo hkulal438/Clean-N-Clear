@@ -10,41 +10,46 @@ import {
   FaLinkedinIn,
 } from "react-icons/fa6";
 
+import logo from "../../images/CLEANNCLEAR_LOGO-01.png";
+
 const Footer = () => {
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-
-    const email = e.target.email.value;
-
-    if (!email) return;
-
-    alert("Thank you for subscribing!");
-    e.target.reset();
-  };
-
   return (
-    <footer className="footer">
+    <footer className="cnc-footer">
 
-      <div className="footer-overlay"></div>
+      {/* Background Overlay */}
+      <div className="cnc-footer-overlay"></div>
 
-      <div className="footer-container">
+      <div className="cnc-footer-container">
 
         {/* =====================================================
-            TOP FOOTER
+            MAIN FOOTER
         ===================================================== */}
 
-        <div className="footer-grid">
+        <div className="cnc-footer-grid">
 
-          {/* BRAND */}
-          <div className="footer-column footer-brand">
+          {/* =================================================
+              BRAND
+          ================================================= */}
 
-            <h3>CLEAN N CLEAR</h3>
+          <div className="cnc-footer-column cnc-footer-brand">
 
-            <p className="brand-tagline">
+            <a
+              href="/"
+              className="cnc-footer-logo-link"
+              aria-label="Clean N Clear Home"
+            >
+              <img
+                src={logo}
+                alt="Clean N Clear"
+                className="cnc-footer-logo"
+              />
+            </a>
+
+            <p className="cnc-footer-tagline">
               Your Total Hygiene Partner
             </p>
 
-            <p className="brand-description">
+            <p className="cnc-footer-description">
               Cleaning Chemicals <span>•</span> Cleaning Tools
               <br />
               Professional Cleaning Equipment
@@ -53,91 +58,135 @@ const Footer = () => {
           </div>
 
 
-          {/* QUICK LINKS */}
-          <div className="footer-column">
+          {/* =================================================
+              QUICK LINKS
+          ================================================= */}
+
+          <div className="cnc-footer-column cnc-footer-links-column">
 
             <h3>Quick Links</h3>
 
             <ul>
+
               <li>
-                <a href="/" className="footer-link">
+                <a
+                  href="/"
+                  className="cnc-footer-link"
+                >
                   Home
                 </a>
               </li>
 
               <li>
-                <a href="/about" className="footer-link">
+                <a
+                  href="/about-us"
+                  className="cnc-footer-link"
+                >
                   About Us
                 </a>
               </li>
 
               <li>
-                <a href="/products" className="footer-link">
+                <a
+                  href="/products"
+                  className="cnc-footer-link"
+                >
                   Products
                 </a>
               </li>
 
               <li>
-                <a href="/solutions" className="footer-link">
+                <a
+                  href="/solutions"
+                  className="cnc-footer-link"
+                >
                   Solutions
                 </a>
               </li>
 
               <li>
-                <a href="/industries" className="footer-link">
+                <a
+                  href="/industries"
+                  className="cnc-footer-link"
+                >
                   Industries
                 </a>
               </li>
 
               <li>
-                <a href="/contact" className="footer-link">
+                <a
+                  href="/contact"
+                  className="cnc-footer-link"
+                >
                   Contact
                 </a>
               </li>
+
             </ul>
 
           </div>
 
 
-          {/* PRODUCTS */}
-          <div className="footer-column">
+          {/* =================================================
+              PRODUCTS
+          ================================================= */}
+
+          <div className="cnc-footer-column cnc-footer-products-column">
 
             <h3>Products</h3>
 
             <ul>
 
               <li>
-                <a href="/products/chemicals" className="footer-link">
+                <a
+                  href="/products/cleaning-chemicals"
+                  className="cnc-footer-link"
+                >
                   Cleaning Chemicals
                 </a>
               </li>
 
               <li>
-                <a href="/products/tools" className="footer-link">
+                <a
+                  href="/products/tools"
+                  className="cnc-footer-link"
+                >
                   Cleaning Tools
                 </a>
               </li>
 
               <li>
-                <a href="/products/equipment" className="footer-link">
+                <a
+                  href="/products/equipment"
+                  className="cnc-footer-link"
+                >
                   Professional Equipment
                 </a>
               </li>
 
               <li>
-                <a href="/products/hygiene" className="footer-link">
+                <a
+                  href="/products/hygiene"
+                  className="cnc-footer-link"
+                >
                   Hygiene Supplies
                 </a>
               </li>
 
               <li>
-                <a href="/products/household" className="footer-link">
+                <a
+                  href="/products/household"
+                  className="cnc-footer-link"
+                >
                   Household Products
                 </a>
               </li>
 
               <li>
-                <a href="/products/commercial" className="footer-link">
+                <a
+                  href="/products/commercial"
+                  className="cnc-footer-link"
+                >
                   Commercial Supplies
                 </a>
               </li>
@@ -147,12 +196,15 @@ const Footer = () => {
           </div>
 
 
-          {/* CONTACT */}
-          <div className="footer-column footer-contact">
+          {/* =================================================
+              CONTACT
+          ================================================= */}
+
+          <div className="cnc-footer-column cnc-footer-contact">
 
             <h3>Contact</h3>
 
-            <p className="contact-address">
+            <p className="cnc-footer-address">
               Shop No. 1 &amp; 2, Lower Ground, KRR Road,
               <br />
               Opp. Symphony Mahendra Arcade,
@@ -162,30 +214,44 @@ const Footer = () => {
               Mangaluru, Karnataka – 575003
             </p>
 
-            <div className="contact-details">
+            <div className="cnc-footer-contact-details">
 
-              <a href="tel:+919901384734">
+              {/* PHONE 1 */}
+              <a
+                href="tel:+919901384734"
+                className="cnc-footer-contact-link"
+              >
                 <FaPhone />
-                +91 99013 84734
+                <span>+91 99013 84734</span>
               </a>
 
-              <a href="tel:+918147304734">
+              {/* PHONE 2 */}
+              <a
+                href="tel:+918147304734"
+                className="cnc-footer-contact-link"
+              >
                 <FaPhone />
-                +91 81473 04734
+                <span>+91 81473 04734</span>
               </a>
 
-              <a href="mailto:cleannclear.ind@gmail.com">
+              {/* EMAIL */}
+              <a
+                href="mailto:cleannclear.ind@gmail.com"
+                className="cnc-footer-contact-link"
+              >
                 <FaEnvelope />
-                cleannclear.ind@gmail.com
+                <span>cleannclear.ind@gmail.com</span>
               </a>
 
+              {/* WHATSAPP */}
               <a
                 href="https://wa.me/919901384734"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="cnc-footer-contact-link"
               >
                 <FaWhatsapp />
-                WhatsApp
+                <span>WhatsApp</span>
               </a>
 
             </div>
@@ -196,73 +262,38 @@ const Footer = () => {
 
 
         {/* =====================================================
-            SOCIAL + CTA
+            SOCIAL MEDIA
         ===================================================== */}
 
-        <div className="footer-cta">
+        <div className="cnc-footer-social">
 
-          <div className="cta-left">
+          <p>
+            Follow Clean N Clear
+          </p>
 
-            <h2>
-              Keep Your Space
-              <br />
-              Clean &amp; Hygienic.
-            </h2>
+          <div className="cnc-footer-social-icons">
 
-            <p>
-              Stay updated with cleaning solutions,
-              products and hygiene tips.
-            </p>
-
-          </div>
-
-
-          <div className="cta-right">
-
-            <form onSubmit={handleSubscribe}>
-
-              <label htmlFor="email">
-                Email
-              </label>
-
-              <input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="your@email.com"
-                required
-              />
-
-              <button type="submit">
-                SUBSCRIBE FOR FREE
-              </button>
-
-            </form>
-
-          </div>
-
-        </div>
-
-
-        {/* =====================================================
-            SOCIAL
-        ===================================================== */}
-
-        <div className="footer-social">
-
-          <p>Follow Clean N Clear</p>
-
-          <div className="social-icons">
-
-            <a href="#" aria-label="Facebook">
+            <a
+              href="#"
+              aria-label="Facebook"
+              className="cnc-footer-social-link"
+            >
               <FaFacebookF />
             </a>
 
-            <a href="#" aria-label="Instagram">
+            <a
+              href="#"
+              aria-label="Instagram"
+              className="cnc-footer-social-link"
+            >
               <FaInstagram />
             </a>
 
-            <a href="#" aria-label="LinkedIn">
+            <a
+              href="#"
+              aria-label="LinkedIn"
+              className="cnc-footer-social-link"
+            >
               <FaLinkedinIn />
             </a>
 
@@ -272,17 +303,17 @@ const Footer = () => {
 
 
         {/* =====================================================
-            BOTTOM
+            BOTTOM FOOTER
         ===================================================== */}
 
-        <div className="footer-bottom">
+        <div className="cnc-footer-bottom">
 
-          <p>
+          <p className="cnc-footer-copyright">
             Copyright © 2026 |{" "}
-            <span>CLEAN N CLEAR</span>
+            <span>Clean N Clear</span>
           </p>
 
-          <div className="bottom-links">
+          <div className="cnc-footer-bottom-links">
 
             <a href="/privacy-policy">
               Privacy Policy
@@ -297,6 +328,7 @@ const Footer = () => {
         </div>
 
       </div>
+
     </footer>
   );
 };

@@ -1,6 +1,11 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "./CleaningChemicals.css";
 
+import {
+  getOrderCart,
+  updateOrderCart,
+} from "../../utils/OrderCart";
+
 // ======================================================
 // PRODUCT IMAGES
 // ======================================================
@@ -27,8 +32,6 @@ const API_URL =
 
 // ======================================================
 // PRODUCTS
-// IMPORTANT:
-// IDs MUST MATCH BACKEND PRODUCT IDs
 // ======================================================
 
 const products = [
@@ -183,23 +186,40 @@ const emptyCustomer = {
 // ======================================================
 
 const CleaningChemicals = () => {
-  const [selectedProduct, setSelectedProduct] = useState(null);
+  // ====================================================
+  // SHARED CART
+  // ====================================================
 
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => getOrderCart());
+
+  const [selectedProduct, setSelectedProduct] =
+    useState(null);
 
   const [showCart, setShowCart] = useState(false);
 
-  const [showCheckout, setShowCheckout] = useState(false);
+  const [showCheckout, setShowCheckout] =
+    useState(false);
 
-  const [showSuccess, setShowSuccess] = useState(false);
+  const [showSuccess, setShowSuccess] =
+    useState(false);
 
   const [orderId, setOrderId] = useState("");
 
-  const [submitting, setSubmitting] = useState(false);
+  const [submitting, setSubmitting] =
+    useState(false);
 
   const [error, setError] = useState("");
 
-  const [customer, setCustomer] = useState(emptyCustomer);
+  const [customer, setCustomer] =
+    useState(emptyCustomer);
+
+  // ====================================================
+  // SYNC CART WITH SHARED ORDER CART
+  // ====================================================
+
+  useEffect(() => {
+    updateOrderCart(cart);
+  }, [cart]);
 
   // ====================================================
   // BODY SCROLL LOCK
@@ -234,7 +254,8 @@ const CleaningChemicals = () => {
 
   const cartCount = useMemo(() => {
     return cart.reduce(
-      (total, item) => total + item.quantity,
+      (total, item) =>
+        total + Number(item?.quantity || 0),
       0
     );
   }, [cart]);
@@ -246,7 +267,9 @@ const CleaningChemicals = () => {
   const cartTotal = useMemo(() => {
     return cart.reduce(
       (total, item) =>
-        total + Number(item.price) * Number(item.quantity),
+        total +
+        Number(item?.price || 0) *
+          Number(item?.quantity || 0),
       0
     );
   }, [cart]);
@@ -266,7 +289,8 @@ const CleaningChemicals = () => {
           item.id === product.id
             ? {
                 ...item,
-                quantity: item.quantity + 1,
+                quantity:
+                  Number(item.quantity || 0) + 1,
               }
             : item
         );
@@ -275,7 +299,13 @@ const CleaningChemicals = () => {
       return [
         ...currentCart,
         {
-          ...product,
+          id: product.id,
+          name: product.name,
+          category: product.category,
+          description: product.description,
+          price: Number(product.price),
+          unit: product.unit,
+          image: product.image,
           quantity: 1,
         },
       ];
@@ -330,7 +360,8 @@ const CleaningChemicals = () => {
         item.id === id
           ? {
               ...item,
-              quantity: item.quantity + 1,
+              quantity:
+                Number(item.quantity || 0) + 1,
             }
           : item
       )
@@ -348,11 +379,15 @@ const CleaningChemicals = () => {
           item.id === id
             ? {
                 ...item,
-                quantity: item.quantity - 1,
+                quantity:
+                  Number(item.quantity || 0) - 1,
               }
             : item
         )
-        .filter((item) => item.quantity > 0)
+        .filter(
+          (item) =>
+            Number(item.quantity || 0) > 0
+        )
     );
   };
 
@@ -362,7 +397,9 @@ const CleaningChemicals = () => {
 
   const removeItem = (id) => {
     setCart((currentCart) =>
-      currentCart.filter((item) => item.id !== id)
+      currentCart.filter(
+        (item) => item.id !== id
+      )
     );
   };
 
@@ -372,7 +409,9 @@ const CleaningChemicals = () => {
 
   const goToCheckout = () => {
     if (cart.length === 0) {
-      setError("Please add at least one product to your order.");
+      setError(
+        "Please add at least one product to your order."
+      );
       return;
     }
 
@@ -421,7 +460,9 @@ const CleaningChemicals = () => {
       return "Please enter your phone number.";
     }
 
-    if (!/^[0-9+\-\s()]{7,20}$/.test(customer.phone.trim())) {
+    const phoneRegex = /^[0-9+\-\s()]{7,20}$/;
+
+    if (!phoneRegex.test(customer.phone.trim())) {
       return "Please enter a valid phone number.";
     }
 
@@ -458,20 +499,21 @@ const CleaningChemicals = () => {
 
     setError("");
 
-    // ----------------------------------------------
+    // --------------------------------------------------
     // VALIDATION
-    // ----------------------------------------------
+    // --------------------------------------------------
 
-    const validationError = validateCustomer();
+    const validationError =
+      validateCustomer();
 
     if (validationError) {
       setError(validationError);
       return;
     }
 
-    // ----------------------------------------------
+    // --------------------------------------------------
     // PREPARE ORDER DATA
-    // ----------------------------------------------
+    // --------------------------------------------------
 
     const orderData = {
       customer: {
@@ -503,7 +545,9 @@ const CleaningChemicals = () => {
       "======================================"
     );
 
-    console.log("SENDING ORDER TO BACKEND");
+    console.log(
+      "SENDING ORDER TO BACKEND"
+    );
 
     console.log(
       "API:",
@@ -519,9 +563,9 @@ const CleaningChemicals = () => {
       "======================================"
     );
 
-    // ----------------------------------------------
+    // --------------------------------------------------
     // START SUBMITTING
-    // ----------------------------------------------
+    // --------------------------------------------------
 
     setSubmitting(true);
 
@@ -539,9 +583,9 @@ const CleaningChemicals = () => {
         }
       );
 
-      // --------------------------------------------
+      // ------------------------------------------------
       // GET RAW RESPONSE
-      // --------------------------------------------
+      // ------------------------------------------------
 
       const responseText =
         await response.text();
@@ -556,9 +600,9 @@ const CleaningChemicals = () => {
         responseText
       );
 
-      // --------------------------------------------
+      // ------------------------------------------------
       // PARSE RESPONSE
-      // --------------------------------------------
+      // ------------------------------------------------
 
       let data = {};
 
@@ -582,9 +626,9 @@ const CleaningChemicals = () => {
         data
       );
 
-      // --------------------------------------------
+      // ------------------------------------------------
       // HTTP ERROR
-      // --------------------------------------------
+      // ------------------------------------------------
 
       if (!response.ok) {
         throw new Error(
@@ -593,9 +637,9 @@ const CleaningChemicals = () => {
         );
       }
 
-      // --------------------------------------------
+      // ------------------------------------------------
       // API ERROR
-      // --------------------------------------------
+      // ------------------------------------------------
 
       if (!data.success) {
         throw new Error(
@@ -604,23 +648,24 @@ const CleaningChemicals = () => {
         );
       }
 
-      // --------------------------------------------
+      // ------------------------------------------------
       // SUCCESS
-      // --------------------------------------------
+      // ------------------------------------------------
 
       const newOrderId =
-        data.orderId || "CNC-ORDER";
+        data.orderId ||
+        data.order?.id ||
+        "CNC-ORDER";
 
       setOrderId(newOrderId);
 
+      // Clear shared cart
       setCart([]);
 
       setCustomer(emptyCustomer);
 
       setShowCheckout(false);
-
       setShowCart(false);
-
       setShowSuccess(true);
 
       setError("");
@@ -638,9 +683,7 @@ const CleaningChemicals = () => {
         "ORDER SUBMISSION ERROR"
       );
 
-      console.error(
-        submissionError
-      );
+      console.error(submissionError);
 
       console.error(
         "======================================"
@@ -686,10 +729,9 @@ const CleaningChemicals = () => {
 
       {/* ==================================================
           HEADER
-          ================================================== */}
+      ================================================== */}
 
       <div className="ccq-header">
-
         <span className="ccq-label">
           CLEANING CHEMICALS
         </span>
@@ -704,9 +746,7 @@ const CleaningChemicals = () => {
           professional cleaning requirements.
         </p>
 
-        {/* ==================================================
-            CART BUTTON
-            ================================================== */}
+        {/* CART BUTTON */}
 
         <button
           type="button"
@@ -721,26 +761,24 @@ const CleaningChemicals = () => {
             </span>
           )}
         </button>
-
       </div>
-
 
       {/* ==================================================
           PRODUCT GRID
-          ================================================== */}
+      ================================================== */}
 
       <div className="ccq-grid">
-
         {products.map((product) => (
           <article
             className="ccq-card"
             key={product.id}
           >
-
             <button
               type="button"
               className="ccq-image-button"
-              onClick={() => openProduct(product)}
+              onClick={() =>
+                openProduct(product)
+              }
               aria-label={`View ${product.name}`}
             >
               <img
@@ -751,7 +789,6 @@ const CleaningChemicals = () => {
             </button>
 
             <div className="ccq-card-content">
-
               <span className="ccq-category">
                 {product.category}
               </span>
@@ -777,32 +814,26 @@ const CleaningChemicals = () => {
               >
                 Add to Order
               </button>
-
             </div>
-
           </article>
         ))}
-
       </div>
-
 
       {/* ==================================================
           PRODUCT MODAL
-          ================================================== */}
+      ================================================== */}
 
       {selectedProduct && (
         <div
           className="ccq-overlay"
           onClick={closeProduct}
         >
-
           <div
             className="ccq-product-modal"
             onClick={(event) =>
               event.stopPropagation()
             }
           >
-
             <button
               type="button"
               className="ccq-close"
@@ -813,17 +844,14 @@ const CleaningChemicals = () => {
             </button>
 
             <div className="ccq-modal-image-wrap">
-
               <img
                 src={selectedProduct.image}
                 alt={selectedProduct.name}
                 className="ccq-modal-image"
               />
-
             </div>
 
             <div className="ccq-modal-content">
-
               <span className="ccq-category">
                 {selectedProduct.category}
               </span>
@@ -850,39 +878,36 @@ const CleaningChemicals = () => {
                 type="button"
                 className="ccq-add-large"
                 onClick={() =>
-                  addToOrder(selectedProduct)
+                  addToOrder(
+                    selectedProduct
+                  )
                 }
               >
                 Add to Order
               </button>
-
             </div>
-
           </div>
-
         </div>
       )}
 
-
       {/* ==================================================
           CART DRAWER
-          ================================================== */}
+      ================================================== */}
 
       {showCart && (
         <div
           className="ccq-overlay"
           onClick={closeCart}
         >
-
           <aside
             className="ccq-cart-drawer"
             onClick={(event) =>
               event.stopPropagation()
             }
           >
+            {/* CART HEADER */}
 
             <div className="ccq-cart-header">
-
               <div>
                 <span className="ccq-label">
                   YOUR ORDER
@@ -901,19 +926,13 @@ const CleaningChemicals = () => {
               >
                 ×
               </button>
-
             </div>
 
-
-            {/* ==================================================
-                CART ITEMS
-                ================================================== */}
+            {/* CART ITEMS */}
 
             <div className="ccq-cart-items">
-
               {cart.length === 0 ? (
                 <div className="ccq-empty">
-
                   <div className="ccq-empty-icon">
                     🛒
                   </div>
@@ -926,7 +945,6 @@ const CleaningChemicals = () => {
                     Add products to your order
                     to continue.
                   </p>
-
                 </div>
               ) : (
                 cart.map((item) => (
@@ -934,32 +952,30 @@ const CleaningChemicals = () => {
                     className="ccq-cart-item"
                     key={item.id}
                   >
-
                     <img
                       src={item.image}
                       alt={item.name}
                     />
 
                     <div className="ccq-cart-item-info">
-
                       <h3>
                         {item.name}
                       </h3>
 
                       <span>
-                        {formatPrice(item.price)}{" "}
-                        / {item.unit}
+                        {formatPrice(item.price)}
+                        {" / "}
+                        {item.unit}
                       </span>
 
                       <strong>
                         {formatPrice(
-                          item.price *
-                            item.quantity
+                          Number(item.price) *
+                            Number(item.quantity)
                         )}
                       </strong>
 
                       <div className="ccq-quantity">
-
                         <button
                           type="button"
                           onClick={() =>
@@ -967,6 +983,7 @@ const CleaningChemicals = () => {
                               item.id
                             )
                           }
+                          aria-label="Decrease quantity"
                         >
                           −
                         </button>
@@ -982,10 +999,10 @@ const CleaningChemicals = () => {
                               item.id
                             )
                           }
+                          aria-label="Increase quantity"
                         >
                           +
                         </button>
-
                       </div>
 
                       <button
@@ -997,25 +1014,17 @@ const CleaningChemicals = () => {
                       >
                         Remove
                       </button>
-
                     </div>
-
                   </div>
                 ))
               )}
-
             </div>
 
-
-            {/* ==================================================
-                CART FOOTER
-                ================================================== */}
+            {/* CART FOOTER */}
 
             {cart.length > 0 && (
               <div className="ccq-cart-footer">
-
                 <div className="ccq-total">
-
                   <span>
                     Estimated Total
                   </span>
@@ -1023,7 +1032,6 @@ const CleaningChemicals = () => {
                   <strong>
                     {formatPrice(cartTotal)}
                   </strong>
-
                 </div>
 
                 <p className="ccq-payment-note">
@@ -1040,23 +1048,18 @@ const CleaningChemicals = () => {
                 >
                   Proceed to Customer Details
                 </button>
-
               </div>
             )}
-
           </aside>
-
         </div>
       )}
 
-
       {/* ==================================================
           CHECKOUT / CUSTOMER DETAILS
-          ================================================== */}
+      ================================================== */}
 
       {showCheckout && (
         <div className="ccq-overlay">
-
           <div className="ccq-checkout">
 
             <button
@@ -1069,7 +1072,6 @@ const CleaningChemicals = () => {
             </button>
 
             <div className="ccq-checkout-heading">
-
               <span className="ccq-label">
                 CUSTOMER DETAILS
               </span>
@@ -1082,16 +1084,11 @@ const CleaningChemicals = () => {
                 Please provide your details so
                 our team can review your order.
               </p>
-
             </div>
 
-
-            {/* ==================================================
-                NO PAYMENT MESSAGE
-                ================================================== */}
+            {/* NO PAYMENT MESSAGE */}
 
             <div className="ccq-no-payment">
-
               <h3>
                 No online payment required
               </h3>
@@ -1103,13 +1100,9 @@ const CleaningChemicals = () => {
                 and payment details will be
                 confirmed by our team.
               </p>
-
             </div>
 
-
-            {/* ==================================================
-                ERROR
-                ================================================== */}
+            {/* ERROR */}
 
             {error && (
               <div className="ccq-error">
@@ -1117,22 +1110,17 @@ const CleaningChemicals = () => {
               </div>
             )}
 
-
-            {/* ==================================================
-                CUSTOMER FORM
-                ================================================== */}
+            {/* CUSTOMER FORM */}
 
             <form
               className="ccq-form"
               onSubmit={submitOrder}
             >
-
               <div className="ccq-form-grid">
 
                 {/* NAME */}
 
                 <div className="ccq-field">
-
                   <label htmlFor="ccq-name">
                     Full Name *
                   </label>
@@ -1142,18 +1130,17 @@ const CleaningChemicals = () => {
                     type="text"
                     name="name"
                     value={customer.name}
-                    onChange={handleCustomerChange}
+                    onChange={
+                      handleCustomerChange
+                    }
                     placeholder="Enter your name"
                     required
                   />
-
                 </div>
-
 
                 {/* PHONE */}
 
                 <div className="ccq-field">
-
                   <label htmlFor="ccq-phone">
                     Phone Number *
                   </label>
@@ -1163,18 +1150,17 @@ const CleaningChemicals = () => {
                     type="tel"
                     name="phone"
                     value={customer.phone}
-                    onChange={handleCustomerChange}
+                    onChange={
+                      handleCustomerChange
+                    }
                     placeholder="Enter phone number"
                     required
                   />
-
                 </div>
-
 
                 {/* EMAIL */}
 
                 <div className="ccq-field">
-
                   <label htmlFor="ccq-email">
                     Email Address
                   </label>
@@ -1184,17 +1170,16 @@ const CleaningChemicals = () => {
                     type="email"
                     name="email"
                     value={customer.email}
-                    onChange={handleCustomerChange}
+                    onChange={
+                      handleCustomerChange
+                    }
                     placeholder="Enter email address"
                   />
-
                 </div>
-
 
                 {/* COMPANY */}
 
                 <div className="ccq-field">
-
                   <label htmlFor="ccq-company">
                     Company / Organisation
                   </label>
@@ -1204,17 +1189,16 @@ const CleaningChemicals = () => {
                     type="text"
                     name="company"
                     value={customer.company}
-                    onChange={handleCustomerChange}
+                    onChange={
+                      handleCustomerChange
+                    }
                     placeholder="Company name"
                   />
-
                 </div>
-
 
                 {/* LOCATION */}
 
                 <div className="ccq-field ccq-field-full">
-
                   <label htmlFor="ccq-location">
                     Location *
                   </label>
@@ -1224,18 +1208,17 @@ const CleaningChemicals = () => {
                     type="text"
                     name="location"
                     value={customer.location}
-                    onChange={handleCustomerChange}
+                    onChange={
+                      handleCustomerChange
+                    }
                     placeholder="City / Area"
                     required
                   />
-
                 </div>
-
 
                 {/* NOTES */}
 
                 <div className="ccq-field ccq-field-full">
-
                   <label htmlFor="ccq-notes">
                     Additional Requirements
                   </label>
@@ -1244,24 +1227,19 @@ const CleaningChemicals = () => {
                     id="ccq-notes"
                     name="notes"
                     value={customer.notes}
-                    onChange={handleCustomerChange}
+                    onChange={
+                      handleCustomerChange
+                    }
                     placeholder="Mention any quantity, delivery or product requirements..."
                     rows="5"
                   />
-
                 </div>
-
               </div>
 
-
-              {/* ==================================================
-                  FINAL ORDER SUMMARY
-                  ================================================== */}
+              {/* FINAL ORDER SUMMARY */}
 
               <div className="ccq-final-summary">
-
                 <div className="ccq-final-summary-header">
-
                   <h3>
                     Order Summary
                   </h3>
@@ -1272,20 +1250,15 @@ const CleaningChemicals = () => {
                       ? "s"
                       : ""}
                   </span>
-
                 </div>
 
-
                 <div className="ccq-final-items">
-
                   {cart.map((item) => (
                     <div
                       key={item.id}
                       className="ccq-final-item"
                     >
-
                       <div>
-
                         <strong>
                           {item.name}
                         </strong>
@@ -1296,24 +1269,19 @@ const CleaningChemicals = () => {
                             item.price
                           )}
                         </span>
-
                       </div>
 
                       <strong>
                         {formatPrice(
-                          item.price *
-                            item.quantity
+                          Number(item.price) *
+                            Number(item.quantity)
                         )}
                       </strong>
-
                     </div>
                   ))}
-
                 </div>
 
-
                 <div className="ccq-final-total">
-
                   <span>
                     Estimated Total
                   </span>
@@ -1321,18 +1289,12 @@ const CleaningChemicals = () => {
                   <strong>
                     {formatPrice(cartTotal)}
                   </strong>
-
                 </div>
-
               </div>
 
-
-              {/* ==================================================
-                  FORM ACTIONS
-                  ================================================== */}
+              {/* FORM ACTIONS */}
 
               <div className="ccq-form-actions">
-
                 <button
                   type="button"
                   className="ccq-back-button"
@@ -1351,24 +1313,18 @@ const CleaningChemicals = () => {
                     ? "Submitting..."
                     : "Submit Order"}
                 </button>
-
               </div>
-
             </form>
-
           </div>
-
         </div>
       )}
 
-
       {/* ==================================================
           SUCCESS
-          ================================================== */}
+      ================================================== */}
 
       {showSuccess && (
         <div className="ccq-overlay">
-
           <div className="ccq-success">
 
             <div className="ccq-success-icon">
@@ -1391,7 +1347,6 @@ const CleaningChemicals = () => {
             </p>
 
             <div className="ccq-order-number">
-
               <span>
                 Order Number
               </span>
@@ -1399,7 +1354,6 @@ const CleaningChemicals = () => {
               <strong>
                 {orderId}
               </strong>
-
             </div>
 
             <button
@@ -1409,12 +1363,9 @@ const CleaningChemicals = () => {
             >
               Continue Shopping
             </button>
-
           </div>
-
         </div>
       )}
-
     </section>
   );
 };

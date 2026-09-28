@@ -1,24 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
-
-/*
-  IMPORTANT:
-  If your structure is:
-
-  Components/
-  ├── CleaningChemicals/
-  │   ├── CleaningChemicals.jsx
-  │   └── CleaningChemicals.css
-  │
-  └── CleaningTools/
-      └── CleaningTools.jsx
-
-  then this is the correct CSS import.
-*/
 import "../CleaningChemicals/CleaningChemicals.css";
 
-/* =========================================================
-   CLEANING TOOLS IMAGES
-   ========================================================= */
+import {
+  getOrderCart,
+  updateOrderCart,
+} from "../../utils/OrderCart";
 
 import AromaToiletBrush from "../../images/CleaningTools/AROMA TOILET BRUSH WITH STAND.jpg";
 import JazzSpinMopBucket from "../../images/CleaningTools/JAZZ SPIN MOP BUCKET.jpg";
@@ -27,1257 +13,1102 @@ import Plunger from "../../images/CleaningTools/PLUNGER.jpg";
 import SparkleMicrofiberFlatMop from "../../images/CleaningTools/SPARKLE MICROFIBER FLAT MOP.jpg";
 import WonderKitchenWiper from "../../images/CleaningTools/WONDER KITCHEN WIPER.jpg";
 
-/* =========================================================
-   API
-   ========================================================= */
+// ======================================================
+// API
+// ======================================================
 
 const API_URL =
   import.meta.env.VITE_API_URL || "http://localhost:5000";
 
-/* =========================================================
-   PRODUCT DATA
-   ========================================================= */
+// ======================================================
+// PRODUCTS
+// ======================================================
 
 const products = [
   {
     id: "aroma-toilet-brush",
     name: "Aroma Toilet Brush with Stand",
-    category: "Cleaning Tools",
     price: 120,
     unit: "Piece",
     image: AromaToiletBrush,
-    description:
-      "A practical toilet cleaning brush with stand, suitable for regular bathroom cleaning and hygiene requirements.",
   },
-
   {
     id: "jazz-spin-mop-bucket",
     name: "Jazz Spin Mop Bucket",
-    category: "Cleaning Tools",
     price: 850,
     unit: "Set",
     image: JazzSpinMopBucket,
-    description:
-      "Spin mop and bucket set designed for convenient floor cleaning in homes, offices and other spaces.",
   },
-
   {
     id: "magik-spin-mop-bucket",
     name: "Magik Spin Mop Bucket",
-    category: "Cleaning Tools",
     price: 750,
     unit: "Set",
     image: MagikSpinMopBucket,
-    description:
-      "Convenient spin mop bucket set suitable for everyday floor cleaning requirements.",
   },
-
   {
     id: "plunger",
     name: "Plunger",
-    category: "Cleaning Tools",
     price: 180,
     unit: "Piece",
     image: Plunger,
-    description:
-      "Essential cleaning tool suitable for clearing blockages in suitable household and commercial applications.",
   },
-
   {
     id: "sparkle-microfiber-flat-mop",
     name: "Sparkle Microfiber Flat Mop",
-    category: "Cleaning Tools",
     price: 350,
     unit: "Piece",
     image: SparkleMicrofiberFlatMop,
-    description:
-      "Microfiber flat mop designed for convenient floor cleaning and everyday maintenance.",
   },
-
   {
     id: "wonder-kitchen-wiper",
     name: "Wonder Kitchen Wiper",
-    category: "Cleaning Tools",
     price: 150,
     unit: "Piece",
     image: WonderKitchenWiper,
-    description:
-      "Kitchen wiper suitable for cleaning and removing water from kitchen surfaces.",
   },
 ];
 
-/* =========================================================
-   COMPONENT
-   ========================================================= */
+// ======================================================
+// EMPTY CUSTOMER
+// ======================================================
+
+const emptyCustomer = {
+  name: "",
+  phone: "",
+  email: "",
+  company: "",
+  location: "",
+  notes: "",
+};
+
+// ======================================================
+// COMPONENT
+// ======================================================
 
 const CleaningTools = () => {
-  /* =======================================================
-     PRODUCT / CART STATES
-     ======================================================= */
+  // ====================================================
+  // SHARED CART
+  // ====================================================
 
-  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [cart, setCart] = useState(() => getOrderCart());
 
-  const [cart, setCart] = useState([]);
+  // ====================================================
+  // MODALS
+  // ====================================================
 
-  const [showCart, setShowCart] = useState(false);
+  const [showProduct, setShowProduct] = useState(null);
+  const [showOrder, setShowOrder] = useState(false);
 
-  const [showCheckout, setShowCheckout] = useState(false);
+  // ====================================================
+  // CUSTOMER
+  // ====================================================
 
-  const [showSuccess, setShowSuccess] = useState(false);
+  const [customer, setCustomer] = useState(emptyCustomer);
 
-  const [orderId, setOrderId] = useState("");
+  // ====================================================
+  // ORDER STATES
+  // ====================================================
 
   const [submitting, setSubmitting] = useState(false);
+  const [successOrder, setSuccessOrder] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const [error, setError] = useState("");
-
-  /* =======================================================
-     CUSTOMER DETAILS
-     ======================================================= */
-
-  const [customer, setCustomer] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    company: "",
-    location: "",
-    notes: "",
-  });
-
-  /* =======================================================
-     ORDERED QUANTITIES
-     ======================================================= */
+  // ====================================================
+  // ORDERED PRODUCT QUANTITIES
+  // ====================================================
 
   const [orderedQuantities, setOrderedQuantities] = useState({});
 
-  const [loadingOrderedQuantities, setLoadingOrderedQuantities] =
-    useState(false);
-
-  /* =========================================================
-     LOAD ORDERED PRODUCT QUANTITIES
-     ========================================================= */
-
-  const loadOrderedQuantities = async () => {
-    try {
-      setLoadingOrderedQuantities(true);
-
-      const response = await fetch(
-        `${API_URL}/api/product-order-quantities`
-      );
-
-      const data = await response.json();
-
-      if (!response.ok || !data.success) {
-        throw new Error(
-          data.message || "Unable to load ordered quantities."
-        );
-      }
-
-      setOrderedQuantities(data.quantities || {});
-    } catch (error) {
-      console.error(
-        "Unable to load ordered quantities:",
-        error
-      );
-
-      /*
-        Do not show an error popup here.
-        Product ordering can still work even if
-        ordered quantity loading fails.
-      */
-    } finally {
-      setLoadingOrderedQuantities(false);
-    }
-  };
-
-  /* =========================================================
-     INITIAL LOAD
-     ========================================================= */
+  // ====================================================
+  // SYNC SHARED ORDER CART
+  // ====================================================
 
   useEffect(() => {
-    loadOrderedQuantities();
-  }, []);
+    updateOrderCart(cart);
+  }, [cart]);
 
-  /* =========================================================
-     BODY SCROLL LOCK FOR MODALS
-     ========================================================= */
+  // ====================================================
+  // BODY SCROLL LOCK
+  // ====================================================
 
   useEffect(() => {
-    const overlayOpen =
-      selectedProduct ||
-      showCart ||
-      showCheckout ||
-      showSuccess;
+    const shouldLock =
+      Boolean(showProduct) ||
+      showOrder ||
+      Boolean(successOrder);
 
-    if (overlayOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = shouldLock
+      ? "hidden"
+      : "";
 
     return () => {
       document.body.style.overflow = "";
     };
-  }, [
-    selectedProduct,
-    showCart,
-    showCheckout,
-    showSuccess,
-  ]);
+  }, [showProduct, showOrder, successOrder]);
 
-  /* =========================================================
-     FORMAT PRICE
-     ========================================================= */
+  // ====================================================
+  // LOAD ORDERED QUANTITIES
+  // ====================================================
 
-  const formatPrice = (price) => {
-    return `₹${Number(price).toLocaleString("en-IN")}`;
-  };
+  useEffect(() => {
+    const loadOrderedQuantities = async () => {
+      try {
+        const response = await fetch(
+          `${API_URL}/api/product-order-quantities`
+        );
 
-  /* =========================================================
-     ADD PRODUCT TO CART
-     ========================================================= */
+        if (!response.ok) {
+          return;
+        }
+
+        const data = await response.json();
+
+        if (data?.success && data?.quantities) {
+          setOrderedQuantities(data.quantities);
+        }
+      } catch (error) {
+        console.error(
+          "Unable to load ordered quantities:",
+          error
+        );
+      }
+    };
+
+    loadOrderedQuantities();
+  }, []);
+
+  // ====================================================
+  // CART COUNT
+  // ====================================================
+
+  const cartCount = useMemo(() => {
+    return cart.reduce(
+      (total, item) =>
+        total + Number(item?.quantity || 0),
+      0
+    );
+  }, [cart]);
+
+  // ====================================================
+  // CART TOTAL
+  // ====================================================
+
+  const cartTotal = useMemo(() => {
+    return cart.reduce(
+      (total, item) =>
+        total +
+        Number(item?.price || 0) *
+          Number(item?.quantity || 0),
+      0
+    );
+  }, [cart]);
+
+  // ====================================================
+  // ADD PRODUCT TO ORDER
+  // ====================================================
 
   const addToCart = (product) => {
-    setCart((previousCart) => {
-      const existingProduct = previousCart.find(
+    setErrorMessage("");
+
+    setCart((currentCart) => {
+      const existingProduct = currentCart.find(
         (item) => item.id === product.id
       );
 
       if (existingProduct) {
-        return previousCart.map((item) =>
+        return currentCart.map((item) =>
           item.id === product.id
             ? {
                 ...item,
-                quantity: item.quantity + 1,
+                quantity:
+                  Number(item.quantity || 0) + 1,
               }
             : item
         );
       }
 
       return [
-        ...previousCart,
+        ...currentCart,
         {
-          ...product,
+          id: product.id,
+          name: product.name,
+          price: Number(product.price),
+          unit: product.unit,
+          image: product.image,
           quantity: 1,
         },
       ];
     });
 
-    /*
-      Close product details after adding.
-    */
-    setSelectedProduct(null);
-
-    /*
-      Open the order/cart drawer immediately.
-      This makes the flow clear to the user.
-    */
-    setShowCart(true);
+    setShowProduct(null);
+    setShowOrder(true);
   };
 
-  /* =========================================================
-     OPEN PRODUCT DETAILS
-     ========================================================= */
+  // ====================================================
+  // UPDATE QUANTITY
+  // ====================================================
 
-  const openProductDetails = (product) => {
-    setError("");
-    setSelectedProduct(product);
+  const updateQuantity = (productId, change) => {
+    setCart((currentCart) =>
+      currentCart
+        .map((item) => {
+          if (item.id !== productId) {
+            return item;
+          }
+
+          const newQuantity =
+            Number(item.quantity || 0) + change;
+
+          return {
+            ...item,
+            quantity: newQuantity,
+          };
+        })
+        .filter(
+          (item) => Number(item.quantity || 0) > 0
+        )
+    );
   };
 
-  /* =========================================================
-     UPDATE QUANTITY
-     ========================================================= */
+  // ====================================================
+  // REMOVE PRODUCT
+  // ====================================================
 
-  const updateQuantity = (id, quantity) => {
-    const newQuantity = Number(quantity);
-
-    if (newQuantity < 1) {
-      removeFromCart(id);
-      return;
-    }
-
-    setCart((previousCart) =>
-      previousCart.map((item) =>
-        item.id === id
-          ? {
-              ...item,
-              quantity: newQuantity,
-            }
-          : item
+  const removeFromCart = (productId) => {
+    setCart((currentCart) =>
+      currentCart.filter(
+        (item) => item.id !== productId
       )
     );
   };
 
-  /* =========================================================
-     REMOVE FROM CART
-     ========================================================= */
-
-  const removeFromCart = (id) => {
-    setCart((previousCart) =>
-      previousCart.filter((item) => item.id !== id)
-    );
-  };
-
-  /* =========================================================
-     CART COUNT
-     ========================================================= */
-
-  const cartCount = useMemo(() => {
-    return cart.reduce(
-      (total, item) =>
-        total + Number(item.quantity || 0),
-      0
-    );
-  }, [cart]);
-
-  /* =========================================================
-     CART TOTAL
-     ========================================================= */
-
-  const cartTotal = useMemo(() => {
-    return cart.reduce(
-      (total, item) =>
-        total +
-        Number(item.price || 0) *
-          Number(item.quantity || 0),
-      0
-    );
-  }, [cart]);
-
-  /* =========================================================
-     CUSTOMER INPUT
-     ========================================================= */
+  // ====================================================
+  // CUSTOMER FORM
+  // ====================================================
 
   const handleCustomerChange = (event) => {
     const { name, value } = event.target;
 
-    setCustomer((previousCustomer) => ({
-      ...previousCustomer,
+    setCustomer((previous) => ({
+      ...previous,
       [name]: value,
     }));
+
+    if (errorMessage) {
+      setErrorMessage("");
+    }
   };
 
-  /* =========================================================
-     OPEN CHECKOUT
-     ========================================================= */
+  // ====================================================
+  // PHONE VALIDATION
+  // ====================================================
 
-  const openCheckout = () => {
-    if (cart.length === 0) {
+  const isValidPhone = (phone) => {
+    const cleaned = phone.replace(/\s+/g, "");
+
+    return /^[+]?[0-9]{10,15}$/.test(cleaned);
+  };
+
+  // ====================================================
+  // EMAIL VALIDATION
+  // ====================================================
+
+  const isValidEmail = (email) => {
+    if (!email.trim()) {
+      return true;
+    }
+
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+      email.trim()
+    );
+  };
+
+  // ====================================================
+  // SUBMIT ORDER
+  // ====================================================
+
+  const handleSubmitOrder = async (event) => {
+    event.preventDefault();
+
+    if (submitting) {
       return;
     }
 
-    setError("");
-    setShowCart(false);
-    setShowCheckout(true);
-  };
+    setErrorMessage("");
 
-  /* =========================================================
-     SUBMIT ORDER
-     ========================================================= */
-
-  const submitOrder = async (event) => {
-    event.preventDefault();
-
-    setError("");
-
-    /* -------------------------------------------------------
-       CHECK CART
-       ------------------------------------------------------- */
+    // ----------------------------------------------
+    // CART VALIDATION
+    // ----------------------------------------------
 
     if (cart.length === 0) {
-      setError(
+      setErrorMessage(
         "Please add at least one product to your order."
       );
       return;
     }
 
-    /* -------------------------------------------------------
-       CHECK REQUIRED CUSTOMER DETAILS
-       ------------------------------------------------------- */
+    // ----------------------------------------------
+    // NAME
+    // ----------------------------------------------
 
-    if (
-      !customer.name.trim() ||
-      !customer.phone.trim() ||
-      !customer.location.trim()
-    ) {
-      setError(
-        "Please enter your name, phone number and location."
+    if (!customer.name.trim()) {
+      setErrorMessage("Please enter your name.");
+      return;
+    }
+
+    // ----------------------------------------------
+    // PHONE
+    // ----------------------------------------------
+
+    if (!customer.phone.trim()) {
+      setErrorMessage(
+        "Please enter your phone number."
       );
       return;
     }
 
+    if (!isValidPhone(customer.phone)) {
+      setErrorMessage(
+        "Please enter a valid phone number."
+      );
+      return;
+    }
+
+    // ----------------------------------------------
+    // LOCATION
+    // ----------------------------------------------
+
+    if (!customer.location.trim()) {
+      setErrorMessage(
+        "Please enter your location."
+      );
+      return;
+    }
+
+    // ----------------------------------------------
+    // EMAIL
+    // ----------------------------------------------
+
+    if (!isValidEmail(customer.email)) {
+      setErrorMessage(
+        "Please enter a valid email address."
+      );
+      return;
+    }
+
+    // ----------------------------------------------
+    // START SUBMIT
+    // ----------------------------------------------
+
+    setSubmitting(true);
+
     try {
-      setSubmitting(true);
-
-      /* -----------------------------------------------------
-         PREPARE ORDER DATA
-         ----------------------------------------------------- */
-
-      const orderData = {
-        customer: {
-          name: customer.name.trim(),
-          phone: customer.phone.trim(),
-          email: customer.email.trim(),
-          company: customer.company.trim(),
-          location: customer.location.trim(),
-        },
-
-        items: cart.map((item) => ({
-          id: item.id,
-          name: item.name,
-          category: item.category,
-          price: Number(item.price),
-          unit: item.unit,
-          quantity: Number(item.quantity),
-          subtotal:
-            Number(item.price) *
-            Number(item.quantity),
-        })),
-
-        notes: customer.notes.trim(),
-
-        total: Number(cartTotal),
-      };
-
-      /* -----------------------------------------------------
-         SEND TO BACKEND
-         ----------------------------------------------------- */
+      const orderItems = cart.map((item) => ({
+        id: item.id,
+        name: item.name,
+        price: Number(item.price),
+        unit: item.unit,
+        quantity: Number(item.quantity),
+        subtotal:
+          Number(item.price) *
+          Number(item.quantity),
+      }));
 
       const response = await fetch(
         `${API_URL}/api/order`,
         {
           method: "POST",
-
           headers: {
             "Content-Type": "application/json",
           },
-
-          body: JSON.stringify(orderData),
+          body: JSON.stringify({
+            customer: {
+              name: customer.name.trim(),
+              phone: customer.phone.trim(),
+              email: customer.email.trim(),
+              company: customer.company.trim(),
+              location: customer.location.trim(),
+            },
+            items: orderItems,
+            notes: customer.notes.trim(),
+          }),
         }
       );
 
-      /* -----------------------------------------------------
-         HANDLE NON-JSON RESPONSE SAFELY
-         ----------------------------------------------------- */
+      const responseText =
+        await response.text();
 
-      const rawResponse = await response.text();
+      let data = {};
 
-      let data;
-
-      try {
-        data = JSON.parse(rawResponse);
-      } catch {
-        throw new Error(
-          "The server returned an invalid response. Please make sure the backend is running."
-        );
+      if (responseText) {
+        try {
+          data = JSON.parse(responseText);
+        } catch {
+          data = {
+            message: responseText,
+          };
+        }
       }
 
-      /* -----------------------------------------------------
-         HANDLE BACKEND ERROR
-         ----------------------------------------------------- */
-
-      if (!response.ok || !data.success) {
+      if (!response.ok || !data?.success) {
         throw new Error(
-          data.message ||
+          data?.message ||
             "Unable to submit your order."
         );
       }
 
-      /* -----------------------------------------------------
-         SUCCESS
-         ----------------------------------------------------- */
+      // --------------------------------------------
+      // SUCCESS
+      // --------------------------------------------
 
-      setOrderId(data.orderId || "");
+      setSuccessOrder(data.order || data);
 
+      // Clear shared cart
       setCart([]);
 
-      setCustomer({
-        name: "",
-        phone: "",
-        email: "",
-        company: "",
-        location: "",
-        notes: "",
-      });
+      // Clear customer form
+      setCustomer({ ...emptyCustomer });
 
-      setShowCheckout(false);
+      // Close order modal
+      setShowOrder(false);
 
-      setShowCart(false);
+      // Clear error
+      setErrorMessage("");
 
-      setShowSuccess(true);
+      // --------------------------------------------
+      // REFRESH ORDERED QUANTITIES
+      // --------------------------------------------
 
-      /* -----------------------------------------------------
-         REFRESH ORDERED QUANTITIES
-         ----------------------------------------------------- */
+      try {
+        const quantityResponse =
+          await fetch(
+            `${API_URL}/api/product-order-quantities`
+          );
 
-      await loadOrderedQuantities();
+        if (quantityResponse.ok) {
+          const quantityData =
+            await quantityResponse.json();
+
+          if (
+            quantityData?.success &&
+            quantityData?.quantities
+          ) {
+            setOrderedQuantities(
+              quantityData.quantities
+            );
+          }
+        }
+      } catch (quantityError) {
+        console.error(
+          "Unable to refresh quantities:",
+          quantityError
+        );
+      }
     } catch (error) {
       console.error(
         "ORDER SUBMISSION ERROR:",
         error
       );
 
-      setError(
-        error.message ||
-          "Unable to submit your order. Please try again."
+      setErrorMessage(
+        error?.message ||
+          "Something went wrong while submitting your order."
       );
     } finally {
       setSubmitting(false);
     }
   };
 
-  /* =========================================================
-     CLOSE ALL MODALS
-     ========================================================= */
-
-  const closeProductDetails = () => {
-    setSelectedProduct(null);
-  };
-
-  const closeCart = () => {
-    setShowCart(false);
-  };
-
-  const closeCheckout = () => {
-    if (!submitting) {
-      setShowCheckout(false);
-      setError("");
-    }
-  };
+  // ====================================================
+  // CLOSE SUCCESS
+  // ====================================================
 
   const closeSuccess = () => {
-    setShowSuccess(false);
-    setOrderId("");
+    setSuccessOrder(null);
+    setErrorMessage("");
   };
 
-  /* =========================================================
-     RENDER
-     ========================================================= */
+  // ====================================================
+  // FORMAT PRICE
+  // ====================================================
+
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      maximumFractionDigits: 0,
+    }).format(Number(price) || 0);
+  };
+
+  // ====================================================
+  // RENDER
+  // ====================================================
 
   return (
-    <section className="ccq-section">
+    <main className="ccq-page">
 
-      {/* =====================================================
+      {/* =================================================
           PAGE HEADER
-          ===================================================== */}
+      ================================================= */}
 
-      <div className="ccq-header">
+      <section className="ccq-page-header">
+        <div className="ccq-page-header-inner">
+          <span className="ccq-eyebrow">
+            CLEAN N CLEAR
+          </span>
 
-        <span className="ccq-label">
-          CLEANING TOOLS
-        </span>
+          <h1>Cleaning Tools</h1>
 
-        <h1 className="ccq-title">
-          Professional Cleaning Tools
-        </h1>
+          <p>
+            Reliable cleaning tools designed
+            for household, commercial and
+            institutional cleaning
+            requirements.
+          </p>
+        </div>
+      </section>
 
-        <p className="ccq-intro">
-          Explore our range of cleaning tools for
-          household, commercial and institutional
-          cleaning requirements.
-        </p>
+      {/* =================================================
+          PRODUCT SECTION
+      ================================================= */}
 
-      </div>
+      <section className="ccq-products-section">
+        <div className="ccq-products-container">
 
-      {/* =====================================================
-          MY ORDER BUTTON
-          ===================================================== */}
+          <div className="ccq-section-heading">
+            <div>
+              <span className="ccq-section-label">
+                OUR PRODUCTS
+              </span>
 
-      <button
-        type="button"
-        className="ccq-cart-button"
-        onClick={() => {
-          setError("");
-          setShowCart(true);
-        }}
-      >
-        <span>
-          My Order
-        </span>
+              <h2>
+                Cleaning Tools &amp; Accessories
+              </h2>
+            </div>
 
-        <strong>
-          {cartCount}
-        </strong>
-      </button>
-
-      {/* =====================================================
-          PRODUCT GRID
-          ===================================================== */}
-
-      <div className="ccq-grid">
-
-        {products.map((product) => {
-
-          const orderedQuantity =
-            Number(
-              orderedQuantities[product.id]
-            ) || 0;
-
-          return (
-            <article
-              className="ccq-card"
-              key={product.id}
-            >
-
-              {/* PRODUCT IMAGE */}
-
+            {cartCount > 0 && (
               <button
                 type="button"
-                className="ccq-image-button"
-                onClick={() =>
-                  openProductDetails(product)
-                }
-                aria-label={`View ${product.name} details`}
+                className="ccq-order-top-button"
+                onClick={() => {
+                  setErrorMessage("");
+                  setShowOrder(true);
+                }}
               >
-
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="ccq-product-image"
-                />
-
+                My Order
+                <span>{cartCount}</span>
               </button>
+            )}
+          </div>
 
-              {/* PRODUCT CONTENT */}
+          {/* =================================================
+              PRODUCT GRID
+          ================================================= */}
 
-              <div className="ccq-card-content">
+          <div className="ccq-product-grid">
+            {products.map((product) => {
+              const ordered = Number(
+                orderedQuantities[product.id] || 0
+              );
 
-                <span className="ccq-category">
-                  {product.category}
-                </span>
-
-                <h2 className="ccq-product-name">
-                  {product.name}
-                </h2>
-
-                <div className="ccq-price">
-                  {formatPrice(product.price)}
-                </div>
-
-                <div className="ccq-unit">
-                  Per {product.unit}
-                </div>
-
-                {/* ORDERED QUANTITY */}
-
-                {orderedQuantity > 0 && (
-                  <div className="ccq-ordered">
-                    Ordered: {orderedQuantity}
-                  </div>
-                )}
-
-                {/* =================================================
-                    IMPORTANT:
-                    ORDER BUTTON NOW OPENS PRODUCT DETAILS
-                    ================================================= */}
-
-                <button
-                  type="button"
-                  className="ccq-add-button"
-                  onClick={() =>
-                    openProductDetails(product)
-                  }
+              return (
+                <article
+                  className="ccq-product-card"
+                  key={product.id}
                 >
-                  Order
-                </button>
+                  {/* IMAGE */}
 
-              </div>
+                  <button
+                    type="button"
+                    className="ccq-product-image-button"
+                    onClick={() =>
+                      setShowProduct(product)
+                    }
+                    aria-label={`View ${product.name}`}
+                  >
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                    />
+                  </button>
 
-            </article>
-          );
-        })}
+                  {/* CONTENT */}
 
-      </div>
+                  <div className="ccq-product-content">
+                    <h3>{product.name}</h3>
 
-      {/* =====================================================
-          PRODUCT DETAILS MODAL
-          ===================================================== */}
+                    <div className="ccq-product-price">
+                      <strong>
+                        {formatPrice(product.price)}
+                      </strong>
 
-      {selectedProduct && (
+                      <span>
+                        / {product.unit}
+                      </span>
+                    </div>
 
+                    {ordered > 0 && (
+                      <div className="ccq-ordered-count">
+                        Ordered: {ordered}
+                      </div>
+                    )}
+
+                    <button
+                      type="button"
+                      className="ccq-add-button"
+                      onClick={() =>
+                        addToCart(product)
+                      }
+                    >
+                      Add to Order
+                    </button>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* =================================================
+          PRODUCT MODAL
+      ================================================= */}
+
+      {showProduct && (
         <div
           className="ccq-overlay"
-          onClick={closeProductDetails}
+          onClick={() => setShowProduct(null)}
         >
-
           <div
-            className="ccq-product-modal"
+            className="ccq-dialog ccq-product-dialog"
             onClick={(event) =>
               event.stopPropagation()
             }
           >
-
-            {/* CLOSE */}
-
             <button
               type="button"
-              className="ccq-close"
-              onClick={closeProductDetails}
-              aria-label="Close product details"
+              className="ccq-close-button"
+              onClick={() =>
+                setShowProduct(null)
+              }
+              aria-label="Close"
             >
               ×
             </button>
 
-            {/* IMAGE */}
-
-            <div className="ccq-modal-image-wrap">
-
+            <div className="ccq-product-dialog-image">
               <img
-                src={selectedProduct.image}
-                alt={selectedProduct.name}
-                className="ccq-modal-image"
+                src={showProduct.image}
+                alt={showProduct.name}
               />
-
             </div>
 
-            {/* DETAILS */}
-
-            <div className="ccq-modal-content">
-
-              <span className="ccq-category">
-                {selectedProduct.category}
+            <div className="ccq-product-dialog-content">
+              <span className="ccq-dialog-label">
+                CLEAN N CLEAR
               </span>
 
-              <h2>
-                {selectedProduct.name}
-              </h2>
+              <h2>{showProduct.name}</h2>
 
-              <div className="ccq-modal-price">
-                {formatPrice(
-                  selectedProduct.price
-                )}
-              </div>
-
-              <p>
-                {selectedProduct.description}
-              </p>
-
-              <div className="ccq-modal-unit">
+              <div className="ccq-dialog-price">
+                {formatPrice(showProduct.price)}
 
                 <span>
-                  Pack / Unit:
+                  / {showProduct.unit}
                 </span>
-
-                <strong>
-                  {selectedProduct.unit}
-                </strong>
-
               </div>
-
-              {/* ADD TO ORDER */}
 
               <button
                 type="button"
-                className="ccq-add-large"
+                className="ccq-primary-button"
                 onClick={() =>
-                  addToCart(selectedProduct)
+                  addToCart(showProduct)
                 }
               >
                 Add to Order
               </button>
-
             </div>
-
           </div>
-
         </div>
-
       )}
 
-      {/* =====================================================
-          CART / ORDER DRAWER
-          ===================================================== */}
+      {/* =================================================
+          ORDER MODAL
+      ================================================= */}
 
-      {showCart && (
-
+      {showOrder && (
         <div
           className="ccq-overlay"
-          onClick={closeCart}
+          onClick={() => setShowOrder(false)}
         >
-
-          <aside
-            className="ccq-cart-drawer"
-            onClick={(event) =>
-              event.stopPropagation()
-            }
-          >
-
-            {/* CART HEADER */}
-
-            <div className="ccq-cart-header">
-
-              <div>
-
-                <span>
-                  YOUR ORDER
-                </span>
-
-                <h2>
-                  Order Summary
-                </h2>
-
-              </div>
-
-              <button
-                type="button"
-                className="ccq-close"
-                onClick={closeCart}
-                aria-label="Close order"
-              >
-                ×
-              </button>
-
-            </div>
-
-            {/* EMPTY CART */}
-
-            {cart.length === 0 ? (
-
-              <div className="ccq-empty">
-
-                <div className="ccq-empty-icon">
-                  🛒
-                </div>
-
-                <h3>
-                  Your order is empty
-                </h3>
-
-                <p>
-                  Add products to your order
-                  to continue.
-                </p>
-
-              </div>
-
-            ) : (
-
-              <>
-
-                {/* CART ITEMS */}
-
-                <div className="ccq-cart-items">
-
-                  {cart.map((item) => (
-
-                    <div
-                      className="ccq-cart-item"
-                      key={item.id}
-                    >
-
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                      />
-
-                      <div className="ccq-cart-item-info">
-
-                        <h3>
-                          {item.name}
-                        </h3>
-
-                        <span>
-                          {formatPrice(item.price)}
-                        </span>
-
-                        <div className="ccq-quantity">
-
-                          <button
-                            type="button"
-                            onClick={() =>
-                              updateQuantity(
-                                item.id,
-                                item.quantity - 1
-                              )
-                            }
-                            aria-label="Decrease quantity"
-                          >
-                            −
-                          </button>
-
-                          <strong>
-                            {item.quantity}
-                          </strong>
-
-                          <button
-                            type="button"
-                            onClick={() =>
-                              updateQuantity(
-                                item.id,
-                                item.quantity + 1
-                              )
-                            }
-                            aria-label="Increase quantity"
-                          >
-                            +
-                          </button>
-
-                        </div>
-
-                      </div>
-
-                      <button
-                        type="button"
-                        className="ccq-remove"
-                        onClick={() =>
-                          removeFromCart(item.id)
-                        }
-                      >
-                        Remove
-                      </button>
-
-                    </div>
-
-                  ))}
-
-                </div>
-
-                {/* CART FOOTER */}
-
-                <div className="ccq-cart-footer">
-
-                  <div className="ccq-total">
-
-                    <span>
-                      Estimated Total
-                    </span>
-
-                    <strong>
-                      ₹
-                      {cartTotal.toLocaleString(
-                        "en-IN"
-                      )}
-                    </strong>
-
-                  </div>
-
-                  <p className="ccq-payment-note">
-                    No payment is required online.
-                    Your order will be sent to our
-                    team for confirmation.
-                  </p>
-
-                  <button
-                    type="button"
-                    className="ccq-checkout-button"
-                    onClick={openCheckout}
-                  >
-                    Continue to Order
-                  </button>
-
-                </div>
-
-              </>
-
-            )}
-
-          </aside>
-
-        </div>
-
-      )}
-
-      {/* =====================================================
-          CUSTOMER CHECKOUT MODAL
-          ===================================================== */}
-
-      {showCheckout && (
-
-        <div className="ccq-overlay">
-
           <div
-            className="ccq-checkout"
+            className="ccq-dialog ccq-order-dialog"
             onClick={(event) =>
               event.stopPropagation()
             }
           >
-
-            {/* CLOSE */}
-
             <button
               type="button"
-              className="ccq-close"
-              onClick={closeCheckout}
-              disabled={submitting}
-              aria-label="Close checkout"
+              className="ccq-close-button"
+              onClick={() =>
+                setShowOrder(false)
+              }
+              aria-label="Close"
             >
               ×
             </button>
 
-            {/* HEADING */}
+            {/* HEADER */}
 
-            <div className="ccq-checkout-heading">
-
-              <span>
-                FINAL STEP
+            <div className="ccq-order-header">
+              <span className="ccq-dialog-label">
+                CLEAN N CLEAR
               </span>
 
-              <h2>
-                Customer Details
-              </h2>
+              <h2>My Order</h2>
 
               <p>
-                Enter your details and submit your
-                order request. No online payment
-                is required.
+                Review your selected
+                products and submit
+                your enquiry.
               </p>
-
             </div>
 
-            {/* ERROR */}
+            {/* CART */}
 
-            {error && (
+            <div className="ccq-cart-list">
+              {cart.length === 0 ? (
+                <div className="ccq-empty-cart">
+                  <h3>
+                    Your order is empty
+                  </h3>
 
-              <div
-                className="ccq-error"
-                role="alert"
-              >
-                {error}
-              </div>
+                  <p>
+                    Add products from
+                    the catalogue to
+                    continue.
+                  </p>
+                </div>
+              ) : (
+                cart.map((item) => (
+                  <div
+                    className="ccq-cart-item"
+                    key={item.id}
+                  >
+                    <div className="ccq-cart-image">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                      />
+                    </div>
 
-            )}
+                    <div className="ccq-cart-info">
+                      <h3>{item.name}</h3>
 
-            {/* FORM */}
+                      <span>
+                        {formatPrice(item.price)}
+                        {" / "}
+                        {item.unit}
+                      </span>
 
-            <form
-              className="ccq-form"
-              onSubmit={submitOrder}
-            >
+                      <div className="ccq-quantity-row">
+                        <button
+                          type="button"
+                          onClick={() =>
+                            updateQuantity(
+                              item.id,
+                              -1
+                            )
+                          }
+                          aria-label={`Decrease ${item.name}`}
+                        >
+                          −
+                        </button>
 
-              <div className="ccq-form-grid">
+                        <strong>
+                          {item.quantity}
+                        </strong>
 
-                {/* NAME */}
+                        <button
+                          type="button"
+                          onClick={() =>
+                            updateQuantity(
+                              item.id,
+                              1
+                            )
+                          }
+                          aria-label={`Increase ${item.name}`}
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
 
-                <div className="ccq-field">
+                    <div className="ccq-cart-item-right">
+                      <strong>
+                        {formatPrice(
+                          Number(item.price) *
+                            Number(item.quantity)
+                        )}
+                      </strong>
 
-                  <label htmlFor="ccq-name">
-                    Full Name *
-                  </label>
+                      <button
+                        type="button"
+                        className="ccq-remove-button"
+                        onClick={() =>
+                          removeFromCart(
+                            item.id
+                          )
+                        }
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
 
-                  <input
-                    id="ccq-name"
-                    type="text"
-                    name="name"
-                    value={customer.name}
-                    onChange={
-                      handleCustomerChange
-                    }
-                    placeholder="Enter your full name"
-                    required
-                  />
+            {/* TOTAL + FORM */}
 
+            {cart.length > 0 && (
+              <>
+                <div className="ccq-cart-total">
+                  <span>
+                    Estimated Total
+                  </span>
+
+                  <strong>
+                    {formatPrice(cartTotal)}
+                  </strong>
                 </div>
 
-                {/* PHONE */}
+                {/* CUSTOMER FORM */}
 
-                <div className="ccq-field">
+                <form
+                  className="ccq-order-form"
+                  onSubmit={handleSubmitOrder}
+                >
+                  <div className="ccq-form-title">
+                    <h3>
+                      Customer Details
+                    </h3>
 
-                  <label htmlFor="ccq-phone">
-                    Phone Number *
-                  </label>
+                    <p>
+                      Please provide
+                      your details for
+                      our team to
+                      contact you.
+                    </p>
+                  </div>
 
-                  <input
-                    id="ccq-phone"
-                    type="tel"
-                    name="phone"
-                    value={customer.phone}
-                    onChange={
-                      handleCustomerChange
-                    }
-                    placeholder="Enter your phone number"
-                    required
-                  />
+                  <div className="ccq-form-grid">
 
-                </div>
+                    {/* NAME */}
 
-                {/* EMAIL */}
+                    <div className="ccq-field">
+                      <label htmlFor="tools-name">
+                        Name *
+                      </label>
 
-                <div className="ccq-field">
+                      <input
+                        id="tools-name"
+                        type="text"
+                        name="name"
+                        value={customer.name}
+                        onChange={
+                          handleCustomerChange
+                        }
+                        placeholder="Enter your name"
+                        required
+                      />
+                    </div>
 
-                  <label htmlFor="ccq-email">
-                    Email Address
-                  </label>
+                    {/* PHONE */}
 
-                  <input
-                    id="ccq-email"
-                    type="email"
-                    name="email"
-                    value={customer.email}
-                    onChange={
-                      handleCustomerChange
-                    }
-                    placeholder="Enter your email"
-                  />
+                    <div className="ccq-field">
+                      <label htmlFor="tools-phone">
+                        Phone Number *
+                      </label>
 
-                </div>
+                      <input
+                        id="tools-phone"
+                        type="tel"
+                        name="phone"
+                        value={customer.phone}
+                        onChange={
+                          handleCustomerChange
+                        }
+                        placeholder="Enter phone number"
+                        required
+                      />
+                    </div>
 
-                {/* COMPANY */}
+                    {/* EMAIL */}
 
-                <div className="ccq-field">
+                    <div className="ccq-field">
+                      <label htmlFor="tools-email">
+                        Email
+                      </label>
 
-                  <label htmlFor="ccq-company">
-                    Company / Organization
-                  </label>
+                      <input
+                        id="tools-email"
+                        type="email"
+                        name="email"
+                        value={customer.email}
+                        onChange={
+                          handleCustomerChange
+                        }
+                        placeholder="Enter email address"
+                      />
+                    </div>
 
-                  <input
-                    id="ccq-company"
-                    type="text"
-                    name="company"
-                    value={customer.company}
-                    onChange={
-                      handleCustomerChange
-                    }
-                    placeholder="Company name"
-                  />
+                    {/* COMPANY */}
 
-                </div>
+                    <div className="ccq-field">
+                      <label htmlFor="tools-company">
+                        Company
+                      </label>
 
-              </div>
+                      <input
+                        id="tools-company"
+                        type="text"
+                        name="company"
+                        value={customer.company}
+                        onChange={
+                          handleCustomerChange
+                        }
+                        placeholder="Company name"
+                      />
+                    </div>
 
-              {/* LOCATION */}
+                    {/* LOCATION */}
 
-              <div className="ccq-field">
+                    <div className="ccq-field ccq-field-full">
+                      <label htmlFor="tools-location">
+                        Location *
+                      </label>
 
-                <label htmlFor="ccq-location">
-                  Delivery / Location *
-                </label>
+                      <input
+                        id="tools-location"
+                        type="text"
+                        name="location"
+                        value={customer.location}
+                        onChange={
+                          handleCustomerChange
+                        }
+                        placeholder="City / Location"
+                        required
+                      />
+                    </div>
 
-                <textarea
-                  id="ccq-location"
-                  name="location"
-                  value={customer.location}
-                  onChange={
-                    handleCustomerChange
-                  }
-                  placeholder="Enter delivery location / address"
-                  rows="3"
-                  required
-                />
+                    {/* NOTES */}
 
-              </div>
+                    <div className="ccq-field ccq-field-full">
+                      <label htmlFor="tools-notes">
+                        Additional Requirements
+                      </label>
 
-              {/* NOTES */}
+                      <textarea
+                        id="tools-notes"
+                        name="notes"
+                        value={customer.notes}
+                        onChange={
+                          handleCustomerChange
+                        }
+                        placeholder="Tell us about your requirement..."
+                        rows="4"
+                      />
+                    </div>
+                  </div>
 
-              <div className="ccq-field">
+                  {/* ERROR */}
 
-                <label htmlFor="ccq-notes">
-                  Additional Notes
-                </label>
-
-                <textarea
-                  id="ccq-notes"
-                  name="notes"
-                  value={customer.notes}
-                  onChange={
-                    handleCustomerChange
-                  }
-                  placeholder="Any additional requirements..."
-                  rows="3"
-                />
-
-              </div>
-
-              {/* ORDER TOTAL */}
-
-              <div className="ccq-checkout-total">
-
-                <span>
-                  Order Total
-                </span>
-
-                <strong>
-                  ₹
-                  {cartTotal.toLocaleString(
-                    "en-IN"
+                  {errorMessage && (
+                    <div className="ccq-error-message">
+                      {errorMessage}
+                    </div>
                   )}
-                </strong>
 
-              </div>
+                  {/* NO PAYMENT MESSAGE */}
 
-              {/* SUBMIT */}
+                  <div className="ccq-payment-note">
+                    No online payment is required.
+                    Final pricing, availability
+                    and delivery details will be
+                    confirmed by our team.
+                  </div>
 
-              <button
-                type="submit"
-                className="ccq-submit"
-                disabled={submitting}
-              >
-                {submitting
-                  ? "Submitting Order..."
-                  : "Submit Order"}
-              </button>
+                  {/* SUBMIT */}
 
-            </form>
-
+                  <button
+                    type="submit"
+                    className="ccq-submit-button"
+                    disabled={submitting}
+                  >
+                    {submitting
+                      ? "Submitting..."
+                      : "Submit Order"}
+                  </button>
+                </form>
+              </>
+            )}
           </div>
-
         </div>
-
       )}
 
-      {/* =====================================================
+      {/* =================================================
           SUCCESS MODAL
-          ===================================================== */}
+      ================================================= */}
 
-      {showSuccess && (
-
+      {successOrder && (
         <div className="ccq-overlay">
-
-          <div className="ccq-success">
+          <div className="ccq-dialog ccq-success-dialog">
 
             <div className="ccq-success-icon">
               ✓
             </div>
 
-            <span className="ccq-success-label">
+            <span className="ccq-dialog-label">
               ORDER RECEIVED
             </span>
 
-            <h2>
-              Thank You!
-            </h2>
+            <h2>Thank You!</h2>
 
             <p>
-              Your order request has been
-              successfully submitted.
+              Your order has been
+              submitted successfully.
+              Our team will review
+              your requirement and
+              contact you shortly.
             </p>
 
-            {orderId && (
-
-              <div className="ccq-order-id">
-
+            {(successOrder?.id ||
+              successOrder?.orderId) && (
+              <div className="ccq-order-number">
                 <span>
                   Order Number
                 </span>
 
                 <strong>
-                  {orderId}
+                  {successOrder.id ||
+                    successOrder.orderId}
                 </strong>
-
               </div>
-
             )}
-
-            <p className="ccq-success-note">
-              Our team will contact you to
-              confirm the order and further
-              details.
-            </p>
 
             <button
               type="button"
-              className="ccq-submit"
+              className="ccq-primary-button"
               onClick={closeSuccess}
             >
-              Done
+              Continue Shopping
             </button>
-
           </div>
-
         </div>
-
       )}
-
-    </section>
+    </main>
   );
 };
 

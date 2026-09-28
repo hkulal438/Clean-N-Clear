@@ -8,10 +8,13 @@ import RideOnScrubberDryer from "../../images/ProffessionalEquipment/Ride on Scr
 import RideOnSweeper from "../../images/ProffessionalEquipment/Ride on Sweeper 18CL.png";
 import SteamVacuumCleaner from "../../images/ProffessionalEquipment/STEAM VACUUM CLEANER.png";
 
+import {
+  getOrderCart,
+  updateOrderCart,
+} from "../../utils/OrderCart";
 
 const API_URL =
   import.meta.env.VITE_API_URL || "http://localhost:5000";
-
 
 /* =========================================================
    PRODUCTS
@@ -85,16 +88,30 @@ const products = [
   },
 ];
 
+/* =========================================================
+   EMPTY CUSTOMER
+   ========================================================= */
+
+const emptyCustomer = {
+  name: "",
+  phone: "",
+  email: "",
+  company: "",
+  location: "",
+};
 
 /* =========================================================
    COMPONENT
    ========================================================= */
 
 const ProffessionalEquiment = () => {
-
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  const [cart, setCart] = useState([]);
+  /* =======================================================
+     SHARED ORDER CART
+     ======================================================= */
+
+  const [cart, setCart] = useState(() => getOrderCart());
 
   const [showCart, setShowCart] = useState(false);
 
@@ -104,21 +121,26 @@ const ProffessionalEquiment = () => {
 
   const [loading, setLoading] = useState(false);
 
-  const [orderedQuantities, setOrderedQuantities] = useState({});
+  const [orderedQuantities, setOrderedQuantities] =
+    useState({});
 
-  const [loadingOrderedQuantities, setLoadingOrderedQuantities] =
-    useState(true);
+  const [
+    loadingOrderedQuantities,
+    setLoadingOrderedQuantities,
+  ] = useState(true);
 
-  const [customer, setCustomer] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    company: "",
-    location: "",
-  });
+  const [customer, setCustomer] =
+    useState(emptyCustomer);
 
   const [notes, setNotes] = useState("");
 
+  /* =========================================================
+     SAVE CART TO SHARED ORDER CART
+     ========================================================= */
+
+  useEffect(() => {
+    updateOrderCart(cart);
+  }, [cart]);
 
   /* =========================================================
      LOAD ORDERED QUANTITIES
@@ -142,23 +164,17 @@ const ProffessionalEquiment = () => {
       }
 
       setOrderedQuantities(data.quantities || {});
-
     } catch (error) {
-
       console.error(
         "Unable to load ordered quantities:",
         error
       );
 
       setOrderedQuantities({});
-
     } finally {
-
       setLoadingOrderedQuantities(false);
-
     }
   };
-
 
   /* =========================================================
      LOAD ON PAGE OPEN
@@ -168,18 +184,16 @@ const ProffessionalEquiment = () => {
     loadOrderedQuantities();
   }, []);
 
-
   /* =========================================================
      BODY SCROLL LOCK
      ========================================================= */
 
   useEffect(() => {
-
     const modalOpen =
-      selectedProduct ||
+      Boolean(selectedProduct) ||
       showCart ||
       showCheckout ||
-      orderSuccess;
+      Boolean(orderSuccess);
 
     if (modalOpen) {
       document.body.style.overflow = "hidden";
@@ -190,14 +204,12 @@ const ProffessionalEquiment = () => {
     return () => {
       document.body.style.overflow = "";
     };
-
   }, [
     selectedProduct,
     showCart,
     showCheckout,
     orderSuccess,
   ]);
-
 
   /* =========================================================
      FORMAT PRICE
@@ -207,62 +219,53 @@ const ProffessionalEquiment = () => {
     return `₹${Number(price).toLocaleString("en-IN")}`;
   };
 
-
   /* =========================================================
-     ADD TO CART
+     ADD TO ORDER
      ========================================================= */
 
   const addToCart = (product) => {
-
     setCart((previousCart) => {
-
       const existingProduct = previousCart.find(
         (item) => item.id === product.id
       );
 
       if (existingProduct) {
-
         return previousCart.map((item) =>
           item.id === product.id
             ? {
                 ...item,
-                quantity: item.quantity + 1,
+                quantity:
+                  Number(item.quantity || 0) + 1,
               }
             : item
         );
-
       }
 
       return [
         ...previousCart,
-
         {
           ...product,
           quantity: 1,
         },
       ];
-
     });
 
-    /*
-      IMPORTANT:
-      After clicking Add to Order,
-      automatically open My Order.
-    */
-
     setSelectedProduct(null);
-
     setShowCart(true);
   };
-
 
   /* =========================================================
      UPDATE QUANTITY
      ========================================================= */
 
   const updateQuantity = (id, quantity) => {
+    const nextQuantity = Number(quantity);
 
-    if (quantity < 1) {
+    if (!Number.isFinite(nextQuantity)) {
+      return;
+    }
+
+    if (nextQuantity < 1) {
       removeFromCart(id);
       return;
     }
@@ -272,29 +275,24 @@ const ProffessionalEquiment = () => {
         item.id === id
           ? {
               ...item,
-              quantity,
+              quantity: nextQuantity,
             }
           : item
       )
     );
-
   };
-
 
   /* =========================================================
      REMOVE PRODUCT
      ========================================================= */
 
   const removeFromCart = (id) => {
-
     setCart((previousCart) =>
       previousCart.filter(
         (item) => item.id !== id
       )
     );
-
   };
-
 
   /* =========================================================
      CART COUNT
@@ -305,7 +303,6 @@ const ProffessionalEquiment = () => {
       total + Number(item.quantity || 0),
     0
   );
-
 
   /* =========================================================
      CART TOTAL
@@ -319,96 +316,110 @@ const ProffessionalEquiment = () => {
     0
   );
 
-
   /* =========================================================
      CUSTOMER INPUT
      ========================================================= */
 
   const handleCustomerChange = (event) => {
-
-    const {
-      name,
-      value,
-    } = event.target;
+    const { name, value } = event.target;
 
     setCustomer((previousCustomer) => ({
       ...previousCustomer,
       [name]: value,
     }));
-
   };
 
-
   /* =========================================================
-     CONTINUE TO CUSTOMER DETAILS
+     OPEN CHECKOUT
      ========================================================= */
 
   const openCheckout = () => {
-
     if (cart.length === 0) {
-
       alert(
         "Please add at least one product to your order."
       );
-
       return;
     }
 
     setShowCart(false);
-
     setShowCheckout(true);
   };
-
 
   /* =========================================================
      SUBMIT ORDER
      ========================================================= */
 
   const submitOrder = async (event) => {
-
     event.preventDefault();
 
     if (cart.length === 0) {
-
       alert(
         "Please add at least one product to your order."
       );
-
       return;
     }
 
+    const name = customer.name.trim();
+    const phone = customer.phone.trim();
+    const email = customer.email.trim();
+    const company = customer.company.trim();
+    const location = customer.location.trim();
 
-    if (
-      !customer.name.trim() ||
-      !customer.phone.trim() ||
-      !customer.location.trim()
-    ) {
+    /* -------------------------------------------------------
+       REQUIRED FIELDS
+       ------------------------------------------------------- */
 
+    if (!name || !phone || !location) {
       alert(
         "Please enter your name, phone number and location."
       );
-
       return;
     }
 
+    /* -------------------------------------------------------
+       PHONE VALIDATION
+       ------------------------------------------------------- */
+
+    const phoneDigits = phone.replace(/\D/g, "");
+
+    if (
+      phoneDigits.length < 7 ||
+      phoneDigits.length > 15
+    ) {
+      alert(
+        "Please enter a valid phone number."
+      );
+      return;
+    }
+
+    /* -------------------------------------------------------
+       EMAIL VALIDATION
+       ------------------------------------------------------- */
+
+    if (
+      email &&
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+        email
+      )
+    ) {
+      alert(
+        "Please enter a valid email address."
+      );
+      return;
+    }
 
     try {
-
       setLoading(true);
 
-
-      /*
-        Send only product ID + quantity.
-
-        Backend calculates the actual
-        product prices itself.
-      */
+      /* -----------------------------------------------------
+         SEND ONLY PRODUCT IDS + QUANTITIES
+         Backend calculates product information and prices.
+         ----------------------------------------------------- */
 
       const orderItems = cart.map((item) => ({
         id: item.id,
         quantity: Number(item.quantity),
       }));
-
 
       const response = await fetch(
         `${API_URL}/api/order`,
@@ -420,67 +431,64 @@ const ProffessionalEquiment = () => {
           },
 
           body: JSON.stringify({
-            customer,
+            customer: {
+              name,
+              phone,
+              email,
+              company,
+              location,
+            },
+
             items: orderItems,
-            notes,
+
+            notes: notes.trim(),
           }),
         }
       );
 
-
       const data = await response.json();
 
-
       if (!response.ok || !data.success) {
-
         throw new Error(
           data.message ||
             "Unable to submit order."
         );
-
       }
 
-
-      /*
-        Save complete response.
-
-        Your backend returns:
-        data.order.id
-      */
+      /* -----------------------------------------------------
+         SHOW SUCCESS
+         ----------------------------------------------------- */
 
       setOrderSuccess(data);
 
-
-      /* Clear cart */
+      /* -----------------------------------------------------
+         CLEAR SHARED CART
+         ----------------------------------------------------- */
 
       setCart([]);
 
-
-      /* Clear customer form */
+      /* -----------------------------------------------------
+         CLEAR CUSTOMER DETAILS
+         ----------------------------------------------------- */
 
       setCustomer({
-        name: "",
-        phone: "",
-        email: "",
-        company: "",
-        location: "",
+        ...emptyCustomer,
       });
-
 
       setNotes("");
 
-
-      /* Close checkout */
+      /* -----------------------------------------------------
+         CLOSE CHECKOUT
+         ----------------------------------------------------- */
 
       setShowCheckout(false);
 
-
-      /* Refresh ordered quantities */
+      /* -----------------------------------------------------
+         REFRESH ORDERED QUANTITIES
+         ----------------------------------------------------- */
 
       await loadOrderedQuantities();
-
     } catch (error) {
-
       console.error(
         "Order submission error:",
         error
@@ -490,48 +498,41 @@ const ProffessionalEquiment = () => {
         error.message ||
           "Unable to submit the order. Please try again."
       );
-
     } finally {
-
       setLoading(false);
-
     }
-
   };
 
-
   /* =========================================================
-     CLOSE ALL MODALS
+     CLOSE FUNCTIONS
      ========================================================= */
 
   const closeProductModal = () => {
     setSelectedProduct(null);
   };
 
-
   const closeCart = () => {
     setShowCart(false);
   };
 
-
   const closeCheckout = () => {
+    if (loading) {
+      return;
+    }
+
     setShowCheckout(false);
   };
-
 
   const closeSuccess = () => {
     setOrderSuccess(null);
   };
-
 
   /* =========================================================
      JSX
      ========================================================= */
 
   return (
-
     <section className="ccq-section">
-
 
       {/* =====================================================
           PAGE HEADER
@@ -565,8 +566,8 @@ const ProffessionalEquiment = () => {
         type="button"
         className="ccq-cart-button"
         onClick={() => setShowCart(true)}
+        aria-label={`My Order - ${cartCount} items`}
       >
-
         <span>
           My Order
         </span>
@@ -574,7 +575,6 @@ const ProffessionalEquiment = () => {
         <strong>
           {cartCount}
         </strong>
-
       </button>
 
 
@@ -585,20 +585,16 @@ const ProffessionalEquiment = () => {
       <div className="ccq-grid">
 
         {products.map((product) => {
-
           const orderedQuantity =
             Number(
               orderedQuantities[product.id]
             ) || 0;
 
-
           return (
-
             <article
               className="ccq-card"
               key={product.id}
             >
-
 
               {/* IMAGE */}
 
@@ -608,14 +604,14 @@ const ProffessionalEquiment = () => {
                 onClick={() =>
                   setSelectedProduct(product)
                 }
+                aria-label={`View ${product.name}`}
               >
-
                 <img
                   src={product.image}
                   alt={product.name}
                   className="ccq-product-image"
+                  loading="lazy"
                 />
-
               </button>
 
 
@@ -627,16 +623,13 @@ const ProffessionalEquiment = () => {
                   {product.category}
                 </span>
 
-
                 <h2 className="ccq-product-name">
                   {product.name}
                 </h2>
 
-
                 <div className="ccq-price">
                   {formatPrice(product.price)}
                 </div>
-
 
                 <div className="ccq-unit">
                   {product.unit}
@@ -647,11 +640,9 @@ const ProffessionalEquiment = () => {
 
                 {!loadingOrderedQuantities &&
                   orderedQuantity > 0 && (
-
                     <div className="ccq-ordered">
                       Ordered: {orderedQuantity}
                     </div>
-
                   )}
 
 
@@ -670,9 +661,7 @@ const ProffessionalEquiment = () => {
               </div>
 
             </article>
-
           );
-
         })}
 
       </div>
@@ -683,10 +672,10 @@ const ProffessionalEquiment = () => {
           ===================================================== */}
 
       {selectedProduct && (
-
         <div
           className="ccq-overlay"
           onClick={closeProductModal}
+          role="presentation"
         >
 
           <div
@@ -694,15 +683,16 @@ const ProffessionalEquiment = () => {
             onClick={(event) =>
               event.stopPropagation()
             }
+            role="dialog"
+            aria-modal="true"
+            aria-label={selectedProduct.name}
           >
-
-
-            {/* CLOSE */}
 
             <button
               type="button"
               className="ccq-close"
               onClick={closeProductModal}
+              aria-label="Close product details"
             >
               ×
             </button>
@@ -729,11 +719,9 @@ const ProffessionalEquiment = () => {
                 {selectedProduct.category}
               </span>
 
-
               <h2>
                 {selectedProduct.name}
               </h2>
-
 
               <div className="ccq-modal-price">
                 {formatPrice(
@@ -741,11 +729,9 @@ const ProffessionalEquiment = () => {
                 )}
               </div>
 
-
               <p>
                 {selectedProduct.description}
               </p>
-
 
               <div className="ccq-modal-unit">
 
@@ -758,7 +744,6 @@ const ProffessionalEquiment = () => {
                 </strong>
 
               </div>
-
 
               <button
                 type="button"
@@ -775,7 +760,6 @@ const ProffessionalEquiment = () => {
           </div>
 
         </div>
-
       )}
 
 
@@ -784,10 +768,10 @@ const ProffessionalEquiment = () => {
           ===================================================== */}
 
       {showCart && (
-
         <div
           className="ccq-overlay"
           onClick={closeCart}
+          role="presentation"
         >
 
           <aside
@@ -795,8 +779,10 @@ const ProffessionalEquiment = () => {
             onClick={(event) =>
               event.stopPropagation()
             }
+            role="dialog"
+            aria-modal="true"
+            aria-label="Order Summary"
           >
-
 
             {/* CART HEADER */}
 
@@ -814,11 +800,11 @@ const ProffessionalEquiment = () => {
 
               </div>
 
-
               <button
                 type="button"
                 className="ccq-close"
                 onClick={closeCart}
+                aria-label="Close order summary"
               >
                 ×
               </button>
@@ -851,7 +837,6 @@ const ProffessionalEquiment = () => {
 
               <>
 
-
                 {/* CART ITEMS */}
 
                 <div className="ccq-cart-items">
@@ -863,16 +848,11 @@ const ProffessionalEquiment = () => {
                       key={item.id}
                     >
 
-
-                      {/* IMAGE */}
-
                       <img
                         src={item.image}
                         alt={item.name}
                       />
 
-
-                      {/* INFO */}
 
                       <div className="ccq-cart-item-info">
 
@@ -881,9 +861,12 @@ const ProffessionalEquiment = () => {
                         </h3>
 
                         <span>
-                          {formatPrice(item.price)}
+                          {formatPrice(item.price)}{" "}
+                          / {item.unit}
                         </span>
 
+
+                        {/* QUANTITY */}
 
                         <div className="ccq-quantity">
 
@@ -892,27 +875,27 @@ const ProffessionalEquiment = () => {
                             onClick={() =>
                               updateQuantity(
                                 item.id,
-                                item.quantity - 1
+                                Number(item.quantity) - 1
                               )
                             }
+                            aria-label={`Decrease ${item.name} quantity`}
                           >
                             −
                           </button>
 
-
                           <strong>
                             {item.quantity}
                           </strong>
-
 
                           <button
                             type="button"
                             onClick={() =>
                               updateQuantity(
                                 item.id,
-                                item.quantity + 1
+                                Number(item.quantity) + 1
                               )
                             }
+                            aria-label={`Increase ${item.name} quantity`}
                           >
                             +
                           </button>
@@ -961,8 +944,6 @@ const ProffessionalEquiment = () => {
                   </div>
 
 
-                  {/* CONTINUE */}
-
                   <button
                     type="button"
                     className="ccq-checkout-button"
@@ -995,7 +976,6 @@ const ProffessionalEquiment = () => {
           </aside>
 
         </div>
-
       )}
 
 
@@ -1005,17 +985,24 @@ const ProffessionalEquiment = () => {
 
       {showCheckout && (
 
-        <div className="ccq-overlay">
+        <div
+          className="ccq-overlay"
+          role="presentation"
+        >
 
-          <div className="ccq-checkout">
-
-
-            {/* CLOSE */}
+          <div
+            className="ccq-checkout"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Customer Details"
+          >
 
             <button
               type="button"
               className="ccq-close"
               onClick={closeCheckout}
+              disabled={loading}
+              aria-label="Close customer details"
             >
               ×
             </button>
@@ -1049,28 +1036,26 @@ const ProffessionalEquiment = () => {
               onSubmit={submitOrder}
             >
 
-
               {/* CUSTOMER GRID */}
 
               <div className="ccq-form-grid">
-
 
                 {/* NAME */}
 
                 <div className="ccq-field">
 
-                  <label>
+                  <label htmlFor="cnc-equipment-name">
                     Full Name *
                   </label>
 
                   <input
+                    id="cnc-equipment-name"
                     type="text"
                     name="name"
                     value={customer.name}
-                    onChange={
-                      handleCustomerChange
-                    }
+                    onChange={handleCustomerChange}
                     placeholder="Enter your full name"
+                    autoComplete="name"
                     required
                   />
 
@@ -1081,18 +1066,19 @@ const ProffessionalEquiment = () => {
 
                 <div className="ccq-field">
 
-                  <label>
+                  <label htmlFor="cnc-equipment-phone">
                     Phone Number *
                   </label>
 
                   <input
+                    id="cnc-equipment-phone"
                     type="tel"
                     name="phone"
                     value={customer.phone}
-                    onChange={
-                      handleCustomerChange
-                    }
+                    onChange={handleCustomerChange}
                     placeholder="Enter your phone number"
+                    autoComplete="tel"
+                    inputMode="tel"
                     required
                   />
 
@@ -1103,18 +1089,18 @@ const ProffessionalEquiment = () => {
 
                 <div className="ccq-field">
 
-                  <label>
+                  <label htmlFor="cnc-equipment-email">
                     Email Address
                   </label>
 
                   <input
+                    id="cnc-equipment-email"
                     type="email"
                     name="email"
                     value={customer.email}
-                    onChange={
-                      handleCustomerChange
-                    }
+                    onChange={handleCustomerChange}
                     placeholder="Enter your email"
+                    autoComplete="email"
                   />
 
                 </div>
@@ -1124,18 +1110,18 @@ const ProffessionalEquiment = () => {
 
                 <div className="ccq-field">
 
-                  <label>
+                  <label htmlFor="cnc-equipment-company">
                     Company / Organization
                   </label>
 
                   <input
+                    id="cnc-equipment-company"
                     type="text"
                     name="company"
                     value={customer.company}
-                    onChange={
-                      handleCustomerChange
-                    }
+                    onChange={handleCustomerChange}
                     placeholder="Company name"
+                    autoComplete="organization"
                   />
 
                 </div>
@@ -1147,18 +1133,18 @@ const ProffessionalEquiment = () => {
 
               <div className="ccq-field">
 
-                <label>
+                <label htmlFor="cnc-equipment-location">
                   Delivery / Location *
                 </label>
 
                 <textarea
+                  id="cnc-equipment-location"
                   name="location"
                   value={customer.location}
-                  onChange={
-                    handleCustomerChange
-                  }
+                  onChange={handleCustomerChange}
                   placeholder="Enter delivery location / address"
                   rows="3"
+                  autoComplete="street-address"
                   required
                 />
 
@@ -1169,16 +1155,15 @@ const ProffessionalEquiment = () => {
 
               <div className="ccq-field">
 
-                <label>
+                <label htmlFor="cnc-equipment-notes">
                   Additional Notes
                 </label>
 
                 <textarea
+                  id="cnc-equipment-notes"
                   value={notes}
                   onChange={(event) =>
-                    setNotes(
-                      event.target.value
-                    )
+                    setNotes(event.target.value)
                   }
                   placeholder="Any specific requirements?"
                   rows="4"
@@ -1187,7 +1172,7 @@ const ProffessionalEquiment = () => {
               </div>
 
 
-              {/* SUMMARY */}
+              {/* FINAL SUMMARY */}
 
               <div className="ccq-final-summary">
 
@@ -1202,7 +1187,6 @@ const ProffessionalEquiment = () => {
                   </strong>
 
                 </div>
-
 
                 <div>
 
@@ -1246,11 +1230,9 @@ const ProffessionalEquiment = () => {
                 className="ccq-submit"
                 disabled={loading}
               >
-
                 {loading
                   ? "Submitting Order..."
                   : "Submit Order Request"}
-
               </button>
 
             </form>
@@ -1258,35 +1240,38 @@ const ProffessionalEquiment = () => {
           </div>
 
         </div>
-
       )}
 
 
       {/* =====================================================
-          SUCCESS MESSAGE
+          SUCCESS
           ===================================================== */}
 
       {orderSuccess && (
 
-        <div className="ccq-overlay">
+        <div
+          className="ccq-overlay"
+          role="presentation"
+        >
 
-          <div className="ccq-success">
-
+          <div
+            className="ccq-success"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Order submitted successfully"
+          >
 
             <div className="ccq-success-icon">
               ✓
             </div>
 
-
             <span>
               ORDER RECEIVED
             </span>
 
-
             <h2>
               Thank You!
             </h2>
-
 
             <p>
               Your order request has been
@@ -1329,12 +1314,10 @@ const ProffessionalEquiment = () => {
           </div>
 
         </div>
-
       )}
 
     </section>
   );
 };
-
 
 export default ProffessionalEquiment;

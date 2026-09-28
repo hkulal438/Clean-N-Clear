@@ -1,0 +1,1667 @@
+/* =========================================================
+   CLEAN N CLEAR
+   PREMIUM ORDER CART PAGE
+   ========================================================= */
+
+.cnc-order-page {
+  --cnc-blue: #081fef;
+  --cnc-blue-dark: #0617b5;
+  --cnc-navy: #071642;
+  --cnc-lime: #91dc00;
+  --cnc-white: #ffffff;
+  --cnc-light: #f6f8fc;
+  --cnc-border: #dfe4ef;
+  --cnc-text: #182033;
+  --cnc-muted: #697286;
+
+  min-height: 100vh;
+
+  /* IMPORTANT:
+     Navbar is already fixed and body reserves its height.
+     Do NOT add another 132px here.
+  */
+  padding-top: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #f7f9fd 100%
+    );
+
+  color: var(--cnc-text);
+
+  font-family:
+    Cambria,
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  box-sizing: border-box;
+}
+
+.cnc-order-page *,
+.cnc-order-page *::before,
+.cnc-order-page *::after {
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
+.cnc-order-container {
+  width: min(
+    1380px,
+    calc(100% - 56px)
+  );
+
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.cnc-order-hero {
+  padding:
+    30px
+    0
+    28px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #f5f7ff 100%
+    );
+
+  border-bottom:
+    1px solid
+    #e6e9f1;
+}
+
+.cnc-order-label {
+  display: inline-block;
+
+  margin-bottom: 8px;
+
+  color: var(--cnc-blue);
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.8px;
+
+  text-transform: uppercase;
+}
+
+.cnc-order-hero h1 {
+  margin: 0;
+
+  color: var(--cnc-navy);
+
+  font-size: clamp(
+    34px,
+    3.5vw,
+    52px
+  );
+
+  font-weight: 700;
+
+  line-height: 1.05;
+
+  letter-spacing: -0.5px;
+}
+
+.cnc-order-hero p {
+  max-width: 690px;
+
+  margin:
+    11px
+    0
+    0;
+
+  color: var(--cnc-muted);
+
+  font-family:
+    Cambria,
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 16px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.cnc-order-content {
+  padding:
+    28px
+    0
+    55px;
+}
+
+
+/* =========================================================
+   MAIN GRID
+   ========================================================= */
+
+.cnc-order-layout {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.7fr)
+    minmax(340px, 0.8fr);
+
+  gap: 32px;
+
+  align-items: start;
+}
+
+
+/* =========================================================
+   LEFT SECTION
+   ========================================================= */
+
+.cnc-order-products {
+  min-width: 0;
+}
+
+.cnc-order-section-heading {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 18px;
+
+  margin-bottom: 10px;
+}
+
+.cnc-order-section-heading > div span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: var(--cnc-blue);
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.6px;
+
+  text-transform: uppercase;
+}
+
+.cnc-order-section-heading h2 {
+  margin: 0;
+
+  color: var(--cnc-navy);
+
+  font-size: 27px;
+
+  line-height: 1.15;
+}
+
+.cnc-order-section-heading > strong {
+  flex-shrink: 0;
+
+  padding:
+    7px
+    13px;
+
+  color: var(--cnc-blue);
+
+  background: #eef1ff;
+
+  border-radius: 20px;
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   CLEAR ORDER
+   ========================================================= */
+
+.cnc-order-clear {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin-bottom: 14px;
+
+  padding: 0;
+
+  color: #a52a2a;
+
+  background: transparent;
+
+  border: 0;
+
+  font-family:
+    Cambria,
+    Georgia,
+    serif;
+
+  font-size: 13px;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease;
+}
+
+.cnc-order-clear:hover {
+  color: #7f1818;
+
+  text-decoration: underline;
+}
+
+
+/* =========================================================
+   PRODUCT LIST
+   ========================================================= */
+
+.cnc-order-item-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+
+/* =========================================================
+   PRODUCT ITEM
+   ========================================================= */
+
+.cnc-order-item {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    92px
+    minmax(180px, 1fr)
+    auto
+    auto
+    auto;
+
+  align-items: center;
+
+  gap: 17px;
+
+  padding: 14px;
+
+  background: var(--cnc-white);
+
+  border:
+    1px solid
+    var(--cnc-border);
+
+  border-radius: 12px;
+
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.cnc-order-item:hover {
+  border-color: #b9c4e2;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 7px 22px rgba(7, 22, 66, 0.06);
+}
+
+
+/* =========================================================
+   PRODUCT IMAGE
+   ========================================================= */
+
+.cnc-order-item-image {
+  width: 92px;
+
+  height: 92px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  overflow: hidden;
+
+  background: #ffffff;
+
+  border:
+    1px solid
+    #e7eaf1;
+
+  border-radius: 10px;
+}
+
+.cnc-order-item-image img {
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: contain;
+
+  display: block;
+}
+
+
+/* =========================================================
+   PRODUCT INFORMATION
+   ========================================================= */
+
+.cnc-order-item-info {
+  min-width: 0;
+}
+
+.cnc-order-item-category {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: var(--cnc-blue);
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.9px;
+
+  text-transform: uppercase;
+}
+
+.cnc-order-item-info h3 {
+  margin: 0;
+
+  color: var(--cnc-navy);
+
+  font-size: 18px;
+
+  line-height: 1.2;
+
+  font-weight: 700;
+}
+
+.cnc-order-item-unit {
+  display: block;
+
+  margin-top: 5px;
+
+  color: var(--cnc-muted);
+
+  font-size: 13px;
+}
+
+.cnc-order-item-price {
+  margin-top: 5px;
+
+  color: var(--cnc-blue);
+
+  font-size: 15px;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   QUANTITY
+   ========================================================= */
+
+.cnc-order-item-quantity {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 5px;
+}
+
+.cnc-order-item-quantity > span {
+  color: var(--cnc-muted);
+
+  font-size: 10px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.7px;
+}
+
+.cnc-order-quantity-control {
+  display: inline-flex;
+
+  align-items: center;
+
+  height: 36px;
+
+  border:
+    1px solid
+    #ccd2df;
+
+  border-radius: 20px;
+
+  overflow: hidden;
+
+  background: #ffffff;
+}
+
+.cnc-order-quantity-control button {
+  width: 34px;
+
+  height: 34px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border: 0;
+
+  background: #ffffff;
+
+  color: var(--cnc-blue);
+
+  font-family:
+    Cambria,
+    Georgia,
+    serif;
+
+  font-size: 20px;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.cnc-order-quantity-control button:hover {
+  background: #eef1ff;
+
+  color: var(--cnc-blue-dark);
+}
+
+.cnc-order-quantity-control strong {
+  min-width: 30px;
+
+  text-align: center;
+
+  color: var(--cnc-navy);
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   ITEM TOTAL
+   ========================================================= */
+
+.cnc-order-item-total {
+  min-width: 100px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-end;
+
+  gap: 3px;
+}
+
+.cnc-order-item-total span {
+  color: var(--cnc-muted);
+
+  font-size: 10px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.7px;
+}
+
+.cnc-order-item-total strong {
+  color: var(--cnc-navy);
+
+  font-size: 16px;
+}
+
+
+/* =========================================================
+   REMOVE
+   ========================================================= */
+
+.cnc-order-remove {
+  align-self: center;
+
+  padding:
+    6px
+    0;
+
+  color: #a52a2a;
+
+  background: transparent;
+
+  border: 0;
+
+  font-family:
+    Cambria,
+    Georgia,
+    serif;
+
+  font-size: 12px;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+}
+
+.cnc-order-remove:hover {
+  color: #7f1818;
+
+  text-decoration: underline;
+}
+
+
+/* =========================================================
+   RIGHT SIDEBAR
+   ========================================================= */
+
+.cnc-order-sidebar {
+  position: sticky;
+
+  top: 146px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 14px;
+
+  min-width: 0;
+}
+
+
+/* =========================================================
+   TOTAL CARD
+   ========================================================= */
+
+.cnc-order-total-card {
+  padding: 23px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #081fef 0%,
+      #0619c7 100%
+    );
+
+  color: #ffffff;
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 10px 25px rgba(8, 31, 239, 0.12);
+}
+
+.cnc-order-card-label {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #ffffff;
+
+  opacity: 0.78;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.5px;
+
+  text-transform: uppercase;
+}
+
+.cnc-order-total-card h2 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 21px;
+}
+
+.cnc-order-total-amount {
+  margin:
+    14px
+    0
+    18px;
+
+  color: #ffffff;
+
+  font-size: 34px;
+
+  font-weight: 700;
+
+  line-height: 1.05;
+}
+
+.cnc-order-total-line {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding:
+    9px
+    0;
+
+  border-top:
+    1px solid
+    rgba(255, 255, 255, 0.2);
+
+  color: #ffffff;
+
+  font-size: 13px;
+}
+
+.cnc-order-total-line strong {
+  color: #ffffff;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   FORM CARD
+   ========================================================= */
+
+.cnc-order-form-card {
+  padding: 23px;
+
+  background: #ffffff;
+
+  border:
+    1px solid
+    var(--cnc-border);
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 5px 18px rgba(7, 22, 66, 0.035);
+}
+
+.cnc-order-form-heading {
+  margin-bottom: 18px;
+}
+
+.cnc-order-form-heading > span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: var(--cnc-blue);
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.5px;
+
+  text-transform: uppercase;
+}
+
+.cnc-order-form-heading h2 {
+  margin: 0;
+
+  color: var(--cnc-navy);
+
+  font-size: 24px;
+
+  line-height: 1.15;
+}
+
+.cnc-order-form-heading p {
+  margin:
+    7px
+    0
+    0;
+
+  color: var(--cnc-muted);
+
+  font-size: 13px;
+
+  line-height: 1.45;
+}
+
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.cnc-order-form {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+.cnc-order-field {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+.cnc-order-field label {
+  color: var(--cnc-navy);
+
+  font-size: 13px;
+
+  font-weight: 700;
+}
+
+.cnc-order-field input,
+.cnc-order-field textarea {
+  width: 100%;
+
+  padding:
+    10px
+    12px;
+
+  color: var(--cnc-text);
+
+  background: #ffffff;
+
+  border:
+    1px solid
+    #cfd5e2;
+
+  border-radius: 7px;
+
+  outline: none;
+
+  font-family:
+    Cambria,
+    Georgia,
+    serif;
+
+  font-size: 14px;
+
+  line-height: 1.4;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.cnc-order-field textarea {
+  resize: vertical;
+
+  min-height: 70px;
+}
+
+.cnc-order-field input::placeholder,
+.cnc-order-field textarea::placeholder {
+  color: #9aa2b2;
+
+  opacity: 1;
+}
+
+.cnc-order-field input:focus,
+.cnc-order-field textarea:focus {
+  border-color: var(--cnc-blue);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(8, 31, 239, 0.07);
+}
+
+
+/* =========================================================
+   PAYMENT NOTE
+   ========================================================= */
+
+.cnc-order-payment-note {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+
+  padding:
+    11px
+    13px;
+
+  background: #f4f8e9;
+
+  border-left:
+    3px solid
+    var(--cnc-lime);
+
+  border-radius: 6px;
+}
+
+.cnc-order-payment-note strong {
+  color: var(--cnc-navy);
+
+  font-size: 13px;
+}
+
+.cnc-order-payment-note span {
+  color: #5d6675;
+
+  font-size: 12px;
+
+  line-height: 1.45;
+}
+
+
+/* =========================================================
+   SUBMIT
+   ========================================================= */
+
+.cnc-order-submit {
+  width: 100%;
+
+  min-height: 48px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 9px;
+
+  margin-top: 2px;
+
+  padding:
+    11px
+    18px;
+
+  color: #ffffff;
+
+  background: var(--cnc-blue);
+
+  border:
+    1px solid
+    var(--cnc-blue);
+
+  border-radius: 7px;
+
+  font-family:
+    Cambria,
+    Georgia,
+    serif;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.cnc-order-submit:hover:not(:disabled) {
+  background: var(--cnc-blue-dark);
+
+  border-color: var(--cnc-blue-dark);
+
+  transform: translateY(-1px);
+}
+
+.cnc-order-submit:disabled {
+  opacity: 0.65;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   LOADING SPINNER
+   ========================================================= */
+
+.cnc-order-spinner {
+  width: 16px;
+
+  height: 16px;
+
+  display: inline-block;
+
+  border:
+    2px solid
+    rgba(255, 255, 255, 0.4);
+
+  border-top-color: #ffffff;
+
+  border-radius: 50%;
+
+  animation:
+    cnc-order-spin
+    0.7s
+    linear
+    infinite;
+}
+
+@keyframes cnc-order-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =========================================================
+   EMPTY ORDER PAGE
+   ========================================================= */
+
+.cnc-order-empty-page {
+  min-height:
+    calc(100vh - 132px);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding:
+    45px
+    20px;
+}
+
+.cnc-order-empty-inner {
+  width: min(
+    580px,
+    100%
+  );
+
+  padding:
+    42px
+    30px;
+
+  text-align: center;
+
+  background: #ffffff;
+
+  border:
+    1px solid
+    var(--cnc-border);
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 8px 28px rgba(7, 22, 66, 0.05);
+}
+
+.cnc-order-empty-icon {
+  width: 70px;
+
+  height: 70px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin:
+    0
+    auto
+    16px;
+
+  background: #eef1ff;
+
+  border-radius: 50%;
+
+  font-size: 30px;
+}
+
+.cnc-order-empty-inner h1 {
+  margin: 0;
+
+  color: var(--cnc-navy);
+
+  font-size: 32px;
+}
+
+.cnc-order-empty-inner p {
+  margin:
+    11px
+    auto
+    22px;
+
+  max-width: 450px;
+
+  color: var(--cnc-muted);
+
+  font-size: 15px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.cnc-order-primary-btn,
+.cnc-order-secondary-btn {
+  min-height: 45px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding:
+    0
+    21px;
+
+  border-radius: 7px;
+
+  font-family:
+    Cambria,
+    Georgia,
+    serif;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.cnc-order-primary-btn {
+  color: #ffffff;
+
+  background: var(--cnc-blue);
+
+  border:
+    1px solid
+    var(--cnc-blue);
+}
+
+.cnc-order-primary-btn:hover {
+  color: #ffffff;
+
+  background: var(--cnc-blue-dark);
+
+  border-color: var(--cnc-blue-dark);
+
+  transform: translateY(-1px);
+}
+
+.cnc-order-secondary-btn {
+  color: var(--cnc-blue);
+
+  background: #ffffff;
+
+  border:
+    1px solid
+    var(--cnc-blue);
+}
+
+.cnc-order-secondary-btn:hover {
+  color: #ffffff;
+
+  background: var(--cnc-blue);
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   SUCCESS PAGE
+   ========================================================= */
+
+.cnc-order-success-page {
+  min-height:
+    calc(100vh - 132px);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding:
+    45px
+    20px;
+}
+
+.cnc-order-success-card {
+  width: min(
+    580px,
+    100%
+  );
+
+  padding:
+    42px
+    34px;
+
+  text-align: center;
+
+  background: #ffffff;
+
+  border:
+    1px solid
+    var(--cnc-border);
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 8px 28px rgba(7, 22, 66, 0.05);
+}
+
+.cnc-order-success-icon {
+  width: 68px;
+
+  height: 68px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin:
+    0
+    auto
+    16px;
+
+  color: #ffffff;
+
+  background: var(--cnc-blue);
+
+  border-radius: 50%;
+
+  font-size: 34px;
+
+  font-weight: 700;
+}
+
+.cnc-order-success-label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: var(--cnc-blue);
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.6px;
+}
+
+.cnc-order-success-card h1 {
+  margin: 0;
+
+  color: var(--cnc-navy);
+
+  font-size: 36px;
+}
+
+.cnc-order-success-main {
+  margin:
+    11px
+    auto
+    18px;
+
+  color: var(--cnc-muted);
+
+  font-size: 16px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   ORDER ID
+   ========================================================= */
+
+.cnc-order-id-box {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 5px;
+
+  margin:
+    18px
+    0;
+
+  padding:
+    15px
+    18px;
+
+  background: #f4f7ff;
+
+  border:
+    1px solid
+    #d9dff3;
+
+  border-radius: 9px;
+}
+
+.cnc-order-id-box span {
+  color: var(--cnc-muted);
+
+  font-size: 11px;
+
+  letter-spacing: 1px;
+
+  text-transform: uppercase;
+}
+
+.cnc-order-id-box strong {
+  color: var(--cnc-blue);
+
+  font-size: 22px;
+
+  letter-spacing: 0.5px;
+}
+
+.cnc-order-success-info {
+  max-width: 450px;
+
+  margin:
+    0
+    auto
+    22px;
+
+  color: var(--cnc-muted);
+
+  font-size: 14px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   SUCCESS ACTIONS
+   ========================================================= */
+
+.cnc-order-success-actions {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  flex-wrap: wrap;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1150px) {
+
+  .cnc-order-layout {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(310px, 370px);
+
+    gap: 25px;
+  }
+
+  .cnc-order-item {
+    grid-template-columns:
+      84px
+      minmax(140px, 1fr)
+      auto
+      auto;
+  }
+
+  .cnc-order-item-image {
+    width: 84px;
+
+    height: 84px;
+  }
+
+  .cnc-order-remove {
+    grid-column: 2 / -1;
+
+    justify-self: end;
+
+    margin-top: -4px;
+  }
+}
+
+
+/* =========================================================
+   SMALL LAPTOP / TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .cnc-order-page {
+    padding-top: 0;
+  }
+
+  .cnc-order-container {
+    width: min(
+      calc(100% - 36px),
+      760px
+    );
+  }
+
+  .cnc-order-hero {
+    padding:
+      28px
+      0
+      26px;
+  }
+
+  .cnc-order-content {
+    padding:
+      28px
+      0
+      50px;
+  }
+
+  .cnc-order-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .cnc-order-sidebar {
+    position: static;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 640px) {
+
+  .cnc-order-page {
+    padding-top: 0;
+  }
+
+  .cnc-order-container {
+    width: calc(100% - 26px);
+  }
+
+  .cnc-order-hero {
+    padding:
+      25px
+      0
+      22px;
+  }
+
+  .cnc-order-label {
+    margin-bottom: 7px;
+
+    font-size: 10px;
+
+    letter-spacing: 1.3px;
+  }
+
+  .cnc-order-hero h1 {
+    font-size: 32px;
+
+    letter-spacing: -0.3px;
+  }
+
+  .cnc-order-hero p {
+    margin-top: 9px;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+  }
+
+  .cnc-order-content {
+    padding:
+      24px
+      0
+      42px;
+  }
+
+
+  /* =======================================================
+     HEADING
+     ======================================================= */
+
+  .cnc-order-section-heading {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 8px;
+  }
+
+  .cnc-order-section-heading h2 {
+    font-size: 24px;
+  }
+
+
+  /* =======================================================
+     PRODUCT ITEM
+     ======================================================= */
+
+  .cnc-order-item {
+    grid-template-columns:
+      76px
+      minmax(0, 1fr);
+
+    gap: 12px;
+
+    padding: 12px;
+
+    border-radius: 10px;
+  }
+
+  .cnc-order-item-image {
+    width: 76px;
+
+    height: 76px;
+
+    grid-row: 1 / 3;
+  }
+
+  .cnc-order-item-info {
+    grid-column: 2;
+  }
+
+  .cnc-order-item-info h3 {
+    font-size: 16px;
+  }
+
+  .cnc-order-item-price {
+    font-size: 14px;
+  }
+
+  .cnc-order-item-quantity {
+    grid-column: 2;
+
+    align-items: flex-start;
+
+    flex-direction: row;
+
+    gap: 9px;
+  }
+
+  .cnc-order-item-total {
+    grid-column: 2;
+
+    align-items: flex-start;
+
+    flex-direction: row;
+
+    gap: 7px;
+  }
+
+  .cnc-order-remove {
+    grid-column: 2;
+
+    justify-self: start;
+
+    margin: 0;
+  }
+
+
+  /* =======================================================
+     TOTAL
+     ======================================================= */
+
+  .cnc-order-total-card {
+    padding: 21px;
+  }
+
+  .cnc-order-total-amount {
+    font-size: 30px;
+  }
+
+
+  /* =======================================================
+     FORM
+     ======================================================= */
+
+  .cnc-order-form-card {
+    padding: 20px;
+  }
+
+  .cnc-order-form-heading h2 {
+    font-size: 23px;
+  }
+
+
+  /* =======================================================
+     EMPTY / SUCCESS
+     ======================================================= */
+
+  .cnc-order-empty-page,
+  .cnc-order-success-page {
+    min-height:
+      calc(100vh - 146px);
+
+    padding:
+      35px
+      13px;
+  }
+
+  .cnc-order-empty-inner,
+  .cnc-order-success-card {
+    padding:
+      34px
+      20px;
+  }
+
+  .cnc-order-empty-inner h1,
+  .cnc-order-success-card h1 {
+    font-size: 29px;
+  }
+
+  .cnc-order-success-icon {
+    width: 64px;
+
+    height: 64px;
+
+    font-size: 30px;
+  }
+
+  .cnc-order-id-box strong {
+    font-size: 20px;
+  }
+
+  .cnc-order-success-actions {
+    flex-direction: column;
+  }
+
+  .cnc-order-primary-btn,
+  .cnc-order-secondary-btn {
+    width: 100%;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+  .cnc-order-page {
+    padding-top: 0;
+  }
+
+  .cnc-order-container {
+    width: calc(100% - 20px);
+  }
+
+  .cnc-order-hero h1 {
+    font-size: 29px;
+  }
+
+  .cnc-order-item {
+    grid-template-columns:
+      66px
+      minmax(0, 1fr);
+
+    padding: 10px;
+
+    gap: 10px;
+  }
+
+  .cnc-order-item-image {
+    width: 66px;
+
+    height: 66px;
+  }
+
+  .cnc-order-item-info h3 {
+    font-size: 14px;
+  }
+
+  .cnc-order-form-card {
+    padding: 17px;
+  }
+}

@@ -1,0 +1,524 @@
+/* =========================================================
+   CLEAN N CLEAR — SOLUTIONS
+   Unique Prefix: cnc-sol-
+========================================================= */
+
+.cnc-sol-section {
+  position: relative;
+  width: 100%;
+  padding: 145px 0 120px;
+  background: #ffffff;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.cnc-sol-container {
+  width: min(1320px, calc(100% - 80px));
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   CENTERED HEADING
+========================================================= */
+
+.cnc-sol-header {
+  max-width: 900px;
+  margin: 0 auto 60px;
+  text-align: center;
+}
+
+.cnc-sol-eyebrow {
+  display: inline-block;
+  margin-bottom: 18px;
+
+  font-family: Cambria, Georgia, serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3px;
+
+  color: #1424e8;
+}
+
+.cnc-sol-heading {
+  margin: 0;
+
+  font-family: Cambria, Georgia, serif;
+  font-size: clamp(48px, 6vw, 76px);
+  line-height: 1;
+  letter-spacing: -2px;
+  font-weight: 700;
+
+  color: #101828;
+}
+
+.cnc-sol-heading span {
+  color: #1424e8;
+}
+
+.cnc-sol-description {
+  max-width: 720px;
+  margin: 25px auto 0;
+
+  font-family: Cambria, Georgia, serif;
+  font-size: 16px;
+  line-height: 1.75;
+
+  color: #667085;
+}
+
+
+/* =========================================================
+   MAIN LAYOUT
+========================================================= */
+
+.cnc-sol-layout {
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: 25px;
+  align-items: stretch;
+}
+
+.cnc-sol-feature {
+  min-width: 0;
+}
+
+.cnc-sol-card-link {
+  display: block;
+  width: 100%;
+
+  text-decoration: none;
+  color: inherit;
+}
+
+
+/* =========================================================
+   FEATURE CARD
+========================================================= */
+
+.cnc-sol-feature-image {
+  position: relative;
+  width: 100%;
+  min-height: 690px;
+
+  overflow: hidden;
+  background: #dfe4ea;
+}
+
+.cnc-sol-feature-image img {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition:
+    transform 1s cubic-bezier(0.2, 0.65, 0.2, 1);
+}
+
+.cnc-sol-feature:hover
+.cnc-sol-feature-image img {
+  transform: scale(1.045);
+}
+
+.cnc-sol-dark-overlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(5, 12, 30, 0.04) 0%,
+      rgba(5, 12, 30, 0.08) 35%,
+      rgba(5, 12, 30, 0.84) 100%
+    );
+}
+
+
+/* =========================================================
+   FEATURE CONTENT
+========================================================= */
+
+.cnc-sol-feature-content {
+  position: absolute;
+
+  left: 42px;
+  right: 42px;
+  bottom: 40px;
+}
+
+.cnc-sol-tag {
+  display: inline-block;
+
+  margin-bottom: 14px;
+  padding: 7px 12px;
+
+  border: 1px solid rgba(255, 255, 255, 0.35);
+
+  background: rgba(255, 255, 255, 0.08);
+
+  backdrop-filter: blur(8px);
+
+  font-family: Cambria, Georgia, serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+
+  color: #ffffff;
+}
+
+.cnc-sol-feature-content h3 {
+  margin: 0 0 13px;
+
+  font-family: Cambria, Georgia, serif;
+  font-size: clamp(42px, 4vw, 60px);
+  line-height: 1;
+  letter-spacing: -1.5px;
+  font-weight: 700;
+
+  color: #ffffff;
+}
+
+.cnc-sol-feature-content p {
+  max-width: 500px;
+  margin: 0;
+
+  font-family: Cambria, Georgia, serif;
+  font-size: 15px;
+  line-height: 1.7;
+
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.cnc-sol-explore {
+  display: inline-block;
+
+  margin-top: 23px;
+
+  font-family: Cambria, Georgia, serif;
+  font-size: 14px;
+  font-weight: 700;
+
+  color: #91dc00;
+
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.cnc-sol-feature:hover
+.cnc-sol-explore {
+  color: #ffffff;
+  transform: translateX(5px);
+}
+
+
+/* =========================================================
+   RIGHT SIDE CARDS
+========================================================= */
+
+.cnc-sol-side {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.cnc-sol-small-card {
+  min-width: 0;
+
+  background: #ffffff;
+
+  border: 1px solid #e6eaf0;
+
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.cnc-sol-small-card:hover {
+  transform: translateY(-5px);
+
+  border-color: #d5dae3;
+
+  box-shadow:
+    0 18px 40px rgba(15, 23, 42, 0.08);
+}
+
+
+/* =========================================================
+   SMALL CARD IMAGE
+========================================================= */
+
+.cnc-sol-small-image {
+  position: relative;
+
+  height: 250px;
+
+  overflow: hidden;
+
+  background: #e6e9ee;
+}
+
+.cnc-sol-small-image img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition:
+    transform 0.8s cubic-bezier(0.2, 0.65, 0.2, 1);
+}
+
+.cnc-sol-small-card:hover
+.cnc-sol-small-image img {
+  transform: scale(1.06);
+}
+
+.cnc-sol-small-overlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.04),
+      rgba(0, 0, 0, 0.35)
+    );
+}
+
+
+/* =========================================================
+   SMALL CARD CONTENT
+========================================================= */
+
+.cnc-sol-small-content {
+  min-height: 165px;
+
+  padding: 23px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cnc-sol-small-content h3 {
+  margin: 0 0 10px;
+
+  font-family: Cambria, Georgia, serif;
+  font-size: 25px;
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+
+  color: #1424e8;
+}
+
+.cnc-sol-small-content p {
+  max-width: 280px;
+
+  margin: 0;
+
+  font-family: Cambria, Georgia, serif;
+  font-size: 14px;
+  line-height: 1.65;
+
+  color: #697386;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .cnc-sol-section {
+    padding-top: 135px;
+  }
+
+  .cnc-sol-container {
+    width: min(92%, 900px);
+  }
+
+  .cnc-sol-heading {
+    font-size: 62px;
+  }
+
+  .cnc-sol-description {
+    max-width: 650px;
+  }
+
+  .cnc-sol-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .cnc-sol-feature-image {
+    min-height: 600px;
+  }
+
+  .cnc-sol-small-image {
+    height: 260px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 750px) {
+
+  .cnc-sol-section {
+    padding-top: 125px;
+    padding-bottom: 90px;
+  }
+
+  .cnc-sol-container {
+    width: calc(100% - 36px);
+  }
+
+  .cnc-sol-header {
+    margin-bottom: 42px;
+  }
+
+  .cnc-sol-heading {
+    font-size: 48px;
+    line-height: 1;
+  }
+
+  .cnc-sol-description {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .cnc-sol-feature-image {
+    min-height: 550px;
+  }
+
+  .cnc-sol-side {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .cnc-sol-small-image {
+    height: 220px;
+  }
+
+  .cnc-sol-small-content {
+    min-height: 175px;
+    padding: 18px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 560px) {
+
+  .cnc-sol-section {
+    padding-top: 145px;
+    padding-bottom: 75px;
+  }
+
+  .cnc-sol-container {
+    width: calc(100% - 28px);
+  }
+
+  .cnc-sol-eyebrow {
+    font-size: 11px;
+    letter-spacing: 2.3px;
+  }
+
+  .cnc-sol-heading {
+    font-size: 40px;
+    letter-spacing: -1px;
+  }
+
+  .cnc-sol-description {
+    font-size: 14px;
+  }
+
+  .cnc-sol-layout {
+    gap: 18px;
+  }
+
+  .cnc-sol-feature-image {
+    min-height: 500px;
+  }
+
+  .cnc-sol-feature-content {
+    left: 24px;
+    right: 24px;
+    bottom: 27px;
+  }
+
+  .cnc-sol-feature-content h3 {
+    font-size: 42px;
+  }
+
+  .cnc-sol-feature-content p {
+    font-size: 14px;
+  }
+
+  .cnc-sol-side {
+    grid-template-columns: 1fr;
+  }
+
+  .cnc-sol-small-image {
+    height: 250px;
+  }
+
+  .cnc-sol-small-content {
+    min-height: auto;
+    padding: 22px;
+  }
+
+  .cnc-sol-small-content h3 {
+    font-size: 26px;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+  .cnc-sol-section {
+    padding-top: 140px;
+  }
+
+  .cnc-sol-heading {
+    font-size: 36px;
+  }
+
+  .cnc-sol-feature-image {
+    min-height: 470px;
+  }
+
+  .cnc-sol-feature-content h3 {
+    font-size: 38px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .cnc-sol-feature-image img,
+  .cnc-sol-small-image img,
+  .cnc-sol-explore {
+    transition: none;
+  }
+}

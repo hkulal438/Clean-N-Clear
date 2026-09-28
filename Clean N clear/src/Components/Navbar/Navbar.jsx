@@ -10,6 +10,10 @@ import SubNavbar from "../subNavbar/subNavbar";
 import logo from "../../images/CLEANNCLEAR_LOGO-01.png";
 import whatsappIcon from "../../images/WhatsApp.png";
 
+import {
+  getOrderCart,
+  getOrderCount,
+} from "../../utils/OrderCart";
 
 /* =========================================================
    NAVIGATION
@@ -120,10 +124,10 @@ const NAV_LINKS = [
     ],
   },
 
- {
-  label: "Brands",
-  href: "/brands",
-},
+  {
+    label: "Brands",
+    href: "/brands",
+  },
 
   {
     label: "Contact",
@@ -131,17 +135,11 @@ const NAV_LINKS = [
   },
 ];
 
-
 /* =========================================================
    CONSTANTS
    ========================================================= */
 
-const WHATSAPP_NUMBER = "919597812345";
-
-
-/* =========================================================
-   COMPANY / BRAND OPTIONS
-   ========================================================= */
+const WHATSAPP_NUMBER = "919901384734";
 
 const COMPANY_OPTIONS = [
   "Clean N Clear",
@@ -149,39 +147,108 @@ const COMPANY_OPTIONS = [
   "Kärcher",
 ];
 
-
 /* =========================================================
    NAVBAR
    ========================================================= */
 
 export default function Navbar() {
-
   const [openDropdown, setOpenDropdown] = useState(null);
 
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const [selectedCompany, setSelectedCompany] = useState(
-    COMPANY_OPTIONS[0]
-  );
+  const [selectedCompany, setSelectedCompany] =
+    useState(COMPANY_OPTIONS[0]);
+
+  /* =======================================================
+     CART COUNT
+     ======================================================= */
+
+  const [cartCount, setCartCount] = useState(() => {
+    try {
+      return getOrderCount(getOrderCart());
+    } catch (error) {
+      console.error(
+        "Unable to load cart count:",
+        error
+      );
+
+      return 0;
+    }
+  });
 
   const navRef = useRef(null);
 
+  /* =======================================================
+     REFRESH CART COUNT
+     ======================================================= */
+
+  useEffect(() => {
+    const refreshCartCount = () => {
+      try {
+        const cart = getOrderCart();
+        const count = getOrderCount(cart);
+
+        setCartCount(count);
+      } catch (error) {
+        console.error(
+          "Unable to refresh cart count:",
+          error
+        );
+
+        setCartCount(0);
+      }
+    };
+
+    refreshCartCount();
+
+    /* Same-tab cart update */
+    window.addEventListener(
+      "cnc-order-count-updated",
+      refreshCartCount
+    );
+
+    /* Other browser tab */
+    window.addEventListener(
+      "storage",
+      refreshCartCount
+    );
+
+    /* Refresh when returning to page */
+    window.addEventListener(
+      "focus",
+      refreshCartCount
+    );
+
+    return () => {
+      window.removeEventListener(
+        "cnc-order-count-updated",
+        refreshCartCount
+      );
+
+      window.removeEventListener(
+        "storage",
+        refreshCartCount
+      );
+
+      window.removeEventListener(
+        "focus",
+        refreshCartCount
+      );
+    };
+  }, []);
 
   /* =======================================================
      CLICK OUTSIDE
      ======================================================= */
 
   useEffect(() => {
-
     const handleClickOutside = (event) => {
-
       if (
         navRef.current &&
         !navRef.current.contains(event.target)
       ) {
         setOpenDropdown(null);
       }
-
     };
 
     document.addEventListener(
@@ -195,25 +262,18 @@ export default function Navbar() {
         handleClickOutside
       );
     };
-
   }, []);
-
 
   /* =======================================================
      ESCAPE
      ======================================================= */
 
   useEffect(() => {
-
     const handleEscape = (event) => {
-
       if (event.key === "Escape") {
-
         setOpenDropdown(null);
         setMobileOpen(false);
-
       }
-
     };
 
     document.addEventListener(
@@ -227,82 +287,68 @@ export default function Navbar() {
         handleEscape
       );
     };
-
   }, []);
-
 
   /* =======================================================
      BODY SCROLL
      ======================================================= */
 
   useEffect(() => {
-
     if (mobileOpen) {
-
       document.body.style.overflow = "hidden";
-
     } else {
-
       document.body.style.overflow = "";
-
     }
 
     return () => {
       document.body.style.overflow = "";
     };
-
   }, [mobileOpen]);
-
 
   /* =======================================================
      DROPDOWN
      ======================================================= */
 
   const toggleDropdown = (label) => {
-
     setOpenDropdown((previous) =>
-      previous === label
-        ? null
-        : label
+      previous === label ? null : label
     );
-
   };
 
-
   /* =======================================================
-     MOBILE OPEN
+     MOBILE MENU
      ======================================================= */
 
   const openMobileMenu = () => {
-
     setOpenDropdown(null);
     setMobileOpen(true);
-
   };
-
-
-  /* =======================================================
-     MOBILE CLOSE
-     ======================================================= */
 
   const closeMobileMenu = () => {
-
     setMobileOpen(false);
     setOpenDropdown(null);
-
   };
-
 
   /* =======================================================
      COMPANY CHANGE
      ======================================================= */
 
   const handleCompanyChange = (event) => {
-
     setSelectedCompany(event.target.value);
-
   };
 
+  /* =======================================================
+     NAVIGATION CLICK
+     ======================================================= */
+
+  const handleNavigation = () => {
+    setOpenDropdown(null);
+    closeMobileMenu();
+  };
+
+  /* =======================================================
+     RENDER
+     ======================================================= */
 
   return (
     <header
@@ -318,45 +364,32 @@ export default function Navbar() {
           =================================================== */}
 
       <div className="rt-topbar">
-
         <div className="rt-topbar__inner">
-
-          {/* CONTACT INFORMATION */}
 
           <div className="rt-topbar__info">
 
             <span className="rt-topbar__item">
-
               <strong>Phone :</strong>{" "}
-
-              <a href="tel:++91 81473 04734">
-                +91 81473 04734
+              <a href="tel:+919901384734">
+                +91 99013 84734
               </a>
-
             </span>
-
 
             <span className="rt-topbar__divider">
               |
             </span>
 
-
             <span className="rt-topbar__item">
-
               <strong>Email :</strong>{" "}
-
               <a href="mailto:cleannclear.ind@gmail.com">
                 cleannclear.ind@gmail.com
               </a>
-
             </span>
-
 
           </div>
 
-
           {/* =================================================
-              COMPANY SEARCH / SELECTOR
+              COMPANY SELECTOR
               ================================================= */}
 
           <div className="rt-company-selector">
@@ -370,7 +403,6 @@ export default function Navbar() {
                 fill="none"
                 aria-hidden="true"
               >
-
                 <circle
                   cx="11"
                   cy="11"
@@ -385,11 +417,9 @@ export default function Navbar() {
                   strokeWidth="2"
                   strokeLinecap="round"
                 />
-
               </svg>
 
             </span>
-
 
             <select
               className="rt-company-selector__select"
@@ -397,22 +427,17 @@ export default function Navbar() {
               onChange={handleCompanyChange}
               aria-label="Select company or brand"
             >
-
               {COMPANY_OPTIONS.map(
                 (company) => (
-
                   <option
                     key={company}
                     value={company}
                   >
                     {company}
                   </option>
-
                 )
               )}
-
             </select>
-
 
             <span className="rt-company-selector__arrow">
 
@@ -423,7 +448,6 @@ export default function Navbar() {
                 fill="none"
                 aria-hidden="true"
               >
-
                 <path
                   d="M1 1L6 6L11 1"
                   stroke="currentColor"
@@ -431,7 +455,6 @@ export default function Navbar() {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
-
               </svg>
 
             </span>
@@ -439,9 +462,7 @@ export default function Navbar() {
           </div>
 
         </div>
-
       </div>
-
 
       {/* ===================================================
           MAIN NAVBAR
@@ -454,7 +475,6 @@ export default function Navbar() {
 
         <div className="rt-navbar__inner">
 
-
           {/* =================================================
               LOGO
               ================================================= */}
@@ -463,19 +483,13 @@ export default function Navbar() {
             href="/"
             className="rt-navbar__logo"
             aria-label="Clean N Clear"
-            onClick={() => {
-              setOpenDropdown(null);
-              closeMobileMenu();
-            }}
+            onClick={handleNavigation}
           >
-
             <img
               src={logo}
               alt="Clean N Clear"
             />
-
           </a>
-
 
           {/* =================================================
               DESKTOP MENU
@@ -491,9 +505,7 @@ export default function Navbar() {
               const isOpen =
                 openDropdown === item.label;
 
-
               return (
-
                 <li
                   key={item.label}
                   className={`rt-navbar__item${
@@ -502,46 +514,35 @@ export default function Navbar() {
                       : ""
                   }`}
                   onMouseEnter={() => {
-
                     if (hasChildren) {
-                      setOpenDropdown(item.label);
+                      setOpenDropdown(
+                        item.label
+                      );
                     }
-
                   }}
                   onMouseLeave={() => {
-
                     if (hasChildren) {
                       setOpenDropdown(null);
                     }
-
                   }}
                 >
 
                   {/* =================================================
-                      ITEMS WITH DROPDOWN
+                      DROPDOWN ITEM
                       ================================================= */}
 
                   {hasChildren ? (
-
                     <div className="rt-navbar__dropdown-trigger">
-
-                      {/* MAIN LINK */}
 
                       <a
                         href={item.href}
                         className="rt-navbar__link rt-navbar__link--main"
-                        onClick={() => {
-                          setOpenDropdown(null);
-                          closeMobileMenu();
-                        }}
+                        onClick={handleNavigation}
                       >
                         <span>
                           {item.label}
                         </span>
                       </a>
-
-
-                      {/* DROPDOWN ARROW */}
 
                       <button
                         type="button"
@@ -551,10 +552,12 @@ export default function Navbar() {
                         onClick={(event) => {
                           event.preventDefault();
                           event.stopPropagation();
-                          toggleDropdown(item.label);
+
+                          toggleDropdown(
+                            item.label
+                          );
                         }}
                       >
-
                         <svg
                           className={`rt-navbar__caret${
                             isOpen
@@ -566,7 +569,6 @@ export default function Navbar() {
                           viewBox="0 0 9 6"
                           aria-hidden="true"
                         >
-
                           <path
                             d="M1 1l3.5 3.5L8 1"
                             stroke="currentColor"
@@ -574,13 +576,10 @@ export default function Navbar() {
                             strokeLinecap="round"
                             fill="none"
                           />
-
                         </svg>
-
                       </button>
 
                     </div>
-
                   ) : (
 
                     /* =================================================
@@ -594,23 +593,18 @@ export default function Navbar() {
                           ? " is-active"
                           : ""
                       }`}
-                      onClick={() => {
-                        setOpenDropdown(null);
-                        closeMobileMenu();
-                      }}
+                      onClick={handleNavigation}
                     >
                       {item.label}
                     </a>
 
                   )}
 
-
                   {/* =================================================
-                      DESKTOP DROPDOWN
+                      DROPDOWN
                       ================================================= */}
 
                   {hasChildren && (
-
                     <ul
                       className={`rt-dropdown${
                         isOpen
@@ -618,48 +612,36 @@ export default function Navbar() {
                           : ""
                       }`}
                     >
-
                       {item.children.map(
                         (child) => (
-
                           <li
                             key={child.label}
                           >
-
                             <a
                               href={child.href}
-                              onClick={() => {
-                                setOpenDropdown(null);
-                                closeMobileMenu();
-                              }}
+                              onClick={
+                                handleNavigation
+                              }
                             >
                               {child.label}
                             </a>
-
                           </li>
-
                         )
                       )}
-
                     </ul>
-
                   )}
 
                 </li>
-
               );
-
             })}
 
           </ul>
-
 
           {/* =================================================
               DESKTOP ACTIONS
               ================================================= */}
 
           <div className="rt-navbar__actions">
-
 
             {/* WHATSAPP */}
 
@@ -670,30 +652,75 @@ export default function Navbar() {
               className="rt-navbar__whatsapp"
               aria-label="WhatsApp"
             >
-
               <img
                 src={whatsappIcon}
                 alt="WhatsApp"
               />
-
             </a>
-
 
             {/* GET A QUOTE */}
 
             <a
               href="/request-a-quote"
               className="rt-navbar__cta"
-              onClick={() => {
-                setOpenDropdown(null);
-                closeMobileMenu();
-              }}
+              onClick={handleNavigation}
             >
               Get a Quote
             </a>
 
           </div>
 
+          {/* =================================================
+              CART BUTTON
+              OPENS ORDER CART PAGE
+              ================================================= */}
+
+          <a
+            href="/order-cart"
+            className="rt-navbar__cart"
+            aria-label={`My Order - ${cartCount} items`}
+            onClick={handleNavigation}
+          >
+
+            <span
+              className="rt-navbar__cart-icon"
+              aria-hidden="true"
+            >
+              <svg
+                width="21"
+                height="21"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M3 4H5L7.4 15.2C7.6 16.1 8.4 16.8 9.4 16.8H17.6C18.5 16.8 19.3 16.2 19.6 15.3L21 9H6"
+                  stroke="currentColor"
+                  strokeWidth="1.9"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+
+                <circle
+                  cx="9.5"
+                  cy="20"
+                  r="1.3"
+                  fill="currentColor"
+                />
+
+                <circle
+                  cx="17.5"
+                  cy="20"
+                  r="1.3"
+                  fill="currentColor"
+                />
+              </svg>
+            </span>
+
+            <span className="rt-navbar__cart-count">
+              {cartCount}
+            </span>
+
+          </a>
 
           {/* =================================================
               MOBILE HAMBURGER
@@ -707,17 +734,13 @@ export default function Navbar() {
             aria-controls="rt-sub-navbar"
             onClick={openMobileMenu}
           >
-
             <span />
             <span />
             <span />
-
           </button>
 
         </div>
-
       </nav>
-
 
       {/* ===================================================
           MOBILE SUB NAVBAR

@@ -1,0 +1,1213 @@
+/* ============================================================
+   CLEAN N CLEAR — REQUEST A QUOTE PAGE
+   Complete Premium Form Design
+   Font: Cambria
+   Prefix: cnc-quote-
+   ============================================================ */
+
+
+/* ============================================================
+   GLOBAL QUOTE PAGE
+   ============================================================ */
+
+.cnc-quote-page {
+  width: 100%;
+  min-height: 100vh;
+
+  margin: 0;
+  padding: 0;
+
+  background: #f7f8fa;
+
+  color: #172033;
+
+  font-family: Cambria, Georgia, serif;
+
+  box-sizing: border-box;
+}
+
+.cnc-quote-page *,
+.cnc-quote-page *::before,
+.cnc-quote-page *::after {
+  box-sizing: border-box;
+}
+
+.cnc-quote-page input,
+.cnc-quote-page textarea,
+.cnc-quote-page button {
+  font-family: Cambria, Georgia, serif;
+}
+
+
+/* ============================================================
+   MAIN CONTAINER
+   ============================================================ */
+
+.cnc-quote-container {
+  width: min(1180px, calc(100% - 50px));
+
+  margin: 0 auto;
+
+  /*
+    Your Clean N Clear navbar is fixed.
+    This creates enough space so the quote heading
+    starts clearly below the navbar.
+  */
+  padding-top: 165px;
+
+  padding-bottom: 80px;
+}
+
+
+/* ============================================================
+   PAGE HEADING
+   ============================================================ */
+
+.cnc-quote-title {
+  max-width: 800px;
+
+  margin: 0 auto 48px;
+
+  text-align: center;
+}
+
+.cnc-quote-title-label {
+  display: block;
+
+  margin-bottom: 13px;
+
+  color: #081fef;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  letter-spacing: 2px;
+
+  line-height: 1.2;
+}
+
+.cnc-quote-title h1 {
+  margin: 0;
+
+  color: #07133f;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: clamp(38px, 4vw, 52px);
+
+  font-weight: 600;
+
+  line-height: 1.15;
+
+  letter-spacing: -0.3px;
+}
+
+.cnc-quote-title p {
+  max-width: 670px;
+
+  margin: 16px auto 0;
+
+  color: #667085;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 17px;
+
+  font-weight: 400;
+
+  line-height: 1.6;
+}
+
+
+/* ============================================================
+   MAIN CONTENT LAYOUT
+   ============================================================ */
+
+.cnc-quote-layout {
+  display: grid;
+
+  grid-template-columns: minmax(0, 1fr) 310px;
+
+  gap: 28px;
+
+  align-items: start;
+}
+
+
+/* ============================================================
+   FORM CARD
+   ============================================================ */
+
+.cnc-quote-form-card {
+  width: 100%;
+
+  background: #ffffff;
+
+  border: 1px solid #dfe3e8;
+
+  border-radius: 2px;
+
+  overflow: hidden;
+}
+
+
+/* ============================================================
+   FORM SECTIONS
+   ============================================================ */
+
+.cnc-quote-section {
+  width: 100%;
+
+  padding: 40px 44px;
+
+  border-bottom: 1px solid #e1e5ea;
+
+  text-align: left;
+}
+
+.cnc-quote-section:last-of-type {
+  border-bottom: none;
+}
+
+
+/* ============================================================
+   SECTION HEADINGS
+   ============================================================ */
+
+.cnc-quote-section-title {
+  width: 100%;
+
+  margin: 0 0 29px;
+
+  text-align: left;
+}
+
+.cnc-quote-section-title h2 {
+  margin: 0 0 7px;
+
+  color: #07133f;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 29px;
+
+  font-weight: 600;
+
+  line-height: 1.2;
+}
+
+.cnc-quote-section-title p {
+  margin: 0;
+
+  color: #737d8c;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 15px;
+
+  font-weight: 400;
+
+  line-height: 1.5;
+}
+
+
+/* ============================================================
+   PERSONAL DETAILS GRID
+   ============================================================ */
+
+.cnc-quote-input-grid {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  column-gap: 28px;
+
+  row-gap: 25px;
+}
+
+
+/* ============================================================
+   FORM FIELD
+   ============================================================ */
+
+.cnc-quote-field {
+  width: 100%;
+
+  min-width: 0;
+
+  text-align: left;
+}
+
+.cnc-quote-field label {
+  display: block;
+
+  margin: 0 0 9px;
+
+  color: #273248;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  line-height: 1.3;
+
+  text-align: left;
+}
+
+.cnc-quote-field label span {
+  color: #081fef;
+}
+
+
+/* ============================================================
+   INPUTS
+   ============================================================ */
+
+.cnc-quote-field input,
+.cnc-quote-field textarea {
+  display: block;
+
+  width: 100%;
+
+  margin: 0;
+
+  border: 1px solid #cfd5dd;
+
+  border-radius: 2px;
+
+  outline: none;
+
+  background: #ffffff;
+
+  color: #172033;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 17px;
+
+  font-weight: 400;
+
+  line-height: 1.5;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.cnc-quote-field input {
+  height: 55px;
+
+  padding: 0 16px;
+}
+
+.cnc-quote-field textarea {
+  min-height: 150px;
+
+  padding: 14px 16px;
+
+  resize: vertical;
+}
+
+.cnc-quote-field input::placeholder,
+.cnc-quote-field textarea::placeholder {
+  color: #9ba3af;
+
+  opacity: 1;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 16px;
+
+  font-weight: 400;
+}
+
+.cnc-quote-field input:hover,
+.cnc-quote-field textarea:hover {
+  border-color: #aeb6c2;
+}
+
+.cnc-quote-field input:focus,
+.cnc-quote-field textarea:focus {
+  border-color: #081fef;
+
+  background: #ffffff;
+
+  box-shadow: 0 0 0 3px rgba(8, 31, 239, 0.07);
+}
+
+
+/* ============================================================
+   CATEGORY SECTION
+   ============================================================ */
+
+.cnc-quote-category-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 11px;
+
+  width: 100%;
+}
+
+
+/* ============================================================
+   CATEGORY BUTTON
+   ============================================================ */
+
+.cnc-quote-category {
+  width: 100%;
+
+  min-height: 64px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  padding: 13px 16px;
+
+  border: 1px solid #d5dae1;
+
+  border-radius: 2px;
+
+  outline: none;
+
+  background: #ffffff;
+
+  color: #273248;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 16px;
+
+  font-weight: 400;
+
+  line-height: 1.35;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.cnc-quote-category:hover {
+  border-color: #081fef;
+
+  background: #fafbff;
+}
+
+.cnc-quote-category:focus-visible {
+  border-color: #081fef;
+
+  box-shadow: 0 0 0 3px rgba(8, 31, 239, 0.07);
+}
+
+
+/* ============================================================
+   CATEGORY CHECKBOX
+   ============================================================ */
+
+.cnc-quote-category-box {
+  width: 21px;
+  height: 21px;
+
+  min-width: 21px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #c5ccd6;
+
+  background: #ffffff;
+
+  color: #ffffff;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  line-height: 1;
+}
+
+.cnc-quote-category-text {
+  flex: 1;
+
+  color: inherit;
+
+  line-height: 1.35;
+
+  text-align: left;
+}
+
+
+/* ============================================================
+   ACTIVE CATEGORY
+   ============================================================ */
+
+.cnc-quote-category-active {
+  border-color: #081fef;
+
+  background: #f2f4ff;
+
+  color: #07133f;
+}
+
+.cnc-quote-category-active .cnc-quote-category-box {
+  border-color: #081fef;
+
+  background: #081fef;
+}
+
+
+/* ============================================================
+   REQUIREMENT FIELDS
+   ============================================================ */
+
+.cnc-quote-requirement-fields {
+  width: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 25px;
+}
+
+
+/* ============================================================
+   SUBMIT AREA
+   ============================================================ */
+
+.cnc-quote-submit-area {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 25px;
+
+  padding: 30px 44px;
+
+  background: #fafbfc;
+
+  border-top: 1px solid #e1e5ea;
+
+  text-align: left;
+}
+
+
+/* ============================================================
+   SUBMIT BUTTON
+   ============================================================ */
+
+.cnc-quote-submit-button {
+  min-width: 220px;
+
+  height: 55px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 30px;
+
+  padding: 0 19px 0 23px;
+
+  border: none;
+
+  border-radius: 2px;
+
+  outline: none;
+
+  background: #081fef;
+
+  color: #ffffff;
+
+  cursor: pointer;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.6px;
+
+  line-height: 1;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.cnc-quote-submit-button span {
+  color: #ffffff;
+
+  font-size: 15px;
+}
+
+.cnc-quote-submit-button b {
+  color: #ffffff;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 22px;
+
+  font-weight: 400;
+
+  line-height: 1;
+}
+
+.cnc-quote-submit-button:hover {
+  background: #0619c7;
+
+  transform: translateY(-1px);
+}
+
+.cnc-quote-submit-button:focus-visible {
+  box-shadow: 0 0 0 4px rgba(8, 31, 239, 0.18);
+}
+
+
+/* ============================================================
+   SUBMIT DESCRIPTION
+   ============================================================ */
+
+.cnc-quote-submit-area p {
+  max-width: 350px;
+
+  margin: 0;
+
+  color: #737d8c;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 14px;
+
+  font-weight: 400;
+
+  line-height: 1.55;
+
+  text-align: left;
+}
+
+
+/* ============================================================
+   SUCCESS MESSAGE
+   ============================================================ */
+
+.cnc-quote-success {
+  width: auto;
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 14px;
+
+  margin: 0 44px 30px;
+
+  padding: 17px 18px;
+
+  border: 1px solid #c8dfd0;
+
+  border-radius: 2px;
+
+  background: #f1f8f3;
+
+  color: #27633e;
+
+  text-align: left;
+}
+
+.cnc-quote-success-icon {
+  width: 25px;
+  height: 25px;
+
+  min-width: 25px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #2e7d4f;
+
+  color: #ffffff;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  line-height: 1;
+}
+
+.cnc-quote-success strong {
+  display: block;
+
+  margin: 0 0 4px;
+
+  color: #27633e;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  line-height: 1.3;
+}
+
+.cnc-quote-success p {
+  margin: 0;
+
+  color: #39704e;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+
+  text-align: left;
+}
+
+
+/* ============================================================
+   DIRECT CONTACT CARD
+   ============================================================ */
+
+.cnc-quote-contact-card {
+  position: sticky;
+
+  top: 150px;
+
+  width: 100%;
+
+  padding: 28px 30px;
+
+  background: #07133f;
+
+  color: #ffffff;
+
+  border-radius: 2px;
+
+  text-align: left;
+}
+
+
+/* ============================================================
+   CONTACT HEADING
+   ============================================================ */
+
+.cnc-quote-contact-heading {
+  width: 100%;
+
+  padding-bottom: 22px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+
+  text-align: left;
+}
+
+.cnc-quote-contact-heading span {
+  display: block;
+
+  margin: 0 0 10px;
+
+  color: #9da8ff;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  letter-spacing: 1.5px;
+
+  line-height: 1.2;
+}
+
+.cnc-quote-contact-heading h2 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 25px;
+
+  font-weight: 600;
+
+  line-height: 1.2;
+
+  text-align: left;
+}
+
+
+/* ============================================================
+   CONTACT ITEM
+   ============================================================ */
+
+.cnc-quote-contact-item {
+  width: 100%;
+
+  padding: 20px 0;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+
+  text-align: left;
+}
+
+.cnc-quote-contact-item:last-child {
+  padding-bottom: 0;
+
+  border-bottom: none;
+}
+
+
+/* ============================================================
+   CONTACT LABEL
+   ============================================================ */
+
+.cnc-quote-contact-item small {
+  display: block;
+
+  margin: 0 0 10px;
+
+  color: #9da8ff;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  letter-spacing: 1.5px;
+
+  line-height: 1.2;
+}
+
+
+/* ============================================================
+   PHONE NUMBERS
+   ============================================================ */
+
+.cnc-quote-contact-item a[href^="tel:"] {
+  display: block;
+
+  width: fit-content;
+
+  margin: 0 0 7px;
+
+  padding: 0;
+
+  color: #ffffff;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 17px;
+
+  font-weight: 600;
+
+  line-height: 1.4;
+
+  text-decoration: none;
+
+  border: none;
+
+  outline: none;
+
+  background: transparent;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.cnc-quote-contact-item a[href^="tel:"]:last-child {
+  margin-bottom: 0;
+}
+
+.cnc-quote-contact-item a[href^="tel:"]:hover {
+  color: #aeb7ff;
+
+  transform: translateX(2px);
+}
+
+
+/* ============================================================
+   EMAIL
+   ============================================================ */
+
+.cnc-quote-contact-item a[href^="mailto:"] {
+  display: inline-block;
+
+  max-width: 100%;
+
+  margin: 0;
+
+  padding: 0;
+
+  color: #ffffff;
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  line-height: 1.45;
+
+  text-decoration: none;
+
+  border: none;
+
+  outline: none;
+
+  background: transparent;
+
+  overflow-wrap: anywhere;
+
+  word-break: break-word;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.cnc-quote-contact-item a[href^="mailto:"]:hover {
+  color: #aeb7ff;
+
+  transform: translateX(2px);
+}
+
+
+/* ============================================================
+   ADDRESS
+   ============================================================ */
+
+.cnc-quote-contact-item p {
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.72);
+
+  font-family: Cambria, Georgia, serif;
+
+  font-size: 14px;
+
+  font-weight: 400;
+
+  line-height: 1.7;
+
+  text-align: left;
+}
+
+
+/* ============================================================
+   TABLET
+   ============================================================ */
+
+@media (max-width: 1000px) {
+
+  .cnc-quote-container {
+    width: min(900px, calc(100% - 40px));
+
+    padding-top: 150px;
+  }
+
+  .cnc-quote-layout {
+    grid-template-columns: 1fr;
+
+    gap: 22px;
+  }
+
+  .cnc-quote-contact-card {
+    position: relative;
+
+    top: auto;
+
+    padding: 28px 30px;
+  }
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 700px) {
+
+  .cnc-quote-container {
+    width: calc(100% - 24px);
+
+    /*
+      Extra space for the fixed mobile navbar.
+    */
+    padding-top: 175px;
+
+    padding-bottom: 55px;
+  }
+
+
+  /* PAGE HEADING */
+
+  .cnc-quote-title {
+    margin-bottom: 32px;
+  }
+
+  .cnc-quote-title-label {
+    margin-bottom: 11px;
+
+    font-size: 12px;
+  }
+
+  .cnc-quote-title h1 {
+    font-size: 34px;
+
+    line-height: 1.18;
+  }
+
+  .cnc-quote-title p {
+    margin-top: 13px;
+
+    font-size: 15px;
+
+    line-height: 1.55;
+  }
+
+
+  /* FORM SECTION */
+
+  .cnc-quote-section {
+    padding: 29px 20px;
+  }
+
+  .cnc-quote-section-title {
+    margin-bottom: 25px;
+  }
+
+  .cnc-quote-section-title h2 {
+    font-size: 25px;
+  }
+
+  .cnc-quote-section-title p {
+    font-size: 14px;
+  }
+
+
+  /* INPUT GRID */
+
+  .cnc-quote-input-grid {
+    grid-template-columns: 1fr;
+
+    row-gap: 21px;
+  }
+
+
+  /* FIELD */
+
+  .cnc-quote-field label {
+    font-size: 15px;
+  }
+
+  .cnc-quote-field input {
+    height: 53px;
+  }
+
+  .cnc-quote-field input,
+  .cnc-quote-field textarea {
+    font-size: 16px;
+  }
+
+  .cnc-quote-field input::placeholder,
+  .cnc-quote-field textarea::placeholder {
+    font-size: 15px;
+  }
+
+
+  /* CATEGORY */
+
+  .cnc-quote-category-grid {
+    grid-template-columns: 1fr;
+
+    gap: 9px;
+  }
+
+  .cnc-quote-category {
+    min-height: 60px;
+
+    font-size: 15px;
+  }
+
+
+  /* SUBMIT */
+
+  .cnc-quote-submit-area {
+    display: block;
+
+    padding: 26px 20px;
+  }
+
+  .cnc-quote-submit-button {
+    width: 100%;
+
+    min-width: 0;
+  }
+
+  .cnc-quote-submit-area p {
+    max-width: none;
+
+    margin-top: 14px;
+
+    font-size: 13px;
+  }
+
+
+  /* SUCCESS */
+
+  .cnc-quote-success {
+    margin-right: 20px;
+
+    margin-left: 20px;
+
+    padding: 15px;
+  }
+
+  .cnc-quote-success strong {
+    font-size: 15px;
+  }
+
+  .cnc-quote-success p {
+    font-size: 13px;
+  }
+
+
+  /* CONTACT CARD */
+
+  .cnc-quote-contact-card {
+    position: relative;
+
+    top: auto;
+
+    padding: 25px 22px;
+  }
+
+  .cnc-quote-contact-heading {
+    padding-bottom: 20px;
+  }
+
+  .cnc-quote-contact-heading h2 {
+    font-size: 23px;
+  }
+
+  .cnc-quote-contact-item {
+    padding: 18px 0;
+  }
+
+
+  /* PHONE */
+
+  .cnc-quote-contact-item a[href^="tel:"] {
+    font-size: 16px;
+  }
+
+
+  /* EMAIL */
+
+  .cnc-quote-contact-item a[href^="mailto:"] {
+    font-size: 15px;
+
+    line-height: 1.5;
+  }
+
+
+  /* ADDRESS */
+
+  .cnc-quote-contact-item p {
+    font-size: 13px;
+
+    line-height: 1.65;
+  }
+}
+
+
+/* ============================================================
+   SMALL MOBILE
+   ============================================================ */
+
+@media (max-width: 380px) {
+
+  .cnc-quote-container {
+    width: calc(100% - 18px);
+
+    padding-top: 165px;
+  }
+
+  .cnc-quote-title h1 {
+    font-size: 31px;
+  }
+
+  .cnc-quote-title p {
+    font-size: 14px;
+  }
+
+  .cnc-quote-section {
+    padding: 25px 16px;
+  }
+
+  .cnc-quote-section-title h2 {
+    font-size: 23px;
+  }
+
+  .cnc-quote-section-title p {
+    font-size: 13px;
+  }
+
+  .cnc-quote-category {
+    padding: 12px;
+
+    font-size: 14px;
+  }
+
+  .cnc-quote-submit-area {
+    padding: 23px 16px;
+  }
+
+  .cnc-quote-success {
+    margin-right: 16px;
+
+    margin-left: 16px;
+  }
+
+  .cnc-quote-contact-card {
+    padding: 23px 18px;
+  }
+
+  .cnc-quote-contact-heading h2 {
+    font-size: 22px;
+  }
+}

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import "./CleaningChemicals.css";
 
 import FurnitureShineMaintainer from "../../images/institute/Furniture Shine Maintainer 5L X 4.webp";
@@ -8,12 +9,21 @@ import HRTDispenser from "../../images/institute/HRT Dispenser sensor based.webp
 import JazzSpinMopBucket from "../../images/institute/JAZZ SPIN MOP BUCKET.jpg";
 import VacuumSweeper from "../../images/institute/Vacuum sweeper.jpg";
 
+import {
+  getOrderCart,
+  updateOrderCart,
+} from "../../utils/OrderCart";
+
+// ======================================================
+// API
+// ======================================================
+
 const API_URL =
   import.meta.env.VITE_API_URL || "http://localhost:5000";
 
-/* =========================================================
-   COMMERCIAL SUPPLIES PRODUCTS
-   ========================================================= */
+// ======================================================
+// COMMERCIAL SUPPLIES PRODUCTS
+// ======================================================
 
 const products = [
   {
@@ -26,7 +36,6 @@ const products = [
     description:
       "Furniture maintenance solution suitable for cleaning and maintaining the appearance of furniture in commercial and institutional environments.",
   },
-
   {
     id: "gemini-no-dust-broom",
     name: "GEMINI NO DUST BROOM",
@@ -37,7 +46,6 @@ const products = [
     description:
       "No-dust broom designed for convenient everyday sweeping and cleaning in commercial and institutional spaces.",
   },
-
   {
     id: "hard-surface-cleaner-1l-x4",
     name: "Hard Surface Cleaner 1L X 4",
@@ -48,7 +56,6 @@ const products = [
     description:
       "Hard surface cleaning solution suitable for regular cleaning and maintenance of different commercial surfaces.",
   },
-
   {
     id: "hrt-dispenser-sensor-based",
     name: "HRT Dispenser Sensor Based",
@@ -59,7 +66,6 @@ const products = [
     description:
       "Sensor-based dispenser designed to provide convenient and hygienic dispensing in commercial and institutional environments.",
   },
-
   {
     id: "jazz-spin-mop-bucket",
     name: "JAZZ SPIN MOP BUCKET",
@@ -70,7 +76,6 @@ const products = [
     description:
       "Spin mop bucket designed to make floor cleaning easier and more convenient for commercial and household applications.",
   },
-
   {
     id: "vacuum-sweeper",
     name: "Vacuum Sweeper",
@@ -83,41 +88,76 @@ const products = [
   },
 ];
 
-/* =========================================================
-   COMPONENT
-   ========================================================= */
+// ======================================================
+// EMPTY CUSTOMER
+// ======================================================
+
+const emptyCustomer = {
+  name: "",
+  phone: "",
+  email: "",
+  company: "",
+  location: "",
+};
+
+// ======================================================
+// COMPONENT
+// ======================================================
 
 const CommercialSupplies = () => {
-  const [selectedProduct, setSelectedProduct] = useState(null);
+  // ====================================================
+  // PRODUCT / MODAL STATES
+  // ====================================================
 
-  const [cart, setCart] = useState([]);
+  const [selectedProduct, setSelectedProduct] =
+    useState(null);
+
+  const [cart, setCart] = useState(() =>
+    getOrderCart()
+  );
 
   const [showCart, setShowCart] = useState(false);
 
-  const [showCheckout, setShowCheckout] = useState(false);
+  const [showCheckout, setShowCheckout] =
+    useState(false);
 
-  const [orderSuccess, setOrderSuccess] = useState(null);
+  const [orderSuccess, setOrderSuccess] =
+    useState(null);
 
   const [loading, setLoading] = useState(false);
 
-  const [orderedQuantities, setOrderedQuantities] = useState({});
+  // ====================================================
+  // ORDERED QUANTITIES
+  // ====================================================
 
-  const [loadingOrderedQuantities, setLoadingOrderedQuantities] =
-    useState(true);
+  const [orderedQuantities, setOrderedQuantities] =
+    useState({});
 
-  const [customer, setCustomer] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    company: "",
-    location: "",
-  });
+  const [
+    loadingOrderedQuantities,
+    setLoadingOrderedQuantities,
+  ] = useState(true);
+
+  // ====================================================
+  // CUSTOMER
+  // ====================================================
+
+  const [customer, setCustomer] =
+    useState(emptyCustomer);
 
   const [notes, setNotes] = useState("");
 
-  /* =========================================================
-     LOAD ORDERED QUANTITIES
-     ========================================================= */
+  // ====================================================
+  // KEEP CART IN SHARED STORAGE
+  // ====================================================
+
+  useEffect(() => {
+    updateOrderCart(cart);
+  }, [cart]);
+
+  // ====================================================
+  // LOAD ORDERED QUANTITIES
+  // ====================================================
 
   const loadOrderedQuantities = async () => {
     try {
@@ -127,15 +167,24 @@ const CommercialSupplies = () => {
         `${API_URL}/api/product-order-quantities`
       );
 
-      const data = await response.json();
-
-      if (!response.ok || !data.success) {
+      if (!response.ok) {
         throw new Error(
-          data.message || "Unable to load ordered quantities."
+          "Unable to load ordered quantities."
         );
       }
 
-      setOrderedQuantities(data.quantities || {});
+      const data = await response.json();
+
+      if (!data?.success) {
+        throw new Error(
+          data?.message ||
+            "Unable to load ordered quantities."
+        );
+      }
+
+      setOrderedQuantities(
+        data.quantities || {}
+      );
     } catch (error) {
       console.error(
         "Unable to load ordered quantities:",
@@ -148,30 +197,28 @@ const CommercialSupplies = () => {
     }
   };
 
-  /* =========================================================
-     LOAD ON PAGE OPEN
-     ========================================================= */
+  // ====================================================
+  // LOAD ORDERED QUANTITIES ON PAGE OPEN
+  // ====================================================
 
   useEffect(() => {
     loadOrderedQuantities();
   }, []);
 
-  /* =========================================================
-     BODY SCROLL LOCK
-     ========================================================= */
+  // ====================================================
+  // BODY SCROLL LOCK
+  // ====================================================
 
   useEffect(() => {
     const modalOpen =
-      selectedProduct ||
+      Boolean(selectedProduct) ||
       showCart ||
       showCheckout ||
-      orderSuccess;
+      Boolean(orderSuccess);
 
-    if (modalOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = modalOpen
+      ? "hidden"
+      : "";
 
     return () => {
       document.body.style.overflow = "";
@@ -183,30 +230,34 @@ const CommercialSupplies = () => {
     orderSuccess,
   ]);
 
-  /* =========================================================
-     FORMAT PRICE
-     ========================================================= */
+  // ====================================================
+  // FORMAT PRICE
+  // ====================================================
 
   const formatPrice = (price) => {
-    return `₹${Number(price).toLocaleString("en-IN")}`;
+    return `₹${Number(price).toLocaleString(
+      "en-IN"
+    )}`;
   };
 
-  /* =========================================================
-     ADD TO ORDER
-     ========================================================= */
+  // ====================================================
+  // ADD TO ORDER
+  // ====================================================
 
   const addToCart = (product) => {
     setCart((previousCart) => {
-      const existingProduct = previousCart.find(
-        (item) => item.id === product.id
-      );
+      const existingProduct =
+        previousCart.find(
+          (item) => item.id === product.id
+        );
 
       if (existingProduct) {
         return previousCart.map((item) =>
           item.id === product.id
             ? {
                 ...item,
-                quantity: item.quantity + 1,
+                quantity:
+                  Number(item.quantity || 0) + 1,
               }
             : item
         );
@@ -222,17 +273,21 @@ const CommercialSupplies = () => {
     });
 
     setSelectedProduct(null);
-
-    /* Automatically show order details */
     setShowCart(true);
   };
 
-  /* =========================================================
-     UPDATE QUANTITY
-     ========================================================= */
+  // ====================================================
+  // UPDATE QUANTITY
+  // ====================================================
 
   const updateQuantity = (id, quantity) => {
-    if (quantity < 1) {
+    const nextQuantity = Number(quantity);
+
+    if (!Number.isFinite(nextQuantity)) {
+      return;
+    }
+
+    if (nextQuantity < 1) {
       removeFromCart(id);
       return;
     }
@@ -242,16 +297,16 @@ const CommercialSupplies = () => {
         item.id === id
           ? {
               ...item,
-              quantity,
+              quantity: nextQuantity,
             }
           : item
       )
     );
   };
 
-  /* =========================================================
-     REMOVE FROM CART
-     ========================================================= */
+  // ====================================================
+  // REMOVE FROM ORDER
+  // ====================================================
 
   const removeFromCart = (id) => {
     setCart((previousCart) =>
@@ -261,9 +316,9 @@ const CommercialSupplies = () => {
     );
   };
 
-  /* =========================================================
-     CART COUNT
-     ========================================================= */
+  // ====================================================
+  // CART COUNT
+  // ====================================================
 
   const cartCount = cart.reduce(
     (total, item) =>
@@ -271,9 +326,9 @@ const CommercialSupplies = () => {
     0
   );
 
-  /* =========================================================
-     CART TOTAL
-     ========================================================= */
+  // ====================================================
+  // CART TOTAL
+  // ====================================================
 
   const cartTotal = cart.reduce(
     (total, item) =>
@@ -283,9 +338,9 @@ const CommercialSupplies = () => {
     0
   );
 
-  /* =========================================================
-     CUSTOMER INPUT
-     ========================================================= */
+  // ====================================================
+  // CUSTOMER INPUT
+  // ====================================================
 
   const handleCustomerChange = (event) => {
     const { name, value } = event.target;
@@ -296,9 +351,9 @@ const CommercialSupplies = () => {
     }));
   };
 
-  /* =========================================================
-     OPEN CHECKOUT
-     ========================================================= */
+  // ====================================================
+  // OPEN CHECKOUT
+  // ====================================================
 
   const openCheckout = () => {
     if (cart.length === 0) {
@@ -312,12 +367,16 @@ const CommercialSupplies = () => {
     setShowCheckout(true);
   };
 
-  /* =========================================================
-     SUBMIT ORDER
-     ========================================================= */
+  // ====================================================
+  // SUBMIT ORDER
+  // ====================================================
 
   const submitOrder = async (event) => {
     event.preventDefault();
+
+    if (loading) {
+      return;
+    }
 
     if (cart.length === 0) {
       alert(
@@ -326,19 +385,65 @@ const CommercialSupplies = () => {
       return;
     }
 
-    if (
-      !customer.name.trim() ||
-      !customer.phone.trim() ||
-      !customer.location.trim()
-    ) {
+    const name = customer.name.trim();
+    const phone = customer.phone.trim();
+    const email = customer.email.trim();
+    const company = customer.company.trim();
+    const location = customer.location.trim();
+
+    // ==================================================
+    // REQUIRED DETAILS
+    // ==================================================
+
+    if (!name || !phone || !location) {
       alert(
         "Please enter your name, phone number and location."
       );
       return;
     }
 
+    // ==================================================
+    // PHONE VALIDATION
+    // ==================================================
+
+    const phoneDigits = phone.replace(
+      /\D/g,
+      ""
+    );
+
+    if (
+      phoneDigits.length < 7 ||
+      phoneDigits.length > 15
+    ) {
+      alert(
+        "Please enter a valid phone number."
+      );
+      return;
+    }
+
+    // ==================================================
+    // EMAIL VALIDATION
+    // ==================================================
+
+    if (
+      email &&
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+        email
+      )
+    ) {
+      alert(
+        "Please enter a valid email address."
+      );
+      return;
+    }
+
     try {
       setLoading(true);
+
+      // ==================================================
+      // SEND ONLY PRODUCT IDs + QUANTITIES
+      // BACKEND CALCULATES PRICES
+      // ==================================================
 
       const orderItems = cart.map((item) => ({
         id: item.id,
@@ -349,50 +454,76 @@ const CommercialSupplies = () => {
         `${API_URL}/api/order`,
         {
           method: "POST",
-
           headers: {
             "Content-Type": "application/json",
           },
-
           body: JSON.stringify({
-            customer,
+            customer: {
+              name,
+              phone,
+              email,
+              company,
+              location,
+            },
             items: orderItems,
-            notes,
+            notes: notes.trim(),
           }),
         }
       );
 
-      const data = await response.json();
+      const responseText =
+        await response.text();
 
-      if (!response.ok || !data.success) {
+      let data = {};
+
+      if (responseText) {
+        try {
+          data = JSON.parse(responseText);
+        } catch {
+          data = {
+            message: responseText,
+          };
+        }
+      }
+
+      if (!response.ok || !data?.success) {
         throw new Error(
-          data.message || "Unable to submit order."
+          data?.message ||
+            "Unable to submit order."
         );
       }
 
+      // ==================================================
+      // SHOW SUCCESS
+      // ==================================================
+
       setOrderSuccess(data);
 
-      /* Clear cart */
+      // ==================================================
+      // CLEAR SHARED ORDER CART
+      // ==================================================
 
       setCart([]);
 
-      /* Clear customer details */
+      // ==================================================
+      // CLEAR CUSTOMER DETAILS
+      // ==================================================
 
       setCustomer({
-        name: "",
-        phone: "",
-        email: "",
-        company: "",
-        location: "",
+        ...emptyCustomer,
       });
 
       setNotes("");
 
-      /* Close checkout */
+      // ==================================================
+      // CLOSE CHECKOUT
+      // ==================================================
 
       setShowCheckout(false);
 
-      /* Refresh ordered quantities */
+      // ==================================================
+      // REFRESH ORDERED QUANTITIES
+      // ==================================================
 
       await loadOrderedQuantities();
     } catch (error) {
@@ -402,7 +533,7 @@ const CommercialSupplies = () => {
       );
 
       alert(
-        error.message ||
+        error?.message ||
           "Unable to submit the order. Please try again."
       );
     } finally {
@@ -410,39 +541,54 @@ const CommercialSupplies = () => {
     }
   };
 
-  /* =========================================================
-     CLOSE FUNCTIONS
-     ========================================================= */
+  // ====================================================
+  // CLOSE PRODUCT MODAL
+  // ====================================================
 
   const closeProductModal = () => {
     setSelectedProduct(null);
   };
 
+  // ====================================================
+  // CLOSE CART
+  // ====================================================
+
   const closeCart = () => {
     setShowCart(false);
   };
 
+  // ====================================================
+  // CLOSE CHECKOUT
+  // ====================================================
+
   const closeCheckout = () => {
+    if (loading) {
+      return;
+    }
+
     setShowCheckout(false);
   };
+
+  // ====================================================
+  // CLOSE SUCCESS
+  // ====================================================
 
   const closeSuccess = () => {
     setOrderSuccess(null);
   };
 
-  /* =========================================================
-     JSX
-     ========================================================= */
+  // ====================================================
+  // RENDER
+  // ====================================================
 
   return (
     <section className="ccq-section">
 
-      {/* =====================================================
-          HEADER
-          ===================================================== */}
+      {/* =================================================
+          PAGE HEADER
+      ================================================= */}
 
       <div className="ccq-header">
-
         <span className="ccq-label">
           COMMERCIAL SUPPLIES
         </span>
@@ -452,40 +598,33 @@ const CommercialSupplies = () => {
         </h1>
 
         <p className="ccq-intro">
-          Explore our range of cleaning and hygiene
-          supplies designed for offices, commercial
-          spaces, institutions and professional
-          cleaning requirements.
+          Explore our range of cleaning and
+          hygiene supplies designed for offices,
+          commercial spaces, institutions and
+          professional cleaning requirements.
         </p>
-
       </div>
 
-
-      {/* =====================================================
+      {/* =================================================
           MY ORDER
-          ===================================================== */}
+      ================================================= */}
 
       <button
         type="button"
         className="ccq-cart-button"
         onClick={() => setShowCart(true)}
+        aria-label={`My Order - ${cartCount} items`}
       >
-        <span>
-          My Order
-        </span>
+        <span>My Order</span>
 
-        <strong>
-          {cartCount}
-        </strong>
+        <strong>{cartCount}</strong>
       </button>
 
-
-      {/* =====================================================
+      {/* =================================================
           PRODUCT GRID
-          ===================================================== */}
+      ================================================= */}
 
       <div className="ccq-grid">
-
         {products.map((product) => {
           const orderedQuantity =
             Number(
@@ -497,8 +636,7 @@ const CommercialSupplies = () => {
               className="ccq-card"
               key={product.id}
             >
-
-              {/* IMAGE */}
+              {/* PRODUCT IMAGE */}
 
               <button
                 type="button"
@@ -506,21 +644,19 @@ const CommercialSupplies = () => {
                 onClick={() =>
                   setSelectedProduct(product)
                 }
+                aria-label={`View ${product.name}`}
               >
-
                 <img
                   src={product.image}
                   alt={product.name}
                   className="ccq-product-image"
+                  loading="lazy"
                 />
-
               </button>
 
-
-              {/* CONTENT */}
+              {/* PRODUCT CONTENT */}
 
               <div className="ccq-card-content">
-
                 <span className="ccq-category">
                   {product.category}
                 </span>
@@ -537,7 +673,6 @@ const CommercialSupplies = () => {
                   {product.unit}
                 </div>
 
-
                 {/* ORDERED QUANTITY */}
 
                 {!loadingOrderedQuantities &&
@@ -546,7 +681,6 @@ const CommercialSupplies = () => {
                       Ordered: {orderedQuantity}
                     </div>
                   )}
-
 
                 {/* ADD TO ORDER */}
 
@@ -559,55 +693,53 @@ const CommercialSupplies = () => {
                 >
                   Add to Order
                 </button>
-
               </div>
-
             </article>
           );
         })}
-
       </div>
 
-
-      {/* =====================================================
+      {/* =================================================
           PRODUCT DETAILS MODAL
-          ===================================================== */}
+      ================================================= */}
 
       {selectedProduct && (
         <div
           className="ccq-overlay"
           onClick={closeProductModal}
+          role="presentation"
         >
-
           <div
             className="ccq-product-modal"
             onClick={(event) =>
               event.stopPropagation()
             }
+            role="dialog"
+            aria-modal="true"
+            aria-label={selectedProduct.name}
           >
-
             <button
               type="button"
               className="ccq-close"
               onClick={closeProductModal}
+              aria-label="Close product details"
             >
               ×
             </button>
 
+            {/* PRODUCT IMAGE */}
 
             <div className="ccq-modal-image-wrap">
-
               <img
                 src={selectedProduct.image}
                 alt={selectedProduct.name}
                 className="ccq-modal-image"
               />
-
             </div>
 
+            {/* PRODUCT DETAILS */}
 
             <div className="ccq-modal-content">
-
               <span className="ccq-category">
                 {selectedProduct.category}
               </span>
@@ -627,7 +759,6 @@ const CommercialSupplies = () => {
               </p>
 
               <div className="ccq-modal-unit">
-
                 <span>
                   Pack / Unit:
                 </span>
@@ -635,7 +766,6 @@ const CommercialSupplies = () => {
                 <strong>
                   {selectedProduct.unit}
                 </strong>
-
               </div>
 
               <button
@@ -647,62 +777,53 @@ const CommercialSupplies = () => {
               >
                 Add to Order
               </button>
-
             </div>
-
           </div>
-
         </div>
       )}
 
-
-      {/* =====================================================
-          ORDER SUMMARY
-          ===================================================== */}
+      {/* =================================================
+          ORDER SUMMARY DRAWER
+      ================================================= */}
 
       {showCart && (
         <div
           className="ccq-overlay"
           onClick={closeCart}
+          role="presentation"
         >
-
           <aside
             className="ccq-cart-drawer"
             onClick={(event) =>
               event.stopPropagation()
             }
+            role="dialog"
+            aria-modal="true"
+            aria-label="Order Summary"
           >
+            {/* CART HEADER */}
 
             <div className="ccq-cart-header">
-
               <div>
+                <span>YOUR ORDER</span>
 
-                <span>
-                  YOUR ORDER
-                </span>
-
-                <h2>
-                  Order Summary
-                </h2>
-
+                <h2>Order Summary</h2>
               </div>
 
               <button
                 type="button"
                 className="ccq-close"
                 onClick={closeCart}
+                aria-label="Close order summary"
               >
                 ×
               </button>
-
             </div>
-
 
             {/* EMPTY ORDER */}
 
             {cart.length === 0 ? (
               <div className="ccq-empty">
-
                 <div className="ccq-empty-icon">
                   🛒
                 </div>
@@ -712,51 +833,53 @@ const CommercialSupplies = () => {
                 </h3>
 
                 <p>
-                  Add products to your order
-                  to continue.
+                  Add products to your
+                  order to continue.
                 </p>
-
               </div>
             ) : (
               <>
-
                 {/* CART ITEMS */}
 
                 <div className="ccq-cart-items">
-
                   {cart.map((item) => (
                     <div
                       className="ccq-cart-item"
                       key={item.id}
                     >
+                      {/* IMAGE */}
 
                       <img
                         src={item.image}
                         alt={item.name}
                       />
 
+                      {/* INFORMATION */}
 
                       <div className="ccq-cart-item-info">
-
-                        <h3>
-                          {item.name}
-                        </h3>
+                        <h3>{item.name}</h3>
 
                         <span>
-                          {formatPrice(item.price)}
+                          {formatPrice(
+                            item.price
+                          )}{" "}
+                          / {item.unit}
                         </span>
 
+                        {/* QUANTITY */}
 
                         <div className="ccq-quantity">
-
                           <button
                             type="button"
                             onClick={() =>
                               updateQuantity(
                                 item.id,
-                                item.quantity - 1
+                                Number(
+                                  item.quantity
+                                ) - 1
                               )
                             }
+                            aria-label={`Decrease ${item.name} quantity`}
                           >
                             −
                           </button>
@@ -770,40 +893,39 @@ const CommercialSupplies = () => {
                             onClick={() =>
                               updateQuantity(
                                 item.id,
-                                item.quantity + 1
+                                Number(
+                                  item.quantity
+                                ) + 1
                               )
                             }
+                            aria-label={`Increase ${item.name} quantity`}
                           >
                             +
                           </button>
-
                         </div>
-
                       </div>
 
+                      {/* REMOVE */}
 
                       <button
                         type="button"
                         className="ccq-remove"
                         onClick={() =>
-                          removeFromCart(item.id)
+                          removeFromCart(
+                            item.id
+                          )
                         }
                       >
                         Remove
                       </button>
-
                     </div>
                   ))}
-
                 </div>
 
-
-                {/* TOTAL */}
+                {/* CART FOOTER */}
 
                 <div className="ccq-cart-footer">
-
                   <div className="ccq-total">
-
                     <span>
                       Estimated Total
                     </span>
@@ -814,9 +936,7 @@ const CommercialSupplies = () => {
                         "en-IN"
                       )}
                     </strong>
-
                   </div>
-
 
                   <button
                     type="button"
@@ -826,9 +946,7 @@ const CommercialSupplies = () => {
                     Continue to Customer Details
                   </button>
 
-
                   <div className="ccq-no-payment">
-
                     <strong>
                       No Online Payment
                     </strong>
@@ -838,43 +956,43 @@ const CommercialSupplies = () => {
                       and our team will contact
                       you for confirmation.
                     </span>
-
                   </div>
-
                 </div>
-
               </>
             )}
-
           </aside>
-
         </div>
       )}
 
-
-      {/* =====================================================
+      {/* =================================================
           CUSTOMER DETAILS
-          ===================================================== */}
+      ================================================= */}
 
       {showCheckout && (
-        <div className="ccq-overlay">
-
-          <div className="ccq-checkout">
-
+        <div
+          className="ccq-overlay"
+          role="presentation"
+        >
+          <div
+            className="ccq-checkout"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Customer Details"
+          >
             <button
               type="button"
               className="ccq-close"
               onClick={closeCheckout}
+              disabled={loading}
+              aria-label="Close customer details"
             >
               ×
             </button>
 
+            {/* CHECKOUT HEADING */}
 
             <div className="ccq-checkout-heading">
-
-              <span>
-                FINAL STEP
-              </span>
+              <span>FINAL STEP</span>
 
               <h2>
                 Customer Details
@@ -885,15 +1003,14 @@ const CommercialSupplies = () => {
                 your order request. No online
                 payment is required.
               </p>
-
             </div>
 
+            {/* FORM */}
 
             <form
               className="ccq-form"
               onSubmit={submitOrder}
             >
-
               {/* FORM GRID */}
 
               <div className="ccq-form-grid">
@@ -901,12 +1018,12 @@ const CommercialSupplies = () => {
                 {/* NAME */}
 
                 <div className="ccq-field">
-
-                  <label>
+                  <label htmlFor="ccq-name">
                     Full Name *
                   </label>
 
                   <input
+                    id="ccq-name"
                     type="text"
                     name="name"
                     value={customer.name}
@@ -914,21 +1031,20 @@ const CommercialSupplies = () => {
                       handleCustomerChange
                     }
                     placeholder="Enter your full name"
+                    autoComplete="name"
                     required
                   />
-
                 </div>
-
 
                 {/* PHONE */}
 
                 <div className="ccq-field">
-
-                  <label>
+                  <label htmlFor="ccq-phone">
                     Phone Number *
                   </label>
 
                   <input
+                    id="ccq-phone"
                     type="tel"
                     name="phone"
                     value={customer.phone}
@@ -936,21 +1052,21 @@ const CommercialSupplies = () => {
                       handleCustomerChange
                     }
                     placeholder="Enter your phone number"
+                    autoComplete="tel"
+                    inputMode="tel"
                     required
                   />
-
                 </div>
-
 
                 {/* EMAIL */}
 
                 <div className="ccq-field">
-
-                  <label>
+                  <label htmlFor="ccq-email">
                     Email Address
                   </label>
 
                   <input
+                    id="ccq-email"
                     type="email"
                     name="email"
                     value={customer.email}
@@ -958,20 +1074,19 @@ const CommercialSupplies = () => {
                       handleCustomerChange
                     }
                     placeholder="Enter your email"
+                    autoComplete="email"
                   />
-
                 </div>
-
 
                 {/* COMPANY */}
 
                 <div className="ccq-field">
-
-                  <label>
+                  <label htmlFor="ccq-company">
                     Company / Organization
                   </label>
 
                   <input
+                    id="ccq-company"
                     type="text"
                     name="company"
                     value={customer.company}
@@ -979,22 +1094,20 @@ const CommercialSupplies = () => {
                       handleCustomerChange
                     }
                     placeholder="Company name"
+                    autoComplete="organization"
                   />
-
                 </div>
-
               </div>
-
 
               {/* LOCATION */}
 
               <div className="ccq-field">
-
-                <label>
+                <label htmlFor="ccq-location">
                   Delivery / Location *
                 </label>
 
                 <textarea
+                  id="ccq-location"
                   name="location"
                   value={customer.location}
                   onChange={
@@ -1002,21 +1115,20 @@ const CommercialSupplies = () => {
                   }
                   placeholder="Enter delivery location / address"
                   rows="3"
+                  autoComplete="street-address"
                   required
                 />
-
               </div>
-
 
               {/* NOTES */}
 
               <div className="ccq-field">
-
-                <label>
+                <label htmlFor="ccq-notes">
                   Additional Notes
                 </label>
 
                 <textarea
+                  id="ccq-notes"
                   value={notes}
                   onChange={(event) =>
                     setNotes(
@@ -1026,28 +1138,20 @@ const CommercialSupplies = () => {
                   placeholder="Any specific requirements?"
                   rows="4"
                 />
-
               </div>
-
 
               {/* FINAL SUMMARY */}
 
               <div className="ccq-final-summary">
-
                 <div>
-
-                  <span>
-                    Products
-                  </span>
+                  <span>Products</span>
 
                   <strong>
                     {cartCount}
                   </strong>
-
                 </div>
 
                 <div>
-
                   <span>
                     Estimated Total
                   </span>
@@ -1058,16 +1162,12 @@ const CommercialSupplies = () => {
                       "en-IN"
                     )}
                   </strong>
-
                 </div>
-
               </div>
-
 
               {/* NO PAYMENT */}
 
               <div className="ccq-no-payment">
-
                 <strong>
                   No Online Payment
                 </strong>
@@ -1077,9 +1177,7 @@ const CommercialSupplies = () => {
                   and our team will contact
                   you for confirmation.
                 </span>
-
               </div>
-
 
               {/* SUBMIT */}
 
@@ -1088,30 +1186,30 @@ const CommercialSupplies = () => {
                 className="ccq-submit"
                 disabled={loading}
               >
-
                 {loading
                   ? "Submitting Order..."
                   : "Submit Order Request"}
-
               </button>
-
             </form>
-
           </div>
-
         </div>
       )}
 
-
-      {/* =====================================================
-          SUCCESS
-          ===================================================== */}
+      {/* =================================================
+          SUCCESS MESSAGE
+      ================================================= */}
 
       {orderSuccess && (
-        <div className="ccq-overlay">
-
-          <div className="ccq-success">
-
+        <div
+          className="ccq-overlay"
+          role="presentation"
+        >
+          <div
+            className="ccq-success"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Order submitted successfully"
+          >
             <div className="ccq-success-icon">
               ✓
             </div>
@@ -1120,37 +1218,31 @@ const CommercialSupplies = () => {
               ORDER RECEIVED
             </span>
 
-            <h2>
-              Thank You!
-            </h2>
+            <h2>Thank You!</h2>
 
             <p>
               Your order request has been
               submitted successfully.
             </p>
 
+            {/* ORDER NUMBER */}
 
             <div className="ccq-order-number">
-
-              <small>
-                Order ID
-              </small>
+              <small>Order ID</small>
 
               <strong>
                 {orderSuccess.orderId ||
                   orderSuccess.order?.id ||
+                  orderSuccess.id ||
                   "Order received"}
               </strong>
-
             </div>
-
 
             <p>
               Our team will contact you to
               confirm availability, delivery
               and final billing.
             </p>
-
 
             <button
               type="button"
@@ -1159,12 +1251,9 @@ const CommercialSupplies = () => {
             >
               Continue Shopping
             </button>
-
           </div>
-
         </div>
       )}
-
     </section>
   );
 };

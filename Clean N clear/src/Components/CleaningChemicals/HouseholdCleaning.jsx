@@ -8,6 +8,11 @@ import PushSweeper from "../../images/house/Push sweeper S 4 Twin.jpg";
 import SprayExtractionCleaner from "../../images/house/Spray extraction cleaner SE 4001.jpg";
 import ToiletCleaner from "../../images/house/Toilet Cleaner 5Ltr.webp";
 
+import {
+  getOrderCart,
+  updateOrderCart,
+} from "../../utils/OrderCart";
+
 const API_URL =
   import.meta.env.VITE_API_URL || "http://localhost:5000";
 
@@ -26,7 +31,6 @@ const products = [
     description:
       "Household cleaning product suitable for everyday cleaning and maintaining a clean home environment.",
   },
-
   {
     id: "household-cleaning-acid-5ltr",
     name: "Cleaning Acid 5Ltr",
@@ -37,7 +41,6 @@ const products = [
     description:
       "Cleaning solution suitable for household cleaning requirements and maintaining hygienic surfaces.",
   },
-
   {
     id: "household-floor-cleaner",
     name: "Floor Cleaner",
@@ -48,7 +51,6 @@ const products = [
     description:
       "Floor cleaning solution suitable for regular household floor cleaning and maintenance.",
   },
-
   {
     id: "push-sweeper-s4-twin",
     name: "Push Sweeper S 4 Twin",
@@ -59,7 +61,6 @@ const products = [
     description:
       "Compact manual push sweeper designed for convenient cleaning of outdoor and household areas.",
   },
-
   {
     id: "spray-extraction-cleaner-se4001",
     name: "Spray Extraction Cleaner SE 4001",
@@ -70,7 +71,6 @@ const products = [
     description:
       "Spray extraction cleaning machine suitable for deep cleaning carpets, upholstery and household surfaces.",
   },
-
   {
     id: "household-toilet-cleaner-5ltr",
     name: "Toilet Cleaner 5Ltr",
@@ -84,13 +84,29 @@ const products = [
 ];
 
 /* =========================================================
+   EMPTY CUSTOMER
+   ========================================================= */
+
+const emptyCustomer = {
+  name: "",
+  phone: "",
+  email: "",
+  company: "",
+  location: "",
+};
+
+/* =========================================================
    COMPONENT
    ========================================================= */
 
 const HouseholdCleaning = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  const [cart, setCart] = useState([]);
+  /* =======================================================
+     SHARED ORDER CART
+     ======================================================= */
+
+  const [cart, setCart] = useState(() => getOrderCart());
 
   const [showCart, setShowCart] = useState(false);
 
@@ -102,18 +118,22 @@ const HouseholdCleaning = () => {
 
   const [orderedQuantities, setOrderedQuantities] = useState({});
 
-  const [loadingOrderedQuantities, setLoadingOrderedQuantities] =
-    useState(true);
+  const [
+    loadingOrderedQuantities,
+    setLoadingOrderedQuantities,
+  ] = useState(true);
 
-  const [customer, setCustomer] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    company: "",
-    location: "",
-  });
+  const [customer, setCustomer] = useState(emptyCustomer);
 
   const [notes, setNotes] = useState("");
+
+  /* =========================================================
+     SAVE CART TO SHARED ORDER CART
+     ========================================================= */
+
+  useEffect(() => {
+    updateOrderCart(cart);
+  }, [cart]);
 
   /* =========================================================
      LOAD ORDERED QUANTITIES
@@ -149,7 +169,7 @@ const HouseholdCleaning = () => {
   };
 
   /* =========================================================
-     LOAD ON PAGE OPEN
+     LOAD ORDERED QUANTITIES ON PAGE OPEN
      ========================================================= */
 
   useEffect(() => {
@@ -162,10 +182,10 @@ const HouseholdCleaning = () => {
 
   useEffect(() => {
     const modalOpen =
-      selectedProduct ||
+      Boolean(selectedProduct) ||
       showCart ||
       showCheckout ||
-      orderSuccess;
+      Boolean(orderSuccess);
 
     if (modalOpen) {
       document.body.style.overflow = "hidden";
@@ -206,7 +226,8 @@ const HouseholdCleaning = () => {
           item.id === product.id
             ? {
                 ...item,
-                quantity: item.quantity + 1,
+                quantity:
+                  Number(item.quantity || 0) + 1,
               }
             : item
         );
@@ -221,9 +242,8 @@ const HouseholdCleaning = () => {
       ];
     });
 
-    /* Open Order Summary automatically */
-
     setSelectedProduct(null);
+
     setShowCart(true);
   };
 
@@ -232,7 +252,13 @@ const HouseholdCleaning = () => {
      ========================================================= */
 
   const updateQuantity = (id, quantity) => {
-    if (quantity < 1) {
+    const nextQuantity = Number(quantity);
+
+    if (!Number.isFinite(nextQuantity)) {
+      return;
+    }
+
+    if (nextQuantity < 1) {
       removeFromCart(id);
       return;
     }
@@ -242,7 +268,7 @@ const HouseholdCleaning = () => {
         item.id === id
           ? {
               ...item,
-              quantity,
+              quantity: nextQuantity,
             }
           : item
       )
@@ -250,14 +276,12 @@ const HouseholdCleaning = () => {
   };
 
   /* =========================================================
-     REMOVE FROM CART
+     REMOVE FROM ORDER
      ========================================================= */
 
   const removeFromCart = (id) => {
     setCart((previousCart) =>
-      previousCart.filter(
-        (item) => item.id !== id
-      )
+      previousCart.filter((item) => item.id !== id)
     );
   };
 
@@ -302,9 +326,7 @@ const HouseholdCleaning = () => {
 
   const openCheckout = () => {
     if (cart.length === 0) {
-      alert(
-        "Please add at least one product to your order."
-      );
+      alert("Please add at least one product to your order.");
       return;
     }
 
@@ -320,25 +342,60 @@ const HouseholdCleaning = () => {
     event.preventDefault();
 
     if (cart.length === 0) {
-      alert(
-        "Please add at least one product to your order."
-      );
+      alert("Please add at least one product to your order.");
       return;
     }
 
-    if (
-      !customer.name.trim() ||
-      !customer.phone.trim() ||
-      !customer.location.trim()
-    ) {
+    const name = customer.name.trim();
+    const phone = customer.phone.trim();
+    const email = customer.email.trim();
+    const company = customer.company.trim();
+    const location = customer.location.trim();
+
+    /* -------------------------------------------------------
+       REQUIRED FIELDS
+       ------------------------------------------------------- */
+
+    if (!name || !phone || !location) {
       alert(
         "Please enter your name, phone number and location."
       );
       return;
     }
 
+    /* -------------------------------------------------------
+       PHONE VALIDATION
+       ------------------------------------------------------- */
+
+    const phoneDigits = phone.replace(/\D/g, "");
+
+    if (
+      phoneDigits.length < 7 ||
+      phoneDigits.length > 15
+    ) {
+      alert("Please enter a valid phone number.");
+      return;
+    }
+
+    /* -------------------------------------------------------
+       EMAIL VALIDATION
+       ------------------------------------------------------- */
+
+    if (
+      email &&
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+    ) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+
     try {
       setLoading(true);
+
+      /* -----------------------------------------------------
+         SEND ONLY PRODUCT IDS + QUANTITIES
+         Backend handles product prices.
+         ----------------------------------------------------- */
 
       const orderItems = cart.map((item) => ({
         id: item.id,
@@ -349,15 +406,19 @@ const HouseholdCleaning = () => {
         `${API_URL}/api/order`,
         {
           method: "POST",
-
           headers: {
             "Content-Type": "application/json",
           },
-
           body: JSON.stringify({
-            customer,
+            customer: {
+              name,
+              phone,
+              email,
+              company,
+              location,
+            },
             items: orderItems,
-            notes,
+            notes: notes.trim(),
           }),
         }
       );
@@ -370,29 +431,37 @@ const HouseholdCleaning = () => {
         );
       }
 
+      /* -----------------------------------------------------
+         SHOW SUCCESS
+         ----------------------------------------------------- */
+
       setOrderSuccess(data);
 
-      /* Clear cart */
+      /* -----------------------------------------------------
+         CLEAR SHARED ORDER CART
+         ----------------------------------------------------- */
 
       setCart([]);
 
-      /* Clear customer details */
+      /* -----------------------------------------------------
+         CLEAR CUSTOMER DETAILS
+         ----------------------------------------------------- */
 
       setCustomer({
-        name: "",
-        phone: "",
-        email: "",
-        company: "",
-        location: "",
+        ...emptyCustomer,
       });
 
       setNotes("");
 
-      /* Close checkout */
+      /* -----------------------------------------------------
+         CLOSE CHECKOUT
+         ----------------------------------------------------- */
 
       setShowCheckout(false);
 
-      /* Refresh ordered quantities */
+      /* -----------------------------------------------------
+         REFRESH ORDERED QUANTITIES
+         ----------------------------------------------------- */
 
       await loadOrderedQuantities();
     } catch (error) {
@@ -411,20 +480,36 @@ const HouseholdCleaning = () => {
   };
 
   /* =========================================================
-     CLOSE FUNCTIONS
+     CLOSE PRODUCT MODAL
      ========================================================= */
 
   const closeProductModal = () => {
     setSelectedProduct(null);
   };
 
+  /* =========================================================
+     CLOSE CART
+     ========================================================= */
+
   const closeCart = () => {
     setShowCart(false);
   };
 
+  /* =========================================================
+     CLOSE CHECKOUT
+     ========================================================= */
+
   const closeCheckout = () => {
+    if (loading) {
+      return;
+    }
+
     setShowCheckout(false);
   };
+
+  /* =========================================================
+     CLOSE SUCCESS
+     ========================================================= */
 
   const closeSuccess = () => {
     setOrderSuccess(null);
@@ -442,7 +527,6 @@ const HouseholdCleaning = () => {
           ===================================================== */}
 
       <div className="ccq-header">
-
         <span className="ccq-label">
           HOUSEHOLD CLEANING
         </span>
@@ -456,9 +540,7 @@ const HouseholdCleaning = () => {
           products and equipment designed for
           everyday cleaning and home maintenance.
         </p>
-
       </div>
-
 
       {/* =====================================================
           MY ORDER
@@ -468,23 +550,18 @@ const HouseholdCleaning = () => {
         type="button"
         className="ccq-cart-button"
         onClick={() => setShowCart(true)}
+        aria-label={`My Order - ${cartCount} items`}
       >
-        <span>
-          My Order
-        </span>
+        <span>My Order</span>
 
-        <strong>
-          {cartCount}
-        </strong>
+        <strong>{cartCount}</strong>
       </button>
-
 
       {/* =====================================================
           PRODUCT GRID
           ===================================================== */}
 
       <div className="ccq-grid">
-
         {products.map((product) => {
           const orderedQuantity =
             Number(
@@ -496,7 +573,6 @@ const HouseholdCleaning = () => {
               className="ccq-card"
               key={product.id}
             >
-
               {/* IMAGE */}
 
               <button
@@ -505,19 +581,19 @@ const HouseholdCleaning = () => {
                 onClick={() =>
                   setSelectedProduct(product)
                 }
+                aria-label={`View ${product.name}`}
               >
                 <img
                   src={product.image}
                   alt={product.name}
                   className="ccq-product-image"
+                  loading="lazy"
                 />
               </button>
-
 
               {/* CONTENT */}
 
               <div className="ccq-card-content">
-
                 <span className="ccq-category">
                   {product.category}
                 </span>
@@ -534,8 +610,7 @@ const HouseholdCleaning = () => {
                   {product.unit}
                 </div>
 
-
-                {/* ORDERED */}
+                {/* ORDERED QUANTITY */}
 
                 {!loadingOrderedQuantities &&
                   orderedQuantity > 0 && (
@@ -544,8 +619,7 @@ const HouseholdCleaning = () => {
                     </div>
                   )}
 
-
-                {/* ADD */}
+                {/* ADD TO ORDER */}
 
                 <button
                   type="button"
@@ -556,15 +630,11 @@ const HouseholdCleaning = () => {
                 >
                   Add to Order
                 </button>
-
               </div>
-
             </article>
           );
         })}
-
       </div>
-
 
       {/* =====================================================
           PRODUCT DETAILS MODAL
@@ -574,41 +644,39 @@ const HouseholdCleaning = () => {
         <div
           className="ccq-overlay"
           onClick={closeProductModal}
+          role="presentation"
         >
-
           <div
             className="ccq-product-modal"
             onClick={(event) =>
               event.stopPropagation()
             }
+            role="dialog"
+            aria-modal="true"
+            aria-label={selectedProduct.name}
           >
-
             <button
               type="button"
               className="ccq-close"
               onClick={closeProductModal}
+              aria-label="Close product details"
             >
               ×
             </button>
 
-
-            {/* IMAGE */}
+            {/* PRODUCT IMAGE */}
 
             <div className="ccq-modal-image-wrap">
-
               <img
                 src={selectedProduct.image}
                 alt={selectedProduct.name}
                 className="ccq-modal-image"
               />
-
             </div>
 
-
-            {/* DETAILS */}
+            {/* PRODUCT DETAILS */}
 
             <div className="ccq-modal-content">
-
               <span className="ccq-category">
                 {selectedProduct.category}
               </span>
@@ -628,15 +696,11 @@ const HouseholdCleaning = () => {
               </p>
 
               <div className="ccq-modal-unit">
-
-                <span>
-                  Pack / Unit:
-                </span>
+                <span>Pack / Unit:</span>
 
                 <strong>
                   {selectedProduct.unit}
                 </strong>
-
               </div>
 
               <button
@@ -648,14 +712,10 @@ const HouseholdCleaning = () => {
               >
                 Add to Order
               </button>
-
             </div>
-
           </div>
-
         </div>
       )}
-
 
       {/* =====================================================
           ORDER SUMMARY
@@ -665,47 +725,40 @@ const HouseholdCleaning = () => {
         <div
           className="ccq-overlay"
           onClick={closeCart}
+          role="presentation"
         >
-
           <aside
             className="ccq-cart-drawer"
             onClick={(event) =>
               event.stopPropagation()
             }
+            role="dialog"
+            aria-modal="true"
+            aria-label="Order Summary"
           >
-
-            {/* HEADER */}
+            {/* CART HEADER */}
 
             <div className="ccq-cart-header">
-
               <div>
+                <span>YOUR ORDER</span>
 
-                <span>
-                  YOUR ORDER
-                </span>
-
-                <h2>
-                  Order Summary
-                </h2>
-
+                <h2>Order Summary</h2>
               </div>
 
               <button
                 type="button"
                 className="ccq-close"
                 onClick={closeCart}
+                aria-label="Close order summary"
               >
                 ×
               </button>
-
             </div>
 
-
-            {/* EMPTY */}
+            {/* EMPTY ORDER */}
 
             {cart.length === 0 ? (
               <div className="ccq-empty">
-
                 <div className="ccq-empty-icon">
                   🛒
                 </div>
@@ -718,48 +771,48 @@ const HouseholdCleaning = () => {
                   Add products to your order
                   to continue.
                 </p>
-
               </div>
             ) : (
               <>
-
                 {/* CART ITEMS */}
 
                 <div className="ccq-cart-items">
-
                   {cart.map((item) => (
                     <div
                       className="ccq-cart-item"
                       key={item.id}
                     >
+                      {/* IMAGE */}
 
                       <img
                         src={item.image}
                         alt={item.name}
                       />
 
+                      {/* INFORMATION */}
 
                       <div className="ccq-cart-item-info">
-
-                        <h3>
-                          {item.name}
-                        </h3>
+                        <h3>{item.name}</h3>
 
                         <span>
-                          {formatPrice(item.price)}
+                          {formatPrice(item.price)}{" "}
+                          / {item.unit}
                         </span>
 
+                        {/* QUANTITY */}
 
                         <div className="ccq-quantity">
-
                           <button
                             type="button"
                             onClick={() =>
                               updateQuantity(
                                 item.id,
-                                item.quantity - 1
+                                Number(
+                                  item.quantity
+                                ) - 1
                               )
                             }
+                            aria-label={`Decrease ${item.name} quantity`}
                           >
                             −
                           </button>
@@ -773,17 +826,19 @@ const HouseholdCleaning = () => {
                             onClick={() =>
                               updateQuantity(
                                 item.id,
-                                item.quantity + 1
+                                Number(
+                                  item.quantity
+                                ) + 1
                               )
                             }
+                            aria-label={`Increase ${item.name} quantity`}
                           >
                             +
                           </button>
-
                         </div>
-
                       </div>
 
+                      {/* REMOVE */}
 
                       <button
                         type="button"
@@ -794,19 +849,14 @@ const HouseholdCleaning = () => {
                       >
                         Remove
                       </button>
-
                     </div>
                   ))}
-
                 </div>
 
-
-                {/* TOTAL */}
+                {/* CART FOOTER */}
 
                 <div className="ccq-cart-footer">
-
                   <div className="ccq-total">
-
                     <span>
                       Estimated Total
                     </span>
@@ -817,9 +867,7 @@ const HouseholdCleaning = () => {
                         "en-IN"
                       )}
                     </strong>
-
                   </div>
-
 
                   <button
                     type="button"
@@ -829,9 +877,7 @@ const HouseholdCleaning = () => {
                     Continue to Customer Details
                   </button>
 
-
                   <div className="ccq-no-payment">
-
                     <strong>
                       No Online Payment
                     </strong>
@@ -841,56 +887,52 @@ const HouseholdCleaning = () => {
                       and our team will contact
                       you for confirmation.
                     </span>
-
                   </div>
-
                 </div>
-
               </>
             )}
-
           </aside>
-
         </div>
       )}
-
 
       {/* =====================================================
           CUSTOMER DETAILS
           ===================================================== */}
 
       {showCheckout && (
-        <div className="ccq-overlay">
-
-          <div className="ccq-checkout">
-
+        <div
+          className="ccq-overlay"
+          role="presentation"
+        >
+          <div
+            className="ccq-checkout"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Customer Details"
+          >
             <button
               type="button"
               className="ccq-close"
               onClick={closeCheckout}
+              disabled={loading}
+              aria-label="Close customer details"
             >
               ×
             </button>
 
+            {/* CHECKOUT HEADING */}
 
             <div className="ccq-checkout-heading">
+              <span>FINAL STEP</span>
 
-              <span>
-                FINAL STEP
-              </span>
-
-              <h2>
-                Customer Details
-              </h2>
+              <h2>Customer Details</h2>
 
               <p>
                 Enter your details and submit
                 your order request. No online
                 payment is required.
               </p>
-
             </div>
-
 
             {/* FORM */}
 
@@ -898,18 +940,19 @@ const HouseholdCleaning = () => {
               className="ccq-form"
               onSubmit={submitOrder}
             >
+              {/* FORM GRID */}
 
               <div className="ccq-form-grid">
 
                 {/* NAME */}
 
                 <div className="ccq-field">
-
-                  <label>
+                  <label htmlFor="household-name">
                     Full Name *
                   </label>
 
                   <input
+                    id="household-name"
                     type="text"
                     name="name"
                     value={customer.name}
@@ -917,21 +960,20 @@ const HouseholdCleaning = () => {
                       handleCustomerChange
                     }
                     placeholder="Enter your full name"
+                    autoComplete="name"
                     required
                   />
-
                 </div>
-
 
                 {/* PHONE */}
 
                 <div className="ccq-field">
-
-                  <label>
+                  <label htmlFor="household-phone">
                     Phone Number *
                   </label>
 
                   <input
+                    id="household-phone"
                     type="tel"
                     name="phone"
                     value={customer.phone}
@@ -939,21 +981,21 @@ const HouseholdCleaning = () => {
                       handleCustomerChange
                     }
                     placeholder="Enter your phone number"
+                    autoComplete="tel"
+                    inputMode="tel"
                     required
                   />
-
                 </div>
-
 
                 {/* EMAIL */}
 
                 <div className="ccq-field">
-
-                  <label>
+                  <label htmlFor="household-email">
                     Email Address
                   </label>
 
                   <input
+                    id="household-email"
                     type="email"
                     name="email"
                     value={customer.email}
@@ -961,20 +1003,19 @@ const HouseholdCleaning = () => {
                       handleCustomerChange
                     }
                     placeholder="Enter your email"
+                    autoComplete="email"
                   />
-
                 </div>
-
 
                 {/* COMPANY */}
 
                 <div className="ccq-field">
-
-                  <label>
+                  <label htmlFor="household-company">
                     Company / Organization
                   </label>
 
                   <input
+                    id="household-company"
                     type="text"
                     name="company"
                     value={customer.company}
@@ -982,22 +1023,20 @@ const HouseholdCleaning = () => {
                       handleCustomerChange
                     }
                     placeholder="Company name"
+                    autoComplete="organization"
                   />
-
                 </div>
-
               </div>
-
 
               {/* LOCATION */}
 
               <div className="ccq-field">
-
-                <label>
+                <label htmlFor="household-location">
                   Delivery / Location *
                 </label>
 
                 <textarea
+                  id="household-location"
                   name="location"
                   value={customer.location}
                   onChange={
@@ -1005,52 +1044,41 @@ const HouseholdCleaning = () => {
                   }
                   placeholder="Enter delivery location / address"
                   rows="3"
+                  autoComplete="street-address"
                   required
                 />
-
               </div>
-
 
               {/* NOTES */}
 
               <div className="ccq-field">
-
-                <label>
+                <label htmlFor="household-notes">
                   Additional Notes
                 </label>
 
                 <textarea
+                  id="household-notes"
                   value={notes}
                   onChange={(event) =>
-                    setNotes(
-                      event.target.value
-                    )
+                    setNotes(event.target.value)
                   }
                   placeholder="Any specific requirements?"
                   rows="4"
                 />
-
               </div>
-
 
               {/* FINAL SUMMARY */}
 
               <div className="ccq-final-summary">
-
                 <div>
-
-                  <span>
-                    Products
-                  </span>
+                  <span>Products</span>
 
                   <strong>
                     {cartCount}
                   </strong>
-
                 </div>
 
                 <div>
-
                   <span>
                     Estimated Total
                   </span>
@@ -1061,16 +1089,12 @@ const HouseholdCleaning = () => {
                       "en-IN"
                     )}
                   </strong>
-
                 </div>
-
               </div>
-
 
               {/* NO PAYMENT */}
 
               <div className="ccq-no-payment">
-
                 <strong>
                   No Online Payment
                 </strong>
@@ -1080,9 +1104,7 @@ const HouseholdCleaning = () => {
                   and our team will contact
                   you for confirmation.
                 </span>
-
               </div>
-
 
               {/* SUBMIT */}
 
@@ -1091,69 +1113,60 @@ const HouseholdCleaning = () => {
                 className="ccq-submit"
                 disabled={loading}
               >
-
                 {loading
                   ? "Submitting Order..."
                   : "Submit Order Request"}
-
               </button>
-
             </form>
-
           </div>
-
         </div>
       )}
-
 
       {/* =====================================================
           SUCCESS
           ===================================================== */}
 
       {orderSuccess && (
-        <div className="ccq-overlay">
-
-          <div className="ccq-success">
-
+        <div
+          className="ccq-overlay"
+          role="presentation"
+        >
+          <div
+            className="ccq-success"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Order submitted successfully"
+          >
             <div className="ccq-success-icon">
               ✓
             </div>
 
-            <span>
-              ORDER RECEIVED
-            </span>
+            <span>ORDER RECEIVED</span>
 
-            <h2>
-              Thank You!
-            </h2>
+            <h2>Thank You!</h2>
 
             <p>
               Your order request has been
               submitted successfully.
             </p>
 
+            {/* ORDER ID */}
 
             <div className="ccq-order-number">
-
-              <small>
-                Order ID
-              </small>
+              <small>Order ID</small>
 
               <strong>
                 {orderSuccess.orderId ||
                   orderSuccess.order?.id ||
                   "Order received"}
               </strong>
-
             </div>
-
 
             <p>
               Our team will contact you to
               confirm availability, delivery
               and final billing.
             </p>
-
 
             <button
               type="button"
@@ -1162,12 +1175,9 @@ const HouseholdCleaning = () => {
             >
               Continue Shopping
             </button>
-
           </div>
-
         </div>
       )}
-
     </section>
   );
 };

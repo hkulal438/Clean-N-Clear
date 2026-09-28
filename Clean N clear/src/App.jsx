@@ -64,12 +64,20 @@ import Residential from "./Components/Pagesofindustries/Residential";
 
 
 //Solutions
+import Solution from "./Components/Solution/Solution";
 
 import Commercial from "./Components/Commercial/Commercial"
 import House from "./Components/House/House"
 import Institute from "./Components/Institute/Institute"
 import Retail from "./Components/Retail/Retail"
 import Wholesale from "./Components/Wholesale/Wholesale"
+
+//get a quote
+import Quote from "./Components/Quote/Quote"
+
+//cart
+import OrderCart from "./Components/OrderCart/OrderCart";
+
 
 // contact
 
@@ -269,7 +277,7 @@ function App() {
           <Route
             path="/solutions"
             element={
-              <Page title="Solutions" />
+              <Solution />
             }
           />
 
@@ -393,11 +401,21 @@ function App() {
           <Route
             path="/request-a-quote"
             element={
-              <Page title="Request a Quote" />
+              <Quote />
             }
           />
 
         </Route>
+
+         {/* =====================================================
+              ORDER CART
+          ===================================================== */}
+
+          <Route
+            path="/order-cart"
+            element={<OrderCart />}
+          />
+
 
 
         {/* ==================================================

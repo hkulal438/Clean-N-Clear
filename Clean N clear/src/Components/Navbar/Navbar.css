@@ -4,11 +4,17 @@
    FIXED HEADER VERSION
    ========================================================= */
 
+
+/* =========================================================
+   GLOBAL BOX SIZING
+   ========================================================= */
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
+
 
 /* =========================================================
    HTML / BODY
@@ -31,6 +37,7 @@ body {
   padding-top: 132px;
 }
 
+
 /* =========================================================
    HEADER
    ========================================================= */
@@ -39,6 +46,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
+
   width: 100%;
 
   margin: 0;
@@ -48,6 +56,7 @@ body {
 
   z-index: 10000;
 }
+
 
 /* =========================================================
    TOP INFORMATION BAR
@@ -64,6 +73,7 @@ body {
 .rt-topbar__inner {
   width: 100%;
   max-width: 1700px;
+
   min-height: 48px;
 
   margin: 0 auto;
@@ -75,6 +85,7 @@ body {
 
   gap: 25px;
 }
+
 
 /* =========================================================
    CONTACT INFORMATION
@@ -112,11 +123,14 @@ body {
 
 .rt-topbar__info a {
   color: #ffffff;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
-.rt-topbar__info a:hover {
-  text-decoration: underline;
+.rt-topbar__info a:hover,
+.rt-topbar__info a:focus,
+.rt-topbar__info a:focus-visible {
+  color: #ffffff;
+  text-decoration: none !important;
 }
 
 .rt-topbar__divider {
@@ -124,9 +138,6 @@ body {
   flex-shrink: 0;
 }
 
-.rt-topbar__cin {
-  white-space: nowrap;
-}
 
 /* =========================================================
    COMPANY SELECTOR
@@ -146,6 +157,7 @@ body {
   background: #ffffff;
 
   border: 1px solid rgba(255, 255, 255, 0.9);
+
   border-radius: 6px;
 
   color: #081fef;
@@ -193,6 +205,12 @@ body {
   cursor: pointer;
 }
 
+.rt-company-selector__select:focus,
+.rt-company-selector__select:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
 .rt-company-selector__select option {
   color: #111827;
   background: #ffffff;
@@ -215,6 +233,7 @@ body {
 
   pointer-events: none;
 }
+
 
 /* =========================================================
    MAIN NAVBAR
@@ -255,6 +274,7 @@ body {
   gap: 20px;
 }
 
+
 /* =========================================================
    LOGO
    ========================================================= */
@@ -273,7 +293,7 @@ body {
 
   line-height: 0;
 
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 .rt-navbar__logo img {
@@ -287,12 +307,14 @@ body {
   object-fit: contain;
 }
 
+
 /* =========================================================
    DESKTOP NAVIGATION
    ========================================================= */
 
 .rt-navbar__links {
   flex: 1;
+
   min-width: 0;
 
   display: flex;
@@ -313,6 +335,7 @@ body {
   margin: 0;
   padding: 0;
 }
+
 
 /* =========================================================
    NAVIGATION LINKS
@@ -343,43 +366,68 @@ body {
     sans-serif;
 
   font-size: 17px;
+
   font-weight: 600;
 
   letter-spacing: 0.05px;
 
   white-space: nowrap;
-  text-decoration: none;
+
+  text-decoration: none !important;
 
   cursor: pointer;
 
-  transition: color 0.2s ease;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
 }
 
-.rt-navbar__link:hover {
-  color: #0619b8;
+
+/* =========================================================
+   REMOVE ALL UNDERLINES
+   ========================================================= */
+
+.rt-navbar__link::before,
+.rt-navbar__link::after {
+  content: none !important;
+  display: none !important;
 }
+
+
+/* =========================================================
+   NAVIGATION HOVER
+   ========================================================= */
+
+.rt-navbar__link:hover,
+.rt-navbar__link:focus,
+.rt-navbar__link:focus-visible,
+.rt-navbar__link:active {
+  color: #0619b8;
+
+  background: transparent;
+
+  text-decoration: none !important;
+}
+
 
 /* =========================================================
    ACTIVE LINK
    ========================================================= */
 
-.rt-navbar__link.is-active::after {
-  content: "";
+.rt-navbar__link.is-active {
+  color: #081fef;
 
-  position: absolute;
+  background: transparent;
 
-  left: 50%;
-  bottom: 5px;
-
-  width: 40px;
-  height: 3px;
-
-  transform: translateX(-50%);
-
-  background: #081fef;
-
-  border-radius: 10px;
+  text-decoration: none !important;
 }
+
+.rt-navbar__link.is-active::before,
+.rt-navbar__link.is-active::after {
+  content: none !important;
+  display: none !important;
+}
+
 
 /* =========================================================
    DROPDOWN TRIGGER
@@ -393,6 +441,7 @@ body {
   gap: 2px;
 }
 
+
 /* =========================================================
    MAIN DROPDOWN LINK
    ========================================================= */
@@ -403,6 +452,7 @@ body {
 
   padding-right: 4px;
 }
+
 
 /* =========================================================
    DROPDOWN ARROW BUTTON
@@ -424,6 +474,7 @@ body {
   padding: 0;
 
   border: none !important;
+
   outline: none !important;
 
   background: transparent !important;
@@ -444,12 +495,16 @@ body {
 .rt-navbar__dropdown-button:focus,
 .rt-navbar__dropdown-button:focus-visible {
   border: none !important;
+
   outline: none !important;
 
   background: transparent !important;
 
+  color: #0619b8;
+
   box-shadow: none !important;
 }
+
 
 /* =========================================================
    CARET
@@ -461,12 +516,14 @@ body {
   width: 9px;
   height: 6px;
 
-  transition: transform 0.2s ease;
+  transition:
+    transform 0.2s ease;
 }
 
 .rt-navbar__caret.is-open {
   transform: rotate(180deg);
 }
+
 
 /* =========================================================
    DESKTOP DROPDOWN
@@ -488,12 +545,14 @@ body {
   background: #ffffff;
 
   border: 1px solid #081fef;
+
   border-radius: 6px;
 
   box-shadow:
     0 12px 28px rgba(0, 0, 0, 0.13);
 
   opacity: 0;
+
   visibility: hidden;
 
   transform: translateY(-6px);
@@ -509,6 +568,7 @@ body {
 .rt-dropdown.is-open,
 .rt-navbar__item:hover > .rt-dropdown {
   opacity: 1;
+
   visibility: visible;
 
   transform: translateY(0);
@@ -520,6 +580,11 @@ body {
   margin: 0;
   padding: 0;
 }
+
+
+/* =========================================================
+   DROPDOWN LINKS
+   ========================================================= */
 
 .rt-dropdown li a {
   display: flex;
@@ -537,22 +602,30 @@ body {
     sans-serif;
 
   font-size: 14px;
+
   font-weight: 500;
 
-  text-decoration: none;
+  text-decoration: none !important;
 
   transition:
     background 0.15s ease,
     color 0.15s ease;
 }
 
-.rt-dropdown li a:hover {
+.rt-dropdown li a:hover,
+.rt-dropdown li a:focus,
+.rt-dropdown li a:focus-visible,
+.rt-dropdown li a:active {
   background: #081fef;
+
   color: #ffffff;
+
+  text-decoration: none !important;
 }
 
+
 /* =========================================================
-   ACTIONS
+   DESKTOP ACTIONS
    ========================================================= */
 
 .rt-navbar__actions {
@@ -565,6 +638,7 @@ body {
 
   margin-left: 8px;
 }
+
 
 /* =========================================================
    WHATSAPP
@@ -580,11 +654,12 @@ body {
 
   flex-shrink: 0;
 
-  text-decoration: none;
+  text-decoration: none !important;
 
   border-radius: 50%;
 
-  transition: transform 0.2s ease;
+  transition:
+    transform 0.2s ease;
 }
 
 .rt-navbar__whatsapp img {
@@ -596,9 +671,14 @@ body {
   object-fit: contain;
 }
 
-.rt-navbar__whatsapp:hover {
+.rt-navbar__whatsapp:hover,
+.rt-navbar__whatsapp:focus,
+.rt-navbar__whatsapp:focus-visible {
   transform: scale(1.1);
+
+  text-decoration: none !important;
 }
+
 
 /* =========================================================
    GET A QUOTE
@@ -606,6 +686,7 @@ body {
 
 .rt-navbar__cta {
   height: 48px;
+
   min-width: 145px;
 
   padding: 0 20px;
@@ -617,6 +698,7 @@ body {
   background: #081fef;
 
   border: 1px solid #081fef;
+
   border-radius: 6px;
 
   color: #ffffff;
@@ -627,22 +709,155 @@ body {
     sans-serif;
 
   font-size: 15px;
+
   font-weight: 700;
 
-  text-decoration: none;
+  text-decoration: none !important;
 
   white-space: nowrap;
 
   transition:
     background 0.2s ease,
+    border-color 0.2s ease,
     transform 0.2s ease;
 }
 
-.rt-navbar__cta:hover {
+.rt-navbar__cta:hover,
+.rt-navbar__cta:focus,
+.rt-navbar__cta:focus-visible,
+.rt-navbar__cta:active {
   background: #0619b8;
 
+  border-color: #0619b8;
+
+  color: #ffffff;
+
   transform: translateY(-1px);
+
+  text-decoration: none !important;
 }
+
+
+/* =========================================================
+   COMPACT CART BUTTON
+   ========================================================= */
+
+.rt-navbar__cart {
+  width: 46px;
+  height: 46px;
+
+  flex: 0 0 46px;
+
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #081fef;
+
+  border: 1px solid #081fef;
+
+  border-radius: 50%;
+
+  color: #ffffff;
+
+  text-decoration: none !important;
+
+  box-shadow:
+    0 5px 14px rgba(8, 31, 239, 0.16);
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.rt-navbar__cart:hover,
+.rt-navbar__cart:focus,
+.rt-navbar__cart:focus-visible,
+.rt-navbar__cart:active {
+  background: #0619b8;
+
+  border-color: #0619b8;
+
+  color: #ffffff;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 7px 18px rgba(8, 31, 239, 0.22);
+
+  text-decoration: none !important;
+}
+
+
+/* =========================================================
+   CART ICON
+   ========================================================= */
+
+.rt-navbar__cart-icon {
+  width: 21px;
+  height: 21px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  line-height: 0;
+}
+
+.rt-navbar__cart-icon svg {
+  display: block;
+
+  width: 21px;
+  height: 21px;
+}
+
+
+/* =========================================================
+   CART COUNT
+   ========================================================= */
+
+.rt-navbar__cart-count {
+  position: absolute;
+
+  top: -5px;
+  right: -5px;
+
+  min-width: 20px;
+  height: 20px;
+
+  padding: 0 5px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #ffffff;
+
+  border: 1.5px solid #081fef;
+
+  border-radius: 50px;
+
+  color: #081fef;
+
+  font-family:
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  line-height: 1;
+
+  white-space: nowrap;
+}
+
 
 /* =========================================================
    HAMBURGER
@@ -664,11 +879,13 @@ body {
   gap: 5px;
 
   margin: 0 0 0 auto;
+
   padding: 0;
 
   background: #ffffff;
 
   border: 1.5px solid #081fef;
+
   border-radius: 5px;
 
   color: #081fef;
@@ -687,11 +904,8 @@ body {
   box-shadow: none;
 
   visibility: visible;
-  opacity: 1;
 
-  transition:
-    opacity 0.2s ease,
-    visibility 0.2s ease;
+  opacity: 1;
 }
 
 .rt-hamburger:hover {
@@ -702,7 +916,9 @@ body {
 .rt-hamburger:focus-visible,
 .rt-hamburger:active {
   outline: none;
+
   box-shadow: none;
+
   background: #ffffff;
 }
 
@@ -719,14 +935,15 @@ body {
   flex-shrink: 0;
 }
 
+
 /* =========================================================
-   IMPORTANT:
-   HIDE NORMAL HEADER WHEN MOBILE DRAWER IS OPEN
+   MOBILE MENU OPEN
    ========================================================= */
 
 .rt-header--menu-open .rt-topbar,
 .rt-header--menu-open .rt-navbar {
   visibility: hidden;
+
   opacity: 0;
 
   pointer-events: none;
@@ -734,22 +951,26 @@ body {
 
 .rt-header--menu-open .rt-hamburger {
   visibility: hidden;
+
   opacity: 0;
 
   pointer-events: none;
 }
+
 
 /* =========================================================
    LARGE TABLET
    ========================================================= */
 
 @media (max-width: 1200px) {
+
   .rt-navbar__links {
     gap: 4px;
   }
 
   .rt-navbar__link {
     padding: 0 7px;
+
     font-size: 15px;
   }
 
@@ -767,17 +988,27 @@ body {
     height: 50px;
   }
 
+  .rt-navbar__cart {
+    width: 44px;
+    height: 44px;
+
+    flex-basis: 44px;
+  }
+
   .rt-company-selector {
     width: 250px;
+
     flex-basis: 250px;
   }
 }
 
+
 /* =========================================================
-   TABLET / MOBILE
+   TABLET
    ========================================================= */
 
 @media (max-width: 1100px) {
+
   .rt-navbar__links,
   .rt-navbar__actions {
     display: none;
@@ -794,15 +1025,28 @@ body {
 
     justify-content: space-between;
 
-    gap: 0;
+    gap: 10px;
   }
 
   .rt-navbar__logo {
     height: 78px;
   }
 
+  /*
+     Cart stays visible on tablet/mobile.
+     Hamburger stays on the right.
+  */
+
+  .rt-navbar__cart {
+    display: inline-flex;
+
+    margin-left: auto;
+  }
+
   .rt-hamburger {
     display: flex;
+
+    margin-left: 0;
   }
 
   body {
@@ -810,13 +1054,16 @@ body {
   }
 }
 
+
 /* =========================================================
    MOBILE TOPBAR
    ========================================================= */
 
 @media (max-width: 768px) {
+
   .rt-topbar {
     min-height: 76px;
+
     padding: 8px 0;
   }
 
@@ -826,9 +1073,11 @@ body {
     padding: 0 10px;
 
     display: flex;
+
     flex-direction: column;
 
     align-items: stretch;
+
     justify-content: center;
 
     gap: 7px;
@@ -838,15 +1087,19 @@ body {
 
   .rt-topbar__info {
     width: 100%;
+
     min-width: 0;
 
     display: flex;
+
     align-items: center;
+
     justify-content: flex-start;
 
     gap: 8px;
 
     overflow-x: auto;
+
     overflow-y: hidden;
 
     white-space: nowrap;
@@ -854,6 +1107,7 @@ body {
     scrollbar-width: none;
 
     font-size: 10px;
+
     line-height: 1;
 
     -webkit-overflow-scrolling: touch;
@@ -873,7 +1127,9 @@ body {
 
   .rt-company-selector {
     width: 100%;
+
     height: 34px;
+
     min-height: 34px;
 
     flex: 0 0 auto;
@@ -887,6 +1143,7 @@ body {
 
   .rt-company-selector__select {
     font-size: 11px;
+
     font-weight: 600;
 
     padding-right: 34px;
@@ -905,13 +1162,14 @@ body {
 
     padding: 0 14px;
 
-    gap: 0;
+    gap: 9px;
 
     justify-content: space-between;
   }
 
   .rt-navbar__logo {
     width: 150px;
+
     height: 76px;
 
     flex: 0 0 150px;
@@ -919,18 +1177,61 @@ body {
 
   .rt-navbar__logo img {
     width: 150px;
+
     max-width: 150px;
   }
+
+
+  /* =======================================================
+     MOBILE CART
+     ======================================================= */
+
+  .rt-navbar__cart {
+    width: 42px;
+
+    height: 42px;
+
+    flex: 0 0 42px;
+
+    margin-left: auto;
+  }
+
+  .rt-navbar__cart-icon,
+  .rt-navbar__cart-icon svg {
+    width: 19px;
+
+    height: 19px;
+  }
+
+  .rt-navbar__cart-count {
+    top: -5px;
+
+    right: -5px;
+
+    min-width: 19px;
+
+    height: 19px;
+
+    padding: 0 4px;
+
+    font-size: 9px;
+  }
+
+
+  /* =======================================================
+     MOBILE HAMBURGER
+     ======================================================= */
 
   .rt-hamburger {
     display: flex;
 
     width: 45px;
+
     height: 45px;
 
     flex: 0 0 45px;
 
-    margin-left: auto;
+    margin-left: 0;
   }
 
   body {
@@ -938,13 +1239,16 @@ body {
   }
 }
 
+
 /* =========================================================
    MOBILE 600px
    ========================================================= */
 
 @media (max-width: 600px) {
+
   .rt-topbar {
     min-height: 74px;
+
     padding: 7px 0;
   }
 
@@ -958,15 +1262,13 @@ body {
 
   .rt-topbar__info {
     font-size: 9px;
-    gap: 7px;
-  }
 
-  .rt-topbar__cin {
-    display: inline-flex;
+    gap: 7px;
   }
 
   .rt-company-selector {
     height: 33px;
+
     min-height: 33px;
   }
 
@@ -983,11 +1285,14 @@ body {
 
     padding: 0 12px;
 
+    gap: 8px;
+
     justify-content: space-between;
   }
 
   .rt-navbar__logo {
     width: 150px;
+
     height: 72px;
 
     flex-basis: 150px;
@@ -997,15 +1302,28 @@ body {
     width: 150px;
   }
 
+  .rt-navbar__cart {
+    width: 40px;
+
+    height: 40px;
+
+    flex-basis: 40px;
+  }
+
+  .rt-navbar__cart-count {
+    min-width: 18px;
+
+    height: 18px;
+
+    font-size: 8.5px;
+  }
+
   .rt-hamburger {
-    display: flex;
+    width: 44px;
 
-    width: 43px;
-    height: 43px;
+    height: 44px;
 
-    flex-basis: 43px;
-
-    margin-left: auto;
+    flex-basis: 44px;
   }
 
   .rt-hamburger span {
@@ -1017,172 +1335,146 @@ body {
   }
 }
 
+
 /* =========================================================
-   MOBILE 480px
+   MOBILE 430px
    ========================================================= */
 
-@media (max-width: 480px) {
-  .rt-topbar {
-    min-height: 72px;
-    padding: 6px 0;
-  }
-
-  .rt-topbar__inner {
-    min-height: 60px;
-
-    padding: 0 7px;
-
-    gap: 6px;
-  }
+@media (max-width: 430px) {
 
   .rt-topbar__info {
     font-size: 8.5px;
+
     gap: 6px;
   }
 
-  .rt-topbar__cin {
-    display: inline-flex;
-  }
+  .rt-topbar__inner {
+    padding-left: 7px;
 
-  .rt-company-selector {
-    width: 100%;
-
-    height: 32px;
-    min-height: 32px;
-  }
-
-  .rt-company-selector__icon {
-    width: 34px;
-  }
-
-  .rt-company-selector__icon svg {
-    width: 15px;
-    height: 15px;
+    padding-right: 7px;
   }
 
   .rt-company-selector__select {
     font-size: 10px;
-
-    padding-right: 32px;
-  }
-
-  .rt-navbar {
-    height: 70px;
   }
 
   .rt-navbar__inner {
-    height: 70px;
+    padding-left: 10px;
 
-    padding: 0 10px;
+    padding-right: 10px;
 
-    justify-content: space-between;
+    gap: 7px;
   }
 
   .rt-navbar__logo {
-    width: 150px;
-    height: 70px;
+    width: 140px;
 
-    flex-basis: 150px;
+    flex-basis: 140px;
   }
 
   .rt-navbar__logo img {
-    width: 150px;
+    width: 140px;
+  }
+
+  .rt-navbar__cart {
+    width: 39px;
+
+    height: 39px;
+
+    flex-basis: 39px;
+  }
+
+  .rt-navbar__cart-icon,
+  .rt-navbar__cart-icon svg {
+    width: 18px;
+
+    height: 18px;
+  }
+
+  .rt-navbar__cart-count {
+    top: -4px;
+
+    right: -4px;
+
+    min-width: 17px;
+
+    height: 17px;
+
+    font-size: 8px;
   }
 
   .rt-hamburger {
-    display: flex;
+    width: 42px;
 
-    width: 43px;
-    height: 43px;
+    height: 42px;
 
-    flex-basis: 43px;
-
-    margin-left: auto;
+    flex-basis: 42px;
   }
 
   .rt-hamburger span {
     width: 22px;
   }
-
-  body {
-    padding-top: 142px;
-  }
 }
+
 
 /* =========================================================
    VERY SMALL MOBILE
    ========================================================= */
 
-@media (max-width: 380px) {
-  .rt-topbar {
-    min-height: 70px;
-  }
-
-  .rt-topbar__inner {
-    min-height: 58px;
-
-    padding: 0 6px;
-  }
+@media (max-width: 360px) {
 
   .rt-topbar__info {
     font-size: 8px;
-    gap: 5px;
-  }
-
-  .rt-company-selector {
-    height: 31px;
-    min-height: 31px;
-  }
-
-  .rt-company-selector__select {
-    font-size: 9.5px;
   }
 
   .rt-navbar__logo {
-    width: 150px;
-    flex-basis: 150px;
+    width: 130px;
+
+    flex-basis: 130px;
   }
 
   .rt-navbar__logo img {
-    width: 150px;
+    width: 130px;
+  }
+
+  .rt-navbar__inner {
+    gap: 6px;
+  }
+
+  .rt-navbar__cart {
+    width: 37px;
+
+    height: 37px;
+
+    flex-basis: 37px;
+  }
+
+  .rt-navbar__cart-icon,
+  .rt-navbar__cart-icon svg {
+    width: 17px;
+
+    height: 17px;
+  }
+
+  .rt-navbar__cart-count {
+    min-width: 16px;
+
+    height: 16px;
+
+    font-size: 7.5px;
   }
 
   .rt-hamburger {
-    display: flex;
+    width: 40px;
 
-    width: 41px;
-    height: 41px;
+    height: 40px;
 
-    flex-basis: 41px;
-
-    margin-left: auto;
+    flex-basis: 40px;
   }
 
   .rt-hamburger span {
-    width: 21px;
-  }
+    width: 20px;
 
-  body {
-    padding-top: 140px;
-  }
-}
-
-/* =========================================================
-   REDUCED MOTION
-   ========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  .rt-navbar,
-  .rt-navbar__link,
-  .rt-navbar__caret,
-  .rt-dropdown,
-  .rt-navbar__whatsapp,
-  .rt-navbar__cta,
-  .rt-hamburger {
-    transition: none;
+    height: 2px;
   }
 }
