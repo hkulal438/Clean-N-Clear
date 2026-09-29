@@ -3,6 +3,7 @@
    RETAIL CLEANING PRODUCTS
    PREMIUM RETAIL DESIGN
    CAMBRIA TYPOGRAPHY
+   HEADER GAP FIXED
    ========================================================= */
 
 
@@ -14,8 +15,8 @@
   width: 100%;
   min-height: 100vh;
 
-  margin: 0;
-  padding: 0;
+  margin: 0 !important;
+  padding: 0 !important;
 
   font-family: Cambria, Georgia, serif;
 
@@ -23,6 +24,44 @@
   background: #ffffff;
 
   overflow-x: hidden;
+}
+
+
+/* =========================================================
+   BOX SIZING
+   ========================================================= */
+
+.cnc-retail-page *,
+.cnc-retail-page *::before,
+.cnc-retail-page *::after {
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   REMOVE ARTIFICIAL HEADER SPACE
+   ========================================================= */
+
+.cnc-retail-page::before,
+.cnc-retail-page::after {
+  content: none !important;
+  display: none !important;
+}
+
+
+/* =========================================================
+   COMMON TYPOGRAPHY
+   ========================================================= */
+
+.cnc-retail-page h1,
+.cnc-retail-page h2,
+.cnc-retail-page h3,
+.cnc-retail-page h4,
+.cnc-retail-page p,
+.cnc-retail-page span,
+.cnc-retail-page a,
+.cnc-retail-page button {
+  font-family: Cambria, Georgia, serif;
 }
 
 
@@ -39,26 +78,30 @@
 
 /* =========================================================
    HERO
+   NO TOP MARGIN
    ========================================================= */
 
 .cnc-retail-hero {
   position: relative;
 
-  width: 100%;
-  min-height: 570px;
-
-  margin-top: 132px;
-
   display: flex;
   align-items: center;
 
+  width: 100%;
+  min-height: 570px;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
   background: #071642;
 
-  overflow: visible;
+  overflow: hidden;
 }
 
 
-/* HERO IMAGE */
+/* =========================================================
+   HERO IMAGE
+   ========================================================= */
 
 .cnc-retail-hero-image {
   position: absolute;
@@ -67,16 +110,21 @@
 
   z-index: 1;
 
+  width: 100%;
+  height: 100%;
+
   background-image:
     url("https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=2000&q=90");
 
-  background-position: center;
+  background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
 }
 
 
-/* HERO OVERLAY */
+/* =========================================================
+   HERO OVERLAY
+   ========================================================= */
 
 .cnc-retail-hero-overlay {
   position: absolute;
@@ -117,14 +165,14 @@
 }
 
 
-/* EYEBROW */
+/* =========================================================
+   EYEBROW
+   ========================================================= */
 
 .cnc-retail-eyebrow {
   display: block;
 
-  margin-bottom: 17px;
-
-  font-family: Cambria, Georgia, serif;
+  margin: 0 0 17px;
 
   font-size: 14px;
 
@@ -132,16 +180,18 @@
 
   letter-spacing: 2.5px;
 
+  line-height: 1.2;
+
   color: #91dc00;
 }
 
 
-/* HERO MAIN HEADING */
+/* =========================================================
+   HERO MAIN HEADING
+   ========================================================= */
 
 .cnc-retail-hero-content h1 {
   margin: 0 0 15px;
-
-  font-family: Cambria, Georgia, serif;
 
   font-size: clamp(40px, 4.6vw, 66px);
 
@@ -157,12 +207,12 @@
 }
 
 
-/* HERO SECONDARY HEADING */
+/* =========================================================
+   HERO SECONDARY HEADING
+   ========================================================= */
 
 .cnc-retail-hero-content h2 {
   margin: 0 0 16px;
-
-  font-family: Cambria, Georgia, serif;
 
   font-size: clamp(22px, 2.2vw, 31px);
 
@@ -176,14 +226,15 @@
 }
 
 
-/* HERO DESCRIPTION */
+/* =========================================================
+   HERO DESCRIPTION
+   ========================================================= */
 
 .cnc-retail-hero-content p {
+  width: 100%;
   max-width: 650px;
 
   margin: 0 0 30px;
-
-  font-family: Cambria, Georgia, serif;
 
   font-size: 17px;
 
@@ -209,6 +260,8 @@
   align-items: center;
 
   gap: 13px;
+
+  width: 100%;
 }
 
 
@@ -220,22 +273,22 @@
   display: inline-flex;
 
   align-items: center;
-
   justify-content: center;
 
   min-width: 165px;
-
   min-height: 51px;
 
   padding: 0 25px;
 
   border: 2px solid transparent;
 
-  font-family: Cambria, Georgia, serif;
+  outline: none;
 
   font-size: 15px;
 
   font-weight: 700;
+
+  line-height: 1;
 
   text-decoration: none;
 
@@ -249,7 +302,9 @@
 }
 
 
-/* PRIMARY */
+/* =========================================================
+   PRIMARY BUTTON
+   ========================================================= */
 
 .cnc-retail-btn-primary {
   background: #91dc00;
@@ -271,7 +326,9 @@
 }
 
 
-/* OUTLINE */
+/* =========================================================
+   OUTLINE BUTTON
+   ========================================================= */
 
 .cnc-retail-btn-outline {
   background: transparent;
@@ -311,6 +368,8 @@
    ========================================================= */
 
 .cnc-retail-section-heading {
+  width: 100%;
+
   margin-bottom: 34px;
 }
 
@@ -320,13 +379,13 @@
 
   margin-bottom: 10px;
 
-  font-family: Cambria, Georgia, serif;
-
   font-size: 13px;
 
   font-weight: 700;
 
   letter-spacing: 2.1px;
+
+  line-height: 1.2;
 
   color: #081fef;
 }
@@ -334,8 +393,6 @@
 
 .cnc-retail-section-heading h2 {
   margin: 0;
-
-  font-family: Cambria, Georgia, serif;
 
   font-size: clamp(31px, 3.1vw, 44px);
 
@@ -361,6 +418,8 @@
   grid-template-columns: repeat(12, 1fr);
 
   gap: 18px;
+
+  width: 100%;
 }
 
 
@@ -387,7 +446,9 @@
 }
 
 
-/* FIRST TWO */
+/* =========================================================
+   FIRST TWO CARDS
+   ========================================================= */
 
 .cnc-retail-category-card:nth-child(1),
 .cnc-retail-category-card:nth-child(2) {
@@ -395,7 +456,9 @@
 }
 
 
-/* HOVER */
+/* =========================================================
+   CARD HOVER
+   ========================================================= */
 
 .cnc-retail-category-card:hover {
   transform: translateY(-4px);
@@ -445,6 +508,7 @@
   height: 100%;
 
   object-fit: cover;
+  object-position: center;
 
   transition: transform 0.45s ease;
 }
@@ -469,14 +533,14 @@
 }
 
 
-/* NUMBER */
+/* =========================================================
+   CATEGORY NUMBER
+   ========================================================= */
 
 .cnc-retail-category-number {
   display: block;
 
   margin-bottom: 7px;
-
-  font-family: Cambria, Georgia, serif;
 
   font-size: 12px;
 
@@ -484,16 +548,18 @@
 
   letter-spacing: 1.8px;
 
+  line-height: 1.2;
+
   color: #081fef;
 }
 
 
-/* CATEGORY TITLE */
+/* =========================================================
+   CATEGORY TITLE
+   ========================================================= */
 
 .cnc-retail-category-content h3 {
   margin: 0 0 9px;
-
-  font-family: Cambria, Georgia, serif;
 
   font-size: 21px;
 
@@ -507,14 +573,14 @@
 }
 
 
-/* CATEGORY DESCRIPTION */
+/* =========================================================
+   CATEGORY DESCRIPTION
+   ========================================================= */
 
 .cnc-retail-category-content p {
   max-width: 520px;
 
   margin: 0 0 15px;
-
-  font-family: Cambria, Georgia, serif;
 
   font-size: 14px;
 
@@ -537,11 +603,11 @@
 
   gap: 9px;
 
-  font-family: Cambria, Georgia, serif;
-
   font-size: 14px;
 
   font-weight: 700;
+
+  line-height: 1.2;
 
   text-decoration: none;
 
@@ -552,8 +618,6 @@
 
 
 .cnc-retail-category-link span {
-  font-family: Cambria, Georgia, serif;
-
   font-size: 18px;
 
   line-height: 1;
@@ -595,10 +659,14 @@
 }
 
 
-/* CTA CONTENT */
+/* =========================================================
+   CTA CONTENT
+   ========================================================= */
 
 .cnc-retail-cta-content {
   flex: 1;
+
+  min-width: 0;
 }
 
 
@@ -607,13 +675,13 @@
 
   margin-bottom: 9px;
 
-  font-family: Cambria, Georgia, serif;
-
   font-size: 13px;
 
   font-weight: 700;
 
   letter-spacing: 2px;
+
+  line-height: 1.2;
 
   color: #91dc00;
 }
@@ -621,8 +689,6 @@
 
 .cnc-retail-cta-content h2 {
   margin: 0;
-
-  font-family: Cambria, Georgia, serif;
 
   font-size: clamp(29px, 3vw, 41px);
 
@@ -656,20 +722,18 @@
   display: inline-flex;
 
   align-items: center;
-
   justify-content: center;
 
   min-width: 145px;
-
   min-height: 50px;
 
   padding: 0 20px;
 
-  font-family: Cambria, Georgia, serif;
-
   font-size: 14px;
 
   font-weight: 700;
+
+  line-height: 1;
 
   text-decoration: none;
 
@@ -681,7 +745,9 @@
 }
 
 
-/* PRIMARY */
+/* =========================================================
+   CTA PRIMARY
+   ========================================================= */
 
 .cnc-retail-cta-primary {
   background: #91dc00;
@@ -703,7 +769,9 @@
 }
 
 
-/* SECONDARY */
+/* =========================================================
+   CTA SECONDARY
+   ========================================================= */
 
 .cnc-retail-cta-secondary {
   background: transparent;
@@ -726,6 +794,31 @@
 
 
 /* =========================================================
+   LARGE TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+  .cnc-retail-hero-content h1,
+  .cnc-retail-hero-content h2,
+  .cnc-retail-section-heading h2,
+  .cnc-retail-cta-content h2 {
+    white-space: normal;
+  }
+
+
+  .cnc-retail-hero-content h1 {
+    font-size: clamp(38px, 5vw, 58px);
+  }
+
+
+  .cnc-retail-hero-content h2 {
+    font-size: 27px;
+  }
+}
+
+
+/* =========================================================
    TABLET
    ========================================================= */
 
@@ -733,6 +826,11 @@
 
   .cnc-retail-hero {
     min-height: 545px;
+  }
+
+
+  .cnc-retail-hero-content {
+    width: calc(100% - 48px);
   }
 
 
@@ -770,21 +868,57 @@
 
 @media (max-width: 700px) {
 
-  /* CONTAINER */
+  /* -------------------------------------------------------
+     PAGE
+     ------------------------------------------------------- */
+
+  .cnc-retail-page {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+
+  /* -------------------------------------------------------
+     CONTAINER
+     ------------------------------------------------------- */
 
   .cnc-retail-container {
     width: calc(100% - 32px);
   }
 
 
-  /* HERO */
+  /* -------------------------------------------------------
+     HERO
+     ------------------------------------------------------- */
 
   .cnc-retail-hero {
+    width: 100%;
+
     min-height: 650px;
 
-    margin-top: 150px;
+    margin: 0 !important;
+    padding: 0 !important;
+
+    align-items: center;
+
+    background: #071642;
+
+    overflow: hidden;
   }
 
+
+  /* -------------------------------------------------------
+     HERO IMAGE
+     ------------------------------------------------------- */
+
+  .cnc-retail-hero-image {
+    background-position: center center;
+  }
+
+
+  /* -------------------------------------------------------
+     HERO OVERLAY
+     ------------------------------------------------------- */
 
   .cnc-retail-hero-overlay {
     background:
@@ -797,12 +931,20 @@
   }
 
 
+  /* -------------------------------------------------------
+     HERO CONTENT
+     ------------------------------------------------------- */
+
   .cnc-retail-hero-content {
     width: calc(100% - 32px);
 
     padding: 56px 0;
   }
 
+
+  /* -------------------------------------------------------
+     EYEBROW
+     ------------------------------------------------------- */
 
   .cnc-retail-eyebrow {
     margin-bottom: 13px;
@@ -812,6 +954,10 @@
     letter-spacing: 1.8px;
   }
 
+
+  /* -------------------------------------------------------
+     HERO H1
+     ------------------------------------------------------- */
 
   .cnc-retail-hero-content h1 {
     margin-bottom: 14px;
@@ -824,6 +970,10 @@
   }
 
 
+  /* -------------------------------------------------------
+     HERO H2
+     ------------------------------------------------------- */
+
   .cnc-retail-hero-content h2 {
     margin-bottom: 15px;
 
@@ -835,7 +985,13 @@
   }
 
 
+  /* -------------------------------------------------------
+     HERO DESCRIPTION
+     ------------------------------------------------------- */
+
   .cnc-retail-hero-content p {
+    max-width: 100%;
+
     margin-bottom: 27px;
 
     font-size: 15px;
@@ -844,9 +1000,13 @@
   }
 
 
-  /* HERO CTA */
+  /* -------------------------------------------------------
+     HERO CTA
+     ------------------------------------------------------- */
 
   .cnc-retail-hero-actions {
+    width: 100%;
+
     flex-direction: column;
 
     align-items: stretch;
@@ -859,10 +1019,14 @@
     width: 100%;
 
     min-width: 0;
+
+    min-height: 50px;
   }
 
 
-  /* CATEGORIES */
+  /* -------------------------------------------------------
+     CATEGORIES
+     ------------------------------------------------------- */
 
   .cnc-retail-categories {
     padding: 53px 0 58px;
@@ -871,6 +1035,15 @@
 
   .cnc-retail-section-heading {
     margin-bottom: 26px;
+  }
+
+
+  .cnc-retail-section-heading > span {
+    margin-bottom: 8px;
+
+    font-size: 12px;
+
+    letter-spacing: 1.7px;
   }
 
 
@@ -883,12 +1056,20 @@
   }
 
 
+  /* -------------------------------------------------------
+     CATEGORY GRID
+     ------------------------------------------------------- */
+
   .cnc-retail-category-grid {
     grid-template-columns: 1fr;
 
     gap: 14px;
   }
 
+
+  /* -------------------------------------------------------
+     CATEGORY CARDS
+     ------------------------------------------------------- */
 
   .cnc-retail-category-card,
   .cnc-retail-category-card:nth-child(1),
@@ -899,15 +1080,28 @@
   }
 
 
+  /* -------------------------------------------------------
+     CATEGORY IMAGE
+     ------------------------------------------------------- */
+
   .cnc-retail-category-image {
     height: 195px;
   }
 
 
+  /* -------------------------------------------------------
+     CATEGORY CONTENT
+     ------------------------------------------------------- */
+
   .cnc-retail-category-content {
     min-height: 170px;
 
     padding: 20px;
+  }
+
+
+  .cnc-retail-category-number {
+    font-size: 12px;
   }
 
 
@@ -920,10 +1114,14 @@
 
   .cnc-retail-category-content p {
     font-size: 14px;
+
+    line-height: 1.5;
   }
 
 
-  /* FINAL CTA */
+  /* -------------------------------------------------------
+     FINAL CTA
+     ------------------------------------------------------- */
 
   .cnc-retail-cta-inner {
     width: calc(100% - 32px);
@@ -937,6 +1135,11 @@
     gap: 25px;
 
     padding: 40px 0 43px;
+  }
+
+
+  .cnc-retail-cta-content {
+    width: 100%;
   }
 
 
@@ -965,6 +1168,8 @@
     width: 100%;
 
     min-width: 0;
+
+    min-height: 50px;
   }
 }
 
@@ -975,6 +1180,12 @@
 
 @media (max-width: 420px) {
 
+  .cnc-retail-page {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+
   .cnc-retail-container {
     width: calc(100% - 28px);
   }
@@ -983,22 +1194,32 @@
   .cnc-retail-hero {
     min-height: 670px;
 
-    margin-top: 150px;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
 
   .cnc-retail-hero-content {
     width: calc(100% - 28px);
+
+    padding: 52px 0;
   }
 
 
   .cnc-retail-hero-content h1 {
     font-size: 34px;
+
+    line-height: 1.08;
   }
 
 
   .cnc-retail-hero-content h2 {
     font-size: 21px;
+  }
+
+
+  .cnc-retail-hero-content p {
+    font-size: 15px;
   }
 
 
@@ -1014,6 +1235,11 @@
   }
 
 
+  .cnc-retail-category-image {
+    height: 185px;
+  }
+
+
   .cnc-retail-cta-inner {
     width: calc(100% - 28px);
   }
@@ -1021,6 +1247,64 @@
 
   .cnc-retail-cta-content h2 {
     font-size: 27px;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+  .cnc-retail-hero {
+    min-height: 680px;
+  }
+
+
+  .cnc-retail-hero-content {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+
+  .cnc-retail-hero-content h1 {
+    font-size: 32px;
+  }
+
+
+  .cnc-retail-hero-content h2 {
+    font-size: 20px;
+  }
+
+
+  .cnc-retail-hero-content p {
+    font-size: 14px;
+  }
+
+
+  .cnc-retail-category-image {
+    height: 180px;
+  }
+
+
+  .cnc-retail-category-content {
+    padding: 18px;
+  }
+
+
+  .cnc-retail-category-content h3 {
+    font-size: 19px;
+  }
+
+
+  .cnc-retail-category-content p {
+    font-size: 13px;
+  }
+
+
+  .cnc-retail-cta-actions {
+    grid-template-columns: 1fr;
   }
 }
 

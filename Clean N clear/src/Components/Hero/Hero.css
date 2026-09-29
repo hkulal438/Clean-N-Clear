@@ -1,7 +1,7 @@
 /* =========================================================
    CLEAN N CLEAR
    HERO SLIDER
-   RESPONSIVE / NO EXCESSIVE TOP SPACE
+   RESPONSIVE / REDUCED TOP GAP
    ========================================================= */
 
 
@@ -11,27 +11,20 @@
 
 .cnc-hero-slider {
   position: relative !important;
-
   display: block !important;
-
   width: 100% !important;
   max-width: 100% !important;
-
   height: auto !important;
   min-height: 0 !important;
   max-height: none !important;
 
-  /* Desktop header clearance */
-  margin: 90px 0 0 0 !important;
+  /* REDUCED ONLY THE TOP GAP */
+  margin: 80px 0 0 0 !important;
 
   padding: 0 !important;
-
   overflow: hidden !important;
-
   background: #ffffff !important;
-
   box-sizing: border-box !important;
-
   line-height: 0 !important;
 }
 
@@ -42,23 +35,16 @@
 
 .cnc-hero-slider__slides {
   position: relative !important;
-
   display: block !important;
-
   width: 100% !important;
   max-width: 100% !important;
-
   height: auto !important;
   min-height: 0 !important;
   max-height: none !important;
-
   margin: 0 !important;
   padding: 0 !important;
-
   overflow: hidden !important;
-
   box-sizing: border-box !important;
-
   line-height: 0 !important;
 }
 
@@ -69,24 +55,17 @@
 
 .cnc-hero-slider__slide {
   position: relative !important;
-
   display: none !important;
-
   width: 100% !important;
   max-width: 100% !important;
-
   height: auto !important;
   min-height: 0 !important;
   max-height: none !important;
-
   margin: 0 !important;
   padding: 0 !important;
-
   opacity: 1 !important;
   visibility: visible !important;
-
   box-sizing: border-box !important;
-
   line-height: 0 !important;
 }
 
@@ -97,19 +76,14 @@
 
 .cnc-hero-slider__slide--active {
   display: block !important;
-
   position: relative !important;
-
   width: 100% !important;
   max-width: 100% !important;
-
   height: auto !important;
   min-height: 0 !important;
   max-height: none !important;
-
   opacity: 1 !important;
   visibility: visible !important;
-
   z-index: 2 !important;
 }
 
@@ -122,20 +96,15 @@
 
 .cnc-hero-slider__image {
   display: block !important;
-
   width: 100% !important;
   max-width: 100% !important;
-
   height: auto !important;
-
   min-width: 0 !important;
   min-height: 0 !important;
-
   max-height: none !important;
 
   margin: 0 !important;
   padding: 0 !important;
-
   border: 0 !important;
 
   object-fit: contain !important;
@@ -144,7 +113,6 @@
   box-sizing: border-box !important;
 
   user-select: none !important;
-
   -webkit-user-drag: none !important;
 
   line-height: 0 !important;
@@ -157,14 +125,12 @@
 
 .cnc-hero-slider__arrow {
   position: absolute !important;
-
   top: 50% !important;
 
   width: 48px !important;
   height: 48px !important;
 
   display: flex !important;
-
   align-items: center !important;
   justify-content: center !important;
 
@@ -177,14 +143,11 @@
   border-radius: 50% !important;
 
   background: rgba(8, 31, 239, 0.90) !important;
-
   color: #ffffff !important;
 
   font-family: Arial, sans-serif !important;
-
   font-size: 30px !important;
   font-weight: 300 !important;
-
   line-height: 1 !important;
 
   cursor: pointer !important;
@@ -243,7 +206,6 @@
   transform: translateX(-50%) !important;
 
   display: flex !important;
-
   align-items: center !important;
   justify-content: center !important;
 
@@ -321,7 +283,8 @@
 @media (min-width: 1600px) {
 
   .cnc-hero-slider {
-    margin-top: 90px !important;
+    /* ONLY TOP GAP CHANGED */
+    margin-top: 80px !important;
   }
 
   .cnc-hero-slider__arrow {
@@ -353,7 +316,8 @@
 @media (min-width: 1201px) and (max-width: 1599px) {
 
   .cnc-hero-slider {
-    margin-top: 90px !important;
+    /* ONLY TOP GAP CHANGED */
+    margin-top: 80px !important;
   }
 
   .cnc-hero-slider__arrow {
@@ -376,9 +340,6 @@
 /* =========================================================
    TABLET
    769px - 1200px
-
-   IMPORTANT:
-   Reduced from 90px/large clearance depending on header.
    ========================================================= */
 
 @media (min-width: 769px) and (max-width: 1200px) {
@@ -411,17 +372,12 @@
 /* =========================================================
    MOBILE
    481px - 768px
-
-   Header is approximately:
-   top bar + search + navbar
-
-   Reduced clearance prevents large blank space.
    ========================================================= */
 
 @media (min-width: 481px) and (max-width: 768px) {
 
   .cnc-hero-slider {
-    margin-top: 145px !important;
+    margin-top: 65px !important;
   }
 
   .cnc-hero-slider__image {
@@ -466,14 +422,12 @@
 /* =========================================================
    SMALL MOBILE
    381px - 480px
-
-   DO NOT increase this back to 175px.
    ========================================================= */
 
 @media (min-width: 381px) and (max-width: 480px) {
 
   .cnc-hero-slider {
-    margin-top: 140px !important;
+    margin-top: 62px !important;
   }
 
   .cnc-hero-slider__image {
@@ -518,14 +472,12 @@
 /* =========================================================
    VERY SMALL MOBILE
    380px AND BELOW
-
-   Keep clearance compact.
    ========================================================= */
 
 @media (max-width: 380px) {
 
   .cnc-hero-slider {
-    margin-top: 135px !important;
+    margin-top: 60px !important;
   }
 
   .cnc-hero-slider__image {

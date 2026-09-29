@@ -2,9 +2,8 @@
    CLEAN N CLEAR
    CLEANING CHEMICALS ORDER SYSTEM
    PREMIUM RESPONSIVE VERSION
-
    ALL CLASSES USE ccq- PREFIX
-   ORDER MODALS ALWAYS STAY BELOW FIXED HEADER
+   COMPACT HEADER SPACING
    ========================================================= */
 
 
@@ -24,28 +23,32 @@
   --ccq-muted: #687083;
   --ccq-border: #e4e7ef;
 
+  /* Compact clearance for fixed navbar */
+  --ccq-header-clearance: 128px;
+
   position: relative;
   z-index: 1;
 
   width: 100%;
   min-height: 100vh;
 
-  /*
-    Main page content starts below fixed header.
-  */
-  padding: 155px 6% 90px;
+  padding:
+    var(--ccq-header-clearance)
+    6%
+    90px;
 
   background: #ffffff;
   color: var(--ccq-text);
 
   font-family: Cambria, Georgia, serif;
 
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 
 
 /* =========================================================
-   SUBTLE BACKGROUND DECORATION
+   BACKGROUND DECORATION
    ========================================================= */
 
 .ccq-section::before {
@@ -84,7 +87,7 @@
 
 
 /* =========================================================
-   HEADER
+   HEADER / INTRO
    ========================================================= */
 
 .ccq-header {
@@ -100,7 +103,7 @@
 
 
 /* =========================================================
-   PREMIUM LABEL
+   LABEL
    ========================================================= */
 
 .ccq-label {
@@ -122,7 +125,6 @@
   font-weight: 700;
 
   letter-spacing: 3px;
-
   text-transform: uppercase;
 }
 
@@ -154,7 +156,7 @@
 
 
 /* =========================================================
-   MAIN HEADING
+   TITLE
    ========================================================= */
 
 .ccq-title {
@@ -167,11 +169,9 @@
   font-family: Cambria, Georgia, serif;
 
   font-size: clamp(38px, 4.3vw, 56px);
-
   font-weight: 700;
 
   line-height: 1.08;
-
   letter-spacing: -1.2px;
 }
 
@@ -190,7 +190,6 @@
 
   left: 3px;
   right: 3px;
-
   bottom: -7px;
 
   height: 3px;
@@ -207,7 +206,7 @@
 
 
 /* =========================================================
-   SUBHEADING
+   INTRO
    ========================================================= */
 
 .ccq-intro {
@@ -225,7 +224,6 @@
   font-weight: 400;
 
   line-height: 1.75;
-
   letter-spacing: 0.15px;
 }
 
@@ -268,6 +266,7 @@
   border-radius: 50px;
 
   background: var(--ccq-blue);
+
   color: #ffffff;
 
   font-family: Cambria, Georgia, serif;
@@ -277,7 +276,8 @@
 
   cursor: pointer;
 
-  box-shadow: 0 8px 20px rgba(8, 31, 239, 0.15);
+  box-shadow:
+    0 8px 20px rgba(8, 31, 239, 0.15);
 
   transition:
     background 0.2s ease,
@@ -290,7 +290,8 @@
 
   transform: translateY(-2px);
 
-  box-shadow: 0 12px 25px rgba(8, 31, 239, 0.2);
+  box-shadow:
+    0 12px 25px rgba(8, 31, 239, 0.2);
 }
 
 .ccq-cart-button strong {
@@ -304,6 +305,7 @@
   border-radius: 50%;
 
   background: #ffffff;
+
   color: var(--ccq-blue);
 
   font-size: 13px;
@@ -320,7 +322,8 @@
 
   display: grid;
 
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
 
   gap: 24px;
 }
@@ -340,7 +343,8 @@
 
   background: #ffffff;
 
-  box-shadow: 0 5px 18px rgba(17, 24, 39, 0.035);
+  box-shadow:
+    0 5px 18px rgba(17, 24, 39, 0.035);
 
   transition:
     transform 0.25s ease,
@@ -351,9 +355,11 @@
 .ccq-card:hover {
   transform: translateY(-5px);
 
-  border-color: rgba(8, 31, 239, 0.22);
+  border-color:
+    rgba(8, 31, 239, 0.22);
 
-  box-shadow: 0 18px 38px rgba(8, 31, 239, 0.09);
+  box-shadow:
+    0 18px 38px rgba(8, 31, 239, 0.09);
 }
 
 
@@ -404,7 +410,8 @@
   transition: transform 0.4s ease;
 }
 
-.ccq-card:hover .ccq-image-button::before {
+.ccq-card:hover
+.ccq-image-button::before {
   transform: scale(1.25);
 }
 
@@ -420,7 +427,8 @@
   transition: transform 0.3s ease;
 }
 
-.ccq-card:hover .ccq-product-image {
+.ccq-card:hover
+.ccq-product-image {
   transform: scale(1.04);
 }
 
@@ -433,13 +441,15 @@
   left: 50%;
   bottom: 13px;
 
-  transform: translate(-50%, 8px);
+  transform:
+    translate(-50%, 8px);
 
   padding: 7px 14px;
 
   border-radius: 30px;
 
   background: rgba(8, 31, 239, 0.94);
+
   color: #ffffff;
 
   font-size: 10px;
@@ -454,10 +464,12 @@
     transform 0.3s ease;
 }
 
-.ccq-card:hover .ccq-image-button::after {
+.ccq-card:hover
+.ccq-image-button::after {
   opacity: 1;
 
-  transform: translate(-50%, 0);
+  transform:
+    translate(-50%, 0);
 }
 
 
@@ -585,6 +597,7 @@
   border-radius: 9px;
 
   background: var(--ccq-blue);
+
   color: #ffffff;
 
   font-family: Cambria, Georgia, serif;
@@ -609,7 +622,8 @@
 
   transform: translateY(-1px);
 
-  box-shadow: 0 8px 18px rgba(8, 31, 239, 0.14);
+  box-shadow:
+    0 8px 18px rgba(8, 31, 239, 0.14);
 }
 
 .ccq-submit:disabled {
@@ -624,15 +638,17 @@
 
 
 /* =========================================================
-   ORDER OVERLAY
+   OVERLAY
    IMPORTANT:
-   ALL ORDER DIALOGS START BELOW FIXED HEADER
+   STARTS BELOW FIXED NAVBAR
    ========================================================= */
 
 .ccq-overlay {
+  --ccq-overlay-header-clearance: 128px;
+
   position: fixed;
 
-  top: 0;
+  top: var(--ccq-overlay-header-clearance);
   right: 0;
   bottom: 0;
   left: 0;
@@ -640,14 +656,14 @@
   z-index: 99999;
 
   display: flex;
+
   align-items: flex-start;
   justify-content: center;
 
-  /*
-    Desktop header clearance.
-    Dialog begins below the fixed navbar.
-  */
-  padding: 155px 25px 25px;
+  padding:
+    12px
+    20px
+    20px;
 
   overflow-y: auto;
 
@@ -689,6 +705,7 @@
   border-radius: 50%;
 
   background: #ffffff;
+
   color: #111111;
 
   font-size: 24px;
@@ -730,14 +747,19 @@
 
   background: #ffffff;
 
-  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.2);
 
   animation: ccqModalIn 0.25s ease;
 
-  /*
-    Prevent modal from touching the bottom.
-  */
   margin-bottom: 10px;
+
+  max-height:
+    calc(
+      100vh -
+      var(--ccq-overlay-header-clearance) -
+      25px
+    );
 }
 
 @keyframes ccqModalIn {
@@ -799,6 +821,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  overflow-y: auto;
 }
 
 .ccq-modal-content h2 {
@@ -865,7 +889,22 @@
 
   width: min(560px, 100%);
 
-  height: min(90vh, 850px);
+  height:
+    min(
+      calc(
+        100vh -
+        var(--ccq-overlay-header-clearance) -
+        15px
+      ),
+      850px
+    );
+
+  max-height:
+    calc(
+      100vh -
+      var(--ccq-overlay-header-clearance) -
+      15px
+    );
 
   display: flex;
   flex-direction: column;
@@ -876,7 +915,8 @@
 
   background: #ffffff;
 
-  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.2);
 
   animation: ccqModalIn 0.25s ease;
 }
@@ -1000,7 +1040,6 @@
   overflow: hidden;
 
   border: 1px solid #dddddd;
-
   border-radius: 7px;
 }
 
@@ -1011,6 +1050,7 @@
   border: none;
 
   background: #f4f5fa;
+
   color: #111111;
 
   font-family: Cambria, Georgia, serif;
@@ -1149,7 +1189,12 @@
 
   width: min(760px, 100%);
 
-  max-height: calc(100vh - 180px);
+  max-height:
+    calc(
+      100vh -
+      var(--ccq-overlay-header-clearance) -
+      25px
+    );
 
   overflow-y: auto;
 
@@ -1159,7 +1204,8 @@
 
   background: #ffffff;
 
-  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.2);
 
   animation: ccqModalIn 0.25s ease;
 
@@ -1210,7 +1256,6 @@
 
 .ccq-form {
   display: flex;
-
   flex-direction: column;
 
   gap: 20px;
@@ -1226,7 +1271,6 @@
 
 .ccq-field {
   display: flex;
-
   flex-direction: column;
 
   gap: 7px;
@@ -1246,12 +1290,12 @@
   padding: 13px 14px;
 
   border: 1px solid #dfe1eb;
-
   border-radius: 8px;
 
   outline: none;
 
   background: #ffffff;
+
   color: #222222;
 
   font-family: Cambria, Georgia, serif;
@@ -1269,7 +1313,8 @@
 .ccq-field textarea:focus {
   border-color: var(--ccq-blue);
 
-  box-shadow: 0 0 0 3px rgba(8, 31, 239, 0.07);
+  box-shadow:
+    0 0 0 3px rgba(8, 31, 239, 0.07);
 }
 
 
@@ -1279,7 +1324,6 @@
 
 .ccq-final-summary {
   display: flex;
-
   justify-content: space-between;
 
   gap: 20px;
@@ -1287,7 +1331,6 @@
   padding: 18px;
 
   border: 1px solid #e1e5ff;
-
   border-radius: 10px;
 
   background: #f5f7ff;
@@ -1295,7 +1338,6 @@
 
 .ccq-final-summary div {
   display: flex;
-
   flex-direction: column;
 
   gap: 5px;
@@ -1320,7 +1362,6 @@
 
 .ccq-no-payment {
   display: flex;
-
   flex-direction: column;
 
   gap: 5px;
@@ -1353,7 +1394,6 @@
   padding: 13px 15px;
 
   border: 1px solid #f0caca;
-
   border-radius: 8px;
 
   background: #fff5f5;
@@ -1429,7 +1469,8 @@
 
   transform: translateY(-1px);
 
-  box-shadow: 0 8px 18px rgba(8, 31, 239, 0.14);
+  box-shadow:
+    0 8px 18px rgba(8, 31, 239, 0.14);
 }
 
 .ccq-submit:disabled {
@@ -1456,7 +1497,8 @@
 
   text-align: center;
 
-  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.2);
 
   animation: ccqModalIn 0.25s ease;
 
@@ -1507,7 +1549,6 @@
 
 .ccq-order-number {
   display: flex;
-
   flex-direction: column;
 
   gap: 5px;
@@ -1540,11 +1581,20 @@
 
 @media (max-width: 1100px) {
   .ccq-section {
-    padding-top: 150px;
+    --ccq-header-clearance: 130px;
+
+    padding-top: var(--ccq-header-clearance);
+  }
+
+  .ccq-overlay {
+    --ccq-overlay-header-clearance: 130px;
+
+    top: var(--ccq-overlay-header-clearance);
   }
 
   .ccq-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -1555,15 +1605,28 @@
 
 @media (max-width: 800px) {
   .ccq-section {
-    /*
-      Header is taller on tablet/mobile.
-      Keep the main page completely below it.
-    */
-    padding: 165px 5% 65px;
+    --ccq-header-clearance: 136px;
+
+    padding:
+      var(--ccq-header-clearance)
+      5%
+      65px;
+  }
+
+  .ccq-overlay {
+    --ccq-overlay-header-clearance: 136px;
+
+    top: var(--ccq-overlay-header-clearance);
+
+    padding:
+      10px
+      15px
+      15px;
   }
 
   .ccq-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
 
     gap: 18px;
   }
@@ -1575,7 +1638,12 @@
   .ccq-product-modal {
     grid-template-columns: 1fr;
 
-    max-height: calc(100vh - 185px);
+    max-height:
+      calc(
+        100vh -
+        var(--ccq-overlay-header-clearance) -
+        25px
+      );
 
     overflow-y: auto;
   }
@@ -1589,29 +1657,32 @@
   }
 
   .ccq-cart-drawer {
-    height: calc(100vh - 180px);
+    height:
+      calc(
+        100vh -
+        var(--ccq-overlay-header-clearance) -
+        15px
+      );
 
-    max-height: calc(100vh - 180px);
+    max-height:
+      calc(
+        100vh -
+        var(--ccq-overlay-header-clearance) -
+        15px
+      );
   }
 
   .ccq-title {
     font-size: 43px;
   }
 
-  /*
-    Tablet order dialogs stay below navbar.
-  */
-  .ccq-overlay {
-    align-items: flex-start;
-
-    padding-top: 155px;
-    padding-right: 20px;
-    padding-bottom: 20px;
-    padding-left: 20px;
-  }
-
   .ccq-checkout {
-    max-height: calc(100vh - 180px);
+    max-height:
+      calc(
+        100vh -
+        var(--ccq-overlay-header-clearance) -
+        25px
+      );
   }
 }
 
@@ -1622,17 +1693,13 @@
 
 @media (max-width: 600px) {
   .ccq-section {
-    /*
-      MAIN MOBILE HEADER FIX
-      Content starts below fixed mobile navbar.
-    */
-    padding-top: 180px;
+    --ccq-header-clearance: 140px;
+
+    padding-top: var(--ccq-header-clearance);
 
     padding-right: 4%;
     padding-bottom: 55px;
     padding-left: 4%;
-
-    overflow-x: hidden;
   }
 
   .ccq-header {
@@ -1680,7 +1747,7 @@
 
 
   /* ---------------------------------------------------------
-     CART
+     CART BUTTON
      --------------------------------------------------------- */
 
   .ccq-cart-button {
@@ -1693,7 +1760,7 @@
 
 
   /* ---------------------------------------------------------
-     PRODUCTS
+     PRODUCT GRID
      --------------------------------------------------------- */
 
   .ccq-grid {
@@ -1724,27 +1791,29 @@
 
   .ccq-ordered,
   .ccq-product-ordered {
-    margin: 11px 0 14px;
+    margin:
+      11px 0
+      14px;
   }
 
 
   /* ---------------------------------------------------------
-     ORDER OVERLAY
-     ALWAYS BELOW MOBILE HEADER
+     OVERLAY
      --------------------------------------------------------- */
 
   .ccq-overlay {
+    --ccq-overlay-header-clearance: 140px;
+
+    top: var(--ccq-overlay-header-clearance);
+
     align-items: flex-start;
+
     justify-content: center;
 
-    /*
-      Mobile navbar clearance.
-    */
-    padding-top: 155px;
-
-    padding-right: 15px;
-    padding-bottom: 15px;
-    padding-left: 15px;
+    padding:
+      8px
+      12px
+      12px;
 
     overflow-y: auto;
   }
@@ -1757,7 +1826,12 @@
   .ccq-product-modal {
     width: 100%;
 
-    max-height: calc(100vh - 170px);
+    max-height:
+      calc(
+        100vh -
+        var(--ccq-overlay-header-clearance) -
+        20px
+      );
 
     border-radius: 16px;
 
@@ -1775,7 +1849,10 @@
   }
 
   .ccq-modal-content {
-    padding: 25px 20px 30px;
+    padding:
+      25px
+      20px
+      30px;
   }
 
   .ccq-modal-content h2 {
@@ -1802,12 +1879,19 @@
   .ccq-cart-drawer {
     width: 100%;
 
-    /*
-      Keeps drawer completely below navbar.
-    */
-    height: calc(100vh - 170px);
+    height:
+      calc(
+        100vh -
+        var(--ccq-overlay-header-clearance) -
+        15px
+      );
 
-    max-height: calc(100vh - 170px);
+    max-height:
+      calc(
+        100vh -
+        var(--ccq-overlay-header-clearance) -
+        15px
+      );
 
     border-radius: 16px;
   }
@@ -1851,9 +1935,16 @@
   .ccq-checkout {
     width: 100%;
 
-    max-height: calc(100vh - 170px);
+    max-height:
+      calc(
+        100vh -
+        var(--ccq-overlay-header-clearance) -
+        20px
+      );
 
-    padding: 35px 22px;
+    padding:
+      35px
+      22px;
 
     border-radius: 15px;
   }
@@ -1891,7 +1982,9 @@
   .ccq-success {
     width: 100%;
 
-    padding: 35px 22px;
+    padding:
+      35px
+      22px;
 
     border-radius: 16px;
   }
@@ -1908,13 +2001,23 @@
 
 @media (max-width: 380px) {
   .ccq-section {
-    /*
-      Extra protection for smaller phones.
-    */
-    padding-top: 190px;
+    --ccq-header-clearance: 143px;
+
+    padding-top: var(--ccq-header-clearance);
 
     padding-right: 15px;
     padding-left: 15px;
+  }
+
+  .ccq-overlay {
+    --ccq-overlay-header-clearance: 143px;
+
+    top: var(--ccq-overlay-header-clearance);
+
+    padding:
+      7px
+      10px
+      10px;
   }
 
   .ccq-title {
@@ -1946,29 +2049,38 @@
     font-size: 24px;
   }
 
-  /*
-    Very small mobile header clearance.
-  */
-  .ccq-overlay {
-    padding-top: 160px;
-
-    padding-right: 10px;
-    padding-bottom: 10px;
-    padding-left: 10px;
-  }
-
   .ccq-product-modal {
-    max-height: calc(100vh - 175px);
+    max-height:
+      calc(
+        100vh -
+        var(--ccq-overlay-header-clearance) -
+        15px
+      );
   }
 
   .ccq-cart-drawer {
-    height: calc(100vh - 175px);
+    height:
+      calc(
+        100vh -
+        var(--ccq-overlay-header-clearance) -
+        10px
+      );
 
-    max-height: calc(100vh - 175px);
+    max-height:
+      calc(
+        100vh -
+        var(--ccq-overlay-header-clearance) -
+        10px
+      );
   }
 
   .ccq-checkout {
-    max-height: calc(100vh - 175px);
+    max-height:
+      calc(
+        100vh -
+        var(--ccq-overlay-header-clearance) -
+        15px
+      );
   }
 }
 

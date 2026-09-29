@@ -22,14 +22,12 @@
 
   width: 100%;
   max-width: 100%;
-
   overflow: hidden;
 
   margin: 0;
   padding: 0;
 
   background: #ffffff;
-
   color: var(--cnc-text);
 
   font-family: Cambria, Georgia, serif;
@@ -54,27 +52,24 @@
 
 .cnc-commercial-container {
   width: min(1160px, calc(100% - 48px));
-
   margin: 0 auto;
 }
 
 
 /* =========================================================
    HERO
-   IMPORTANT:
-   PAGE STARTS BELOW FIXED HEADER
    ========================================================= */
 
 .cnc-commercial-hero {
   position: relative;
-
   width: 100%;
 
   /*
-    Your navbar/header is fixed.
-    This prevents the hero from going underneath it.
+    Navbar is fixed.
+    76px keeps the hero below the navbar
+    without creating the previous large white gap.
   */
-  margin-top: 132px;
+  margin-top: 76px !important;
 
   min-height: 500px;
 
@@ -103,11 +98,9 @@
 
 .cnc-commercial-hero-content {
   position: relative;
-
   z-index: 2;
 
   width: min(1160px, calc(100% - 48px));
-
   margin: 0 auto;
 
   padding: 62px 0 58px;
@@ -126,15 +119,11 @@
   display: inline-block;
 
   margin: 0 0 14px;
-
   padding-left: 35px;
 
   font-size: 12px !important;
-
   line-height: 1.2;
-
   font-weight: 700;
-
   letter-spacing: 2px;
 
   color: #ffffff;
@@ -144,7 +133,6 @@
   content: "";
 
   position: absolute;
-
   left: 0;
   top: 50%;
 
@@ -165,17 +153,14 @@
   max-width: 700px;
 
   margin: 0;
-
   padding: 0;
 
   font-family: Cambria, Georgia, serif !important;
 
   font-size: clamp(42px, 5vw, 68px) !important;
-
   line-height: 0.98 !important;
 
   font-weight: 700;
-
   letter-spacing: -1.5px;
 
   color: #ffffff;
@@ -190,13 +175,11 @@
   max-width: 590px;
 
   margin: 20px 0 10px;
-
   padding: 0;
 
   font-family: Cambria, Georgia, serif !important;
 
   font-size: clamp(20px, 2.2vw, 28px) !important;
-
   line-height: 1.2 !important;
 
   font-weight: 600;
@@ -213,13 +196,11 @@
   max-width: 590px;
 
   margin: 0;
-
   padding: 0;
 
   font-family: Cambria, Georgia, serif !important;
 
   font-size: 15px !important;
-
   line-height: 1.55 !important;
 
   color: rgba(255, 255, 255, 0.82);
@@ -232,11 +213,9 @@
 
 .cnc-commercial-hero-actions {
   display: flex;
-
   align-items: center;
 
   gap: 10px;
-
   margin-top: 25px;
 }
 
@@ -244,7 +223,6 @@
   min-height: 45px;
 
   display: inline-flex;
-
   align-items: center;
   justify-content: center;
 
@@ -253,13 +231,10 @@
   border: 1px solid transparent;
 
   font-family: Cambria, Georgia, serif !important;
-
   font-size: 14px !important;
-
   font-weight: 700;
 
   line-height: 1;
-
   text-decoration: none;
 
   transition:
@@ -275,13 +250,11 @@
 
 .cnc-commercial-btn-primary {
   background: #ffffff;
-
   color: var(--cnc-blue);
 }
 
 .cnc-commercial-btn-primary:hover {
   background: var(--cnc-lime);
-
   color: #071642;
 }
 
@@ -308,7 +281,6 @@
 
 .cnc-commercial-section-heading {
   max-width: 650px;
-
   margin-bottom: 32px;
 }
 
@@ -318,15 +290,12 @@
   display: inline-block;
 
   margin-bottom: 9px;
-
   padding-left: 30px;
 
   font-family: Cambria, Georgia, serif !important;
 
   font-size: 11px !important;
-
   font-weight: 700;
-
   letter-spacing: 1.8px;
 
   color: var(--cnc-blue);
@@ -336,7 +305,6 @@
   content: "";
 
   position: absolute;
-
   left: 0;
   top: 50%;
 
@@ -350,17 +318,14 @@
 
 .cnc-commercial-section-heading h2 {
   margin: 0;
-
   padding: 0;
 
   font-family: Cambria, Georgia, serif !important;
 
   font-size: clamp(30px, 3.5vw, 44px) !important;
-
   line-height: 1.08 !important;
 
   font-weight: 700;
-
   letter-spacing: -0.7px;
 
   color: var(--cnc-text);
@@ -374,7 +339,6 @@
   font-family: Cambria, Georgia, serif !important;
 
   font-size: 14px !important;
-
   line-height: 1.55 !important;
 
   color: var(--cnc-muted);
@@ -436,7 +400,6 @@
   right: 18px;
 
   font-size: 11px !important;
-
   font-weight: 700;
 
   color: #b5b8c0;
@@ -452,7 +415,6 @@
   height: 40px;
 
   display: flex;
-
   align-items: center;
   justify-content: center;
 
@@ -463,7 +425,6 @@
   color: #ffffff;
 
   font-size: 13px !important;
-
   font-weight: 700;
 }
 
@@ -478,7 +439,6 @@
   font-family: Cambria, Georgia, serif !important;
 
   font-size: 19px !important;
-
   line-height: 1.15 !important;
 
   font-weight: 700;
@@ -494,7 +454,6 @@
   font-family: Cambria, Georgia, serif !important;
 
   font-size: 13px !important;
-
   line-height: 1.55 !important;
 
   color: #666666;
@@ -555,7 +514,6 @@
   min-height: 270px;
 
   display: flex;
-
   flex-direction: column;
 
   padding: 24px;
@@ -584,13 +542,10 @@
 
 .cnc-commercial-category-top {
   display: flex;
-
   align-items: center;
-
   justify-content: space-between;
 
   font-size: 11px !important;
-
   font-weight: 700;
 
   color: var(--cnc-lime);
@@ -598,7 +553,6 @@
 
 .cnc-commercial-arrow {
   font-size: 19px !important;
-
   color: #ffffff;
 }
 
@@ -614,7 +568,6 @@
   font-family: Cambria, Georgia, serif !important;
 
   font-size: 24px !important;
-
   line-height: 1.15 !important;
 
   font-weight: 700;
@@ -630,7 +583,6 @@
   font-family: Cambria, Georgia, serif !important;
 
   font-size: 13px !important;
-
   line-height: 1.55 !important;
 
   color: rgba(255, 255, 255, 0.7);
@@ -638,19 +590,15 @@
 
 .cnc-commercial-category-bottom {
   display: flex;
-
   align-items: center;
-
   justify-content: space-between;
 
   margin-top: 20px;
-
   padding-top: 13px;
 
   border-top: 1px solid rgba(255, 255, 255, 0.13);
 
   font-size: 11px !important;
-
   font-weight: 700;
 
   color: rgba(255, 255, 255, 0.78);
@@ -658,7 +606,6 @@
 
 .cnc-commercial-category-bottom > span:last-child {
   font-size: 17px !important;
-
   color: #ffffff;
 }
 
@@ -693,7 +640,6 @@
 
 .cnc-commercial-sector-image {
   position: absolute;
-
   inset: 0;
 }
 
@@ -715,7 +661,6 @@
 
 .cnc-commercial-sector-overlay {
   position: absolute;
-
   inset: 0;
 
   background:
@@ -744,9 +689,7 @@
   margin-bottom: 4px;
 
   font-size: 10px !important;
-
   font-weight: 700;
-
   letter-spacing: 1.4px;
 
   color: var(--cnc-lime);
@@ -758,7 +701,6 @@
   font-family: Cambria, Georgia, serif !important;
 
   font-size: 21px !important;
-
   line-height: 1.1 !important;
 
   font-weight: 700;
@@ -783,9 +725,7 @@
   margin: 0 auto;
 
   display: flex;
-
   align-items: center;
-
   justify-content: space-between;
 
   gap: 35px;
@@ -801,9 +741,7 @@
   margin-bottom: 7px;
 
   font-size: 10px !important;
-
   font-weight: 700;
-
   letter-spacing: 1.8px;
 
   color: var(--cnc-lime);
@@ -815,11 +753,9 @@
   font-family: Cambria, Georgia, serif !important;
 
   font-size: clamp(29px, 3.3vw, 42px) !important;
-
   line-height: 1.08 !important;
 
   font-weight: 700;
-
   letter-spacing: -0.5px;
 
   color: #ffffff;
@@ -833,7 +769,6 @@
   font-family: Cambria, Georgia, serif !important;
 
   font-size: 13px !important;
-
   line-height: 1.5 !important;
 
   color: rgba(255, 255, 255, 0.76);
@@ -845,9 +780,7 @@
   min-height: 47px;
 
   display: inline-flex;
-
   align-items: center;
-
   justify-content: space-between;
 
   gap: 25px;
@@ -863,7 +796,6 @@
   font-family: Cambria, Georgia, serif !important;
 
   font-size: 13px !important;
-
   font-weight: 700;
 
   transition:
@@ -914,13 +846,13 @@
 
 @media (max-width: 700px) {
 
-  /*
-    Mobile header is taller.
-    Keeps hero safely below fixed navbar.
-  */
-
   .cnc-commercial-hero {
-    margin-top: 150px;
+    /*
+      Keep hero below fixed navbar.
+      Reduced from 110px to 76px to remove
+      the unwanted white gap.
+    */
+    margin-top: 76px !important;
 
     min-height: 530px;
 
@@ -955,7 +887,6 @@
     max-width: 500px;
 
     font-size: 39px !important;
-
     line-height: 1 !important;
 
     letter-spacing: -0.8px;
@@ -967,7 +898,6 @@
     margin-top: 16px;
 
     font-size: 20px !important;
-
     line-height: 1.2 !important;
   }
 
@@ -975,7 +905,6 @@
     max-width: 470px;
 
     font-size: 13px !important;
-
     line-height: 1.5 !important;
   }
 
@@ -996,7 +925,9 @@
   }
 
 
-  /* SECTIONS */
+  /* =====================================================
+     SECTIONS
+     ===================================================== */
 
   .cnc-commercial-needs,
   .cnc-commercial-products,
@@ -1010,7 +941,6 @@
 
   .cnc-commercial-section-heading h2 {
     font-size: 30px !important;
-
     line-height: 1.08 !important;
   }
 
@@ -1019,7 +949,9 @@
   }
 
 
-  /* NEEDS */
+  /* =====================================================
+     NEEDS
+     ===================================================== */
 
   .cnc-commercial-needs-grid {
     grid-template-columns: 1fr;
@@ -1051,7 +983,9 @@
   }
 
 
-  /* PRODUCTS */
+  /* =====================================================
+     PRODUCTS
+     ===================================================== */
 
   .cnc-commercial-category-grid {
     gap: 9px;
@@ -1072,7 +1006,9 @@
   }
 
 
-  /* SECTORS */
+  /* =====================================================
+     SECTORS
+     ===================================================== */
 
   .cnc-commercial-sector-grid {
     grid-template-columns: 1fr;
@@ -1085,7 +1021,9 @@
   }
 
 
-  /* CTA */
+  /* =====================================================
+     CTA
+     ===================================================== */
 
   .cnc-commercial-cta {
     padding: 43px 14px;
@@ -1120,7 +1058,7 @@
 @media (max-width: 400px) {
 
   .cnc-commercial-hero {
-    margin-top: 155px;
+    margin-top: 76px !important;
   }
 
   .cnc-commercial-hero h1 {

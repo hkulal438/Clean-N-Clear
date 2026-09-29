@@ -14,7 +14,6 @@
   --cnc-house-dark-blue: #071642;
   --cnc-house-navy: #061337;
   --cnc-house-lime: #91dc00;
-
   --cnc-house-text: #171717;
   --cnc-house-muted: #666666;
   --cnc-house-light: #f5f6f9;
@@ -23,12 +22,14 @@
 
   width: 100%;
   max-width: 100%;
+
   overflow: hidden;
 
   margin: 0;
   padding: 0;
 
   background: #ffffff;
+
   color: var(--cnc-house-text);
 
   font-family: Cambria, Georgia, serif;
@@ -80,9 +81,15 @@
   position: relative;
 
   width: 100%;
+
   min-height: 500px;
 
-  margin-top: 132px;
+  /*
+    FIX:
+    Keep hero below the fixed navbar,
+    but remove the excessive white gap.
+  */
+  margin-top: 76px !important;
 
   display: flex;
   align-items: center;
@@ -111,6 +118,7 @@
 
 .cnc-house-hero-overlay {
   position: absolute;
+
   inset: 0;
 
   z-index: 1;
@@ -132,6 +140,7 @@
 
 .cnc-house-hero-content {
   position: relative;
+
   z-index: 2;
 
   width: min(1160px, calc(100% - 48px));
@@ -154,9 +163,11 @@
   display: inline-block;
 
   margin: 0 0 14px;
+
   padding-left: 35px;
 
   font-size: 12px !important;
+
   line-height: 1.2;
 
   font-weight: 700;
@@ -165,7 +176,6 @@
 
   color: #ffffff;
 }
-
 
 .cnc-house-eyebrow::before {
   content: "";
@@ -216,6 +226,7 @@
   max-width: 590px;
 
   margin: 20px 0 10px;
+
   padding: 0;
 
   font-family: Cambria, Georgia, serif !important;
@@ -238,6 +249,7 @@
   max-width: 590px;
 
   margin: 0;
+
   padding: 0;
 
   font-family: Cambria, Georgia, serif !important;
@@ -275,6 +287,7 @@
   display: inline-flex;
 
   align-items: center;
+
   justify-content: center;
 
   padding: 0 22px;
@@ -298,7 +311,6 @@
     transform 0.25s ease;
 }
 
-
 .cnc-house-btn:hover {
   transform: translateY(-2px);
 }
@@ -313,7 +325,6 @@
 
   color: var(--cnc-house-blue);
 }
-
 
 .cnc-house-btn-primary:hover {
   background: var(--cnc-house-lime);
@@ -334,7 +345,6 @@
   color: #ffffff;
 }
 
-
 .cnc-house-btn-outline:hover {
   border-color: #ffffff;
 
@@ -353,7 +363,6 @@
 
   margin-bottom: 32px;
 }
-
 
 .cnc-house-section-heading > span {
   position: relative;
@@ -375,7 +384,6 @@
   color: var(--cnc-house-blue);
 }
 
-
 .cnc-house-section-heading > span::before {
   content: "";
 
@@ -392,9 +400,9 @@
   background: var(--cnc-house-lime);
 }
 
-
 .cnc-house-section-heading h2 {
   margin: 0;
+
   padding: 0;
 
   font-family: Cambria, Georgia, serif !important;
@@ -409,7 +417,6 @@
 
   color: var(--cnc-house-text);
 }
-
 
 .cnc-house-section-heading p {
   max-width: 580px;
@@ -475,7 +482,6 @@
   inset: 0;
 }
 
-
 .cnc-house-area-image img {
   width: 100%;
   height: 100%;
@@ -486,7 +492,6 @@
 
   transition: transform 0.5s ease;
 }
-
 
 .cnc-house-area-card:hover
 .cnc-house-area-image img {
@@ -528,7 +533,6 @@
   color: #ffffff;
 }
 
-
 .cnc-house-area-content > span {
   display: block;
 
@@ -543,7 +547,6 @@
   color: var(--cnc-house-lime);
 }
 
-
 .cnc-house-area-content h3 {
   margin: 0;
 
@@ -557,7 +560,6 @@
 
   color: #ffffff;
 }
-
 
 .cnc-house-area-content p {
   max-width: 260px;
@@ -595,11 +597,9 @@
   color: var(--cnc-house-lime);
 }
 
-
 .cnc-house-range .cnc-house-section-heading h2 {
   color: #ffffff;
 }
-
 
 .cnc-house-range .cnc-house-section-heading p {
   color: rgba(255, 255, 255, 0.68);
@@ -650,7 +650,6 @@
     transform 0.25s ease;
 }
 
-
 .cnc-house-range-row:hover {
   transform: translateY(-3px);
 
@@ -687,7 +686,6 @@
   padding-right: 22px;
 }
 
-
 .cnc-house-range-content h3 {
   margin: 0 0 8px;
 
@@ -701,7 +699,6 @@
 
   color: #ffffff;
 }
-
 
 .cnc-house-range-content p {
   max-width: 310px;
@@ -733,7 +730,6 @@
 
   transition: transform 0.25s ease;
 }
-
 
 .cnc-house-range-row:hover
 .cnc-house-range-arrow {
@@ -784,7 +780,6 @@
     box-shadow 0.25s ease;
 }
 
-
 .cnc-house-product-card:hover {
   transform: translateY(-3px);
 
@@ -802,13 +797,13 @@
   position: relative;
 
   width: 100%;
+
   height: 220px;
 
   overflow: hidden;
 
   background: #f7f7f7;
 }
-
 
 .cnc-house-product-image img {
   width: 100%;
@@ -822,7 +817,6 @@
 
   transition: transform 0.4s ease;
 }
-
 
 .cnc-house-product-card:hover
 .cnc-house-product-image img {
@@ -838,7 +832,6 @@
   padding: 19px 20px 20px;
 }
 
-
 .cnc-house-product-content h3 {
   margin: 0 0 7px;
 
@@ -852,7 +845,6 @@
 
   color: #171717;
 }
-
 
 .cnc-house-product-content p {
   min-height: 40px;
@@ -897,13 +889,11 @@
   text-decoration: none;
 }
 
-
 .cnc-house-product-link span {
   font-size: 17px !important;
 
   transition: transform 0.25s ease;
 }
-
 
 .cnc-house-product-card:hover
 .cnc-house-product-link span {
@@ -920,7 +910,6 @@
 
   background: var(--cnc-house-blue);
 }
-
 
 .cnc-house-cta-inner {
   width: min(1160px, 100%);
@@ -945,7 +934,6 @@
   color: #ffffff;
 }
 
-
 .cnc-house-cta-text > span {
   display: block;
 
@@ -959,7 +947,6 @@
 
   color: var(--cnc-house-lime);
 }
-
 
 .cnc-house-cta-text h2 {
   max-width: 650px;
@@ -978,7 +965,6 @@
 
   color: #ffffff;
 }
-
 
 .cnc-house-cta-text p {
   max-width: 560px;
@@ -1032,7 +1018,6 @@
     color 0.25s ease;
 }
 
-
 .cnc-house-cta-action:hover {
   transform: translateY(-2px);
 
@@ -1040,7 +1025,6 @@
 
   color: var(--cnc-house-dark-blue);
 }
-
 
 .cnc-house-cta-action strong {
   font-size: 18px !important;
@@ -1082,25 +1066,27 @@
      ------------------------------------------------------- */
 
   .cnc-house-hero {
-    margin-top: 150px;
+    /*
+      Keep hero below fixed navbar.
+      Reduced from 150px to 76px
+      to remove excessive white space.
+    */
+    margin-top: 76px !important;
 
     min-height: 530px;
 
     background-position: 65% center;
   }
 
-
   .cnc-house-container {
     width: calc(100% - 28px);
   }
-
 
   .cnc-house-hero-content {
     width: calc(100% - 28px);
 
     padding: 55px 0 50px;
   }
-
 
   .cnc-house-eyebrow {
     margin-bottom: 12px;
@@ -1112,11 +1098,9 @@
     letter-spacing: 1.6px;
   }
 
-
   .cnc-house-eyebrow::before {
     width: 21px;
   }
-
 
   .cnc-house-hero h1 {
     max-width: 500px;
@@ -1128,7 +1112,6 @@
     letter-spacing: -0.8px;
   }
 
-
   .cnc-house-hero h2 {
     max-width: 480px;
 
@@ -1139,7 +1122,6 @@
     line-height: 1.2 !important;
   }
 
-
   .cnc-house-hero p {
     max-width: 470px;
 
@@ -1147,7 +1129,6 @@
 
     line-height: 1.5 !important;
   }
-
 
   .cnc-house-hero-actions {
     align-items: stretch;
@@ -1158,7 +1139,6 @@
 
     margin-top: 21px;
   }
-
 
   .cnc-house-btn {
     width: 100%;
@@ -1177,18 +1157,15 @@
     padding: 50px 0;
   }
 
-
   .cnc-house-section-heading {
     margin-bottom: 25px;
   }
-
 
   .cnc-house-section-heading h2 {
     font-size: 30px !important;
 
     line-height: 1.08 !important;
   }
-
 
   .cnc-house-section-heading p {
     font-size: 13px !important;
@@ -1205,18 +1182,17 @@
     gap: 9px;
   }
 
-
   .cnc-house-area-card {
     min-height: 215px;
   }
 
-
   .cnc-house-area-content {
     left: 17px;
+
     right: 17px;
+
     bottom: 17px;
   }
-
 
   .cnc-house-area-content h3 {
     font-size: 20px !important;
@@ -1233,7 +1209,6 @@
     gap: 9px;
   }
 
-
   .cnc-house-range-row {
     min-height: 150px;
 
@@ -1242,21 +1217,17 @@
     padding: 20px;
   }
 
-
   .cnc-house-range-content {
     padding-right: 5px;
   }
-
 
   .cnc-house-range-content h3 {
     font-size: 20px !important;
   }
 
-
   .cnc-house-range-content p {
     font-size: 12px !important;
   }
-
 
   .cnc-house-range-arrow {
     font-size: 20px !important;
@@ -1273,16 +1244,13 @@
     gap: 9px;
   }
 
-
   .cnc-house-product-image {
     height: 215px;
   }
 
-
   .cnc-house-product-content {
     padding: 18px;
   }
-
 
   .cnc-house-product-content h3 {
     font-size: 19px !important;
@@ -1297,7 +1265,6 @@
     padding: 43px 14px;
   }
 
-
   .cnc-house-cta-inner {
     align-items: flex-start;
 
@@ -1306,16 +1273,13 @@
     gap: 22px;
   }
 
-
   .cnc-house-cta-text h2 {
     font-size: 30px !important;
   }
 
-
   .cnc-house-cta-text p {
     font-size: 12.5px !important;
   }
-
 
   .cnc-house-cta-action {
     width: 100%;
@@ -1330,29 +1294,24 @@
 @media (max-width: 400px) {
 
   .cnc-house-hero {
-    margin-top: 155px;
+    margin-top: 76px !important;
   }
-
 
   .cnc-house-hero h1 {
     font-size: 35px !important;
   }
 
-
   .cnc-house-hero h2 {
     font-size: 18px !important;
   }
-
 
   .cnc-house-section-heading h2 {
     font-size: 28px !important;
   }
 
-
   .cnc-house-product-image {
     height: 200px;
   }
-
 
   .cnc-house-range-row {
     padding: 17px;
