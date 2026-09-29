@@ -10,7 +10,7 @@ import {
   FaLinkedinIn,
 } from "react-icons/fa6";
 
-import logo from "../../images/CLEANNCLEAR_LOGO-01.png";
+import logo from "../../images/CLEANNCLEAR_LOGO-05.png";
 
 const Footer = () => {
   return (
