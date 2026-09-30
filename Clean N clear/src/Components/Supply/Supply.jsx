@@ -13,12 +13,12 @@ const authorizedPartners = [
   {
     image: karcherLogo,
     className: "karcher",
-    link: "https://www.kaercher.com/in/",
+    // link: "https://www.kaercher.com/in/",
   },
   {
     image: revachemLogo,
     className: "revachem",
-    link: "https://www.revachem.co.in/",
+    // link: "https://www.revachem.co.in/",
   },
 ];
 
@@ -27,31 +27,31 @@ const suppliedBrands = [
     name: "TASKI",
     image: taskiLogo,
     className: "taski",
-    link: "https://taski.com/",
+    // link: "https://taski.com/",
   },
   {
     name: "Diversey",
     image: diverseyLogo,
     className: "diversey",
-    link: "https://diverseyvericlean.com/diversey-vericlean-system/products",
+    // link: "https://diverseyvericlean.com/diversey-vericlean-system/products",
   },
   {
     name: "MiraClean",
     image: miracleanLogo,
     className: "miraclean",
-    link: "https://miraclean.in/pages/know-more-page",
+    // link: "https://miraclean.in/pages/know-more-page",
   },
   {
     name: "Aristo",
     image: aristoLogo,
     className: "aristo",
-    link: "https://aristoplast.com/products/cleaning-products/25",
+    // link: "https://aristoplast.com/products/cleaning-products/25",
   },
   {
     name: "iClean",
     image: icleanLogo,
     className: "iclean",
-    link: "https://icleans.in/",
+    // link: "https://icleans.in/",
   },
 ];
 
