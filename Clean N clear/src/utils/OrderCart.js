@@ -1,16 +1,19 @@
+
 export const ORDER_CART_KEY = "cnc_order_cart";
 
 export const getOrderCart = () => {
   try {
     const savedCart = localStorage.getItem(ORDER_CART_KEY);
+    const parsedCart = savedCart ? JSON.parse(savedCart) : [];
 
-    if (!savedCart) return [];
+    if (!Array.isArray(parsedCart)) return [];
 
-    const parsedCart = JSON.parse(savedCart);
-
-    return Array.isArray(parsedCart) ? parsedCart : [];
+    return parsedCart.map((item) => ({
+      ...item,
+      quantity: Math.max(1, Number(item.quantity) || 1),
+    }));
   } catch (error) {
-    console.error("Unable to read order cart:", error);
+    console.error("Unable to read cart:", error);
     return [];
   }
 };
@@ -18,13 +21,11 @@ export const getOrderCart = () => {
 export const saveOrderCart = (cart) => {
   try {
     const safeCart = Array.isArray(cart) ? cart : [];
-
-    localStorage.setItem(
-      ORDER_CART_KEY,
-      JSON.stringify(safeCart)
-    );
+    localStorage.setItem(ORDER_CART_KEY, JSON.stringify(safeCart));
+    return safeCart;
   } catch (error) {
-    console.error("Unable to save order cart:", error);
+    console.error("Unable to save cart:", error);
+    return [];
   }
 };
 
@@ -32,27 +33,26 @@ export const getOrderCount = (cart = getOrderCart()) => {
   if (!Array.isArray(cart)) return 0;
 
   return cart.reduce(
-    (total, item) => total + Number(item?.quantity || 0),
+    (total, item) => total + Math.max(0, Number(item.quantity) || 0),
     0
   );
 };
 
 export const updateOrderCart = (cart) => {
-  const safeCart = Array.isArray(cart) ? cart : [];
-
-  saveOrderCart(safeCart);
-
+  const safeCart = saveOrderCart(cart);
   const count = getOrderCount(safeCart);
 
-  window.dispatchEvent(
-    new CustomEvent("cnc-order-count-updated", {
-      detail: { count },
-    })
-  );
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(
+      new CustomEvent("cnc-order-count-updated", {
+        detail: { count },
+      })
+    );
+
+    window.dispatchEvent(new Event("cnc-order-cart-updated"));
+  }
 
   return safeCart;
 };
 
-export const clearOrderCart = () => {
-  updateOrderCart([]);
-};
+export const clearOrderCart = () => updateOrderCart([]);
