@@ -1,96 +1,270 @@
-import React, { useEffect, useState } from "react";
+
+import { useEffect, useState } from "react";
 import "./CleaningChemicals.css";
 
+import AirportBin2 from "../../images/Hygeine/Airport bin-2.png";
+import AirportBin3 from "../../images/Hygeine/Airport bin-3.png";
+import AirportBin from "../../images/Hygeine/airport bin.png";
+import AshtrayBin from "../../images/Hygeine/Ashthray bin.png";
+import BedRoll from "../../images/Hygeine/Bed roll.png";
+import CornerBinWithAshtray from "../../images/Hygeine/corner bin with ashtray.png";
+import HalfRoundBin from "../../images/Hygeine/half round bin.png";
+import HardRolledTowel from "../../images/Hygeine/hard rolled towel.png";
+import JointBin from "../../images/Hygeine/joint bin.png";
 import LiquidPerfume from "../../images/Hygeine/Liquid Perfume 5L X 4.webp";
+import MFoldTowel from "../../images/Hygeine/M fold towel.png";
 import MedicleanFoamingSoap from "../../images/Hygeine/Mediclean Foaming Soap 500ml X 4.webp";
+import PedalBin from "../../images/Hygeine/pedal bin.png";
+import PerforatedBin from "../../images/Hygeine/perforated bin.png";
+import PlanterPot from "../../images/Hygeine/planter pot.png";
+import PlanterPot2 from "../../images/Hygeine/planter-pot-2.png";
+import PlanterPot3 from "../../images/Hygeine/planter pot-3.png";
+import PlanterPot4 from "../../images/Hygeine/planter pot-4.png";
+import PlanterPot5 from "../../images/Hygeine/planter pot-5.png";
+import PlanterPot6 from "../../images/Hygeine/planter-pot-6.png";
 import PressureProMachineProtectorAdvance from "../../images/Hygeine/PressurePro Machine Protector Advance 1 RM 110, 1l.jpg";
 import PressureProMachineProtector from "../../images/Hygeine/PressurePro Machine Protector RM 110, 1l.jpg";
 import RevaHandRubPlus from "../../images/Hygeine/Reva Hand Rub Plus 5 Litre.webp";
 import RevaHandSanitizer from "../../images/Hygeine/Reva Hand Sanitizer.webp";
+import RoundBinWithAshtray from "../../images/Hygeine/round bin with ashtray bin.png";
+import SoftTissueNapkin from "../../images/Hygeine/Soft tissue napkin.png";
+import SquareBinTopOpen from "../../images/Hygeine/square bin top open.png";
+import SquareBinWithAshtray from "../../images/Hygeine/square bin with ashtrey bin.png";
+import SquareJointBin from "../../images/Hygeine/square joint bin.png";
+import SwingBin from "../../images/Hygeine/swing bin.png";
+import ToiletTissueRoll from "../../images/Hygeine/toilet tissue roll.png";
 
 import {
   getOrderCart,
   updateOrderCart,
 } from "../../utils/OrderCart";
 
-const API_URL =
-  import.meta.env.VITE_API_URL || "http://localhost:5000";
-
-/* =========================================================
-   HYGIENE SUPPLIES
-   ========================================================= */
+const API_URL = (
+  import.meta.env.VITE_API_URL || "http://localhost:5000"
+).replace(/\/+$/, "");
 
 const products = [
   {
-    id: "liquid-perfume-5l-x4",
-    name: "Liquid Perfume 5L X 4",
-    category: "Hygiene Supplies",
-    price: 2800,
+    id: "airport-bin-2",
+    name: "Airport Bin",
+    image: AirportBin2,
+    unit: "Unit",
+    description: "Waste bin for public and commercial spaces.",
+  },
+  {
+    id: "airport-bin-3",
+    name: "Airport Bin",
+    image: AirportBin3,
+    unit: "Unit",
+    description: "Waste bin for commercial and institutional use.",
+  },
+  {
+    id: "airport-bin",
+    name: "Airport Bin",
+    image: AirportBin,
+    unit: "Unit",
+    description: "Waste bin suitable for shared spaces.",
+  },
+  {
+    id: "ashtray-bin",
+    name: "Ashtray Bin",
+    image: AshtrayBin,
+    unit: "Unit",
+    description: "Bin designed for designated smoking areas.",
+  },
+  {
+    id: "bed-roll",
+    name: "Bed Roll",
+    image: BedRoll,
     unit: "Pack",
+    description: "Bed roll for hygiene and facility requirements.",
+  },
+  {
+    id: "corner-bin-with-ashtray",
+    name: "Corner Bin with Ashtray",
+    image: CornerBinWithAshtray,
+    unit: "Unit",
+    description: "Corner waste bin with an integrated ashtray.",
+  },
+  {
+    id: "half-round-bin",
+    name: "Half Round Bin",
+    image: HalfRoundBin,
+    unit: "Unit",
+    description: "Space-saving waste bin for indoor areas.",
+  },
+  {
+    id: "hard-rolled-towel",
+    name: "Hard Rolled Towel",
+    image: HardRolledTowel,
+    unit: "Pack",
+    description: "Paper towels for washroom hygiene.",
+  },
+  {
+    id: "joint-bin",
+    name: "Joint Bin",
+    image: JointBin,
+    unit: "Unit",
+    description: "Waste bin for commercial facilities.",
+  },
+  {
+    id: "liquid-perfume",
+    name: "Liquid Perfume",
     image: LiquidPerfume,
-    description:
-      "Liquid perfume suitable for maintaining a pleasant and fresh environment in commercial and institutional spaces.",
-  },
-
-  {
-    id: "mediclean-foaming-soap-500ml-x4",
-    name: "Mediclean Foaming Soap 500ml X 4",
-    category: "Hygiene Supplies",
-    price: 850,
     unit: "Pack",
+    description: "Liquid fragrance for facility maintenance.",
+  },
+  {
+    id: "m-fold-towel",
+    name: "M Fold Towel",
+    image: MFoldTowel,
+    unit: "Pack",
+    description: "Folded paper towels for washroom dispensers.",
+  },
+  {
+    id: "mediclean-foaming-soap",
+    name: "Mediclean Foaming Soap",
     image: MedicleanFoamingSoap,
-    description:
-      "Foaming hand soap suitable for maintaining hand hygiene in offices, commercial spaces and institutions.",
+    unit: "Pack",
+    description: "Foaming soap for hand hygiene.",
   },
-
   {
-    id: "pressurepro-machine-protector-advance-rm110",
-    name: "PressurePro Machine Protector Advance 1 RM 110",
-    category: "Hygiene Supplies",
-    price: 1450,
-    unit: "1 Litre",
+    id: "pedal-bin",
+    name: "Pedal Bin",
+    image: PedalBin,
+    unit: "Unit",
+    description: "Pedal-operated bin for hands-free waste disposal.",
+  },
+  {
+    id: "perforated-bin",
+    name: "Perforated Bin",
+    image: PerforatedBin,
+    unit: "Unit",
+    description: "Perforated waste bin for facility use.",
+  },
+  {
+    id: "planter-pot",
+    name: "Planter Pot",
+    image: PlanterPot,
+    unit: "Unit",
+    description: "Planter pot for indoor or outdoor spaces.",
+  },
+  {
+    id: "planter-pot-2",
+    name: "Planter Pot",
+    image: PlanterPot2,
+    unit: "Unit",
+    description: "Planter pot for facility decoration.",
+  },
+  {
+    id: "planter-pot-3",
+    name: "Planter Pot",
+    image: PlanterPot3,
+    unit: "Unit",
+    description: "Planter pot for indoor or outdoor spaces.",
+  },
+  {
+    id: "planter-pot-4",
+    name: "Planter Pot",
+    image: PlanterPot4,
+    unit: "Unit",
+    description: "Planter pot for facility decoration.",
+  },
+  {
+    id: "planter-pot-5",
+    name: "Planter Pot",
+    image: PlanterPot5,
+    unit: "Unit",
+    description: "Planter pot for indoor or outdoor spaces.",
+  },
+  {
+    id: "planter-pot-6",
+    name: "Planter Pot",
+    image: PlanterPot6,
+    unit: "Unit",
+    description: "Planter pot for facility decoration.",
+  },
+  {
+    id: "pressurepro-machine-protector-advance",
+    name: "PressurePro Machine Protector Advance",
     image: PressureProMachineProtectorAdvance,
-    description:
-      "Machine protection solution designed for professional cleaning equipment maintenance.",
+    unit: "Unit",
+    description: "Machine protection product for cleaning equipment.",
   },
-
   {
-    id: "pressurepro-machine-protector-rm110",
-    name: "PressurePro Machine Protector RM 110",
-    category: "Hygiene Supplies",
-    price: 1250,
-    unit: "1 Litre",
+    id: "pressurepro-machine-protector",
+    name: "PressurePro Machine Protector",
     image: PressureProMachineProtector,
-    description:
-      "Professional machine protection solution suitable for cleaning equipment maintenance requirements.",
+    unit: "Unit",
+    description: "Machine protection product for cleaning equipment.",
   },
-
   {
-    id: "reva-hand-rub-plus-5l",
-    name: "Reva Hand Rub Plus 5 Litre",
-    category: "Hygiene Supplies",
-    price: 1100,
-    unit: "5 Litre",
+    id: "reva-hand-rub-plus",
+    name: "Reva Hand Rub Plus",
     image: RevaHandRubPlus,
-    description:
-      "Hand rub solution suitable for maintaining hand hygiene across commercial and institutional environments.",
+    unit: "Unit",
+    description: "Hand hygiene solution for workplace and facility use.",
   },
-
   {
     id: "reva-hand-sanitizer",
     name: "Reva Hand Sanitizer",
-    category: "Hygiene Supplies",
-    price: 450,
-    unit: "Unit",
     image: RevaHandSanitizer,
-    description:
-      "Hand sanitizer suitable for convenient hand hygiene in workplaces, institutions and public spaces.",
+    unit: "Unit",
+    description: "Hand sanitizer for convenient hand hygiene.",
   },
-];
-
-/* =========================================================
-   EMPTY CUSTOMER
-   ========================================================= */
+  {
+    id: "round-bin-with-ashtray",
+    name: "Round Bin with Ashtray",
+    image: RoundBinWithAshtray,
+    unit: "Unit",
+    description: "Round waste bin with an integrated ashtray.",
+  },
+  {
+    id: "soft-tissue-napkin",
+    name: "Soft Tissue Napkin",
+    image: SoftTissueNapkin,
+    unit: "Pack",
+    description: "Soft tissue napkins for everyday hygiene.",
+  },
+  {
+    id: "square-bin-top-open",
+    name: "Square Bin Top Open",
+    image: SquareBinTopOpen,
+    unit: "Unit",
+    description: "Square waste bin with an open top.",
+  },
+  {
+    id: "square-bin-with-ashtray",
+    name: "Square Bin with Ashtray",
+    image: SquareBinWithAshtray,
+    unit: "Unit",
+    description: "Square waste bin with an integrated ashtray.",
+  },
+  {
+    id: "square-joint-bin",
+    name: "Square Joint Bin",
+    image: SquareJointBin,
+    unit: "Unit",
+    description: "Square waste bin for commercial facilities.",
+  },
+  {
+    id: "swing-bin",
+    name: "Swing Bin",
+    image: SwingBin,
+    unit: "Unit",
+    description: "Swing-lid bin for indoor use.",
+  },
+  {
+    id: "toilet-tissue-roll",
+    name: "Toilet Tissue Roll",
+    image: ToiletTissueRoll,
+    unit: "Pack",
+    description: "Toilet tissue for washroom facilities.",
+  },
+].map((product) => ({
+  ...product,
+  category: "Hygiene Supplies",
+}));
 
 const emptyCustomer = {
   name: "",
@@ -100,103 +274,87 @@ const emptyCustomer = {
   location: "",
 };
 
-/* =========================================================
-   COMPONENT
-   ========================================================= */
-
-const HygieneSupplies = () => {
-  const [selectedProduct, setSelectedProduct] =
-    useState(null);
-
-  /* =======================================================
-     SHARED ORDER CART
-     ======================================================= */
-
-  const [cart, setCart] = useState(() =>
-    getOrderCart()
-  );
-
-  const [showCart, setShowCart] =
-    useState(false);
-
-  const [showCheckout, setShowCheckout] =
-    useState(false);
-
-  const [orderSuccess, setOrderSuccess] =
-    useState(null);
-
-  const [loading, setLoading] =
-    useState(false);
-
-  const [orderedQuantities, setOrderedQuantities] =
-    useState({});
-
-  const [
-    loadingOrderedQuantities,
-    setLoadingOrderedQuantities,
-  ] = useState(true);
-
-  const [customer, setCustomer] =
-    useState(emptyCustomer);
-
-  const [notes, setNotes] =
-    useState("");
-
-  /* =========================================================
-     SAVE SHARED CART
-     ========================================================= */
+export default function HygieneSupplies() {
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [cart, setCart] = useState(() => getOrderCart());
+  const [showCart, setShowCart] = useState(false);
+  const [showCheckout, setShowCheckout] = useState(false);
+  const [orderSuccess, setOrderSuccess] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [orderedQuantities, setOrderedQuantities] = useState({});
+  const [loadingOrderedQuantities, setLoadingOrderedQuantities] =
+    useState(true);
+  const [customer, setCustomer] = useState(emptyCustomer);
+  const [notes, setNotes] = useState("");
 
   useEffect(() => {
     updateOrderCart(cart);
   }, [cart]);
 
-  /* =========================================================
-     LOAD ORDERED QUANTITIES
-     ========================================================= */
-
   const loadOrderedQuantities = async () => {
     try {
-      setLoadingOrderedQuantities(true);
-
       const response = await fetch(
         `${API_URL}/api/product-order-quantities`
       );
 
-      const data = await response.json();
+      const data = await response.json().catch(() => ({}));
 
       if (!response.ok || !data.success) {
         throw new Error(
-          data.message ||
-            "Unable to load ordered quantities."
+          data.message || "Unable to load order quantities."
         );
       }
 
-      setOrderedQuantities(
-        data.quantities || {}
-      );
+      setOrderedQuantities(data.quantities || {});
+      return true;
     } catch (error) {
-      console.error(
-        "Unable to load ordered quantities:",
-        error
-      );
-
+      console.error("Unable to load ordered quantities:", error);
       setOrderedQuantities({});
+      return false;
     } finally {
       setLoadingOrderedQuantities(false);
     }
   };
 
-  /* =========================================================
-     LOAD ON PAGE OPEN
-     ========================================================= */
-
   useEffect(() => {
-    loadOrderedQuantities();
-  }, []);
+    let active = true;
 
-  /* =========================================================
-     BODY SCROLL LOCK
-     ========================================================= */
+    const load = async () => {
+      try {
+        const response = await fetch(
+          `${API_URL}/api/product-order-quantities`
+        );
+
+        const data = await response.json().catch(() => ({}));
+
+        if (!response.ok || !data.success) {
+          throw new Error(
+            data.message || "Unable to load order quantities."
+          );
+        }
+
+        if (active) {
+          setOrderedQuantities(data.quantities || {});
+        }
+      } catch (error) {
+        console.error("Unable to load ordered quantities:", error);
+
+        if (active) {
+          setOrderedQuantities({});
+        }
+      } finally {
+        if (active) {
+          setLoadingOrderedQuantities(false);
+        }
+      }
+    };
+
+    load();
+
+    return () => {
+      active = false;
+    };
+  }, []);
 
   useEffect(() => {
     const modalOpen =
@@ -205,77 +363,49 @@ const HygieneSupplies = () => {
       showCheckout ||
       Boolean(orderSuccess);
 
-    if (modalOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = modalOpen ? "hidden" : "";
 
     return () => {
       document.body.style.overflow = "";
     };
-  }, [
-    selectedProduct,
-    showCart,
-    showCheckout,
-    orderSuccess,
-  ]);
-
-  /* =========================================================
-     FORMAT PRICE
-     ========================================================= */
-
-  const formatPrice = (price) => {
-    return `₹${Number(price).toLocaleString("en-IN")}`;
-  };
-
-  /* =========================================================
-     ADD TO ORDER
-     ========================================================= */
+  }, [selectedProduct, showCart, showCheckout, orderSuccess]);
 
   const addToCart = (product) => {
     setCart((previousCart) => {
-      const existingProduct =
-        previousCart.find(
-          (item) => item.id === product.id
-        );
+      const existing = previousCart.find(
+        (item) => item.id === product.id
+      );
 
-      if (existingProduct) {
+      if (existing) {
         return previousCart.map((item) =>
           item.id === product.id
             ? {
                 ...item,
-                quantity:
-                  Number(item.quantity || 0) + 1,
+                quantity: Number(item.quantity || 0) + 1,
               }
             : item
         );
       }
 
-      return [
-        ...previousCart,
-        {
-          ...product,
-          quantity: 1,
-        },
-      ];
+      return [...previousCart, { ...product, quantity: 1 }];
     });
 
     setSelectedProduct(null);
     setShowCart(true);
   };
 
-  /* =========================================================
-     UPDATE QUANTITY
-     ========================================================= */
+  const removeFromCart = (id) => {
+    setCart((previousCart) =>
+      previousCart.filter((item) => item.id !== id)
+    );
+  };
 
   const updateQuantity = (id, quantity) => {
-    const safeQuantity = Number(quantity);
+    const nextQuantity = Number(quantity);
 
-    if (
-      !Number.isFinite(safeQuantity) ||
-      safeQuantity < 1
-    ) {
+    if (!Number.isFinite(nextQuantity)) return;
+
+    if (nextQuantity < 1) {
       removeFromCart(id);
       return;
     }
@@ -283,71 +413,29 @@ const HygieneSupplies = () => {
     setCart((previousCart) =>
       previousCart.map((item) =>
         item.id === id
-          ? {
-              ...item,
-              quantity: safeQuantity,
-            }
+          ? { ...item, quantity: nextQuantity }
           : item
       )
     );
   };
 
-  /* =========================================================
-     REMOVE FROM ORDER
-     ========================================================= */
-
-  const removeFromCart = (id) => {
-    setCart((previousCart) =>
-      previousCart.filter(
-        (item) => item.id !== id
-      )
-    );
-  };
-
-  /* =========================================================
-     CART COUNT
-     ========================================================= */
-
   const cartCount = cart.reduce(
-    (total, item) =>
-      total + Number(item.quantity || 0),
+    (total, item) => total + Number(item.quantity || 0),
     0
   );
-
-  /* =========================================================
-     CART TOTAL
-     ========================================================= */
-
-  const cartTotal = cart.reduce(
-    (total, item) =>
-      total +
-      Number(item.price || 0) *
-        Number(item.quantity || 0),
-    0
-  );
-
-  /* =========================================================
-     CUSTOMER INPUT
-     ========================================================= */
 
   const handleCustomerChange = (event) => {
     const { name, value } = event.target;
 
-    setCustomer((previousCustomer) => ({
-      ...previousCustomer,
+    setCustomer((previous) => ({
+      ...previous,
       [name]: value,
     }));
   };
 
-  /* =========================================================
-     OPEN CHECKOUT
-     ========================================================= */
-
   const openCheckout = () => {
-    if (cart.length === 0) {
-      alert(
-        "Please add at least one product to your order."
-      );
+    if (!cart.length) {
+      window.alert("Please add at least one product to your order.");
       return;
     }
 
@@ -355,17 +443,11 @@ const HygieneSupplies = () => {
     setShowCheckout(true);
   };
 
-  /* =========================================================
-     SUBMIT ORDER
-     ========================================================= */
-
   const submitOrder = async (event) => {
     event.preventDefault();
 
-    if (cart.length === 0) {
-      alert(
-        "Please add at least one product to your order."
-      );
+    if (!cart.length) {
+      window.alert("Please add at least one product to your order.");
       return;
     }
 
@@ -375,135 +457,72 @@ const HygieneSupplies = () => {
     const company = customer.company.trim();
     const location = customer.location.trim();
 
-    /* -------------------------------------------------------
-       REQUIRED FIELDS
-       ------------------------------------------------------- */
-
     if (!name || !phone || !location) {
-      alert(
+      window.alert(
         "Please enter your name, phone number and location."
       );
       return;
     }
 
-    /* -------------------------------------------------------
-       PHONE VALIDATION
-       ------------------------------------------------------- */
+    const phoneDigits = phone.replace(/\D/g, "");
 
-    const phoneDigits =
-      phone.replace(/\D/g, "");
-
-    if (
-      phoneDigits.length < 7 ||
-      phoneDigits.length > 15
-    ) {
-      alert(
-        "Please enter a valid phone number."
-      );
+    if (phoneDigits.length < 7 || phoneDigits.length > 15) {
+      window.alert("Please enter a valid phone number.");
       return;
     }
-
-    /* -------------------------------------------------------
-       EMAIL VALIDATION
-       ------------------------------------------------------- */
 
     if (
       email &&
       !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
     ) {
-      alert(
-        "Please enter a valid email address."
-      );
+      window.alert("Please enter a valid email address.");
       return;
     }
 
     try {
       setLoading(true);
 
-      /* -----------------------------------------------------
-         SEND ONLY PRODUCT IDS + QUANTITIES
-         Backend calculates product information and price.
-         ----------------------------------------------------- */
-
-      const orderItems = cart.map((item) => ({
-        id: item.id,
-        quantity: Number(item.quantity),
-      }));
-
-      const response = await fetch(
-        `${API_URL}/api/order`,
-        {
-          method: "POST",
-
-          headers: {
-            "Content-Type": "application/json",
+      const response = await fetch(`${API_URL}/api/order`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          customer: {
+            name,
+            phone,
+            email,
+            company,
+            location,
           },
+          items: cart.map((item) => ({
+            id: item.id,
+            quantity: Number(item.quantity),
+          })),
+          notes: notes.trim(),
+        }),
+      });
 
-          body: JSON.stringify({
-            customer: {
-              name,
-              phone,
-              email,
-              company,
-              location,
-            },
-
-            items: orderItems,
-
-            notes: notes.trim(),
-          }),
-        }
-      );
-
-      const data = await response.json();
+      const data = await response.json().catch(() => ({}));
 
       if (!response.ok || !data.success) {
         throw new Error(
-          data.message ||
-            "Unable to submit order."
+          data.message || "Unable to submit order."
         );
       }
 
-      /* -----------------------------------------------------
-         SHOW SUCCESS
-         ----------------------------------------------------- */
-
       setOrderSuccess(data);
-
-      /* -----------------------------------------------------
-         CLEAR SHARED CART
-         ----------------------------------------------------- */
-
       setCart([]);
-
-      /* -----------------------------------------------------
-         CLEAR CUSTOMER DETAILS
-         ----------------------------------------------------- */
-
-      setCustomer({
-        ...emptyCustomer,
-      });
-
+      setCustomer({ ...emptyCustomer });
       setNotes("");
-
-      /* -----------------------------------------------------
-         CLOSE CHECKOUT
-         ----------------------------------------------------- */
-
       setShowCheckout(false);
 
-      /* -----------------------------------------------------
-         REFRESH ORDERED QUANTITIES
-         ----------------------------------------------------- */
-
+      // Refresh quantities after the order has been accepted.
       await loadOrderedQuantities();
     } catch (error) {
-      console.error(
-        "Order submission error:",
-        error
-      );
+      console.error("Order submission error:", error);
 
-      alert(
+      window.alert(
         error.message ||
           "Unable to submit the order. Please try again."
       );
@@ -512,61 +531,16 @@ const HygieneSupplies = () => {
     }
   };
 
-  /* =========================================================
-     CLOSE FUNCTIONS
-     ========================================================= */
-
-  const closeProductModal = () => {
-    setSelectedProduct(null);
-  };
-
-  const closeCart = () => {
-    setShowCart(false);
-  };
-
-  const closeCheckout = () => {
-    if (loading) {
-      return;
-    }
-
-    setShowCheckout(false);
-  };
-
-  const closeSuccess = () => {
-    setOrderSuccess(null);
-  };
-
-  /* =========================================================
-     JSX
-     ========================================================= */
-
   return (
     <section className="ccq-section">
-
-      {/* =====================================================
-          HEADER
-          ===================================================== */}
-
       <div className="ccq-header">
-        <span className="ccq-label">
-          HYGIENE SUPPLIES
-        </span>
-
-        <h1 className="ccq-title">
-          Hygiene Supplies
-        </h1>
-
+        <span className="ccq-label">HYGIENE SUPPLIES</span>
+        <h1 className="ccq-title">Hygiene Supplies</h1>
         <p className="ccq-intro">
-          Explore our range of hygiene products
-          designed for workplaces, commercial
-          spaces, healthcare environments and
-          institutional cleaning requirements.
+          Explore our range of hygiene products, waste bins,
+          washroom essentials and facility supplies.
         </p>
       </div>
-
-      {/* =====================================================
-          MY ORDER
-          ===================================================== */}
 
       <button
         type="button"
@@ -575,34 +549,20 @@ const HygieneSupplies = () => {
         aria-label={`My Order - ${cartCount} items`}
       >
         <span>My Order</span>
-
         <strong>{cartCount}</strong>
       </button>
-
-      {/* =====================================================
-          PRODUCT GRID
-          ===================================================== */}
 
       <div className="ccq-grid">
         {products.map((product) => {
           const orderedQuantity =
-            Number(
-              orderedQuantities[product.id]
-            ) || 0;
+            Number(orderedQuantities[product.id]) || 0;
 
           return (
-            <article
-              className="ccq-card"
-              key={product.id}
-            >
-              {/* IMAGE */}
-
+            <article className="ccq-card" key={product.id}>
               <button
                 type="button"
                 className="ccq-image-button"
-                onClick={() =>
-                  setSelectedProduct(product)
-                }
+                onClick={() => setSelectedProduct(product)}
                 aria-label={`View ${product.name}`}
               >
                 <img
@@ -613,8 +573,6 @@ const HygieneSupplies = () => {
                 />
               </button>
 
-              {/* CONTENT */}
-
               <div className="ccq-card-content">
                 <span className="ccq-category">
                   {product.category}
@@ -624,15 +582,7 @@ const HygieneSupplies = () => {
                   {product.name}
                 </h2>
 
-                <div className="ccq-price">
-                  {formatPrice(product.price)}
-                </div>
-
-                <div className="ccq-unit">
-                  {product.unit}
-                </div>
-
-                {/* ORDERED QUANTITY */}
+                <div className="ccq-unit">{product.unit}</div>
 
                 {!loadingOrderedQuantities &&
                   orderedQuantity > 0 && (
@@ -641,14 +591,10 @@ const HygieneSupplies = () => {
                     </div>
                   )}
 
-                {/* ADD TO ORDER */}
-
                 <button
                   type="button"
                   className="ccq-add-button"
-                  onClick={() =>
-                    addToCart(product)
-                  }
+                  onClick={() => addToCart(product)}
                 >
                   Add to Order
                 </button>
@@ -658,21 +604,15 @@ const HygieneSupplies = () => {
         })}
       </div>
 
-      {/* =====================================================
-          PRODUCT DETAILS MODAL
-          ===================================================== */}
-
       {selectedProduct && (
         <div
           className="ccq-overlay"
-          onClick={closeProductModal}
+          onClick={() => setSelectedProduct(null)}
           role="presentation"
         >
           <div
             className="ccq-product-modal"
-            onClick={(event) =>
-              event.stopPropagation()
-            }
+            onClick={(event) => event.stopPropagation()}
             role="dialog"
             aria-modal="true"
             aria-label={selectedProduct.name}
@@ -680,7 +620,7 @@ const HygieneSupplies = () => {
             <button
               type="button"
               className="ccq-close"
-              onClick={closeProductModal}
+              onClick={() => setSelectedProduct(null)}
               aria-label="Close product details"
             >
               ×
@@ -699,34 +639,18 @@ const HygieneSupplies = () => {
                 {selectedProduct.category}
               </span>
 
-              <h2>
-                {selectedProduct.name}
-              </h2>
-
-              <div className="ccq-modal-price">
-                {formatPrice(
-                  selectedProduct.price
-                )}
-              </div>
-
-              <p>
-                {selectedProduct.description}
-              </p>
+              <h2>{selectedProduct.name}</h2>
+              <p>{selectedProduct.description}</p>
 
               <div className="ccq-modal-unit">
                 <span>Pack / Unit:</span>
-
-                <strong>
-                  {selectedProduct.unit}
-                </strong>
+                <strong>{selectedProduct.unit}</strong>
               </div>
 
               <button
                 type="button"
                 className="ccq-add-large"
-                onClick={() =>
-                  addToCart(selectedProduct)
-                }
+                onClick={() => addToCart(selectedProduct)}
               >
                 Add to Order
               </button>
@@ -735,83 +659,54 @@ const HygieneSupplies = () => {
         </div>
       )}
 
-      {/* =====================================================
-          ORDER SUMMARY
-          ===================================================== */}
-
       {showCart && (
         <div
           className="ccq-overlay"
-          onClick={closeCart}
+          onClick={() => setShowCart(false)}
           role="presentation"
         >
           <aside
             className="ccq-cart-drawer"
-            onClick={(event) =>
-              event.stopPropagation()
-            }
+            onClick={(event) => event.stopPropagation()}
             role="dialog"
             aria-modal="true"
             aria-label="Order Summary"
           >
-            {/* HEADER */}
-
             <div className="ccq-cart-header">
               <div>
                 <span>YOUR ORDER</span>
-
                 <h2>Order Summary</h2>
               </div>
 
               <button
                 type="button"
                 className="ccq-close"
-                onClick={closeCart}
+                onClick={() => setShowCart(false)}
                 aria-label="Close order summary"
               >
                 ×
               </button>
             </div>
 
-            {/* EMPTY ORDER */}
-
             {cart.length === 0 ? (
               <div className="ccq-empty">
-                <div className="ccq-empty-icon">
-                  🛒
-                </div>
-
-                <h3>
-                  Your order is empty
-                </h3>
-
-                <p>
-                  Add products to your order
-                  to continue.
-                </p>
+                <div className="ccq-empty-icon">🛒</div>
+                <h3>Your order is empty</h3>
+                <p>Add products to your order to continue.</p>
               </div>
             ) : (
               <>
-                {/* CART ITEMS */}
-
                 <div className="ccq-cart-items">
                   {cart.map((item) => (
-                    <div
-                      className="ccq-cart-item"
-                      key={item.id}
-                    >
+                    <div className="ccq-cart-item" key={item.id}>
                       <img
                         src={item.image}
-                        alt={item.name}
+                        alt={item.name || "Product"}
                       />
 
                       <div className="ccq-cart-item-info">
-                        <h3>{item.name}</h3>
-
-                        <span>
-                          {formatPrice(item.price)}{" "}
-                          / {item.unit}
-                        </span>
+                        <h3>{item.name || "Product"}</h3>
+                        <span>{item.unit || "Unit"}</span>
 
                         <div className="ccq-quantity">
                           <button
@@ -819,31 +714,29 @@ const HygieneSupplies = () => {
                             onClick={() =>
                               updateQuantity(
                                 item.id,
-                                Number(
-                                  item.quantity
-                                ) - 1
+                                Number(item.quantity) - 1
                               )
                             }
-                            aria-label={`Decrease quantity of ${item.name}`}
+                            aria-label={`Decrease ${
+                              item.name || "product"
+                            } quantity`}
                           >
                             −
                           </button>
 
-                          <strong>
-                            {item.quantity}
-                          </strong>
+                          <strong>{item.quantity}</strong>
 
                           <button
                             type="button"
                             onClick={() =>
                               updateQuantity(
                                 item.id,
-                                Number(
-                                  item.quantity
-                                ) + 1
+                                Number(item.quantity) + 1
                               )
                             }
-                            aria-label={`Increase quantity of ${item.name}`}
+                            aria-label={`Increase ${
+                              item.name || "product"
+                            } quantity`}
                           >
                             +
                           </button>
@@ -853,9 +746,7 @@ const HygieneSupplies = () => {
                       <button
                         type="button"
                         className="ccq-remove"
-                        onClick={() =>
-                          removeFromCart(item.id)
-                        }
+                        onClick={() => removeFromCart(item.id)}
                       >
                         Remove
                       </button>
@@ -863,20 +754,10 @@ const HygieneSupplies = () => {
                   ))}
                 </div>
 
-                {/* TOTAL */}
-
                 <div className="ccq-cart-footer">
                   <div className="ccq-total">
-                    <span>
-                      Estimated Total
-                    </span>
-
-                    <strong>
-                      ₹
-                      {cartTotal.toLocaleString(
-                        "en-IN"
-                      )}
-                    </strong>
+                    <span>Products in your order</span>
+                    <strong>{cartCount}</strong>
                   </div>
 
                   <button
@@ -888,14 +769,10 @@ const HygieneSupplies = () => {
                   </button>
 
                   <div className="ccq-no-payment">
-                    <strong>
-                      No Online Payment
-                    </strong>
-
+                    <strong>Order Request</strong>
                     <span>
-                      Submit your order request
-                      and our team will contact
-                      you for confirmation.
+                      Submit your request and our team will contact
+                      you to confirm the details.
                     </span>
                   </div>
                 </div>
@@ -905,15 +782,8 @@ const HygieneSupplies = () => {
         </div>
       )}
 
-      {/* =====================================================
-          CUSTOMER DETAILS
-          ===================================================== */}
-
       {showCheckout && (
-        <div
-          className="ccq-overlay"
-          role="presentation"
-        >
+        <div className="ccq-overlay" role="presentation">
           <div
             className="ccq-checkout"
             role="dialog"
@@ -923,7 +793,7 @@ const HygieneSupplies = () => {
             <button
               type="button"
               className="ccq-close"
-              onClick={closeCheckout}
+              onClick={() => !loading && setShowCheckout(false)}
               disabled={loading}
               aria-label="Close customer details"
             >
@@ -932,58 +802,39 @@ const HygieneSupplies = () => {
 
             <div className="ccq-checkout-heading">
               <span>FINAL STEP</span>
-
               <h2>Customer Details</h2>
-
               <p>
-                Enter your details and submit
-                your order request. No online
-                payment is required.
+                Enter your details and submit your order request.
               </p>
             </div>
 
-            <form
-              className="ccq-form"
-              onSubmit={submitOrder}
-            >
+            <form className="ccq-form" onSubmit={submitOrder}>
               <div className="ccq-form-grid">
-
-                {/* NAME */}
-
                 <div className="ccq-field">
-                  <label htmlFor="cnc-hygiene-name">
+                  <label htmlFor="hygiene-name">
                     Full Name *
                   </label>
-
                   <input
-                    id="cnc-hygiene-name"
-                    type="text"
+                    id="hygiene-name"
                     name="name"
                     value={customer.name}
-                    onChange={
-                      handleCustomerChange
-                    }
+                    onChange={handleCustomerChange}
                     placeholder="Enter your full name"
                     autoComplete="name"
                     required
                   />
                 </div>
 
-                {/* PHONE */}
-
                 <div className="ccq-field">
-                  <label htmlFor="cnc-hygiene-phone">
+                  <label htmlFor="hygiene-phone">
                     Phone Number *
                   </label>
-
                   <input
-                    id="cnc-hygiene-phone"
+                    id="hygiene-phone"
                     type="tel"
                     name="phone"
                     value={customer.phone}
-                    onChange={
-                      handleCustomerChange
-                    }
+                    onChange={handleCustomerChange}
                     placeholder="Enter your phone number"
                     autoComplete="tel"
                     inputMode="tel"
@@ -991,128 +842,78 @@ const HygieneSupplies = () => {
                   />
                 </div>
 
-                {/* EMAIL */}
-
                 <div className="ccq-field">
-                  <label htmlFor="cnc-hygiene-email">
+                  <label htmlFor="hygiene-email">
                     Email Address
                   </label>
-
                   <input
-                    id="cnc-hygiene-email"
+                    id="hygiene-email"
                     type="email"
                     name="email"
                     value={customer.email}
-                    onChange={
-                      handleCustomerChange
-                    }
+                    onChange={handleCustomerChange}
                     placeholder="Enter your email"
                     autoComplete="email"
                   />
                 </div>
 
-                {/* COMPANY */}
-
                 <div className="ccq-field">
-                  <label htmlFor="cnc-hygiene-company">
+                  <label htmlFor="hygiene-company">
                     Company / Organization
                   </label>
-
                   <input
-                    id="cnc-hygiene-company"
-                    type="text"
+                    id="hygiene-company"
                     name="company"
                     value={customer.company}
-                    onChange={
-                      handleCustomerChange
-                    }
+                    onChange={handleCustomerChange}
                     placeholder="Company name"
                     autoComplete="organization"
                   />
                 </div>
               </div>
 
-              {/* LOCATION */}
-
               <div className="ccq-field">
-                <label htmlFor="cnc-hygiene-location">
+                <label htmlFor="hygiene-location">
                   Delivery / Location *
                 </label>
-
                 <textarea
-                  id="cnc-hygiene-location"
+                  id="hygiene-location"
                   name="location"
                   value={customer.location}
-                  onChange={
-                    handleCustomerChange
-                  }
+                  onChange={handleCustomerChange}
                   placeholder="Enter delivery location / address"
-                  rows="3"
+                  rows={3}
                   autoComplete="street-address"
                   required
                 />
               </div>
 
-              {/* NOTES */}
-
               <div className="ccq-field">
-                <label htmlFor="cnc-hygiene-notes">
+                <label htmlFor="hygiene-notes">
                   Additional Notes
                 </label>
-
                 <textarea
-                  id="cnc-hygiene-notes"
+                  id="hygiene-notes"
                   value={notes}
-                  onChange={(event) =>
-                    setNotes(
-                      event.target.value
-                    )
-                  }
+                  onChange={(event) => setNotes(event.target.value)}
                   placeholder="Any specific requirements?"
-                  rows="4"
+                  rows={3}
                 />
               </div>
-
-              {/* FINAL SUMMARY */}
 
               <div className="ccq-final-summary">
                 <div>
                   <span>Products</span>
-
-                  <strong>
-                    {cartCount}
-                  </strong>
-                </div>
-
-                <div>
-                  <span>
-                    Estimated Total
-                  </span>
-
-                  <strong>
-                    ₹
-                    {cartTotal.toLocaleString(
-                      "en-IN"
-                    )}
-                  </strong>
+                  <strong>{cartCount}</strong>
                 </div>
               </div>
-
-              {/* NO PAYMENT */}
 
               <div className="ccq-no-payment">
-                <strong>
-                  No Online Payment
-                </strong>
-
+                <strong>Order Request</strong>
                 <span>
-                  Submit your order request
-                  and our team will contact
-                  you for confirmation.
+                  Our team will contact you to confirm your request.
                 </span>
               </div>
-
-              {/* SUBMIT */}
 
               <button
                 type="submit"
@@ -1128,39 +929,23 @@ const HygieneSupplies = () => {
         </div>
       )}
 
-      {/* =====================================================
-          SUCCESS
-          ===================================================== */}
-
       {orderSuccess && (
-        <div
-          className="ccq-overlay"
-          role="presentation"
-        >
+        <div className="ccq-overlay" role="presentation">
           <div
             className="ccq-success"
             role="dialog"
             aria-modal="true"
             aria-label="Order submitted successfully"
           >
-            <div className="ccq-success-icon">
-              ✓
-            </div>
-
-            <span>
-              ORDER RECEIVED
-            </span>
-
+            <div className="ccq-success-icon">✓</div>
+            <span>ORDER RECEIVED</span>
             <h2>Thank You!</h2>
-
             <p>
-              Your order request has been
-              submitted successfully.
+              Your order request has been submitted successfully.
             </p>
 
             <div className="ccq-order-number">
               <small>Order ID</small>
-
               <strong>
                 {orderSuccess.orderId ||
                   orderSuccess.order?.id ||
@@ -1169,15 +954,13 @@ const HygieneSupplies = () => {
             </div>
 
             <p>
-              Our team will contact you to
-              confirm availability, delivery
-              and final billing.
+              Our team will contact you to confirm your request.
             </p>
 
             <button
               type="button"
               className="ccq-success-button"
-              onClick={closeSuccess}
+              onClick={() => setOrderSuccess(null)}
             >
               Continue Shopping
             </button>
@@ -1186,6 +969,4 @@ const HygieneSupplies = () => {
       )}
     </section>
   );
-};
-
-export default HygieneSupplies;
+}

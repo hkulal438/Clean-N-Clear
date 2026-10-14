@@ -1,96 +1,108 @@
-import React, { useEffect, useState } from "react";
+
+import { useCallback, useEffect, useState } from "react";
 import "./CleaningChemicals.css";
 
-import HighSpeedPolisher from "../../images/ProffessionalEquipment/HIGH SPEED POLISHER.png";
-import MiniRideOnSweeper from "../../images/ProffessionalEquipment/Mini Ride on Sweeper BOL.png";
+import Product3LayerServiceCart from "../../images/ProffessionalEquipment/3_Layer_Service_Cart.png";
+import ABSJRTDispenser from "../../images/ProffessionalEquipment/ABS_JRT_Dispenser.png";
+import ABSMFoldDispenser1 from "../../images/ProffessionalEquipment/ABS_M_Fold_Dispenser_1.png";
+import ABSMFoldDispenser2 from "../../images/ProffessionalEquipment/ABS_M_Fold_Dispenser_2.png";
+import AerosolDispenser from "../../images/ProffessionalEquipment/Aerosel dispenser.png";
+import AirRevitalizer from "../../images/ProffessionalEquipment/Air revatilizer.png";
+import BioMedicalWasteTrolley from "../../images/ProffessionalEquipment/Bio_Medical_Waste_Trolley.png";
+import FacialTissueDispenser from "../../images/ProffessionalEquipment/Facial_Tissue_Dispenser.png";
+import HIGHSPEEDPOLISHER from "../../images/ProffessionalEquipment/HIGH SPEED POLISHER.png";
+import HRTDispenser from "../../images/ProffessionalEquipment/HRT_Dispenser.png";
+import JanitorCart from "../../images/ProffessionalEquipment/Janitor_Cart.png";
+import KitchenTowelDispenser from "../../images/ProffessionalEquipment/Kitchen_Towel_Dispenser.png";
+import LFoldTissueDispenser from "../../images/ProffessionalEquipment/L_Fold_Tissue_Dispenser.png";
+import LCDAreoselDispenser from "../../images/ProffessionalEquipment/LCD Areosel dispenser.png";
+import MiniRideOnSweeperBOL from "../../images/ProffessionalEquipment/Mini Ride on Sweeper BOL.png";
 import MiniScrubberCable from "../../images/ProffessionalEquipment/Mini Scrubber (Cable).png";
-import RideOnScrubberDryer from "../../images/ProffessionalEquipment/Ride on Scrubber Dryer 110L.png";
-import RideOnSweeper from "../../images/ProffessionalEquipment/Ride on Sweeper 18CL.png";
-import SteamVacuumCleaner from "../../images/ProffessionalEquipment/STEAM VACUUM CLEANER.png";
+import MultiFunctionalServiceCart from "../../images/ProffessionalEquipment/Multi functional service cart.png";
+import MultiFunctionalJanitorialCart from "../../images/ProffessionalEquipment/Multi_Functional_Janitorial_Cart.png";
+import PaperCupDispenser from "../../images/ProffessionalEquipment/Paper cup dispenser.png";
+import PlatformTrolley from "../../images/ProffessionalEquipment/Platform_Trolley.png";
+import PopUpTissueDispenser from "../../images/ProffessionalEquipment/Pop_Up_Tissue_Dispenser.png";
+import RideOnScrubberDryer110L from "../../images/ProffessionalEquipment/Ride on Scrubber Dryer 110L.png";
+import RideOnSweeper18CL from "../../images/ProffessionalEquipment/Ride on Sweeper 18CL.png";
+import SoapDispenser1 from "../../images/ProffessionalEquipment/Soap_Dispenser_1.png";
+import SoapDispenser2 from "../../images/ProffessionalEquipment/Soap_Dispenser_2.png";
+import SoapDispenser3 from "../../images/ProffessionalEquipment/Soap_Dispenser_3.png";
+import SoapDispenser4 from "../../images/ProffessionalEquipment/Soap_Dispenser_4.png";
+import SoapDispenser5 from "../../images/ProffessionalEquipment/Soap_Dispenser_5.png";
+import Sponge from "../../images/ProffessionalEquipment/Sponge.png";
+import SSJRTDispenser from "../../images/ProffessionalEquipment/SS_JRT_Dispenser.png";
+import SSMFoldDispenser2 from "../../images/ProffessionalEquipment/SS_M_Fold_Dispenser_2.png";
+import SSMFoldDispenser from "../../images/ProffessionalEquipment/SS_M_Fold_Dispenser.png";
+import SSSoapDispenser from "../../images/ProffessionalEquipment/SS_Soap_Dispenser.png";
+import SSToiletRollHolder from "../../images/ProffessionalEquipment/SS_Toilet_Roll_Holder.png";
+import STEAMVACUUMCLEANER from "../../images/ProffessionalEquipment/STEAM VACUUM CLEANER.png";
+import TwinSoapDispenser from "../../images/ProffessionalEquipment/Twin soap dispenser.png";
+import UrinalScreen1 from "../../images/ProffessionalEquipment/Urinal screen-1.png";
+import UrinalScreen from "../../images/ProffessionalEquipment/Urinal screen.png";
+import VapourizerOil from "../../images/ProffessionalEquipment/Vapourizer oil.png";
+import WringerTrolley20L from "../../images/ProffessionalEquipment/Wringer_Trolley_20L.png";
+import WringerTrolley40L from "../../images/ProffessionalEquipment/Wringer_Trolley_40L.png";
+import WringerTrolley60L from "../../images/ProffessionalEquipment/Wringer_Trolley_60L.png";
 
 import {
   getOrderCart,
   updateOrderCart,
 } from "../../utils/OrderCart";
 
-const API_URL =
-  import.meta.env.VITE_API_URL || "http://localhost:5000";
-
-/* =========================================================
-   PRODUCTS
-   ========================================================= */
+const API_URL = (
+  import.meta.env.VITE_API_URL || "http://localhost:5000"
+).replace(/\/+$/, "");
 
 const products = [
-  {
-    id: "high-speed-polisher",
-    name: "High Speed Polisher",
-    category: "Professional Equipment",
-    price: 18500,
-    unit: "Unit",
-    image: HighSpeedPolisher,
-    description:
-      "High speed floor polishing machine suitable for professional cleaning and floor maintenance.",
-  },
-
-  {
-    id: "mini-ride-on-sweeper-bol",
-    name: "Mini Ride on Sweeper BOL",
-    category: "Professional Equipment",
-    price: 125000,
-    unit: "Unit",
-    image: MiniRideOnSweeper,
-    description:
-      "Compact ride-on sweeping machine designed for efficient cleaning of commercial and institutional spaces.",
-  },
-
-  {
-    id: "mini-scrubber-cable",
-    name: "Mini Scrubber (Cable)",
-    category: "Professional Equipment",
-    price: 45000,
-    unit: "Unit",
-    image: MiniScrubberCable,
-    description:
-      "Compact floor scrubbing machine suitable for effective cleaning of different floor surfaces.",
-  },
-
-  {
-    id: "ride-on-scrubber-dryer-110l",
-    name: "Ride on Scrubber Dryer 110L",
-    category: "Professional Equipment",
-    price: 285000,
-    unit: "Unit",
-    image: RideOnScrubberDryer,
-    description:
-      "Professional ride-on scrubber dryer designed for efficient large-area floor cleaning.",
-  },
-
-  {
-    id: "ride-on-sweeper-18cl",
-    name: "Ride on Sweeper 18CL",
-    category: "Professional Equipment",
-    price: 225000,
-    unit: "Unit",
-    image: RideOnSweeper,
-    description:
-      "Powerful ride-on sweeping equipment suitable for commercial and institutional cleaning requirements.",
-  },
-
-  {
-    id: "steam-vacuum-cleaner",
-    name: "Steam Vacuum Cleaner",
-    category: "Professional Equipment",
-    price: 65000,
-    unit: "Unit",
-    image: SteamVacuumCleaner,
-    description:
-      "Professional steam vacuum cleaner designed for deep cleaning and effective hygiene maintenance.",
-  },
-];
-
-/* =========================================================
-   EMPTY CUSTOMER
-   ========================================================= */
+  { id: "3-layer-service-cart", name: "3 Layer Service Cart", image: Product3LayerServiceCart },
+  { id: "abs-jrt-dispenser", name: "ABS JRT Dispenser", image: ABSJRTDispenser },
+  { id: "abs-m-fold-dispenser-1", name: "ABS M Fold Dispenser 1", image: ABSMFoldDispenser1 },
+  { id: "abs-m-fold-dispenser-2", name: "ABS M Fold Dispenser 2", image: ABSMFoldDispenser2 },
+  { id: "aerosol-dispenser", name: "Aerosol dispenser", image: AerosolDispenser },
+  { id: "air-revitalizer", name: "Air revitalizer", image: AirRevitalizer },
+  { id: "bio-medical-waste-trolley", name: "Bio Medical Waste Trolley", image: BioMedicalWasteTrolley },
+  { id: "facial-tissue-dispenser", name: "Facial Tissue Dispenser", image: FacialTissueDispenser },
+  { id: "high-speed-polisher", name: "HIGH SPEED POLISHER", image: HIGHSPEEDPOLISHER },
+  { id: "hrt-dispenser", name: "HRT Dispenser", image: HRTDispenser },
+  { id: "janitor-cart", name: "Janitor Cart", image: JanitorCart },
+  { id: "kitchen-towel-dispenser", name: "Kitchen Towel Dispenser", image: KitchenTowelDispenser },
+  { id: "l-fold-tissue-dispenser", name: "L Fold Tissue Dispenser", image: LFoldTissueDispenser },
+  { id: "lcd-areosel-dispenser", name: "LCD Areosel dispenser", image: LCDAreoselDispenser },
+  { id: "mini-ride-on-sweeper-bol", name: "Mini Ride on Sweeper BOL", image: MiniRideOnSweeperBOL },
+  { id: "mini-scrubber-cable", name: "Mini Scrubber (Cable)", image: MiniScrubberCable },
+  { id: "multi-functional-service-cart", name: "Multi functional service cart", image: MultiFunctionalServiceCart },
+  { id: "multi-functional-janitorial-cart", name: "Multi Functional Janitorial Cart", image: MultiFunctionalJanitorialCart },
+  { id: "paper-cup-dispenser", name: "Paper cup dispenser", image: PaperCupDispenser },
+  { id: "platform-trolley", name: "Platform Trolley", image: PlatformTrolley },
+  { id: "pop-up-tissue-dispenser", name: "Pop Up Tissue Dispenser", image: PopUpTissueDispenser },
+  { id: "ride-on-scrubber-dryer-110l", name: "Ride on Scrubber Dryer 110L", image: RideOnScrubberDryer110L },
+  { id: "ride-on-sweeper-18cl", name: "Ride on Sweeper 18CL", image: RideOnSweeper18CL },
+  { id: "soap-dispenser-1", name: "Soap Dispenser 1", image: SoapDispenser1 },
+  { id: "soap-dispenser-2", name: "Soap Dispenser 2", image: SoapDispenser2 },
+  { id: "soap-dispenser-3", name: "Soap Dispenser 3", image: SoapDispenser3 },
+  { id: "soap-dispenser-4", name: "Soap Dispenser 4", image: SoapDispenser4 },
+  { id: "soap-dispenser-5", name: "Soap Dispenser 5", image: SoapDispenser5 },
+  { id: "sponge", name: "Sponge", image: Sponge },
+  { id: "ss-jrt-dispenser", name: "SS JRT Dispenser", image: SSJRTDispenser },
+  { id: "ss-m-fold-dispenser-2", name: "SS M Fold Dispenser 2", image: SSMFoldDispenser2 },
+  { id: "ss-m-fold-dispenser", name: "SS M Fold Dispenser", image: SSMFoldDispenser },
+  { id: "ss-soap-dispenser", name: "SS Soap Dispenser", image: SSSoapDispenser },
+  { id: "ss-toilet-roll-holder", name: "SS Toilet Roll Holder", image: SSToiletRollHolder },
+  { id: "steam-vacuum-cleaner", name: "STEAM VACUUM CLEANER", image: STEAMVACUUMCLEANER },
+  { id: "twin-soap-dispenser", name: "Twin soap dispenser", image: TwinSoapDispenser },
+  { id: "urinal-screen-1", name: "Urinal screen-1", image: UrinalScreen1 },
+  { id: "urinal-screen", name: "Urinal screen", image: UrinalScreen },
+  { id: "vapourizer-oil", name: "Vapourizer oil", image: VapourizerOil },
+  { id: "wringer-trolley-20l", name: "Wringer Trolley 20L", image: WringerTrolley20L },
+  { id: "wringer-trolley-40l", name: "Wringer Trolley 40L", image: WringerTrolley40L },
+  { id: "wringer-trolley-60l", name: "Wringer Trolley 60L", image: WringerTrolley60L },
+].map((product) => ({
+  ...product,
+  category: "Professional Equipment",
+  unit: "Unit",
+  description: `${product.name} for professional cleaning, hygiene, and facility maintenance.`,
+}));
 
 const emptyCustomer = {
   name: "",
@@ -100,93 +112,88 @@ const emptyCustomer = {
   location: "",
 };
 
-/* =========================================================
-   COMPONENT
-   ========================================================= */
+const readJsonResponse = async (response) => {
+  const text = await response.text();
 
-const ProffessionalEquiment = () => {
+  if (!text) return {};
+
+  try {
+    return JSON.parse(text);
+  } catch {
+    throw new Error(
+      `The server returned an invalid response (${response.status}).`
+    );
+  }
+};
+
+const ProfessionalEquipment = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
-
-  /* =======================================================
-     SHARED ORDER CART
-     ======================================================= */
-
-  const [cart, setCart] = useState(() => getOrderCart());
+  const [cart, setCart] = useState(() => {
+    const savedCart = getOrderCart();
+    return Array.isArray(savedCart) ? savedCart : [];
+  });
 
   const [showCart, setShowCart] = useState(false);
-
   const [showCheckout, setShowCheckout] = useState(false);
-
   const [orderSuccess, setOrderSuccess] = useState(null);
-
   const [loading, setLoading] = useState(false);
-
-  const [orderedQuantities, setOrderedQuantities] =
-    useState({});
-
-  const [
-    loadingOrderedQuantities,
-    setLoadingOrderedQuantities,
-  ] = useState(true);
-
-  const [customer, setCustomer] =
-    useState(emptyCustomer);
-
+  const [orderedQuantities, setOrderedQuantities] = useState({});
+  const [loadingOrderedQuantities, setLoadingOrderedQuantities] = useState(true);
+  const [customer, setCustomer] = useState(emptyCustomer);
   const [notes, setNotes] = useState("");
-
-  /* =========================================================
-     SAVE CART TO SHARED ORDER CART
-     ========================================================= */
 
   useEffect(() => {
     updateOrderCart(cart);
   }, [cart]);
 
-  /* =========================================================
-     LOAD ORDERED QUANTITIES
-     ========================================================= */
+  /* Safely load quantities without breaking the product page. */
+  const loadOrderedQuantities = useCallback(async () => {
+    setLoadingOrderedQuantities(true);
 
-  const loadOrderedQuantities = async () => {
     try {
-      setLoadingOrderedQuantities(true);
-
       const response = await fetch(
-        `${API_URL}/api/product-order-quantities`
+        `${API_URL}/api/product-order-quantities`,
+        {
+          method: "GET",
+          headers: { Accept: "application/json" },
+        }
       );
 
-      const data = await response.json();
+      const data = await readJsonResponse(response);
 
-      if (!response.ok || !data.success) {
+      if (!response.ok) {
         throw new Error(
           data.message ||
-            "Unable to load ordered quantities."
+            `Unable to load quantities (${response.status}).`
         );
       }
 
-      setOrderedQuantities(data.quantities || {});
-    } catch (error) {
-      console.error(
-        "Unable to load ordered quantities:",
-        error
-      );
+      if (data.success !== true) {
+        throw new Error(
+          data.message ||
+            "The quantities endpoint did not return success: true."
+        );
+      }
 
+      const quantities =
+        data.quantities &&
+        typeof data.quantities === "object" &&
+        !Array.isArray(data.quantities)
+          ? data.quantities
+          : {};
+
+      setOrderedQuantities(quantities);
+    } catch (error) {
+      console.error("Unable to load ordered quantities:", error);
       setOrderedQuantities({});
     } finally {
       setLoadingOrderedQuantities(false);
     }
-  };
-
-  /* =========================================================
-     LOAD ON PAGE OPEN
-     ========================================================= */
+  }, []);
 
   useEffect(() => {
     loadOrderedQuantities();
-  }, []);
-
-  /* =========================================================
-     BODY SCROLL LOCK
-     ========================================================= */
+  }, [loadOrderedQuantities]);
 
   useEffect(() => {
     const modalOpen =
@@ -195,75 +202,45 @@ const ProffessionalEquiment = () => {
       showCheckout ||
       Boolean(orderSuccess);
 
-    if (modalOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = modalOpen ? "hidden" : "";
 
     return () => {
       document.body.style.overflow = "";
     };
-  }, [
-    selectedProduct,
-    showCart,
-    showCheckout,
-    orderSuccess,
-  ]);
-
-  /* =========================================================
-     FORMAT PRICE
-     ========================================================= */
-
-  const formatPrice = (price) => {
-    return `₹${Number(price).toLocaleString("en-IN")}`;
-  };
-
-  /* =========================================================
-     ADD TO ORDER
-     ========================================================= */
+  }, [selectedProduct, showCart, showCheckout, orderSuccess]);
 
   const addToCart = (product) => {
     setCart((previousCart) => {
-      const existingProduct = previousCart.find(
+      const existing = previousCart.find(
         (item) => item.id === product.id
       );
 
-      if (existingProduct) {
+      if (existing) {
         return previousCart.map((item) =>
           item.id === product.id
-            ? {
-                ...item,
-                quantity:
-                  Number(item.quantity || 0) + 1,
-              }
+            ? { ...item, quantity: Number(item.quantity || 0) + 1 }
             : item
         );
       }
 
-      return [
-        ...previousCart,
-        {
-          ...product,
-          quantity: 1,
-        },
-      ];
+      return [...previousCart, { ...product, quantity: 1 }];
     });
 
     setSelectedProduct(null);
+    setShowCheckout(false);
     setShowCart(true);
   };
 
-  /* =========================================================
-     UPDATE QUANTITY
-     ========================================================= */
+  const removeFromCart = (id) => {
+    setCart((previousCart) =>
+      previousCart.filter((item) => item.id !== id)
+    );
+  };
 
   const updateQuantity = (id, quantity) => {
     const nextQuantity = Number(quantity);
 
-    if (!Number.isFinite(nextQuantity)) {
-      return;
-    }
+    if (!Number.isFinite(nextQuantity)) return;
 
     if (nextQuantity < 1) {
       removeFromCart(id);
@@ -273,71 +250,29 @@ const ProffessionalEquiment = () => {
     setCart((previousCart) =>
       previousCart.map((item) =>
         item.id === id
-          ? {
-              ...item,
-              quantity: nextQuantity,
-            }
+          ? { ...item, quantity: Math.floor(nextQuantity) }
           : item
       )
     );
   };
 
-  /* =========================================================
-     REMOVE PRODUCT
-     ========================================================= */
-
-  const removeFromCart = (id) => {
-    setCart((previousCart) =>
-      previousCart.filter(
-        (item) => item.id !== id
-      )
-    );
-  };
-
-  /* =========================================================
-     CART COUNT
-     ========================================================= */
-
   const cartCount = cart.reduce(
-    (total, item) =>
-      total + Number(item.quantity || 0),
+    (total, item) => total + Number(item.quantity || 0),
     0
   );
-
-  /* =========================================================
-     CART TOTAL
-     ========================================================= */
-
-  const cartTotal = cart.reduce(
-    (total, item) =>
-      total +
-      Number(item.price || 0) *
-        Number(item.quantity || 0),
-    0
-  );
-
-  /* =========================================================
-     CUSTOMER INPUT
-     ========================================================= */
 
   const handleCustomerChange = (event) => {
     const { name, value } = event.target;
 
-    setCustomer((previousCustomer) => ({
-      ...previousCustomer,
+    setCustomer((previous) => ({
+      ...previous,
       [name]: value,
     }));
   };
 
-  /* =========================================================
-     OPEN CHECKOUT
-     ========================================================= */
-
   const openCheckout = () => {
     if (cart.length === 0) {
-      alert(
-        "Please add at least one product to your order."
-      );
+      window.alert("Please add at least one product to your order.");
       return;
     }
 
@@ -345,17 +280,13 @@ const ProffessionalEquiment = () => {
     setShowCheckout(true);
   };
 
-  /* =========================================================
-     SUBMIT ORDER
-     ========================================================= */
-
   const submitOrder = async (event) => {
     event.preventDefault();
 
+    if (loading) return;
+
     if (cart.length === 0) {
-      alert(
-        "Please add at least one product to your order."
-      );
+      window.alert("Please add at least one product to your order.");
       return;
     }
 
@@ -365,136 +296,62 @@ const ProffessionalEquiment = () => {
     const company = customer.company.trim();
     const location = customer.location.trim();
 
-    /* -------------------------------------------------------
-       REQUIRED FIELDS
-       ------------------------------------------------------- */
-
     if (!name || !phone || !location) {
-      alert(
-        "Please enter your name, phone number and location."
-      );
+      window.alert("Please enter your name, phone number and location.");
       return;
     }
-
-    /* -------------------------------------------------------
-       PHONE VALIDATION
-       ------------------------------------------------------- */
 
     const phoneDigits = phone.replace(/\D/g, "");
 
-    if (
-      phoneDigits.length < 7 ||
-      phoneDigits.length > 15
-    ) {
-      alert(
-        "Please enter a valid phone number."
-      );
+    if (phoneDigits.length < 7 || phoneDigits.length > 15) {
+      window.alert("Please enter a valid phone number.");
       return;
     }
 
-    /* -------------------------------------------------------
-       EMAIL VALIDATION
-       ------------------------------------------------------- */
-
-    if (
-      email &&
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
-        email
-      )
-    ) {
-      alert(
-        "Please enter a valid email address."
-      );
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      window.alert("Please enter a valid email address.");
       return;
     }
 
     try {
       setLoading(true);
 
-      /* -----------------------------------------------------
-         SEND ONLY PRODUCT IDS + QUANTITIES
-         Backend calculates product information and prices.
-         ----------------------------------------------------- */
-
-      const orderItems = cart.map((item) => ({
+      const items = cart.map((item) => ({
         id: item.id,
         quantity: Number(item.quantity),
       }));
 
-      const response = await fetch(
-        `${API_URL}/api/order`,
-        {
-          method: "POST",
+      const response = await fetch(`${API_URL}/api/order`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          customer: { name, phone, email, company, location },
+          items,
+          notes: notes.trim(),
+        }),
+      });
 
-          headers: {
-            "Content-Type": "application/json",
-          },
+      const data = await readJsonResponse(response);
 
-          body: JSON.stringify({
-            customer: {
-              name,
-              phone,
-              email,
-              company,
-              location,
-            },
-
-            items: orderItems,
-
-            notes: notes.trim(),
-          }),
-        }
-      );
-
-      const data = await response.json();
-
-      if (!response.ok || !data.success) {
+      if (!response.ok || data.success !== true) {
         throw new Error(
-          data.message ||
-            "Unable to submit order."
+          data.message || "Unable to submit your order."
         );
       }
 
-      /* -----------------------------------------------------
-         SHOW SUCCESS
-         ----------------------------------------------------- */
-
       setOrderSuccess(data);
-
-      /* -----------------------------------------------------
-         CLEAR SHARED CART
-         ----------------------------------------------------- */
-
       setCart([]);
-
-      /* -----------------------------------------------------
-         CLEAR CUSTOMER DETAILS
-         ----------------------------------------------------- */
-
-      setCustomer({
-        ...emptyCustomer,
-      });
-
+      setCustomer({ ...emptyCustomer });
       setNotes("");
-
-      /* -----------------------------------------------------
-         CLOSE CHECKOUT
-         ----------------------------------------------------- */
-
       setShowCheckout(false);
-
-      /* -----------------------------------------------------
-         REFRESH ORDERED QUANTITIES
-         ----------------------------------------------------- */
 
       await loadOrderedQuantities();
     } catch (error) {
-      console.error(
-        "Order submission error:",
-        error
-      );
-
-      alert(
+      console.error("Order submission error:", error);
+      window.alert(
         error.message ||
           "Unable to submit the order. Please try again."
       );
@@ -503,64 +360,20 @@ const ProffessionalEquiment = () => {
     }
   };
 
-  /* =========================================================
-     CLOSE FUNCTIONS
-     ========================================================= */
-
-  const closeProductModal = () => {
-    setSelectedProduct(null);
-  };
-
-  const closeCart = () => {
-    setShowCart(false);
-  };
-
   const closeCheckout = () => {
-    if (loading) {
-      return;
-    }
-
-    setShowCheckout(false);
+    if (!loading) setShowCheckout(false);
   };
-
-  const closeSuccess = () => {
-    setOrderSuccess(null);
-  };
-
-  /* =========================================================
-     JSX
-     ========================================================= */
 
   return (
     <section className="ccq-section">
-
-      {/* =====================================================
-          PAGE HEADER
-          ===================================================== */}
-
       <div className="ccq-header">
-
-        <span className="ccq-label">
-          PROFESSIONAL EQUIPMENT
-        </span>
-
-        <h1 className="ccq-title">
-          Professional Cleaning Equipment
-        </h1>
-
+        <span className="ccq-label">PROFESSIONAL EQUIPMENT</span>
+        <h1 className="ccq-title">Professional Cleaning Equipment</h1>
         <p className="ccq-intro">
-          Explore our range of professional cleaning
-          equipment designed for commercial,
-          household and institutional cleaning
-          requirements.
+          Explore our range of professional cleaning equipment designed
+          for commercial, household and institutional cleaning requirements.
         </p>
-
       </div>
-
-
-      {/* =====================================================
-          MY ORDER BUTTON
-          ===================================================== */}
 
       <button
         type="button"
@@ -568,42 +381,21 @@ const ProffessionalEquiment = () => {
         onClick={() => setShowCart(true)}
         aria-label={`My Order - ${cartCount} items`}
       >
-        <span>
-          My Order
-        </span>
-
-        <strong>
-          {cartCount}
-        </strong>
+        <span>My Order</span>
+        <strong>{cartCount}</strong>
       </button>
 
-
-      {/* =====================================================
-          PRODUCT GRID
-          ===================================================== */}
-
       <div className="ccq-grid">
-
         {products.map((product) => {
           const orderedQuantity =
-            Number(
-              orderedQuantities[product.id]
-            ) || 0;
+            Number(orderedQuantities[product.id]) || 0;
 
           return (
-            <article
-              className="ccq-card"
-              key={product.id}
-            >
-
-              {/* IMAGE */}
-
+            <article className="ccq-card" key={product.id}>
               <button
                 type="button"
                 className="ccq-image-button"
-                onClick={() =>
-                  setSelectedProduct(product)
-                }
+                onClick={() => setSelectedProduct(product)}
                 aria-label={`View ${product.name}`}
               >
                 <img
@@ -614,262 +406,129 @@ const ProffessionalEquiment = () => {
                 />
               </button>
 
-
-              {/* CONTENT */}
-
               <div className="ccq-card-content">
+                <span className="ccq-category">{product.category}</span>
+                <h2 className="ccq-product-name">{product.name}</h2>
+                <div className="ccq-unit">{product.unit}</div>
 
-                <span className="ccq-category">
-                  {product.category}
-                </span>
-
-                <h2 className="ccq-product-name">
-                  {product.name}
-                </h2>
-
-                <div className="ccq-price">
-                  {formatPrice(product.price)}
-                </div>
-
-                <div className="ccq-unit">
-                  {product.unit}
-                </div>
-
-
-                {/* ORDERED QUANTITY */}
-
-                {!loadingOrderedQuantities &&
-                  orderedQuantity > 0 && (
-                    <div className="ccq-ordered">
-                      Ordered: {orderedQuantity}
-                    </div>
-                  )}
-
-
-                {/* ADD TO ORDER */}
+                {!loadingOrderedQuantities && orderedQuantity > 0 && (
+                  <div className="ccq-ordered">
+                    Ordered: {orderedQuantity}
+                  </div>
+                )}
 
                 <button
                   type="button"
                   className="ccq-add-button"
-                  onClick={() =>
-                    addToCart(product)
-                  }
+                  onClick={() => addToCart(product)}
                 >
                   Add to Order
                 </button>
-
               </div>
-
             </article>
           );
         })}
-
       </div>
-
-
-      {/* =====================================================
-          PRODUCT DETAILS MODAL
-          ===================================================== */}
 
       {selectedProduct && (
         <div
           className="ccq-overlay"
-          onClick={closeProductModal}
+          onClick={() => setSelectedProduct(null)}
           role="presentation"
         >
-
           <div
             className="ccq-product-modal"
-            onClick={(event) =>
-              event.stopPropagation()
-            }
+            onClick={(event) => event.stopPropagation()}
             role="dialog"
             aria-modal="true"
             aria-label={selectedProduct.name}
           >
-
             <button
               type="button"
               className="ccq-close"
-              onClick={closeProductModal}
+              onClick={() => setSelectedProduct(null)}
               aria-label="Close product details"
             >
               ×
             </button>
 
-
-            {/* IMAGE */}
-
             <div className="ccq-modal-image-wrap">
-
               <img
                 src={selectedProduct.image}
                 alt={selectedProduct.name}
                 className="ccq-modal-image"
               />
-
             </div>
 
-
-            {/* DETAILS */}
-
             <div className="ccq-modal-content">
-
               <span className="ccq-category">
                 {selectedProduct.category}
               </span>
-
-              <h2>
-                {selectedProduct.name}
-              </h2>
-
-              <div className="ccq-modal-price">
-                {formatPrice(
-                  selectedProduct.price
-                )}
-              </div>
-
-              <p>
-                {selectedProduct.description}
-              </p>
+              <h2>{selectedProduct.name}</h2>
+              <p>{selectedProduct.description}</p>
 
               <div className="ccq-modal-unit">
-
-                <span>
-                  Pack / Unit:
-                </span>
-
-                <strong>
-                  {selectedProduct.unit}
-                </strong>
-
+                <span>Pack / Unit:</span>
+                <strong>{selectedProduct.unit}</strong>
               </div>
 
               <button
                 type="button"
                 className="ccq-add-large"
-                onClick={() =>
-                  addToCart(selectedProduct)
-                }
+                onClick={() => addToCart(selectedProduct)}
               >
                 Add to Order
               </button>
-
             </div>
-
           </div>
-
         </div>
       )}
-
-
-      {/* =====================================================
-          ORDER SUMMARY
-          ===================================================== */}
 
       {showCart && (
         <div
           className="ccq-overlay"
-          onClick={closeCart}
+          onClick={() => setShowCart(false)}
           role="presentation"
         >
-
           <aside
             className="ccq-cart-drawer"
-            onClick={(event) =>
-              event.stopPropagation()
-            }
+            onClick={(event) => event.stopPropagation()}
             role="dialog"
             aria-modal="true"
             aria-label="Order Summary"
           >
-
-            {/* CART HEADER */}
-
             <div className="ccq-cart-header">
-
               <div>
-
-                <span>
-                  YOUR ORDER
-                </span>
-
-                <h2>
-                  Order Summary
-                </h2>
-
+                <span>YOUR ORDER</span>
+                <h2>Order Summary</h2>
               </div>
-
               <button
                 type="button"
                 className="ccq-close"
-                onClick={closeCart}
+                onClick={() => setShowCart(false)}
                 aria-label="Close order summary"
               >
                 ×
               </button>
-
             </div>
 
-
-            {/* EMPTY CART */}
-
             {cart.length === 0 ? (
-
               <div className="ccq-empty">
-
-                <div className="ccq-empty-icon">
-                  🛒
-                </div>
-
-                <h3>
-                  Your order is empty
-                </h3>
-
-                <p>
-                  Add products to your order
-                  to continue.
-                </p>
-
+                <div className="ccq-empty-icon">🛒</div>
+                <h3>Your order is empty</h3>
+                <p>Add products to your order to continue.</p>
               </div>
-
             ) : (
-
               <>
-
-                {/* CART ITEMS */}
-
                 <div className="ccq-cart-items">
-
                   {cart.map((item) => (
-
-                    <div
-                      className="ccq-cart-item"
-                      key={item.id}
-                    >
-
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                      />
-
+                    <div className="ccq-cart-item" key={item.id}>
+                      <img src={item.image} alt={item.name} />
 
                       <div className="ccq-cart-item-info">
-
-                        <h3>
-                          {item.name}
-                        </h3>
-
-                        <span>
-                          {formatPrice(item.price)}{" "}
-                          / {item.unit}
-                        </span>
-
-
-                        {/* QUANTITY */}
+                        <h3>{item.name}</h3>
 
                         <div className="ccq-quantity">
-
                           <button
                             type="button"
                             onClick={() =>
@@ -883,9 +542,7 @@ const ProffessionalEquiment = () => {
                             −
                           </button>
 
-                          <strong>
-                            {item.quantity}
-                          </strong>
+                          <strong>{item.quantity}</strong>
 
                           <button
                             type="button"
@@ -899,51 +556,21 @@ const ProffessionalEquiment = () => {
                           >
                             +
                           </button>
-
                         </div>
-
                       </div>
-
-
-                      {/* REMOVE */}
 
                       <button
                         type="button"
                         className="ccq-remove"
-                        onClick={() =>
-                          removeFromCart(item.id)
-                        }
+                        onClick={() => removeFromCart(item.id)}
                       >
                         Remove
                       </button>
-
                     </div>
-
                   ))}
-
                 </div>
 
-
-                {/* CART FOOTER */}
-
                 <div className="ccq-cart-footer">
-
-                  <div className="ccq-total">
-
-                    <span>
-                      Estimated Total
-                    </span>
-
-                    <strong>
-                      ₹
-                      {cartTotal.toLocaleString(
-                        "en-IN"
-                      )}
-                    </strong>
-
-                  </div>
-
-
                   <button
                     type="button"
                     className="ccq-checkout-button"
@@ -952,51 +579,28 @@ const ProffessionalEquiment = () => {
                     Continue to Customer Details
                   </button>
 
-
                   <div className="ccq-no-payment">
-
-                    <strong>
-                      No Online Payment
-                    </strong>
-
+                    <strong>No Online Payment</strong>
                     <span>
-                      Submit your order request
-                      and our team will contact
+                      Submit your order request and our team will contact
                       you for confirmation.
                     </span>
-
                   </div>
-
                 </div>
-
               </>
-
             )}
-
           </aside>
-
         </div>
       )}
 
-
-      {/* =====================================================
-          CUSTOMER DETAILS
-          ===================================================== */}
-
       {showCheckout && (
-
-        <div
-          className="ccq-overlay"
-          role="presentation"
-        >
-
+        <div className="ccq-overlay" role="presentation">
           <div
             className="ccq-checkout"
             role="dialog"
             aria-modal="true"
             aria-label="Customer Details"
           >
-
             <button
               type="button"
               className="ccq-close"
@@ -1007,47 +611,19 @@ const ProffessionalEquiment = () => {
               ×
             </button>
 
-
-            {/* HEADING */}
-
             <div className="ccq-checkout-heading">
-
-              <span>
-                FINAL STEP
-              </span>
-
-              <h2>
-                Customer Details
-              </h2>
-
+              <span>FINAL STEP</span>
+              <h2>Customer Details</h2>
               <p>
-                Enter your details and submit
-                your order request. No online
-                payment is required.
+                Enter your details and submit your order request.
+                No online payment is required.
               </p>
-
             </div>
 
-
-            {/* FORM */}
-
-            <form
-              className="ccq-form"
-              onSubmit={submitOrder}
-            >
-
-              {/* CUSTOMER GRID */}
-
+            <form className="ccq-form" onSubmit={submitOrder}>
               <div className="ccq-form-grid">
-
-                {/* NAME */}
-
                 <div className="ccq-field">
-
-                  <label htmlFor="cnc-equipment-name">
-                    Full Name *
-                  </label>
-
+                  <label htmlFor="cnc-equipment-name">Full Name *</label>
                   <input
                     id="cnc-equipment-name"
                     type="text"
@@ -1058,18 +634,10 @@ const ProffessionalEquiment = () => {
                     autoComplete="name"
                     required
                   />
-
                 </div>
 
-
-                {/* PHONE */}
-
                 <div className="ccq-field">
-
-                  <label htmlFor="cnc-equipment-phone">
-                    Phone Number *
-                  </label>
-
+                  <label htmlFor="cnc-equipment-phone">Phone Number *</label>
                   <input
                     id="cnc-equipment-phone"
                     type="tel"
@@ -1081,18 +649,10 @@ const ProffessionalEquiment = () => {
                     inputMode="tel"
                     required
                   />
-
                 </div>
 
-
-                {/* EMAIL */}
-
                 <div className="ccq-field">
-
-                  <label htmlFor="cnc-equipment-email">
-                    Email Address
-                  </label>
-
+                  <label htmlFor="cnc-equipment-email">Email Address</label>
                   <input
                     id="cnc-equipment-email"
                     type="email"
@@ -1102,18 +662,12 @@ const ProffessionalEquiment = () => {
                     placeholder="Enter your email"
                     autoComplete="email"
                   />
-
                 </div>
 
-
-                {/* COMPANY */}
-
                 <div className="ccq-field">
-
                   <label htmlFor="cnc-equipment-company">
                     Company / Organization
                   </label>
-
                   <input
                     id="cnc-equipment-company"
                     type="text"
@@ -1123,201 +677,102 @@ const ProffessionalEquiment = () => {
                     placeholder="Company name"
                     autoComplete="organization"
                   />
-
                 </div>
-
               </div>
 
-
-              {/* LOCATION */}
-
               <div className="ccq-field">
-
                 <label htmlFor="cnc-equipment-location">
                   Delivery / Location *
                 </label>
-
                 <textarea
                   id="cnc-equipment-location"
                   name="location"
                   value={customer.location}
                   onChange={handleCustomerChange}
                   placeholder="Enter delivery location / address"
-                  rows="3"
+                  rows={3}
                   autoComplete="street-address"
                   required
                 />
-
               </div>
 
-
-              {/* NOTES */}
-
               <div className="ccq-field">
-
-                <label htmlFor="cnc-equipment-notes">
-                  Additional Notes
-                </label>
-
+                <label htmlFor="cnc-equipment-notes">Additional Notes</label>
                 <textarea
                   id="cnc-equipment-notes"
                   value={notes}
-                  onChange={(event) =>
-                    setNotes(event.target.value)
-                  }
+                  onChange={(event) => setNotes(event.target.value)}
                   placeholder="Any specific requirements?"
-                  rows="4"
+                  rows={4}
                 />
-
               </div>
-
-
-              {/* FINAL SUMMARY */}
 
               <div className="ccq-final-summary">
-
                 <div>
-
-                  <span>
-                    Products
-                  </span>
-
-                  <strong>
-                    {cartCount}
-                  </strong>
-
+                  <span>Products</span>
+                  <strong>{cartCount}</strong>
                 </div>
-
-                <div>
-
-                  <span>
-                    Estimated Total
-                  </span>
-
-                  <strong>
-                    ₹
-                    {cartTotal.toLocaleString(
-                      "en-IN"
-                    )}
-                  </strong>
-
-                </div>
-
               </div>
-
-
-              {/* NO PAYMENT */}
 
               <div className="ccq-no-payment">
-
-                <strong>
-                  No Online Payment
-                </strong>
-
+                <strong>No Online Payment</strong>
                 <span>
-                  Submit your order request
-                  and our team will contact
-                  you for confirmation.
+                  Submit your order request and our team will contact you
+                  for confirmation.
                 </span>
-
               </div>
-
-
-              {/* SUBMIT */}
 
               <button
                 type="submit"
                 className="ccq-submit"
                 disabled={loading}
               >
-                {loading
-                  ? "Submitting Order..."
-                  : "Submit Order Request"}
+                {loading ? "Submitting Order..." : "Submit Order Request"}
               </button>
-
             </form>
-
           </div>
-
         </div>
       )}
 
-
-      {/* =====================================================
-          SUCCESS
-          ===================================================== */}
-
       {orderSuccess && (
-
-        <div
-          className="ccq-overlay"
-          role="presentation"
-        >
-
+        <div className="ccq-overlay" role="presentation">
           <div
             className="ccq-success"
             role="dialog"
             aria-modal="true"
             aria-label="Order submitted successfully"
           >
-
-            <div className="ccq-success-icon">
-              ✓
-            </div>
-
-            <span>
-              ORDER RECEIVED
-            </span>
-
-            <h2>
-              Thank You!
-            </h2>
-
-            <p>
-              Your order request has been
-              submitted successfully.
-            </p>
-
-
-            {/* ORDER ID */}
+            <div className="ccq-success-icon">✓</div>
+            <span>ORDER RECEIVED</span>
+            <h2>Thank You!</h2>
+            <p>Your order request has been submitted successfully.</p>
 
             <div className="ccq-order-number">
-
-              <small>
-                Order ID
-              </small>
-
+              <small>Order ID</small>
               <strong>
                 {orderSuccess.orderId ||
                   orderSuccess.order?.id ||
                   "Order received"}
               </strong>
-
             </div>
 
-
             <p>
-              Our team will contact you to
-              confirm availability, delivery
-              and final billing.
+              Our team will contact you to confirm availability,
+              delivery and final billing.
             </p>
-
 
             <button
               type="button"
               className="ccq-success-button"
-              onClick={closeSuccess}
+              onClick={() => setOrderSuccess(null)}
             >
               Continue Shopping
             </button>
-
           </div>
-
         </div>
       )}
-
     </section>
   );
 };
 
-export default ProffessionalEquiment;
+export default ProfessionalEquipment;

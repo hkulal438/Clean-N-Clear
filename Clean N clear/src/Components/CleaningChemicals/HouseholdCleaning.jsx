@@ -1,91 +1,113 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./CleaningChemicals.css";
-
-import CleanerProduct from "../../images/house/Cleaner Product.webp";
-import CleaningAcid from "../../images/house/Cleaning Acid 5Ltr.webp";
-import FloorCleaner from "../../images/house/Floor Cleaner.webp";
-import PushSweeper from "../../images/house/Push sweeper S 4 Twin.jpg";
-import SprayExtractionCleaner from "../../images/house/Spray extraction cleaner SE 4001.jpg";
-import ToiletCleaner from "../../images/house/Toilet Cleaner 5Ltr.webp";
 
 import {
   getOrderCart,
   updateOrderCart,
 } from "../../utils/OrderCart";
 
+// ================= REVA PRODUCT IMAGE IMPORTS =================
+
+import REVAABright from "../../images/house/REVA_A_BRIGHT.png";
+import REVAAC2 from "../../images/house/REVA_AC_2.png";
+import REVAAquaPlus from "../../images/house/REVA_AQUA_PLUS.png";
+import REVAAquaTab from "../../images/house/REVA_AQUA_TAB.png";
+import REVABioClean from "../../images/house/REVA_BIO_CLEAN.png";
+import REVACleanHard from "../../images/house/REVA_CLEAN_HARD.png";
+import REVACS04 from "../../images/house/REVA_CS_O4.png";
+import REVACS08 from "../../images/house/REVA_CS_O8.png";
+import REVADCL from "../../images/house/REVA_DCL.png";
+import REVADishODet from "../../images/house/REVA_DISH_O_DET.png";
+import RevaFCCS from "../../images/house/Reva_FCCS.png";
+import REVAFoamSoap from "../../images/house/REVA_FOAM_SOAP.png";
+import REVAFPM from "../../images/house/REVA_FPM.png";
+import REVAFreshAromaOil from "../../images/house/REVA_FRESH_AROMA_OIL.png";
+import REVAFreshBS from "../../images/house/REVA_FRESH_BS.png";
+import REVAHandDegreaser from "../../images/house/REVA_HAND_DEGREASER.png";
+import REVAHandSanitizer from "../../images/house/REVA_HAND_SANITIZER.png";
+import REVAHandPlus from "../../images/house/REVA_HANDPLUS.png";
+import REVAHD2 from "../../images/house/REVA_HD_2.png";
+import REVAHyg1 from "../../images/house/REVA_HYGI+.png";
+import REVAMDet from "../../images/house/REVA_M_DET.png";
+import REVAMRinse from "../../images/house/REVA_M_RINSE.png";
+import REVAMaklin from "../../images/house/REVA_MAKLIN.png";
+import REVAMD10 from "../../images/house/REVA_MD_10.png";
+import REVAMPC from "../../images/house/REVA_MPC.png";
+import RevaMultiDet from "../../images/house/Reva_Multi_Det.png";
+import REVANFC from "../../images/house/REVA_NFC.png";
+import REVAOCRPlus from "../../images/house/REVA_OCR_PLUS.png";
+import REVAPrimeDetFS from "../../images/house/REVA_PRIME_DET_FS.png";
+import REVAPrimeDet from "../../images/house/REVA_PRIME_DET.png";
+import REVAPurpleLeafBodyGel from "../../images/house/REVA_PURPLE_LEAF_BODY_GEL.png";
+import REVAPurpleLeafHandWash from "../../images/house/REVA_PURPLE_LEAF_HAND_WASH.png";
+import REVAPurpleLeafPremiumShampoo from "../../images/house/REVA_PURPLE_LEAF_PREMIUM_SHAMPOO.png";
+import REVAPurpleLeafSkinMoisturizer from "../../images/house/REVA_PURPLE_LEAF_SKIN_MOISTURIZER.png";
+import REVAQuatHyg from "../../images/house/REVA_QUAT_HYG.png";
+import REVARPA from "../../images/house/REVA_RPA.png";
+import REVASanicil from "../../images/house/REVA_SANICIL.png";
+import REVASense from "../../images/house/REVA_SENSE.png";
+import REVASoftHandwash from "../../images/house/REVA_SOFT_HANDWASH.png";
+import REVASolutionAB from "../../images/house/REVA_SOLUTION_A_B.png";
+import REVASparkle from "../../images/house/REVA_SPARKLE.png";
+import REVASpotter from "../../images/house/REVA_SPOTTER.png";
+import REVASSP from "../../images/house/REVA_SSP.png";
+import REVAStickOff from "../../images/house/REVA_STICK_OFF.png";
+import REVASVD from "../../images/house/REVA_SVD.png";
+import REVAWSR from "../../images/house/REVA_WSR.png";
+
 const API_URL =
   import.meta.env.VITE_API_URL || "http://localhost:5000";
 
-/* =========================================================
-   HOUSEHOLD CLEANING PRODUCTS
-   ========================================================= */
+// ================= PRODUCT LIST =================
 
 const products = [
-  {
-    id: "household-cleaner-product",
-    name: "Cleaner Product",
-    category: "Household Cleaning",
-    price: 350,
-    unit: "Unit",
-    image: CleanerProduct,
-    description:
-      "Household cleaning product suitable for everyday cleaning and maintaining a clean home environment.",
-  },
-  {
-    id: "household-cleaning-acid-5ltr",
-    name: "Cleaning Acid 5Ltr",
-    category: "Household Cleaning",
-    price: 650,
-    unit: "5 Litre",
-    image: CleaningAcid,
-    description:
-      "Cleaning solution suitable for household cleaning requirements and maintaining hygienic surfaces.",
-  },
-  {
-    id: "household-floor-cleaner",
-    name: "Floor Cleaner",
-    category: "Household Cleaning",
-    price: 450,
-    unit: "Unit",
-    image: FloorCleaner,
-    description:
-      "Floor cleaning solution suitable for regular household floor cleaning and maintenance.",
-  },
-  {
-    id: "push-sweeper-s4-twin",
-    name: "Push Sweeper S 4 Twin",
-    category: "Household Cleaning",
-    price: 18500,
-    unit: "Unit",
-    image: PushSweeper,
-    description:
-      "Compact manual push sweeper designed for convenient cleaning of outdoor and household areas.",
-  },
-  {
-    id: "spray-extraction-cleaner-se4001",
-    name: "Spray Extraction Cleaner SE 4001",
-    category: "Household Cleaning",
-    price: 28500,
-    unit: "Unit",
-    image: SprayExtractionCleaner,
-    description:
-      "Spray extraction cleaning machine suitable for deep cleaning carpets, upholstery and household surfaces.",
-  },
-  {
-    id: "household-toilet-cleaner-5ltr",
-    name: "Toilet Cleaner 5Ltr",
-    category: "Household Cleaning",
-    price: 600,
-    unit: "5 Litre",
-    image: ToiletCleaner,
-    description:
-      "Toilet cleaning solution designed for regular bathroom and toilet cleaning requirements.",
-  },
+  { id: "reva-a-bright", name: "REVA A Bright", image: REVAABright },
+  { id: "reva-ac-2", name: "REVA AC 2", image: REVAAC2 },
+  { id: "reva-aqua-plus", name: "REVA Aqua Plus", image: REVAAquaPlus },
+  { id: "reva-aqua-tab", name: "REVA Aqua Tab", image: REVAAquaTab },
+  { id: "reva-bio-clean", name: "REVA Bio Clean", image: REVABioClean },
+  { id: "reva-clean-hard", name: "REVA Clean Hard", image: REVACleanHard },
+  { id: "reva-cs-o4", name: "REVA CS O4", image: REVACS04 },
+  { id: "reva-cs-o8", name: "REVA CS O8", image: REVACS08 },
+  { id: "reva-dcl", name: "REVA DCL", image: REVADCL },
+  { id: "reva-dish-o-det", name: "REVA Dish O Det", image: REVADishODet },
+  { id: "reva-fccs", name: "REVA FCCS", image: RevaFCCS },
+  { id: "reva-foam-soap", name: "REVA Foam Soap", image: REVAFoamSoap },
+  { id: "reva-fpm", name: "REVA FPM", image: REVAFPM },
+  { id: "reva-fresh-aroma-oil", name: "REVA Fresh Aroma Oil", image: REVAFreshAromaOil },
+  { id: "reva-fresh-bs", name: "REVA Fresh BS", image: REVAFreshBS },
+  { id: "reva-hand-degreaser", name: "REVA Hand Degreaser", image: REVAHandDegreaser },
+  { id: "reva-hand-sanitizer", name: "REVA Hand Sanitizer", image: REVAHandSanitizer },
+  { id: "reva-handplus", name: "REVA Handplus", image: REVAHandPlus },
+  { id: "reva-hd-2", name: "REVA HD 2", image: REVAHD2 },
+  { id: "reva-hygi", name: "REVA HYGI+", image: REVAHyg1 },
+  { id: "reva-m-det", name: "REVA M Det", image: REVAMDet },
+  { id: "reva-m-rinse", name: "REVA M Rinse", image: REVAMRinse },
+  { id: "reva-maklin", name: "REVA Maklin", image: REVAMaklin },
+  { id: "reva-md-10", name: "REVA MD 10", image: REVAMD10 },
+  { id: "reva-mpc", name: "REVA MPC", image: REVAMPC },
+  { id: "reva-multi-det", name: "REVA Multi Det", image: RevaMultiDet },
+  { id: "reva-nfc", name: "REVA NFC", image: REVANFC },
+  { id: "reva-ocr-plus", name: "REVA OCR Plus", image: REVAOCRPlus },
+  { id: "reva-prime-det-fs", name: "REVA Prime Det FS", image: REVAPrimeDetFS },
+  { id: "reva-prime-det", name: "REVA Prime Det", image: REVAPrimeDet },
+  { id: "reva-purple-leaf-body-gel", name: "REVA Purple Leaf Body Gel", image: REVAPurpleLeafBodyGel },
+  { id: "reva-purple-leaf-hand-wash", name: "REVA Purple Leaf Hand Wash", image: REVAPurpleLeafHandWash },
+  { id: "reva-purple-leaf-premium-shampoo", name: "REVA Purple Leaf Premium Shampoo", image: REVAPurpleLeafPremiumShampoo },
+  { id: "reva-purple-leaf-skin-moisturizer", name: "REVA Purple Leaf Skin Moisturizer", image: REVAPurpleLeafSkinMoisturizer },
+  { id: "reva-quat-hyg", name: "REVA Quat Hyg", image: REVAQuatHyg },
+  { id: "reva-rpa", name: "REVA RPA", image: REVARPA },
+  { id: "reva-sanicil", name: "REVA Sanicil", image: REVASanicil },
+  { id: "reva-sense", name: "REVA Sense", image: REVASense },
+  { id: "reva-soft-handwash", name: "REVA Soft Handwash", image: REVASoftHandwash },
+  { id: "reva-solution-a-b", name: "REVA Solution A B", image: REVASolutionAB },
+  { id: "reva-sparkle", name: "REVA Sparkle", image: REVASparkle },
+  { id: "reva-spotter", name: "REVA Spotter", image: REVASpotter },
+  { id: "reva-ssp", name: "REVA SSP", image: REVASSP },
+  { id: "reva-stick-off", name: "REVA Stick Off", image: REVAStickOff },
+  { id: "reva-svd", name: "REVA SVD", image: REVASVD },
+  { id: "reva-wsr", name: "REVA WSR", image: REVAWSR },
 ];
-
-/* =========================================================
-   EMPTY CUSTOMER
-   ========================================================= */
 
 const emptyCustomer = {
   name: "",
@@ -95,90 +117,19 @@ const emptyCustomer = {
   location: "",
 };
 
-/* =========================================================
-   COMPONENT
-   ========================================================= */
-
 const HouseholdCleaning = () => {
-  const [selectedProduct, setSelectedProduct] = useState(null);
-
-  /* =======================================================
-     SHARED ORDER CART
-     ======================================================= */
-
   const [cart, setCart] = useState(() => getOrderCart());
-
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const [showCart, setShowCart] = useState(false);
-
   const [showCheckout, setShowCheckout] = useState(false);
-
   const [orderSuccess, setOrderSuccess] = useState(null);
-
   const [loading, setLoading] = useState(false);
-
-  const [orderedQuantities, setOrderedQuantities] = useState({});
-
-  const [
-    loadingOrderedQuantities,
-    setLoadingOrderedQuantities,
-  ] = useState(true);
-
   const [customer, setCustomer] = useState(emptyCustomer);
-
   const [notes, setNotes] = useState("");
-
-  /* =========================================================
-     SAVE CART TO SHARED ORDER CART
-     ========================================================= */
 
   useEffect(() => {
     updateOrderCart(cart);
   }, [cart]);
-
-  /* =========================================================
-     LOAD ORDERED QUANTITIES
-     ========================================================= */
-
-  const loadOrderedQuantities = async () => {
-    try {
-      setLoadingOrderedQuantities(true);
-
-      const response = await fetch(
-        `${API_URL}/api/product-order-quantities`
-      );
-
-      const data = await response.json();
-
-      if (!response.ok || !data.success) {
-        throw new Error(
-          data.message || "Unable to load ordered quantities."
-        );
-      }
-
-      setOrderedQuantities(data.quantities || {});
-    } catch (error) {
-      console.error(
-        "Unable to load ordered quantities:",
-        error
-      );
-
-      setOrderedQuantities({});
-    } finally {
-      setLoadingOrderedQuantities(false);
-    }
-  };
-
-  /* =========================================================
-     LOAD ORDERED QUANTITIES ON PAGE OPEN
-     ========================================================= */
-
-  useEffect(() => {
-    loadOrderedQuantities();
-  }, []);
-
-  /* =========================================================
-     BODY SCROLL LOCK
-     ========================================================= */
 
   useEffect(() => {
     const modalOpen =
@@ -187,48 +138,28 @@ const HouseholdCleaning = () => {
       showCheckout ||
       Boolean(orderSuccess);
 
-    if (modalOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = modalOpen ? "hidden" : "";
 
     return () => {
       document.body.style.overflow = "";
     };
-  }, [
-    selectedProduct,
-    showCart,
-    showCheckout,
-    orderSuccess,
-  ]);
+  }, [selectedProduct, showCart, showCheckout, orderSuccess]);
 
-  /* =========================================================
-     FORMAT PRICE
-     ========================================================= */
-
-  const formatPrice = (price) => {
-    return `₹${Number(price).toLocaleString("en-IN")}`;
-  };
-
-  /* =========================================================
-     ADD TO ORDER
-     ========================================================= */
+  const cartCount = cart.reduce(
+    (total, item) => total + Number(item.quantity || 0),
+    0
+  );
 
   const addToCart = (product) => {
     setCart((previousCart) => {
-      const existingProduct = previousCart.find(
+      const existing = previousCart.find(
         (item) => item.id === product.id
       );
 
-      if (existingProduct) {
+      if (existing) {
         return previousCart.map((item) =>
           item.id === product.id
-            ? {
-                ...item,
-                quantity:
-                  Number(item.quantity || 0) + 1,
-              }
+            ? { ...item, quantity: Number(item.quantity || 0) + 1 }
             : item
         );
       }
@@ -236,80 +167,43 @@ const HouseholdCleaning = () => {
       return [
         ...previousCart,
         {
-          ...product,
+          id: product.id,
+          name: product.name,
+          image: product.image,
           quantity: 1,
+          unit: "Unit",
         },
       ];
     });
 
     setSelectedProduct(null);
-
     setShowCart(true);
   };
-
-  /* =========================================================
-     UPDATE QUANTITY
-     ========================================================= */
 
   const updateQuantity = (id, quantity) => {
     const nextQuantity = Number(quantity);
 
-    if (!Number.isFinite(nextQuantity)) {
-      return;
-    }
+    if (!Number.isFinite(nextQuantity)) return;
 
     if (nextQuantity < 1) {
-      removeFromCart(id);
+      setCart((previousCart) =>
+        previousCart.filter((item) => item.id !== id)
+      );
       return;
     }
 
     setCart((previousCart) =>
       previousCart.map((item) =>
-        item.id === id
-          ? {
-              ...item,
-              quantity: nextQuantity,
-            }
-          : item
+        item.id === id ? { ...item, quantity: nextQuantity } : item
       )
     );
   };
-
-  /* =========================================================
-     REMOVE FROM ORDER
-     ========================================================= */
 
   const removeFromCart = (id) => {
     setCart((previousCart) =>
       previousCart.filter((item) => item.id !== id)
     );
   };
-
-  /* =========================================================
-     CART COUNT
-     ========================================================= */
-
-  const cartCount = cart.reduce(
-    (total, item) =>
-      total + Number(item.quantity || 0),
-    0
-  );
-
-  /* =========================================================
-     CART TOTAL
-     ========================================================= */
-
-  const cartTotal = cart.reduce(
-    (total, item) =>
-      total +
-      Number(item.price || 0) *
-        Number(item.quantity || 0),
-    0
-  );
-
-  /* =========================================================
-     CUSTOMER INPUT
-     ========================================================= */
 
   const handleCustomerChange = (event) => {
     const { name, value } = event.target;
@@ -320,13 +214,9 @@ const HouseholdCleaning = () => {
     }));
   };
 
-  /* =========================================================
-     OPEN CHECKOUT
-     ========================================================= */
-
   const openCheckout = () => {
-    if (cart.length === 0) {
-      alert("Please add at least one product to your order.");
+    if (!cart.length) {
+      window.alert("Please add at least one product to your order.");
       return;
     }
 
@@ -334,15 +224,11 @@ const HouseholdCleaning = () => {
     setShowCheckout(true);
   };
 
-  /* =========================================================
-     SUBMIT ORDER
-     ========================================================= */
-
   const submitOrder = async (event) => {
     event.preventDefault();
 
-    if (cart.length === 0) {
-      alert("Please add at least one product to your order.");
+    if (!cart.length) {
+      window.alert("Please add at least one product to your order.");
       return;
     }
 
@@ -352,319 +238,130 @@ const HouseholdCleaning = () => {
     const company = customer.company.trim();
     const location = customer.location.trim();
 
-    /* -------------------------------------------------------
-       REQUIRED FIELDS
-       ------------------------------------------------------- */
-
     if (!name || !phone || !location) {
-      alert(
-        "Please enter your name, phone number and location."
-      );
+      window.alert("Please enter your name, phone number and location.");
       return;
     }
-
-    /* -------------------------------------------------------
-       PHONE VALIDATION
-       ------------------------------------------------------- */
 
     const phoneDigits = phone.replace(/\D/g, "");
 
-    if (
-      phoneDigits.length < 7 ||
-      phoneDigits.length > 15
-    ) {
-      alert("Please enter a valid phone number.");
+    if (phoneDigits.length < 7 || phoneDigits.length > 15) {
+      window.alert("Please enter a valid phone number.");
       return;
     }
 
-    /* -------------------------------------------------------
-       EMAIL VALIDATION
-       ------------------------------------------------------- */
-
-    if (
-      email &&
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
-    ) {
-      alert("Please enter a valid email address.");
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      window.alert("Please enter a valid email address.");
       return;
     }
 
     try {
       setLoading(true);
 
-      /* -----------------------------------------------------
-         SEND ONLY PRODUCT IDS + QUANTITIES
-         Backend handles product prices.
-         ----------------------------------------------------- */
-
-      const orderItems = cart.map((item) => ({
-        id: item.id,
-        quantity: Number(item.quantity),
-      }));
-
-      const response = await fetch(
-        `${API_URL}/api/order`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            customer: {
-              name,
-              phone,
-              email,
-              company,
-              location,
-            },
-            items: orderItems,
-            notes: notes.trim(),
-          }),
-        }
-      );
+      const response = await fetch(`${API_URL}/api/order`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          customer: { name, phone, email, company, location },
+          items: cart.map((item) => ({
+            id: item.id,
+            quantity: Number(item.quantity),
+          })),
+          notes: notes.trim(),
+        }),
+      });
 
       const data = await response.json();
 
       if (!response.ok || !data.success) {
-        throw new Error(
-          data.message || "Unable to submit order."
-        );
+        throw new Error(data.message || "Unable to submit order.");
       }
 
-      /* -----------------------------------------------------
-         SHOW SUCCESS
-         ----------------------------------------------------- */
-
       setOrderSuccess(data);
-
-      /* -----------------------------------------------------
-         CLEAR SHARED ORDER CART
-         ----------------------------------------------------- */
-
       setCart([]);
-
-      /* -----------------------------------------------------
-         CLEAR CUSTOMER DETAILS
-         ----------------------------------------------------- */
-
-      setCustomer({
-        ...emptyCustomer,
-      });
-
+      updateOrderCart([]);
+      setCustomer({ ...emptyCustomer });
       setNotes("");
-
-      /* -----------------------------------------------------
-         CLOSE CHECKOUT
-         ----------------------------------------------------- */
-
       setShowCheckout(false);
-
-      /* -----------------------------------------------------
-         REFRESH ORDERED QUANTITIES
-         ----------------------------------------------------- */
-
-      await loadOrderedQuantities();
     } catch (error) {
-      console.error(
-        "Order submission error:",
-        error
-      );
-
-      alert(
-        error.message ||
-          "Unable to submit the order. Please try again."
-      );
+      console.error("Order submission error:", error);
+      window.alert(error.message || "Unable to submit the order. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
-  /* =========================================================
-     CLOSE PRODUCT MODAL
-     ========================================================= */
-
-  const closeProductModal = () => {
-    setSelectedProduct(null);
-  };
-
-  /* =========================================================
-     CLOSE CART
-     ========================================================= */
-
-  const closeCart = () => {
-    setShowCart(false);
-  };
-
-  /* =========================================================
-     CLOSE CHECKOUT
-     ========================================================= */
-
-  const closeCheckout = () => {
-    if (loading) {
-      return;
-    }
-
-    setShowCheckout(false);
-  };
-
-  /* =========================================================
-     CLOSE SUCCESS
-     ========================================================= */
-
-  const closeSuccess = () => {
-    setOrderSuccess(null);
-  };
-
-  /* =========================================================
-     JSX
-     ========================================================= */
-
   return (
     <section className="ccq-section">
-
-      {/* =====================================================
-          HEADER
-          ===================================================== */}
-
-      <div className="ccq-header">
-        <span className="ccq-label">
-          HOUSEHOLD CLEANING
-        </span>
-
-        <h1 className="ccq-title">
-          Household Cleaning
-        </h1>
-
+      <header className="ccq-header">
+        <span className="ccq-label">REVA PRODUCTS</span>
+        <h1 className="ccq-title">Cleaning <span>Solutions</span></h1>
         <p className="ccq-intro">
-          Explore our range of household cleaning
-          products and equipment designed for
-          everyday cleaning and home maintenance.
+          Explore our range of REVA cleaning, hygiene and care products
+          for household, commercial and institutional use.
         </p>
-      </div>
-
-      {/* =====================================================
-          MY ORDER
-          ===================================================== */}
+      </header>
 
       <button
         type="button"
         className="ccq-cart-button"
         onClick={() => setShowCart(true)}
-        aria-label={`My Order - ${cartCount} items`}
       >
         <span>My Order</span>
-
         <strong>{cartCount}</strong>
       </button>
 
-      {/* =====================================================
-          PRODUCT GRID
-          ===================================================== */}
-
       <div className="ccq-grid">
-        {products.map((product) => {
-          const orderedQuantity =
-            Number(
-              orderedQuantities[product.id]
-            ) || 0;
-
-          return (
-            <article
-              className="ccq-card"
-              key={product.id}
+        {products.map((product) => (
+          <article className="ccq-card" key={product.id}>
+            <button
+              type="button"
+              className="ccq-image-button"
+              onClick={() => setSelectedProduct(product)}
+              aria-label={`View ${product.name}`}
             >
-              {/* IMAGE */}
+              <img
+                src={product.image}
+                alt={product.name}
+                className="ccq-product-image"
+                loading="lazy"
+              />
+            </button>
 
+            <div className="ccq-card-content">
+              <span className="ccq-category">REVA Collection</span>
+              <h2 className="ccq-product-name">{product.name}</h2>
               <button
                 type="button"
-                className="ccq-image-button"
-                onClick={() =>
-                  setSelectedProduct(product)
-                }
-                aria-label={`View ${product.name}`}
+                className="ccq-add-button"
+                onClick={() => addToCart(product)}
               >
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="ccq-product-image"
-                  loading="lazy"
-                />
+                Add to Order
               </button>
-
-              {/* CONTENT */}
-
-              <div className="ccq-card-content">
-                <span className="ccq-category">
-                  {product.category}
-                </span>
-
-                <h2 className="ccq-product-name">
-                  {product.name}
-                </h2>
-
-                <div className="ccq-price">
-                  {formatPrice(product.price)}
-                </div>
-
-                <div className="ccq-unit">
-                  {product.unit}
-                </div>
-
-                {/* ORDERED QUANTITY */}
-
-                {!loadingOrderedQuantities &&
-                  orderedQuantity > 0 && (
-                    <div className="ccq-ordered">
-                      Ordered: {orderedQuantity}
-                    </div>
-                  )}
-
-                {/* ADD TO ORDER */}
-
-                <button
-                  type="button"
-                  className="ccq-add-button"
-                  onClick={() =>
-                    addToCart(product)
-                  }
-                >
-                  Add to Order
-                </button>
-              </div>
-            </article>
-          );
-        })}
+            </div>
+          </article>
+        ))}
       </div>
-
-      {/* =====================================================
-          PRODUCT DETAILS MODAL
-          ===================================================== */}
 
       {selectedProduct && (
         <div
           className="ccq-overlay"
-          onClick={closeProductModal}
-          role="presentation"
+          onClick={() => setSelectedProduct(null)}
         >
           <div
             className="ccq-product-modal"
-            onClick={(event) =>
-              event.stopPropagation()
-            }
+            onClick={(event) => event.stopPropagation()}
             role="dialog"
             aria-modal="true"
-            aria-label={selectedProduct.name}
           >
             <button
               type="button"
               className="ccq-close"
-              onClick={closeProductModal}
+              onClick={() => setSelectedProduct(null)}
               aria-label="Close product details"
             >
               ×
             </button>
-
-            {/* PRODUCT IMAGE */}
 
             <div className="ccq-modal-image-wrap">
               <img
@@ -674,41 +371,17 @@ const HouseholdCleaning = () => {
               />
             </div>
 
-            {/* PRODUCT DETAILS */}
-
             <div className="ccq-modal-content">
-              <span className="ccq-category">
-                {selectedProduct.category}
-              </span>
-
-              <h2>
-                {selectedProduct.name}
-              </h2>
-
-              <div className="ccq-modal-price">
-                {formatPrice(
-                  selectedProduct.price
-                )}
-              </div>
-
+              <span className="ccq-label">REVA COLLECTION</span>
+              <h2>{selectedProduct.name}</h2>
               <p>
-                {selectedProduct.description}
+                Contact our team for product details and assistance with
+                your requirements.
               </p>
-
-              <div className="ccq-modal-unit">
-                <span>Pack / Unit:</span>
-
-                <strong>
-                  {selectedProduct.unit}
-                </strong>
-              </div>
-
               <button
                 type="button"
                 className="ccq-add-large"
-                onClick={() =>
-                  addToCart(selectedProduct)
-                }
+                onClick={() => addToCart(selectedProduct)}
               >
                 Add to Order
               </button>
@@ -717,89 +390,48 @@ const HouseholdCleaning = () => {
         </div>
       )}
 
-      {/* =====================================================
-          ORDER SUMMARY
-          ===================================================== */}
-
       {showCart && (
         <div
           className="ccq-overlay"
-          onClick={closeCart}
-          role="presentation"
+          onClick={() => setShowCart(false)}
         >
           <aside
             className="ccq-cart-drawer"
-            onClick={(event) =>
-              event.stopPropagation()
-            }
+            onClick={(event) => event.stopPropagation()}
             role="dialog"
             aria-modal="true"
-            aria-label="Order Summary"
+            aria-label="Order summary"
           >
-            {/* CART HEADER */}
-
             <div className="ccq-cart-header">
               <div>
-                <span>YOUR ORDER</span>
-
+                <span>YOUR SELECTION</span>
                 <h2>Order Summary</h2>
               </div>
-
               <button
                 type="button"
                 className="ccq-close"
-                onClick={closeCart}
+                onClick={() => setShowCart(false)}
                 aria-label="Close order summary"
               >
                 ×
               </button>
             </div>
 
-            {/* EMPTY ORDER */}
-
             {cart.length === 0 ? (
               <div className="ccq-empty">
-                <div className="ccq-empty-icon">
-                  🛒
-                </div>
-
-                <h3>
-                  Your order is empty
-                </h3>
-
-                <p>
-                  Add products to your order
-                  to continue.
-                </p>
+                <div className="ccq-empty-icon">🛒</div>
+                <h3>Your order is empty</h3>
+                <p>Add products from the collection to continue.</p>
               </div>
             ) : (
               <>
-                {/* CART ITEMS */}
-
                 <div className="ccq-cart-items">
                   {cart.map((item) => (
-                    <div
-                      className="ccq-cart-item"
-                      key={item.id}
-                    >
-                      {/* IMAGE */}
-
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                      />
-
-                      {/* INFORMATION */}
+                    <div className="ccq-cart-item" key={item.id}>
+                      <img src={item.image} alt={item.name} />
 
                       <div className="ccq-cart-item-info">
                         <h3>{item.name}</h3>
-
-                        <span>
-                          {formatPrice(item.price)}{" "}
-                          / {item.unit}
-                        </span>
-
-                        {/* QUANTITY */}
 
                         <div className="ccq-quantity">
                           <button
@@ -807,28 +439,20 @@ const HouseholdCleaning = () => {
                             onClick={() =>
                               updateQuantity(
                                 item.id,
-                                Number(
-                                  item.quantity
-                                ) - 1
+                                Number(item.quantity) - 1
                               )
                             }
                             aria-label={`Decrease ${item.name} quantity`}
                           >
                             −
                           </button>
-
-                          <strong>
-                            {item.quantity}
-                          </strong>
-
+                          <strong>{item.quantity}</strong>
                           <button
                             type="button"
                             onClick={() =>
                               updateQuantity(
                                 item.id,
-                                Number(
-                                  item.quantity
-                                ) + 1
+                                Number(item.quantity) + 1
                               )
                             }
                             aria-label={`Increase ${item.name} quantity`}
@@ -838,14 +462,10 @@ const HouseholdCleaning = () => {
                         </div>
                       </div>
 
-                      {/* REMOVE */}
-
                       <button
                         type="button"
                         className="ccq-remove"
-                        onClick={() =>
-                          removeFromCart(item.id)
-                        }
+                        onClick={() => removeFromCart(item.id)}
                       >
                         Remove
                       </button>
@@ -853,20 +473,10 @@ const HouseholdCleaning = () => {
                   ))}
                 </div>
 
-                {/* CART FOOTER */}
-
                 <div className="ccq-cart-footer">
                   <div className="ccq-total">
-                    <span>
-                      Estimated Total
-                    </span>
-
-                    <strong>
-                      ₹
-                      {cartTotal.toLocaleString(
-                        "en-IN"
-                      )}
-                    </strong>
+                    <span>Selected items</span>
+                    <strong>{cartCount}</strong>
                   </div>
 
                   <button
@@ -876,18 +486,6 @@ const HouseholdCleaning = () => {
                   >
                     Continue to Customer Details
                   </button>
-
-                  <div className="ccq-no-payment">
-                    <strong>
-                      No Online Payment
-                    </strong>
-
-                    <span>
-                      Submit your order request
-                      and our team will contact
-                      you for confirmation.
-                    </span>
-                  </div>
                 </div>
               </>
             )}
@@ -895,283 +493,157 @@ const HouseholdCleaning = () => {
         </div>
       )}
 
-      {/* =====================================================
-          CUSTOMER DETAILS
-          ===================================================== */}
-
       {showCheckout && (
-        <div
-          className="ccq-overlay"
-          role="presentation"
-        >
+        <div className="ccq-overlay">
           <div
             className="ccq-checkout"
             role="dialog"
             aria-modal="true"
-            aria-label="Customer Details"
+            aria-label="Customer details"
           >
             <button
               type="button"
               className="ccq-close"
-              onClick={closeCheckout}
+              onClick={() => !loading && setShowCheckout(false)}
               disabled={loading}
               aria-label="Close customer details"
             >
               ×
             </button>
 
-            {/* CHECKOUT HEADING */}
-
             <div className="ccq-checkout-heading">
               <span>FINAL STEP</span>
-
               <h2>Customer Details</h2>
-
-              <p>
-                Enter your details and submit
-                your order request. No online
-                payment is required.
-              </p>
+              <p>Enter your details to submit your order request.</p>
             </div>
 
-            {/* FORM */}
-
-            <form
-              className="ccq-form"
-              onSubmit={submitOrder}
-            >
-              {/* FORM GRID */}
-
+            <form className="ccq-form" onSubmit={submitOrder}>
               <div className="ccq-form-grid">
-
-                {/* NAME */}
-
                 <div className="ccq-field">
-                  <label htmlFor="household-name">
-                    Full Name *
-                  </label>
-
+                  <label htmlFor="reva-name">Full Name *</label>
                   <input
-                    id="household-name"
-                    type="text"
+                    id="reva-name"
                     name="name"
                     value={customer.name}
-                    onChange={
-                      handleCustomerChange
-                    }
+                    onChange={handleCustomerChange}
                     placeholder="Enter your full name"
                     autoComplete="name"
                     required
                   />
                 </div>
 
-                {/* PHONE */}
-
                 <div className="ccq-field">
-                  <label htmlFor="household-phone">
-                    Phone Number *
-                  </label>
-
+                  <label htmlFor="reva-phone">Phone Number *</label>
                   <input
-                    id="household-phone"
+                    id="reva-phone"
                     type="tel"
                     name="phone"
                     value={customer.phone}
-                    onChange={
-                      handleCustomerChange
-                    }
+                    onChange={handleCustomerChange}
                     placeholder="Enter your phone number"
                     autoComplete="tel"
-                    inputMode="tel"
                     required
                   />
                 </div>
 
-                {/* EMAIL */}
-
                 <div className="ccq-field">
-                  <label htmlFor="household-email">
-                    Email Address
-                  </label>
-
+                  <label htmlFor="reva-email">Email Address</label>
                   <input
-                    id="household-email"
+                    id="reva-email"
                     type="email"
                     name="email"
                     value={customer.email}
-                    onChange={
-                      handleCustomerChange
-                    }
+                    onChange={handleCustomerChange}
                     placeholder="Enter your email"
                     autoComplete="email"
                   />
                 </div>
 
-                {/* COMPANY */}
-
                 <div className="ccq-field">
-                  <label htmlFor="household-company">
-                    Company / Organization
-                  </label>
-
+                  <label htmlFor="reva-company">Company / Organization</label>
                   <input
-                    id="household-company"
-                    type="text"
+                    id="reva-company"
                     name="company"
                     value={customer.company}
-                    onChange={
-                      handleCustomerChange
-                    }
+                    onChange={handleCustomerChange}
                     placeholder="Company name"
                     autoComplete="organization"
                   />
                 </div>
               </div>
 
-              {/* LOCATION */}
-
               <div className="ccq-field">
-                <label htmlFor="household-location">
-                  Delivery / Location *
-                </label>
-
+                <label htmlFor="reva-location">Location / Address *</label>
                 <textarea
-                  id="household-location"
+                  id="reva-location"
                   name="location"
                   value={customer.location}
-                  onChange={
-                    handleCustomerChange
-                  }
-                  placeholder="Enter delivery location / address"
-                  rows="3"
+                  onChange={handleCustomerChange}
+                  placeholder="Enter your location or address"
+                  rows={3}
                   autoComplete="street-address"
                   required
                 />
               </div>
 
-              {/* NOTES */}
-
               <div className="ccq-field">
-                <label htmlFor="household-notes">
-                  Additional Notes
-                </label>
-
+                <label htmlFor="reva-notes">Additional Requirements</label>
                 <textarea
-                  id="household-notes"
+                  id="reva-notes"
                   value={notes}
-                  onChange={(event) =>
-                    setNotes(event.target.value)
-                  }
-                  placeholder="Any specific requirements?"
-                  rows="4"
+                  onChange={(event) => setNotes(event.target.value)}
+                  placeholder="Tell us about your requirements..."
+                  rows={4}
                 />
               </div>
 
-              {/* FINAL SUMMARY */}
-
               <div className="ccq-final-summary">
                 <div>
-                  <span>Products</span>
-
-                  <strong>
-                    {cartCount}
-                  </strong>
-                </div>
-
-                <div>
-                  <span>
-                    Estimated Total
-                  </span>
-
-                  <strong>
-                    ₹
-                    {cartTotal.toLocaleString(
-                      "en-IN"
-                    )}
-                  </strong>
+                  <span>Selected products</span>
+                  <strong>{cartCount}</strong>
                 </div>
               </div>
-
-              {/* NO PAYMENT */}
-
-              <div className="ccq-no-payment">
-                <strong>
-                  No Online Payment
-                </strong>
-
-                <span>
-                  Submit your order request
-                  and our team will contact
-                  you for confirmation.
-                </span>
-              </div>
-
-              {/* SUBMIT */}
 
               <button
                 type="submit"
                 className="ccq-submit"
                 disabled={loading}
               >
-                {loading
-                  ? "Submitting Order..."
-                  : "Submit Order Request"}
+                {loading ? "Submitting..." : "Submit Order Request"}
               </button>
             </form>
           </div>
         </div>
       )}
 
-      {/* =====================================================
-          SUCCESS
-          ===================================================== */}
-
       {orderSuccess && (
-        <div
-          className="ccq-overlay"
-          role="presentation"
-        >
-          <div
-            className="ccq-success"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Order submitted successfully"
-          >
-            <div className="ccq-success-icon">
-              ✓
-            </div>
-
+        <div className="ccq-overlay">
+          <div className="ccq-success" role="dialog" aria-modal="true">
+            <div className="ccq-success-icon">✓</div>
             <span>ORDER RECEIVED</span>
-
             <h2>Thank You!</h2>
-
             <p>
-              Your order request has been
-              submitted successfully.
+              Your order request has been submitted successfully.
+              Our team will contact you shortly.
             </p>
 
-            {/* ORDER ID */}
-
-            <div className="ccq-order-number">
-              <small>Order ID</small>
-
-              <strong>
-                {orderSuccess.orderId ||
-                  orderSuccess.order?.id ||
-                  "Order received"}
-              </strong>
-            </div>
-
-            <p>
-              Our team will contact you to
-              confirm availability, delivery
-              and final billing.
-            </p>
+            {(orderSuccess.orderId ||
+              orderSuccess.order?.id ||
+              orderSuccess.id) && (
+              <div className="ccq-order-number">
+                <small>Order ID</small>
+                <strong>
+                  {orderSuccess.orderId ||
+                    orderSuccess.order?.id ||
+                    orderSuccess.id}
+                </strong>
+              </div>
+            )}
 
             <button
               type="button"
               className="ccq-success-button"
-              onClick={closeSuccess}
+              onClick={() => setOrderSuccess(null)}
             >
               Continue Shopping
             </button>
