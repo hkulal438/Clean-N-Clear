@@ -1,3 +1,4 @@
+
 import { useEffect, useMemo, useState } from "react";
 import "./CleaningChemicals.css";
 import { getOrderCart, updateOrderCart } from "../../utils/OrderCart";
@@ -72,8 +73,7 @@ import WaterBottleTrolley from "../../images/institute/water bottle trolley.png"
 import WheelWasteBin120L240L from "../../images/institute/Wheel_Waste_Bin_120L_240L.png";
 import WheelWasteBin660L1100L from "../../images/institute/Wheel_Waste_Bin_660L_1100L.png";
 
-const API_URL =
-  import.meta.env.VITE_API_URL || "http://localhost:5000";
+const WHATSAPP_NUMBER = "918147304734";
 
 // ================= PRODUCT LIST =================
 
@@ -157,12 +157,11 @@ const emptyCustomer = {
 };
 
 export default function Institute() {
-  const [cart, setCart] = useState(() => getOrderCart());
+  const [cart, setCart] = useState(() => getOrderCart() || []);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [showOrder, setShowOrder] = useState(false);
+  const [showCheckout, setShowCheckout] = useState(false);
   const [customer, setCustomer] = useState(emptyCustomer);
-  const [submitting, setSubmitting] = useState(false);
-  const [successOrder, setSuccessOrder] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
@@ -170,15 +169,27 @@ export default function Institute() {
   }, [cart]);
 
   useEffect(() => {
+    const syncCart = () => setCart(getOrderCart() || []);
+
+    window.addEventListener("focus", syncCart);
+    window.addEventListener("storage", syncCart);
+
+    return () => {
+      window.removeEventListener("focus", syncCart);
+      window.removeEventListener("storage", syncCart);
+    };
+  }, []);
+
+  useEffect(() => {
     const modalOpen =
-      Boolean(selectedProduct) || showOrder || Boolean(successOrder);
+      Boolean(selectedProduct) || showOrder || showCheckout;
 
     document.body.style.overflow = modalOpen ? "hidden" : "";
 
     return () => {
       document.body.style.overflow = "";
     };
-  }, [selectedProduct, showOrder, successOrder]);
+  }, [selectedProduct, showOrder, showCheckout]);
 
   const cartCount = useMemo(
     () =>
@@ -209,13 +220,14 @@ export default function Institute() {
           id: product.id,
           name: product.name,
           image: product.image,
+          category: "Institutional Supplies",
           quantity: 1,
-          unit: "Select quantity",
         },
       ];
     });
 
     setSelectedProduct(null);
+    setShowCheckout(false);
     setShowOrder(true);
   };
 
@@ -251,11 +263,25 @@ export default function Institute() {
     setErrorMessage("");
   };
 
-  const handleSubmitOrder = async (event) => {
+  const openCheckout = () => {
+    if (!cart.length) {
+      setErrorMessage("Please add products to your order first.");
+      return;
+    }
+
+    setErrorMessage("");
+    setShowOrder(false);
+    setShowCheckout(true);
+  };
+
+  const backToOrder = () => {
+    setErrorMessage("");
+    setShowCheckout(false);
+    setShowOrder(true);
+  };
+
+  const handleSubmitOrder = (event) => {
     event.preventDefault();
-
-    if (submitting) return;
-
     setErrorMessage("");
 
     if (!cart.length) {
@@ -286,51 +312,38 @@ export default function Institute() {
       return;
     }
 
-    setSubmitting(true);
+    const productDetails = cart
+      .map(
+        (item, index) =>
+          `${index + 1}. ${item.name}\nQuantity: ${item.quantity}`
+      )
+      .join("\n\n");
 
-    try {
-      const response = await fetch(`${API_URL}/api/order`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          customer: {
-            name: customer.name.trim(),
-            phone: customer.phone.trim(),
-            email: customer.email.trim(),
-            company: customer.company.trim(),
-            location: customer.location.trim(),
-          },
-          items: cart.map((item) => ({
-            id: item.id,
-            quantity: Number(item.quantity),
-          })),
-          notes: customer.notes.trim(),
-        }),
-      });
+    const message = [
+      "*NEW ORDER ENQUIRY - CLEAN N CLEAR*",
+      "",
+      "*CUSTOMER DETAILS*",
+      `Name: ${customer.name.trim()}`,
+      `Phone: ${customer.phone.trim()}`,
+      `Email: ${customer.email.trim() || "Not provided"}`,
+      `Company / Institution: ${customer.company.trim() || "Not provided"}`,
+      `Location: ${customer.location.trim()}`,
+      "",
+      "*SELECTED PRODUCTS*",
+      productDetails,
+      "",
+      `Total quantity: ${cartCount}`,
+      "",
+      "*ADDITIONAL REQUIREMENTS*",
+      customer.notes.trim() || "None",
+      "",
+      "Please confirm product availability and pricing.",
+    ].join("\n");
 
-      const data = await response.json().catch(() => ({}));
+    const whatsappURL =
+      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 
-      if (!response.ok || !data?.success) {
-        throw new Error(
-          data?.message || "Unable to submit your order. Please try again."
-        );
-      }
-
-      setSuccessOrder(data.order || data);
-      setCart([]);
-      updateOrderCart([]);
-      setCustomer({ ...emptyCustomer });
-      setShowOrder(false);
-    } catch (error) {
-      console.error("Order submission failed:", error);
-      setErrorMessage(
-        error?.message || "Something went wrong while submitting your order."
-      );
-    } finally {
-      setSubmitting(false);
-    }
+    window.open(whatsappURL, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -343,8 +356,8 @@ export default function Institute() {
         </h1>
 
         <p className="ccq-intro">
-          Explore bins, waste-management products, dispensers, trolleys and
-          other supplies for institutional and commercial environments.
+          Explore our range of waste-management products, bins,
+          dispensers, trolleys and essential institutional supplies.
         </p>
       </header>
 
@@ -356,8 +369,7 @@ export default function Institute() {
           setShowOrder(true);
         }}
       >
-        <span>My Order</span>
-        <strong>{cartCount}</strong>
+        My Order <strong>{cartCount}</strong>
       </button>
 
       <div className="ccq-grid">
@@ -383,8 +395,6 @@ export default function Institute() {
               </span>
 
               <h2 className="ccq-product-name">{product.name}</h2>
-
-              <div className="ccq-unit">Select quantity</div>
 
               <button
                 type="button"
@@ -427,7 +437,7 @@ export default function Institute() {
             <div className="ccq-modal-content">
               <span className="ccq-label">INSTITUTIONAL SUPPLIES</span>
               <h2>{selectedProduct.name}</h2>
-              <p>Select this product to add it to your order.</p>
+              <p>Add this product to your order to request availability and pricing.</p>
 
               <button
                 type="button"
@@ -446,23 +456,24 @@ export default function Institute() {
           className="ccq-overlay"
           onClick={() => setShowOrder(false)}
         >
-          <div
-            className="ccq-checkout"
+          <aside
+            className="ccq-cart-drawer"
             onClick={(event) => event.stopPropagation()}
           >
-            <button
-              type="button"
-              className="ccq-close"
-              onClick={() => setShowOrder(false)}
-              aria-label="Close order"
-            >
-              ×
-            </button>
+            <div className="ccq-cart-header">
+              <div>
+                <span className="ccq-label">YOUR SELECTION</span>
+                <h2>My Order</h2>
+              </div>
 
-            <div className="ccq-checkout-heading">
-              <span>CLEAN N CLEAR</span>
-              <h2>My Order</h2>
-              <p>Review your selected products and submit your enquiry.</p>
+              <button
+                type="button"
+                className="ccq-close"
+                onClick={() => setShowOrder(false)}
+                aria-label="Close order"
+              >
+                ×
+              </button>
             </div>
 
             <div className="ccq-cart-items">
@@ -499,167 +510,190 @@ export default function Institute() {
                           +
                         </button>
                       </div>
-                    </div>
 
-                    <button
-                      type="button"
-                      className="ccq-remove"
-                      onClick={() => removeFromCart(item.id)}
-                    >
-                      Remove
-                    </button>
+                      <button
+                        type="button"
+                        className="ccq-remove"
+                        onClick={() => removeFromCart(item.id)}
+                      >
+                        Remove
+                      </button>
+                    </div>
                   </div>
                 ))
               )}
             </div>
 
             {cart.length > 0 && (
-              <>
-                <div className="ccq-final-summary">
-                  <div>
-                    <span>Selected items</span>
-                    <strong>{cartCount}</strong>
-                  </div>
+              <div className="ccq-cart-footer">
+                <div className="ccq-total">
+                  <span>Total quantity</span>
+                  <strong>{cartCount}</strong>
                 </div>
 
-                <form
-                  className="ccq-form"
-                  onSubmit={handleSubmitOrder}
+                {errorMessage && (
+                  <div className="ccq-error">{errorMessage}</div>
+                )}
+
+                <button
+                  type="button"
+                  className="ccq-checkout-button"
+                  onClick={openCheckout}
                 >
-                  <div className="ccq-form-grid">
-                    <div className="ccq-field">
-                      <label htmlFor="inst-name">Name *</label>
-                      <input
-                        id="inst-name"
-                        name="name"
-                        value={customer.name}
-                        onChange={handleCustomerChange}
-                        placeholder="Enter your name"
-                        required
-                      />
-                    </div>
-
-                    <div className="ccq-field">
-                      <label htmlFor="inst-phone">Phone Number *</label>
-                      <input
-                        id="inst-phone"
-                        type="tel"
-                        name="phone"
-                        value={customer.phone}
-                        onChange={handleCustomerChange}
-                        placeholder="Enter phone number"
-                        required
-                      />
-                    </div>
-
-                    <div className="ccq-field">
-                      <label htmlFor="inst-email">Email</label>
-                      <input
-                        id="inst-email"
-                        type="email"
-                        name="email"
-                        value={customer.email}
-                        onChange={handleCustomerChange}
-                        placeholder="Enter email address"
-                      />
-                    </div>
-
-                    <div className="ccq-field">
-                      <label htmlFor="inst-company">
-                        Company / Institution
-                      </label>
-                      <input
-                        id="inst-company"
-                        name="company"
-                        value={customer.company}
-                        onChange={handleCustomerChange}
-                        placeholder="Institution name"
-                      />
-                    </div>
-
-                    <div className="ccq-field">
-                      <label htmlFor="inst-location">Location *</label>
-                      <input
-                        id="inst-location"
-                        name="location"
-                        value={customer.location}
-                        onChange={handleCustomerChange}
-                        placeholder="City / Location"
-                        required
-                      />
-                    </div>
-
-                    <div className="ccq-field">
-                      <label htmlFor="inst-notes">
-                        Additional Requirements
-                      </label>
-                      <textarea
-                        id="inst-notes"
-                        name="notes"
-                        value={customer.notes}
-                        onChange={handleCustomerChange}
-                        placeholder="Tell us about your requirement..."
-                        rows={4}
-                      />
-                    </div>
-                  </div>
-
-                  {errorMessage && (
-                    <div className="ccq-error">{errorMessage}</div>
-                  )}
-
-                  <div className="ccq-form-actions">
-                    <button
-                      type="button"
-                      className="ccq-back-button"
-                      onClick={() => setShowOrder(false)}
-                    >
-                      Continue Shopping
-                    </button>
-
-                    <button
-                      type="submit"
-                      className="ccq-submit"
-                      disabled={submitting}
-                    >
-                      {submitting ? "Submitting..." : "Submit Order"}
-                    </button>
-                  </div>
-                </form>
-              </>
+                  Enter Customer Details
+                </button>
+              </div>
             )}
-          </div>
+          </aside>
         </div>
       )}
 
-      {successOrder && (
-        <div className="ccq-overlay">
-          <div className="ccq-success">
-            <div className="ccq-success-icon">✓</div>
-            <span>ORDER RECEIVED</span>
-            <h2>Thank You!</h2>
-
-            <p>
-              Your request has been submitted successfully. Our team will
-              review it and contact you shortly.
-            </p>
-
-            {(successOrder?.id || successOrder?.orderId) && (
-              <div className="ccq-order-number">
-                <small>Order Number</small>
-                <strong>
-                  {successOrder.id || successOrder.orderId}
-                </strong>
-              </div>
-            )}
-
+      {showCheckout && (
+        <div
+          className="ccq-overlay"
+          onClick={(event) => {
+            if (event.target === event.currentTarget) {
+              setShowCheckout(false);
+            }
+          }}
+        >
+          <div
+            className="ccq-checkout"
+            onClick={(event) => event.stopPropagation()}
+          >
             <button
               type="button"
-              className="ccq-success-button"
-              onClick={() => setSuccessOrder(null)}
+              className="ccq-close"
+              onClick={backToOrder}
+              aria-label="Back to order"
             >
-              Continue Shopping
+              ×
             </button>
+
+            <div className="ccq-checkout-heading">
+              <span className="ccq-label">CLEAN N CLEAR</span>
+              <h2>Customer Details</h2>
+              <p>
+                Enter your details to prepare your order enquiry in WhatsApp.
+              </p>
+            </div>
+
+            {errorMessage && (
+              <div className="ccq-error">{errorMessage}</div>
+            )}
+
+            <form className="ccq-form" onSubmit={handleSubmitOrder}>
+              <div className="ccq-form-grid">
+                <div className="ccq-field">
+                  <label htmlFor="inst-name">Name *</label>
+                  <input
+                    id="inst-name"
+                    name="name"
+                    value={customer.name}
+                    onChange={handleCustomerChange}
+                    placeholder="Enter your name"
+                    autoComplete="name"
+                    required
+                  />
+                </div>
+
+                <div className="ccq-field">
+                  <label htmlFor="inst-phone">Phone Number *</label>
+                  <input
+                    id="inst-phone"
+                    type="tel"
+                    name="phone"
+                    value={customer.phone}
+                    onChange={handleCustomerChange}
+                    placeholder="Enter phone number"
+                    autoComplete="tel"
+                    required
+                  />
+                </div>
+
+                <div className="ccq-field">
+                  <label htmlFor="inst-email">Email</label>
+                  <input
+                    id="inst-email"
+                    type="email"
+                    name="email"
+                    value={customer.email}
+                    onChange={handleCustomerChange}
+                    placeholder="Enter email address"
+                    autoComplete="email"
+                  />
+                </div>
+
+                <div className="ccq-field">
+                  <label htmlFor="inst-company">
+                    Company / Institution
+                  </label>
+                  <input
+                    id="inst-company"
+                    name="company"
+                    value={customer.company}
+                    onChange={handleCustomerChange}
+                    placeholder="Institution name"
+                    autoComplete="organization"
+                  />
+                </div>
+
+                <div className="ccq-field">
+                  <label htmlFor="inst-location">Location *</label>
+                  <input
+                    id="inst-location"
+                    name="location"
+                    value={customer.location}
+                    onChange={handleCustomerChange}
+                    placeholder="City / Location"
+                    autoComplete="street-address"
+                    required
+                  />
+                </div>
+
+                <div className="ccq-field">
+                  <label htmlFor="inst-notes">Additional Requirements</label>
+                  <textarea
+                    id="inst-notes"
+                    name="notes"
+                    value={customer.notes}
+                    onChange={handleCustomerChange}
+                    placeholder="Tell us about your requirements..."
+                    rows={4}
+                  />
+                </div>
+              </div>
+
+              <div className="ccq-final-summary">
+                <h3>Order Summary</h3>
+
+                {cart.map((item) => (
+                  <div className="ccq-final-item" key={item.id}>
+                    <span>{item.name}</span>
+                    <strong>× {item.quantity}</strong>
+                  </div>
+                ))}
+
+                <div className="ccq-total">
+                  <span>Total quantity</span>
+                  <strong>{cartCount}</strong>
+                </div>
+              </div>
+
+              <div className="ccq-form-actions">
+                <button
+                  type="button"
+                  className="ccq-back-button"
+                  onClick={backToOrder}
+                >
+                  Back to Order
+                </button>
+
+                <button type="submit" className="ccq-submit">
+                  Continue to WhatsApp
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}

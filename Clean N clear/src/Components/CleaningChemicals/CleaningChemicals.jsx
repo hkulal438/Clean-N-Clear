@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./CleaningChemicals.css";
@@ -7,10 +8,7 @@ import {
   updateOrderCart,
 } from "../../utils/OrderCart";
 
-// ======================================================
-// ONLY IMAGES FROM YOUR SCREENSHOTS
-// ======================================================
-
+// Product images
 import AutoSprayRefill from "../../images/CleaningChemicals/Auto_Spray_Refill_225ml.png";
 import CleaningAcid1L from "../../images/CleaningChemicals/Cleaning_Acid_1L.png";
 import CleaningAcidSmallBottle from "../../images/CleaningChemicals/Cleaning_Acid_Small_Bottle.png";
@@ -29,17 +27,10 @@ import ToiletCleaner500ml5L from "../../images/CleaningChemicals/Toilet_Cleaner_
 import ToiletCleanerSmallBottle from "../../images/CleaningChemicals/Toilet_Cleaner_Small_Bottle.png";
 import UrinalScreen from "../../images/CleaningChemicals/Urinal_Screen.png";
 
-// ======================================================
-// API
-// ======================================================
+// WhatsApp business number
+const WHATSAPP_NUMBER = "918147304734";
 
-const API_URL =
-  import.meta.env.VITE_API_URL || "http://localhost:5000";
-
-// ======================================================
-// PRODUCTS — ONLY THE 17 SCREENSHOT IMAGES
-// ======================================================
-
+// Products
 const products = [
   {
     id: "auto-spray-refill-225ml",
@@ -171,10 +162,6 @@ const emptyCustomer = {
   notes: "",
 };
 
-// ======================================================
-// COMPONENT
-// ======================================================
-
 const CleaningChemicals = () => {
   const [cart, setCart] = useState(() => getOrderCart());
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -182,10 +169,9 @@ const CleaningChemicals = () => {
   const [showCheckout, setShowCheckout] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [customer, setCustomer] = useState(emptyCustomer);
-  const [orderId, setOrderId] = useState("");
   const [error, setError] = useState("");
-  const [submitting, setSubmitting] = useState(false);
 
+  // Keep the shared cart synchronized.
   useEffect(() => {
     updateOrderCart(cart);
   }, [cart]);
@@ -202,6 +188,7 @@ const CleaningChemicals = () => {
     };
   }, []);
 
+  // Prevent background scrolling while a modal is open.
   useEffect(() => {
     const modalOpen =
       selectedProduct !== null ||
@@ -260,7 +247,10 @@ const CleaningChemicals = () => {
     setCart((currentCart) =>
       currentCart.map((item) =>
         item.id === id
-          ? { ...item, quantity: Number(item.quantity || 0) + 1 }
+          ? {
+              ...item,
+              quantity: Number(item.quantity || 0) + 1,
+            }
           : item
       )
     );
@@ -271,7 +261,10 @@ const CleaningChemicals = () => {
       currentCart
         .map((item) =>
           item.id === id
-            ? { ...item, quantity: Number(item.quantity || 0) - 1 }
+            ? {
+                ...item,
+                quantity: Number(item.quantity || 0) - 1,
+              }
             : item
         )
         .filter((item) => Number(item.quantity || 0) > 0)
@@ -312,10 +305,9 @@ const CleaningChemicals = () => {
     setError("");
   };
 
-  const submitOrder = async (event) => {
+  // Submit order directly to WhatsApp.
+  const submitOrder = (event) => {
     event.preventDefault();
-
-    if (submitting) return;
 
     if (!customer.name.trim()) {
       setError("Please enter your name.");
@@ -340,61 +332,66 @@ const CleaningChemicals = () => {
       return;
     }
 
-    if (!cart.length) {
+    if (cart.length === 0) {
       setError("Your order is empty.");
       return;
     }
 
-    setSubmitting(true);
     setError("");
 
-    const orderData = {
-      customer: {
-        name: customer.name.trim(),
-        phone: customer.phone.trim(),
-        email: customer.email.trim(),
-        company: customer.company.trim(),
-        location: customer.location.trim(),
-      },
-      items: cart.map((item) => ({
-        id: item.id,
-        quantity: Number(item.quantity),
-      })),
-      notes: customer.notes.trim(),
-    };
+    const productDetails = cart
+      .map(
+        (item, index) =>
+          `${index + 1}. ${item.name}\n` +
+          `Package: ${item.unit}\n` +
+          `Quantity: ${item.quantity}`
+      )
+      .join("\n\n");
 
-    try {
-      const response = await fetch(`${API_URL}/api/order`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(orderData),
-      });
+    const message = [
+      "NEW ORDER - CLEAN N CLEAR",
+      "",
+      "CUSTOMER DETAILS",
+      `Name: ${customer.name.trim()}`,
+      `Phone: ${customer.phone.trim()}`,
+      `Email: ${customer.email.trim() || "Not provided"}`,
+      `Company: ${customer.company.trim() || "Not provided"}`,
+      `Location: ${customer.location.trim()}`,
+      "",
+      "ORDER DETAILS",
+      productDetails,
+      "",
+      "ADDITIONAL REQUIREMENTS",
+      customer.notes.trim() || "None",
+      "",
+      "Please confirm this order and share the next steps.",
+    ].join("\n");
 
-      const data = await response.json().catch(() => ({}));
+    const whatsappURL =
+      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 
-      if (!response.ok || !data.success) {
-        throw new Error(
-          data.message || "Unable to submit your order. Please try again."
-        );
-      }
+    // Open WhatsApp from the form submission.
+    const whatsappWindow = window.open(
+      whatsappURL,
+      "_blank",
+      "noopener,noreferrer"
+    );
 
-      setOrderId(data.orderId || data.order?.id || "Order received");
-      setCart([]);
-      updateOrderCart([]);
-      setCustomer({ ...emptyCustomer });
-      setShowCheckout(false);
-      setShowCart(false);
-      setShowSuccess(true);
-    } catch (submitError) {
-      console.error("Order submission failed:", submitError);
-      setError(
-        submitError.message || "Unable to submit your order. Please try again."
-      );
-    } finally {
-      setSubmitting(false);
+    // If the browser blocks the new tab, navigate directly.
+    if (!whatsappWindow) {
+      window.location.href = whatsappURL;
     }
+  };
+
+  const finishOrder = () => {
+    setCart([]);
+    updateOrderCart([]);
+    setCustomer({ ...emptyCustomer });
+    setShowSuccess(false);
+    setShowCheckout(false);
+    setShowCart(false);
+    setSelectedProduct(null);
+    setError("");
   };
 
   return (
@@ -421,13 +418,12 @@ const CleaningChemicals = () => {
         >
           Order Cart
           {cartCount > 0 && (
-            <span className="ccq-cart-count">{cartCount}</span>
+            <strong>{cartCount}</strong>
           )}
         </button>
       </header>
 
       {/* PRODUCT GRID */}
-
       <div className="ccq-grid">
         {products.map((product) => (
           <article className="ccq-card" key={product.id}>
@@ -468,8 +464,7 @@ const CleaningChemicals = () => {
         ))}
       </div>
 
-      {/* PRODUCT DETAILS */}
-
+      {/* PRODUCT DETAILS MODAL */}
       {selectedProduct && (
         <div
           className="ccq-overlay"
@@ -516,8 +511,7 @@ const CleaningChemicals = () => {
         </div>
       )}
 
-      {/* CART DRAWER */}
-
+      {/* ORDER CART */}
       {showCart && (
         <div
           className="ccq-overlay"
@@ -574,7 +568,7 @@ const CleaningChemicals = () => {
                           −
                         </button>
 
-                        <span>{item.quantity}</span>
+                        <strong>{item.quantity}</strong>
 
                         <button
                           type="button"
@@ -610,7 +604,9 @@ const CleaningChemicals = () => {
                   to confirm the details.
                 </p>
 
-                {error && <div className="ccq-error">{error}</div>}
+                {error && (
+                  <div className="ccq-error">{error}</div>
+                )}
 
                 <button
                   type="button"
@@ -625,8 +621,7 @@ const CleaningChemicals = () => {
         </div>
       )}
 
-      {/* CUSTOMER DETAILS */}
-
+      {/* CUSTOMER DETAILS FORM */}
       {showCheckout && (
         <div className="ccq-overlay">
           <div className="ccq-checkout">
@@ -635,7 +630,6 @@ const CleaningChemicals = () => {
               className="ccq-close"
               onClick={backToCart}
               aria-label="Back to order"
-              disabled={submitting}
             >
               ×
             </button>
@@ -649,7 +643,9 @@ const CleaningChemicals = () => {
               </p>
             </div>
 
-            {error && <div className="ccq-error">{error}</div>}
+            {error && (
+              <div className="ccq-error">{error}</div>
+            )}
 
             <form className="ccq-form" onSubmit={submitOrder}>
               <div className="ccq-form-grid">
@@ -759,17 +755,12 @@ const CleaningChemicals = () => {
                   type="button"
                   className="ccq-back-button"
                   onClick={backToCart}
-                  disabled={submitting}
                 >
                   Back to Order
                 </button>
 
-                <button
-                  type="submit"
-                  className="ccq-submit"
-                  disabled={submitting}
-                >
-                  {submitting ? "Submitting..." : "Submit Order"}
+                <button type="submit" className="ccq-submit">
+                  Continue to WhatsApp
                 </button>
               </div>
             </form>
@@ -777,32 +768,23 @@ const CleaningChemicals = () => {
         </div>
       )}
 
-      {/* SUCCESS */}
-
+      {/* ORDER HANDOFF CONFIRMATION */}
       {showSuccess && (
         <div className="ccq-overlay">
           <div className="ccq-success">
             <div className="ccq-success-icon">✓</div>
-            <span className="ccq-label">ORDER RECEIVED</span>
-            <h2>Order Submitted Successfully</h2>
+            <span className="ccq-label">WHATSAPP ORDER</span>
+            <h2>Continue Your Order</h2>
 
             <p>
-              Thank you for your request. Our team will review it
-              and contact you regarding the next steps.
+              Your WhatsApp message has been prepared. Send it in
+              WhatsApp to deliver your order to our team.
             </p>
-
-            <div className="ccq-order-number">
-              <span>Order Number</span>
-              <strong>{orderId}</strong>
-            </div>
 
             <button
               type="button"
               className="ccq-success-button"
-              onClick={() => {
-                setShowSuccess(false);
-                setOrderId("");
-              }}
+              onClick={finishOrder}
             >
               Continue Shopping
             </button>

@@ -39,9 +39,8 @@ import {
   updateOrderCart,
 } from "../../utils/OrderCart";
 
-const API_URL = (
-  import.meta.env.VITE_API_URL || "http://localhost:5000"
-).replace(/\/+$/, "");
+// WhatsApp number in international format without + or spaces.
+const WHATSAPP_NUMBER = "918147304734";
 
 const products = [
   {
@@ -279,96 +278,25 @@ export default function HygieneSupplies() {
   const [cart, setCart] = useState(() => getOrderCart());
   const [showCart, setShowCart] = useState(false);
   const [showCheckout, setShowCheckout] = useState(false);
-  const [orderSuccess, setOrderSuccess] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [orderedQuantities, setOrderedQuantities] = useState({});
-  const [loadingOrderedQuantities, setLoadingOrderedQuantities] =
-    useState(true);
   const [customer, setCustomer] = useState(emptyCustomer);
   const [notes, setNotes] = useState("");
 
+  // Keep the shared cart synchronized with the rest of the website.
   useEffect(() => {
     updateOrderCart(cart);
   }, [cart]);
 
-  const loadOrderedQuantities = async () => {
-    try {
-      const response = await fetch(
-        `${API_URL}/api/product-order-quantities`
-      );
-
-      const data = await response.json().catch(() => ({}));
-
-      if (!response.ok || !data.success) {
-        throw new Error(
-          data.message || "Unable to load order quantities."
-        );
-      }
-
-      setOrderedQuantities(data.quantities || {});
-      return true;
-    } catch (error) {
-      console.error("Unable to load ordered quantities:", error);
-      setOrderedQuantities({});
-      return false;
-    } finally {
-      setLoadingOrderedQuantities(false);
-    }
-  };
-
-  useEffect(() => {
-    let active = true;
-
-    const load = async () => {
-      try {
-        const response = await fetch(
-          `${API_URL}/api/product-order-quantities`
-        );
-
-        const data = await response.json().catch(() => ({}));
-
-        if (!response.ok || !data.success) {
-          throw new Error(
-            data.message || "Unable to load order quantities."
-          );
-        }
-
-        if (active) {
-          setOrderedQuantities(data.quantities || {});
-        }
-      } catch (error) {
-        console.error("Unable to load ordered quantities:", error);
-
-        if (active) {
-          setOrderedQuantities({});
-        }
-      } finally {
-        if (active) {
-          setLoadingOrderedQuantities(false);
-        }
-      }
-    };
-
-    load();
-
-    return () => {
-      active = false;
-    };
-  }, []);
-
+  // Prevent background scrolling while a modal or drawer is open.
   useEffect(() => {
     const modalOpen =
-      Boolean(selectedProduct) ||
-      showCart ||
-      showCheckout ||
-      Boolean(orderSuccess);
+      Boolean(selectedProduct) || showCart || showCheckout;
 
     document.body.style.overflow = modalOpen ? "hidden" : "";
 
     return () => {
       document.body.style.overflow = "";
     };
-  }, [selectedProduct, showCart, showCheckout, orderSuccess]);
+  }, [selectedProduct, showCart, showCheckout]);
 
   const addToCart = (product) => {
     setCart((previousCart) => {
@@ -443,7 +371,7 @@ export default function HygieneSupplies() {
     setShowCheckout(true);
   };
 
-  const submitOrder = async (event) => {
+  const submitOrder = (event) => {
     event.preventDefault();
 
     if (!cart.length) {
@@ -456,6 +384,7 @@ export default function HygieneSupplies() {
     const email = customer.email.trim();
     const company = customer.company.trim();
     const location = customer.location.trim();
+    const additionalNotes = notes.trim();
 
     if (!name || !phone || !location) {
       window.alert(
@@ -479,63 +408,48 @@ export default function HygieneSupplies() {
       return;
     }
 
-    try {
-      setLoading(true);
+    const productLines = cart
+      .map(
+        (item, index) =>
+          `${index + 1}. ${item.name}\n` +
+          `   Quantity: ${Number(item.quantity) || 1} ${item.unit || "Unit"}`
+      )
+      .join("\n\n");
 
-      const response = await fetch(`${API_URL}/api/order`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          customer: {
-            name,
-            phone,
-            email,
-            company,
-            location,
-          },
-          items: cart.map((item) => ({
-            id: item.id,
-            quantity: Number(item.quantity),
-          })),
-          notes: notes.trim(),
-        }),
-      });
+    const message = [
+      "Hello! I would like to place a Hygiene Supplies order.",
+      "",
+      "CUSTOMER DETAILS",
+      `Name: ${name}`,
+      `Phone: ${phone}`,
+      `Email: ${email || "Not provided"}`,
+      `Company / Organization: ${company || "Not provided"}`,
+      `Delivery / Location: ${location}`,
+      "",
+      "ORDER ITEMS",
+      productLines,
+      "",
+      `Total quantity: ${cartCount} items`,
+      "",
+      `Additional Notes: ${additionalNotes || "None"}`,
+      "",
+      "Please confirm product availability and pricing. Thank you!",
+    ].join("\n");
 
-      const data = await response.json().catch(() => ({}));
+    const whatsappURL =
+      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 
-      if (!response.ok || !data.success) {
-        throw new Error(
-          data.message || "Unable to submit order."
-        );
-      }
-
-      setOrderSuccess(data);
-      setCart([]);
-      setCustomer({ ...emptyCustomer });
-      setNotes("");
-      setShowCheckout(false);
-
-      // Refresh quantities after the order has been accepted.
-      await loadOrderedQuantities();
-    } catch (error) {
-      console.error("Order submission error:", error);
-
-      window.alert(
-        error.message ||
-          "Unable to submit the order. Please try again."
-      );
-    } finally {
-      setLoading(false);
-    }
+    // Open WhatsApp with the prepared order. The customer must press Send.
+    window.open(whatsappURL, "_blank", "noopener,noreferrer");
   };
 
   return (
     <section className="ccq-section">
       <div className="ccq-header">
         <span className="ccq-label">HYGIENE SUPPLIES</span>
+
         <h1 className="ccq-title">Hygiene Supplies</h1>
+
         <p className="ccq-intro">
           Explore our range of hygiene products, waste bins,
           washroom essentials and facility supplies.
@@ -553,57 +467,46 @@ export default function HygieneSupplies() {
       </button>
 
       <div className="ccq-grid">
-        {products.map((product) => {
-          const orderedQuantity =
-            Number(orderedQuantities[product.id]) || 0;
+        {products.map((product) => (
+          <article className="ccq-card" key={product.id}>
+            <button
+              type="button"
+              className="ccq-image-button"
+              onClick={() => setSelectedProduct(product)}
+              aria-label={`View ${product.name}`}
+            >
+              <img
+                src={product.image}
+                alt={product.name}
+                className="ccq-product-image"
+                loading="lazy"
+              />
+            </button>
 
-          return (
-            <article className="ccq-card" key={product.id}>
+            <div className="ccq-card-content">
+              <span className="ccq-category">
+                {product.category}
+              </span>
+
+              <h2 className="ccq-product-name">
+                {product.name}
+              </h2>
+
+              <div className="ccq-unit">{product.unit}</div>
+
               <button
                 type="button"
-                className="ccq-image-button"
-                onClick={() => setSelectedProduct(product)}
-                aria-label={`View ${product.name}`}
+                className="ccq-add-button"
+                onClick={() => addToCart(product)}
               >
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="ccq-product-image"
-                  loading="lazy"
-                />
+                Add to Order
               </button>
-
-              <div className="ccq-card-content">
-                <span className="ccq-category">
-                  {product.category}
-                </span>
-
-                <h2 className="ccq-product-name">
-                  {product.name}
-                </h2>
-
-                <div className="ccq-unit">{product.unit}</div>
-
-                {!loadingOrderedQuantities &&
-                  orderedQuantity > 0 && (
-                    <div className="ccq-ordered">
-                      Ordered: {orderedQuantity}
-                    </div>
-                  )}
-
-                <button
-                  type="button"
-                  className="ccq-add-button"
-                  onClick={() => addToCart(product)}
-                >
-                  Add to Order
-                </button>
-              </div>
-            </article>
-          );
-        })}
+            </div>
+          </article>
+        ))}
       </div>
 
+      {/* Product details modal */}
       {selectedProduct && (
         <div
           className="ccq-overlay"
@@ -640,6 +543,7 @@ export default function HygieneSupplies() {
               </span>
 
               <h2>{selectedProduct.name}</h2>
+
               <p>{selectedProduct.description}</p>
 
               <div className="ccq-modal-unit">
@@ -659,6 +563,7 @@ export default function HygieneSupplies() {
         </div>
       )}
 
+      {/* Order summary drawer */}
       {showCart && (
         <div
           className="ccq-overlay"
@@ -717,9 +622,7 @@ export default function HygieneSupplies() {
                                 Number(item.quantity) - 1
                               )
                             }
-                            aria-label={`Decrease ${
-                              item.name || "product"
-                            } quantity`}
+                            aria-label={`Decrease ${item.name} quantity`}
                           >
                             −
                           </button>
@@ -734,9 +637,7 @@ export default function HygieneSupplies() {
                                 Number(item.quantity) + 1
                               )
                             }
-                            aria-label={`Increase ${
-                              item.name || "product"
-                            } quantity`}
+                            aria-label={`Increase ${item.name} quantity`}
                           >
                             +
                           </button>
@@ -769,10 +670,11 @@ export default function HygieneSupplies() {
                   </button>
 
                   <div className="ccq-no-payment">
-                    <strong>Order Request</strong>
+                    <strong>WhatsApp Order Request</strong>
                     <span>
-                      Submit your request and our team will contact
-                      you to confirm the details.
+                      Your product list and details will be prepared
+                      in WhatsApp. You can review the message before
+                      sending it.
                     </span>
                   </div>
                 </div>
@@ -782,10 +684,16 @@ export default function HygieneSupplies() {
         </div>
       )}
 
+      {/* Customer details and WhatsApp submission */}
       {showCheckout && (
-        <div className="ccq-overlay" role="presentation">
+        <div
+          className="ccq-overlay"
+          role="presentation"
+          onClick={() => setShowCheckout(false)}
+        >
           <div
             className="ccq-checkout"
+            onClick={(event) => event.stopPropagation()}
             role="dialog"
             aria-modal="true"
             aria-label="Customer Details"
@@ -793,8 +701,7 @@ export default function HygieneSupplies() {
             <button
               type="button"
               className="ccq-close"
-              onClick={() => !loading && setShowCheckout(false)}
-              disabled={loading}
+              onClick={() => setShowCheckout(false)}
               aria-label="Close customer details"
             >
               ×
@@ -804,16 +711,14 @@ export default function HygieneSupplies() {
               <span>FINAL STEP</span>
               <h2>Customer Details</h2>
               <p>
-                Enter your details and submit your order request.
+                Enter your details to prepare your order in WhatsApp.
               </p>
             </div>
 
             <form className="ccq-form" onSubmit={submitOrder}>
               <div className="ccq-form-grid">
                 <div className="ccq-field">
-                  <label htmlFor="hygiene-name">
-                    Full Name *
-                  </label>
+                  <label htmlFor="hygiene-name">Full Name *</label>
                   <input
                     id="hygiene-name"
                     name="name"
@@ -826,9 +731,7 @@ export default function HygieneSupplies() {
                 </div>
 
                 <div className="ccq-field">
-                  <label htmlFor="hygiene-phone">
-                    Phone Number *
-                  </label>
+                  <label htmlFor="hygiene-phone">Phone Number *</label>
                   <input
                     id="hygiene-phone"
                     type="tel"
@@ -843,9 +746,7 @@ export default function HygieneSupplies() {
                 </div>
 
                 <div className="ccq-field">
-                  <label htmlFor="hygiene-email">
-                    Email Address
-                  </label>
+                  <label htmlFor="hygiene-email">Email Address</label>
                   <input
                     id="hygiene-email"
                     type="email"
@@ -889,9 +790,7 @@ export default function HygieneSupplies() {
               </div>
 
               <div className="ccq-field">
-                <label htmlFor="hygiene-notes">
-                  Additional Notes
-                </label>
+                <label htmlFor="hygiene-notes">Additional Notes</label>
                 <textarea
                   id="hygiene-notes"
                   value={notes}
@@ -909,61 +808,20 @@ export default function HygieneSupplies() {
               </div>
 
               <div className="ccq-no-payment">
-                <strong>Order Request</strong>
+                <strong>Continue with WhatsApp</strong>
                 <span>
-                  Our team will contact you to confirm your request.
+                  WhatsApp will open with your prepared order.
+                  Review the details and press Send to submit your request.
                 </span>
               </div>
 
               <button
                 type="submit"
                 className="ccq-submit"
-                disabled={loading}
               >
-                {loading
-                  ? "Submitting Order..."
-                  : "Submit Order Request"}
+                Continue to WhatsApp
               </button>
             </form>
-          </div>
-        </div>
-      )}
-
-      {orderSuccess && (
-        <div className="ccq-overlay" role="presentation">
-          <div
-            className="ccq-success"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Order submitted successfully"
-          >
-            <div className="ccq-success-icon">✓</div>
-            <span>ORDER RECEIVED</span>
-            <h2>Thank You!</h2>
-            <p>
-              Your order request has been submitted successfully.
-            </p>
-
-            <div className="ccq-order-number">
-              <small>Order ID</small>
-              <strong>
-                {orderSuccess.orderId ||
-                  orderSuccess.order?.id ||
-                  "Order received"}
-              </strong>
-            </div>
-
-            <p>
-              Our team will contact you to confirm your request.
-            </p>
-
-            <button
-              type="button"
-              className="ccq-success-button"
-              onClick={() => setOrderSuccess(null)}
-            >
-              Continue Shopping
-            </button>
           </div>
         </div>
       )}

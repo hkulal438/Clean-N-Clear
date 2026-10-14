@@ -1,5 +1,5 @@
 
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./CleaningChemicals.css";
 
 import Product3LayerServiceCart from "../../images/ProffessionalEquipment/3_Layer_Service_Cart.png";
@@ -50,9 +50,8 @@ import {
   updateOrderCart,
 } from "../../utils/OrderCart";
 
-const API_URL = (
-  import.meta.env.VITE_API_URL || "http://localhost:5000"
-).replace(/\/+$/, "");
+// WhatsApp number in international format without + or spaces.
+const WHATSAPP_NUMBER = "918147304734";
 
 const products = [
   { id: "3-layer-service-cart", name: "3 Layer Service Cart", image: Product3LayerServiceCart },
@@ -112,20 +111,6 @@ const emptyCustomer = {
   location: "",
 };
 
-const readJsonResponse = async (response) => {
-  const text = await response.text();
-
-  if (!text) return {};
-
-  try {
-    return JSON.parse(text);
-  } catch {
-    throw new Error(
-      `The server returned an invalid response (${response.status}).`
-    );
-  }
-};
-
 const ProfessionalEquipment = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [cart, setCart] = useState(() => {
@@ -135,10 +120,6 @@ const ProfessionalEquipment = () => {
 
   const [showCart, setShowCart] = useState(false);
   const [showCheckout, setShowCheckout] = useState(false);
-  const [orderSuccess, setOrderSuccess] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [orderedQuantities, setOrderedQuantities] = useState({});
-  const [loadingOrderedQuantities, setLoadingOrderedQuantities] = useState(true);
   const [customer, setCustomer] = useState(emptyCustomer);
   const [notes, setNotes] = useState("");
 
@@ -146,68 +127,16 @@ const ProfessionalEquipment = () => {
     updateOrderCart(cart);
   }, [cart]);
 
-  /* Safely load quantities without breaking the product page. */
-  const loadOrderedQuantities = useCallback(async () => {
-    setLoadingOrderedQuantities(true);
-
-    try {
-      const response = await fetch(
-        `${API_URL}/api/product-order-quantities`,
-        {
-          method: "GET",
-          headers: { Accept: "application/json" },
-        }
-      );
-
-      const data = await readJsonResponse(response);
-
-      if (!response.ok) {
-        throw new Error(
-          data.message ||
-            `Unable to load quantities (${response.status}).`
-        );
-      }
-
-      if (data.success !== true) {
-        throw new Error(
-          data.message ||
-            "The quantities endpoint did not return success: true."
-        );
-      }
-
-      const quantities =
-        data.quantities &&
-        typeof data.quantities === "object" &&
-        !Array.isArray(data.quantities)
-          ? data.quantities
-          : {};
-
-      setOrderedQuantities(quantities);
-    } catch (error) {
-      console.error("Unable to load ordered quantities:", error);
-      setOrderedQuantities({});
-    } finally {
-      setLoadingOrderedQuantities(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    loadOrderedQuantities();
-  }, [loadOrderedQuantities]);
-
   useEffect(() => {
     const modalOpen =
-      Boolean(selectedProduct) ||
-      showCart ||
-      showCheckout ||
-      Boolean(orderSuccess);
+      Boolean(selectedProduct) || showCart || showCheckout;
 
     document.body.style.overflow = modalOpen ? "hidden" : "";
 
     return () => {
       document.body.style.overflow = "";
     };
-  }, [selectedProduct, showCart, showCheckout, orderSuccess]);
+  }, [selectedProduct, showCart, showCheckout]);
 
   const addToCart = (product) => {
     setCart((previousCart) => {
@@ -218,7 +147,10 @@ const ProfessionalEquipment = () => {
       if (existing) {
         return previousCart.map((item) =>
           item.id === product.id
-            ? { ...item, quantity: Number(item.quantity || 0) + 1 }
+            ? {
+                ...item,
+                quantity: Number(item.quantity || 0) + 1,
+              }
             : item
         );
       }
@@ -238,7 +170,7 @@ const ProfessionalEquipment = () => {
   };
 
   const updateQuantity = (id, quantity) => {
-    const nextQuantity = Number(quantity);
+    const nextQuantity = Math.floor(Number(quantity));
 
     if (!Number.isFinite(nextQuantity)) return;
 
@@ -250,7 +182,7 @@ const ProfessionalEquipment = () => {
     setCart((previousCart) =>
       previousCart.map((item) =>
         item.id === id
-          ? { ...item, quantity: Math.floor(nextQuantity) }
+          ? { ...item, quantity: nextQuantity }
           : item
       )
     );
@@ -280,10 +212,8 @@ const ProfessionalEquipment = () => {
     setShowCheckout(true);
   };
 
-  const submitOrder = async (event) => {
+  const submitOrder = (event) => {
     event.preventDefault();
-
-    if (loading) return;
 
     if (cart.length === 0) {
       window.alert("Please add at least one product to your order.");
@@ -297,7 +227,9 @@ const ProfessionalEquipment = () => {
     const location = customer.location.trim();
 
     if (!name || !phone || !location) {
-      window.alert("Please enter your name, phone number and location.");
+      window.alert(
+        "Please enter your name, phone number and location."
+      );
       return;
     }
 
@@ -308,60 +240,47 @@ const ProfessionalEquipment = () => {
       return;
     }
 
-    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (
+      email &&
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+    ) {
       window.alert("Please enter a valid email address.");
       return;
     }
 
-    try {
-      setLoading(true);
+    const productLines = cart
+      .map(
+        (item, index) =>
+          `${index + 1}. ${item.name}\n` +
+          `   Quantity: ${Number(item.quantity) || 1} ${item.unit || "Unit"}`
+      )
+      .join("\n\n");
 
-      const items = cart.map((item) => ({
-        id: item.id,
-        quantity: Number(item.quantity),
-      }));
+    const message = [
+      "Hello! I would like to place a Professional Equipment order.",
+      "",
+      "CUSTOMER DETAILS",
+      `Name: ${name}`,
+      `Phone: ${phone}`,
+      `Email: ${email || "Not provided"}`,
+      `Company / Organization: ${company || "Not provided"}`,
+      `Delivery / Location: ${location}`,
+      "",
+      "ORDER ITEMS",
+      productLines,
+      "",
+      `Total quantity: ${cartCount} items`,
+      "",
+      `Additional Notes: ${notes.trim() || "None"}`,
+      "",
+      "Please confirm product availability and pricing. Thank you!",
+    ].join("\n");
 
-      const response = await fetch(`${API_URL}/api/order`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          customer: { name, phone, email, company, location },
-          items,
-          notes: notes.trim(),
-        }),
-      });
+    const whatsappURL =
+      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 
-      const data = await readJsonResponse(response);
-
-      if (!response.ok || data.success !== true) {
-        throw new Error(
-          data.message || "Unable to submit your order."
-        );
-      }
-
-      setOrderSuccess(data);
-      setCart([]);
-      setCustomer({ ...emptyCustomer });
-      setNotes("");
-      setShowCheckout(false);
-
-      await loadOrderedQuantities();
-    } catch (error) {
-      console.error("Order submission error:", error);
-      window.alert(
-        error.message ||
-          "Unable to submit the order. Please try again."
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const closeCheckout = () => {
-    if (!loading) setShowCheckout(false);
+    // WhatsApp opens with the order prepared; the customer must press Send.
+    window.open(whatsappURL, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -386,50 +305,40 @@ const ProfessionalEquipment = () => {
       </button>
 
       <div className="ccq-grid">
-        {products.map((product) => {
-          const orderedQuantity =
-            Number(orderedQuantities[product.id]) || 0;
+        {products.map((product) => (
+          <article className="ccq-card" key={product.id}>
+            <button
+              type="button"
+              className="ccq-image-button"
+              onClick={() => setSelectedProduct(product)}
+              aria-label={`View ${product.name}`}
+            >
+              <img
+                src={product.image}
+                alt={product.name}
+                className="ccq-product-image"
+                loading="lazy"
+              />
+            </button>
 
-          return (
-            <article className="ccq-card" key={product.id}>
+            <div className="ccq-card-content">
+              <span className="ccq-category">{product.category}</span>
+              <h2 className="ccq-product-name">{product.name}</h2>
+              <div className="ccq-unit">{product.unit}</div>
+
               <button
                 type="button"
-                className="ccq-image-button"
-                onClick={() => setSelectedProduct(product)}
-                aria-label={`View ${product.name}`}
+                className="ccq-add-button"
+                onClick={() => addToCart(product)}
               >
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="ccq-product-image"
-                  loading="lazy"
-                />
+                Add to Order
               </button>
-
-              <div className="ccq-card-content">
-                <span className="ccq-category">{product.category}</span>
-                <h2 className="ccq-product-name">{product.name}</h2>
-                <div className="ccq-unit">{product.unit}</div>
-
-                {!loadingOrderedQuantities && orderedQuantity > 0 && (
-                  <div className="ccq-ordered">
-                    Ordered: {orderedQuantity}
-                  </div>
-                )}
-
-                <button
-                  type="button"
-                  className="ccq-add-button"
-                  onClick={() => addToCart(product)}
-                >
-                  Add to Order
-                </button>
-              </div>
-            </article>
-          );
-        })}
+            </div>
+          </article>
+        ))}
       </div>
 
+      {/* Product details */}
       {selectedProduct && (
         <div
           className="ccq-overlay"
@@ -484,6 +393,7 @@ const ProfessionalEquipment = () => {
         </div>
       )}
 
+      {/* Order summary */}
       {showCart && (
         <div
           className="ccq-overlay"
@@ -502,6 +412,7 @@ const ProfessionalEquipment = () => {
                 <span>YOUR ORDER</span>
                 <h2>Order Summary</h2>
               </div>
+
               <button
                 type="button"
                 className="ccq-close"
@@ -523,10 +434,14 @@ const ProfessionalEquipment = () => {
                 <div className="ccq-cart-items">
                   {cart.map((item) => (
                     <div className="ccq-cart-item" key={item.id}>
-                      <img src={item.image} alt={item.name} />
+                      <img
+                        src={item.image}
+                        alt={item.name || "Product"}
+                      />
 
                       <div className="ccq-cart-item-info">
-                        <h3>{item.name}</h3>
+                        <h3>{item.name || "Product"}</h3>
+                        <span>{item.unit || "Unit"}</span>
 
                         <div className="ccq-quantity">
                           <button
@@ -571,6 +486,11 @@ const ProfessionalEquipment = () => {
                 </div>
 
                 <div className="ccq-cart-footer">
+                  <div className="ccq-total">
+                    <span>Products in your order</span>
+                    <strong>{cartCount}</strong>
+                  </div>
+
                   <button
                     type="button"
                     className="ccq-checkout-button"
@@ -580,10 +500,10 @@ const ProfessionalEquipment = () => {
                   </button>
 
                   <div className="ccq-no-payment">
-                    <strong>No Online Payment</strong>
+                    <strong>WhatsApp Order Request</strong>
                     <span>
-                      Submit your order request and our team will contact
-                      you for confirmation.
+                      Your order will be prepared in WhatsApp for you
+                      to review before sending.
                     </span>
                   </div>
                 </div>
@@ -593,10 +513,16 @@ const ProfessionalEquipment = () => {
         </div>
       )}
 
+      {/* Customer details */}
       {showCheckout && (
-        <div className="ccq-overlay" role="presentation">
+        <div
+          className="ccq-overlay"
+          onClick={() => setShowCheckout(false)}
+          role="presentation"
+        >
           <div
             className="ccq-checkout"
+            onClick={(event) => event.stopPropagation()}
             role="dialog"
             aria-modal="true"
             aria-label="Customer Details"
@@ -604,8 +530,7 @@ const ProfessionalEquipment = () => {
             <button
               type="button"
               className="ccq-close"
-              onClick={closeCheckout}
-              disabled={loading}
+              onClick={() => setShowCheckout(false)}
               aria-label="Close customer details"
             >
               ×
@@ -615,18 +540,16 @@ const ProfessionalEquipment = () => {
               <span>FINAL STEP</span>
               <h2>Customer Details</h2>
               <p>
-                Enter your details and submit your order request.
-                No online payment is required.
+                Enter your details to prepare your order in WhatsApp.
               </p>
             </div>
 
             <form className="ccq-form" onSubmit={submitOrder}>
               <div className="ccq-form-grid">
                 <div className="ccq-field">
-                  <label htmlFor="cnc-equipment-name">Full Name *</label>
+                  <label htmlFor="equipment-name">Full Name *</label>
                   <input
-                    id="cnc-equipment-name"
-                    type="text"
+                    id="equipment-name"
                     name="name"
                     value={customer.name}
                     onChange={handleCustomerChange}
@@ -637,9 +560,9 @@ const ProfessionalEquipment = () => {
                 </div>
 
                 <div className="ccq-field">
-                  <label htmlFor="cnc-equipment-phone">Phone Number *</label>
+                  <label htmlFor="equipment-phone">Phone Number *</label>
                   <input
-                    id="cnc-equipment-phone"
+                    id="equipment-phone"
                     type="tel"
                     name="phone"
                     value={customer.phone}
@@ -652,9 +575,9 @@ const ProfessionalEquipment = () => {
                 </div>
 
                 <div className="ccq-field">
-                  <label htmlFor="cnc-equipment-email">Email Address</label>
+                  <label htmlFor="equipment-email">Email Address</label>
                   <input
-                    id="cnc-equipment-email"
+                    id="equipment-email"
                     type="email"
                     name="email"
                     value={customer.email}
@@ -665,12 +588,11 @@ const ProfessionalEquipment = () => {
                 </div>
 
                 <div className="ccq-field">
-                  <label htmlFor="cnc-equipment-company">
+                  <label htmlFor="equipment-company">
                     Company / Organization
                   </label>
                   <input
-                    id="cnc-equipment-company"
-                    type="text"
+                    id="equipment-company"
                     name="company"
                     value={customer.company}
                     onChange={handleCustomerChange}
@@ -681,11 +603,11 @@ const ProfessionalEquipment = () => {
               </div>
 
               <div className="ccq-field">
-                <label htmlFor="cnc-equipment-location">
+                <label htmlFor="equipment-location">
                   Delivery / Location *
                 </label>
                 <textarea
-                  id="cnc-equipment-location"
+                  id="equipment-location"
                   name="location"
                   value={customer.location}
                   onChange={handleCustomerChange}
@@ -697,13 +619,13 @@ const ProfessionalEquipment = () => {
               </div>
 
               <div className="ccq-field">
-                <label htmlFor="cnc-equipment-notes">Additional Notes</label>
+                <label htmlFor="equipment-notes">Additional Notes</label>
                 <textarea
-                  id="cnc-equipment-notes"
+                  id="equipment-notes"
                   value={notes}
                   onChange={(event) => setNotes(event.target.value)}
                   placeholder="Any specific requirements?"
-                  rows={4}
+                  rows={3}
                 />
               </div>
 
@@ -715,59 +637,17 @@ const ProfessionalEquipment = () => {
               </div>
 
               <div className="ccq-no-payment">
-                <strong>No Online Payment</strong>
+                <strong>Continue with WhatsApp</strong>
                 <span>
-                  Submit your order request and our team will contact you
-                  for confirmation.
+                  WhatsApp will open with your prepared order. Review the
+                  details and press Send to submit your request.
                 </span>
               </div>
 
-              <button
-                type="submit"
-                className="ccq-submit"
-                disabled={loading}
-              >
-                {loading ? "Submitting Order..." : "Submit Order Request"}
+              <button type="submit" className="ccq-submit">
+                Continue to WhatsApp
               </button>
             </form>
-          </div>
-        </div>
-      )}
-
-      {orderSuccess && (
-        <div className="ccq-overlay" role="presentation">
-          <div
-            className="ccq-success"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Order submitted successfully"
-          >
-            <div className="ccq-success-icon">✓</div>
-            <span>ORDER RECEIVED</span>
-            <h2>Thank You!</h2>
-            <p>Your order request has been submitted successfully.</p>
-
-            <div className="ccq-order-number">
-              <small>Order ID</small>
-              <strong>
-                {orderSuccess.orderId ||
-                  orderSuccess.order?.id ||
-                  "Order received"}
-              </strong>
-            </div>
-
-            <p>
-              Our team will contact you to confirm availability,
-              delivery and final billing.
-            </p>
-
-            <button
-              type="button"
-              className="ccq-success-button"
-              onClick={() => setOrderSuccess(null)}
-            >
-              Continue Shopping
-            </button>
           </div>
         </div>
       )}

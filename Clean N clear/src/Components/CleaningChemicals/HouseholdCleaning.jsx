@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import "./CleaningChemicals.css";
 
@@ -55,8 +56,9 @@ import REVAStickOff from "../../images/house/REVA_STICK_OFF.png";
 import REVASVD from "../../images/house/REVA_SVD.png";
 import REVAWSR from "../../images/house/REVA_WSR.png";
 
-const API_URL =
-  import.meta.env.VITE_API_URL || "http://localhost:5000";
+// ================= WHATSAPP CONFIGURATION =================
+
+const WHATSAPP_NUMBER = "918147304734";
 
 // ================= PRODUCT LIST =================
 
@@ -122,35 +124,35 @@ const HouseholdCleaning = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [showCart, setShowCart] = useState(false);
   const [showCheckout, setShowCheckout] = useState(false);
-  const [orderSuccess, setOrderSuccess] = useState(null);
-  const [loading, setLoading] = useState(false);
   const [customer, setCustomer] = useState(emptyCustomer);
   const [notes, setNotes] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
+  // Keep the shared order cart updated.
   useEffect(() => {
     updateOrderCart(cart);
   }, [cart]);
 
+  // Lock background scrolling while a modal is open.
   useEffect(() => {
     const modalOpen =
-      Boolean(selectedProduct) ||
-      showCart ||
-      showCheckout ||
-      Boolean(orderSuccess);
+      Boolean(selectedProduct) || showCart || showCheckout;
 
     document.body.style.overflow = modalOpen ? "hidden" : "";
 
     return () => {
       document.body.style.overflow = "";
     };
-  }, [selectedProduct, showCart, showCheckout, orderSuccess]);
+  }, [selectedProduct, showCart, showCheckout]);
 
   const cartCount = cart.reduce(
-    (total, item) => total + Number(item.quantity || 0),
+    (total, item) => total + Number(item?.quantity || 0),
     0
   );
 
   const addToCart = (product) => {
+    setErrorMessage("");
+
     setCart((previousCart) => {
       const existing = previousCart.find(
         (item) => item.id === product.id
@@ -159,7 +161,10 @@ const HouseholdCleaning = () => {
       if (existing) {
         return previousCart.map((item) =>
           item.id === product.id
-            ? { ...item, quantity: Number(item.quantity || 0) + 1 }
+            ? {
+                ...item,
+                quantity: Number(item.quantity || 0) + 1,
+              }
             : item
         );
       }
@@ -177,6 +182,7 @@ const HouseholdCleaning = () => {
     });
 
     setSelectedProduct(null);
+    setShowCheckout(false);
     setShowCart(true);
   };
 
@@ -194,7 +200,9 @@ const HouseholdCleaning = () => {
 
     setCart((previousCart) =>
       previousCart.map((item) =>
-        item.id === id ? { ...item, quantity: nextQuantity } : item
+        item.id === id
+          ? { ...item, quantity: nextQuantity }
+          : item
       )
     );
   };
@@ -212,11 +220,15 @@ const HouseholdCleaning = () => {
       ...previousCustomer,
       [name]: value,
     }));
+
+    setErrorMessage("");
   };
 
   const openCheckout = () => {
+    setErrorMessage("");
+
     if (!cart.length) {
-      window.alert("Please add at least one product to your order.");
+      setErrorMessage("Please add at least one product to your order.");
       return;
     }
 
@@ -224,11 +236,12 @@ const HouseholdCleaning = () => {
     setShowCheckout(true);
   };
 
-  const submitOrder = async (event) => {
+  const submitOrder = (event) => {
     event.preventDefault();
+    setErrorMessage("");
 
     if (!cart.length) {
-      window.alert("Please add at least one product to your order.");
+      setErrorMessage("Please add at least one product to your order.");
       return;
     }
 
@@ -237,65 +250,73 @@ const HouseholdCleaning = () => {
     const email = customer.email.trim();
     const company = customer.company.trim();
     const location = customer.location.trim();
+    const additionalNotes = notes.trim();
 
     if (!name || !phone || !location) {
-      window.alert("Please enter your name, phone number and location.");
+      setErrorMessage(
+        "Please enter your name, phone number and location."
+      );
       return;
     }
 
     const phoneDigits = phone.replace(/\D/g, "");
 
     if (phoneDigits.length < 7 || phoneDigits.length > 15) {
-      window.alert("Please enter a valid phone number.");
+      setErrorMessage("Please enter a valid phone number.");
       return;
     }
 
-    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      window.alert("Please enter a valid email address.");
+    if (
+      email &&
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+    ) {
+      setErrorMessage("Please enter a valid email address.");
       return;
     }
 
-    try {
-      setLoading(true);
+    const productLines = cart
+      .map(
+        (item, index) =>
+          `${index + 1}. ${item.name} — Quantity: ${Number(
+            item.quantity || 1
+          )}`
+      )
+      .join("\n");
 
-      const response = await fetch(`${API_URL}/api/order`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          customer: { name, phone, email, company, location },
-          items: cart.map((item) => ({
-            id: item.id,
-            quantity: Number(item.quantity),
-          })),
-          notes: notes.trim(),
-        }),
-      });
+    const message = [
+      "Hello Clean N Clear,",
+      "",
+      "I would like to enquire about the following REVA products:",
+      "",
+      productLines,
+      "",
+      "CUSTOMER DETAILS",
+      `Name: ${name}`,
+      `Phone: ${phone}`,
+      `Email: ${email || "Not provided"}`,
+      `Company / Organization: ${company || "Not provided"}`,
+      `Location / Address: ${location}`,
+      `Additional Requirements: ${additionalNotes || "None"}`,
+      "",
+      "Please share the availability, pricing and further details.",
+    ].join("\n");
 
-      const data = await response.json();
+    const whatsappURL =
+      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 
-      if (!response.ok || !data.success) {
-        throw new Error(data.message || "Unable to submit order.");
-      }
-
-      setOrderSuccess(data);
-      setCart([]);
-      updateOrderCart([]);
-      setCustomer({ ...emptyCustomer });
-      setNotes("");
-      setShowCheckout(false);
-    } catch (error) {
-      console.error("Order submission error:", error);
-      window.alert(error.message || "Unable to submit the order. Please try again.");
-    } finally {
-      setLoading(false);
-    }
+    // Open WhatsApp directly. No backend or API request is made.
+    window.open(whatsappURL, "_blank", "noopener,noreferrer");
   };
 
   return (
     <section className="ccq-section">
       <header className="ccq-header">
         <span className="ccq-label">REVA PRODUCTS</span>
-        <h1 className="ccq-title">Cleaning <span>Solutions</span></h1>
+
+        <h1 className="ccq-title">
+          Cleaning <span>Solutions</span>
+        </h1>
+
         <p className="ccq-intro">
           Explore our range of REVA cleaning, hygiene and care products
           for household, commercial and institutional use.
@@ -305,7 +326,10 @@ const HouseholdCleaning = () => {
       <button
         type="button"
         className="ccq-cart-button"
-        onClick={() => setShowCart(true)}
+        onClick={() => {
+          setErrorMessage("");
+          setShowCart(true);
+        }}
       >
         <span>My Order</span>
         <strong>{cartCount}</strong>
@@ -329,8 +353,14 @@ const HouseholdCleaning = () => {
             </button>
 
             <div className="ccq-card-content">
-              <span className="ccq-category">REVA Collection</span>
-              <h2 className="ccq-product-name">{product.name}</h2>
+              <span className="ccq-category">
+                REVA Collection
+              </span>
+
+              <h2 className="ccq-product-name">
+                {product.name}
+              </h2>
+
               <button
                 type="button"
                 className="ccq-add-button"
@@ -343,6 +373,8 @@ const HouseholdCleaning = () => {
         ))}
       </div>
 
+      {/* ================= PRODUCT DETAILS MODAL ================= */}
+
       {selectedProduct && (
         <div
           className="ccq-overlay"
@@ -353,6 +385,7 @@ const HouseholdCleaning = () => {
             onClick={(event) => event.stopPropagation()}
             role="dialog"
             aria-modal="true"
+            aria-label={`${selectedProduct.name} details`}
           >
             <button
               type="button"
@@ -373,11 +406,14 @@ const HouseholdCleaning = () => {
 
             <div className="ccq-modal-content">
               <span className="ccq-label">REVA COLLECTION</span>
+
               <h2>{selectedProduct.name}</h2>
+
               <p>
-                Contact our team for product details and assistance with
-                your requirements.
+                Contact our team for product details and assistance
+                with your requirements.
               </p>
+
               <button
                 type="button"
                 className="ccq-add-large"
@@ -389,6 +425,8 @@ const HouseholdCleaning = () => {
           </div>
         </div>
       )}
+
+      {/* ================= ORDER SUMMARY ================= */}
 
       {showCart && (
         <div
@@ -407,6 +445,7 @@ const HouseholdCleaning = () => {
                 <span>YOUR SELECTION</span>
                 <h2>Order Summary</h2>
               </div>
+
               <button
                 type="button"
                 className="ccq-close"
@@ -446,7 +485,9 @@ const HouseholdCleaning = () => {
                           >
                             −
                           </button>
+
                           <strong>{item.quantity}</strong>
+
                           <button
                             type="button"
                             onClick={() =>
@@ -493,10 +534,16 @@ const HouseholdCleaning = () => {
         </div>
       )}
 
+      {/* ================= CUSTOMER DETAILS ================= */}
+
       {showCheckout && (
-        <div className="ccq-overlay">
+        <div
+          className="ccq-overlay"
+          onClick={() => setShowCheckout(false)}
+        >
           <div
             className="ccq-checkout"
+            onClick={(event) => event.stopPropagation()}
             role="dialog"
             aria-modal="true"
             aria-label="Customer details"
@@ -504,8 +551,7 @@ const HouseholdCleaning = () => {
             <button
               type="button"
               className="ccq-close"
-              onClick={() => !loading && setShowCheckout(false)}
-              disabled={loading}
+              onClick={() => setShowCheckout(false)}
               aria-label="Close customer details"
             >
               ×
@@ -514,7 +560,9 @@ const HouseholdCleaning = () => {
             <div className="ccq-checkout-heading">
               <span>FINAL STEP</span>
               <h2>Customer Details</h2>
-              <p>Enter your details to submit your order request.</p>
+              <p>
+                Enter your details to prepare your order on WhatsApp.
+              </p>
             </div>
 
             <form className="ccq-form" onSubmit={submitOrder}>
@@ -560,7 +608,9 @@ const HouseholdCleaning = () => {
                 </div>
 
                 <div className="ccq-field">
-                  <label htmlFor="reva-company">Company / Organization</label>
+                  <label htmlFor="reva-company">
+                    Company / Organization
+                  </label>
                   <input
                     id="reva-company"
                     name="company"
@@ -573,7 +623,9 @@ const HouseholdCleaning = () => {
               </div>
 
               <div className="ccq-field">
-                <label htmlFor="reva-location">Location / Address *</label>
+                <label htmlFor="reva-location">
+                  Location / Address *
+                </label>
                 <textarea
                   id="reva-location"
                   name="location"
@@ -587,11 +639,16 @@ const HouseholdCleaning = () => {
               </div>
 
               <div className="ccq-field">
-                <label htmlFor="reva-notes">Additional Requirements</label>
+                <label htmlFor="reva-notes">
+                  Additional Requirements
+                </label>
                 <textarea
                   id="reva-notes"
                   value={notes}
-                  onChange={(event) => setNotes(event.target.value)}
+                  onChange={(event) => {
+                    setNotes(event.target.value);
+                    setErrorMessage("");
+                  }}
                   placeholder="Tell us about your requirements..."
                   rows={4}
                 />
@@ -604,49 +661,37 @@ const HouseholdCleaning = () => {
                 </div>
               </div>
 
-              <button
-                type="submit"
-                className="ccq-submit"
-                disabled={loading}
-              >
-                {loading ? "Submitting..." : "Submit Order Request"}
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
+              {errorMessage && (
+                <div className="ccq-error" role="alert">
+                  {errorMessage}
+                </div>
+              )}
 
-      {orderSuccess && (
-        <div className="ccq-overlay">
-          <div className="ccq-success" role="dialog" aria-modal="true">
-            <div className="ccq-success-icon">✓</div>
-            <span>ORDER RECEIVED</span>
-            <h2>Thank You!</h2>
-            <p>
-              Your order request has been submitted successfully.
-              Our team will contact you shortly.
-            </p>
+              <div className="ccq-form-actions">
+                <button
+                  type="button"
+                  className="ccq-back-button"
+                  onClick={() => {
+                    setShowCheckout(false);
+                    setShowCart(true);
+                  }}
+                >
+                  Back to Order
+                </button>
 
-            {(orderSuccess.orderId ||
-              orderSuccess.order?.id ||
-              orderSuccess.id) && (
-              <div className="ccq-order-number">
-                <small>Order ID</small>
-                <strong>
-                  {orderSuccess.orderId ||
-                    orderSuccess.order?.id ||
-                    orderSuccess.id}
-                </strong>
+                <button
+                  type="submit"
+                  className="ccq-submit"
+                >
+                  Continue to WhatsApp
+                </button>
               </div>
-            )}
 
-            <button
-              type="button"
-              className="ccq-success-button"
-              onClick={() => setOrderSuccess(null)}
-            >
-              Continue Shopping
-            </button>
+              <p className="ccq-intro">
+                WhatsApp will open with your order details filled in.
+                Please review the message and press Send to submit your enquiry.
+              </p>
+            </form>
           </div>
         </div>
       )}

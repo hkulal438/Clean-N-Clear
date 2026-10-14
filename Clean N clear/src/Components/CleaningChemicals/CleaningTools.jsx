@@ -1,6 +1,12 @@
+
 import { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import "./CleaningChemicals.css";
-import { getOrderCart, updateOrderCart } from "../../utils/OrderCart";
+
+import {
+  getOrderCart,
+  updateOrderCart,
+} from "../../utils/OrderCart";
 
 import AluminiumHandle from "../../images/CleaningTools/Aluminium handle.png";
 import AROMATOILETBRUSHWITHSTAND from "../../images/CleaningTools/AROMA TOILET BRUSH WITH STAND.jpg";
@@ -82,88 +88,88 @@ import WONDERKITCHENWIPER from "../../images/CleaningTools/WONDER KITCHEN WIPER.
 import WoodenHandle from "../../images/CleaningTools/Wooden handle.png";
 import WoodenCarpetBrush from "../../images/CleaningTools/Wooden_Carpet_Brush.png";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const WHATSAPP_NUMBER = "918147304734";
 
 const products = [
-  { id: "aluminium-handle", name: "Aluminium handle", unit: "Select quantity", image: AluminiumHandle },
-  { id: "aroma-toilet-brush-with-stand", name: "AROMA TOILET BRUSH WITH STAND", unit: "Select quantity", image: AROMATOILETBRUSHWITHSTAND },
-  { id: "carpet-brush", name: "Carpet Brush", unit: "Select quantity", image: CarpetBrush },
-  { id: "caution-sign-board", name: "Caution sign board", unit: "Select quantity", image: CautionSignBoard },
-  { id: "ceiling-brush", name: "Ceiling Brush", unit: "Select quantity", image: CeilingBrush },
-  { id: "checked-cloth", name: "Checked cloth", unit: "Select quantity", image: CheckedCloth },
-  { id: "cloth-brush", name: "Cloth brush", unit: "Select quantity", image: ClothBrush },
-  { id: "co-web-brush", name: "Co web brush", unit: "Select quantity", image: CoWebBrush },
-  { id: "co-web-triangle-brush", name: "Co web triangle brush", unit: "Select quantity", image: CoWebTriangleBrush },
-  { id: "cobweb-brush", name: "Cobweb Brush", unit: "Select quantity", image: CobwebBrush },
-  { id: "cotton-cut-end-refill-2", name: "Cotton Cut End Refill 2", unit: "Select quantity", image: CottonCutEndRefill2 },
-  { id: "cotton-jumbo-wet-mop-refill", name: "Cotton Jumbo Wet Mop Refill", unit: "Select quantity", image: CottonJumboWetMopRefill },
-  { id: "cotton-loop-mop-refill-2", name: "Cotton Loop Mop Refill 2", unit: "Select quantity", image: CottonLoopMopRefill2 },
-  { id: "cotton-loop-mop-refill-1", name: "Cotton Loop Mop Refill 1", unit: "Select quantity", image: CottonLoopMopRefill1 },
-  { id: "cotton-loop-mop-refill-2", name: "Cotton Loop Mop Refill 2", unit: "Select quantity", image: CottonLoopMopRefill22 },
-  { id: "cotton-loop-mop-refill-3", name: "Cotton Loop Mop Refill 3", unit: "Select quantity", image: CottonLoopMopRefill3 },
-  { id: "cotton-loop-mop-refill", name: "Cotton Loop Mop Refill", unit: "Select quantity", image: CottonLoopMopRefill },
-  { id: "damp-mop-40cm", name: "Damp Mop 40cm", unit: "Select quantity", image: DampMop40cm },
-  { id: "deck-mop-refill", name: "Deck Mop Refill", unit: "Select quantity", image: DeckMopRefill },
-  { id: "deck-mop-with-handle", name: "Deck Mop With Handle", unit: "Select quantity", image: DeckMopWithHandle },
-  { id: "dry-mop-refill-18in-24in", name: "Dry Mop Refill 18in 24in", unit: "Select quantity", image: DryMopRefill18in24in },
-  { id: "dry-mop-set-18in-24in", name: "Dry Mop Set 18in 24in", unit: "Select quantity", image: DryMopSet18in24in },
-  { id: "feather-duster-1", name: "Feather duster 1", unit: "Select quantity", image: FeatherDuster1 },
-  { id: "feather-duster", name: "Feather duster", unit: "Select quantity", image: FeatherDuster },
-  { id: "flat-mop-45cm", name: "Flat Mop 45cm", unit: "Select quantity", image: FlatMop45cm },
-  { id: "flat-mop-55cm", name: "Flat Mop 55cm", unit: "Select quantity", image: FlatMop55cm },
-  { id: "flat-mop-refill-45cm-60cm", name: "Flat Mop Refill 45cm 60cm", unit: "Select quantity", image: FlatMopRefill45cm60cm },
-  { id: "flexi-mop-refill", name: "Flexi Mop Refill", unit: "Select quantity", image: FlexiMopRefill },
-  { id: "flexi-mop-with-handle-colors", name: "Flexi Mop With Handle Colors", unit: "Select quantity", image: FlexiMopWithHandleColors },
-  { id: "flexi-mop-with-handle", name: "Flexi Mop With Handle", unit: "Select quantity", image: FlexiMopWithHandle },
-  { id: "floor-brush", name: "Floor brush", unit: "Select quantity", image: FloorBrush },
-  { id: "floor-scrubbing-pad", name: "Floor scrubbing pad", unit: "Select quantity", image: FloorScrubbingPad },
-  { id: "floor-scrubbing-brush", name: "Floor Scrubbing Brush", unit: "Select quantity", image: FloorScrubbingBrush },
-  { id: "floor-wiper-16in", name: "Floor Wiper 16in", unit: "Select quantity", image: FloorWiper16in },
-  { id: "floor-wiper-dual-blade-45cm", name: "Floor Wiper Dual Blade 45cm", unit: "Select quantity", image: FloorWiperDualBlade45cm },
-  { id: "floor-wiper-dual-blade-55cm", name: "Floor Wiper Dual Blade 55cm", unit: "Select quantity", image: FloorWiperDualBlade55cm },
-  { id: "floor-wiper-hd-black-18in-24in", name: "Floor Wiper HD Black 18in 24in", unit: "Select quantity", image: FloorWiperHDBlack18in24in },
-  { id: "glass-applicator-refill", name: "Glass Applicator refill", unit: "Select quantity", image: GlassApplicatorRefill },
-  { id: "glass-applicator", name: "Glass Applicator", unit: "Select quantity", image: GlassApplicator },
-  { id: "glass-cloth", name: "Glass cloth", unit: "Select quantity", image: GlassCloth },
-  { id: "glass-scraper-mini", name: "Glass scraper mini", unit: "Select quantity", image: GlassScraperMini },
-  { id: "glass-scraper", name: "Glass scraper", unit: "Select quantity", image: GlassScraper },
-  { id: "glass-squeege", name: "Glass squeege", unit: "Select quantity", image: GlassSqueege },
-  { id: "iron-brush", name: "iron brush", unit: "Select quantity", image: IronBrush },
-  { id: "jazz-spin-mop-bucket", name: "JAZZ SPIN MOP BUCKET", unit: "Select quantity", image: JAZZSPINMOPBUCKET },
-  { id: "kentucky-mop-clip", name: "Kentucky mop clip", unit: "Select quantity", image: KentuckyMopClip },
-  { id: "leaf-picker", name: "Leaf picker", unit: "Select quantity", image: LeafPicker },
-  { id: "lobby-dustpan", name: "Lobby dustpan", unit: "Select quantity", image: LobbyDustpan },
-  { id: "loop-mop-refill", name: "Loop Mop Refill", unit: "Select quantity", image: LoopMopRefill },
-  { id: "loop-mop-with-handle-colors", name: "Loop Mop With Handle Colors", unit: "Select quantity", image: LoopMopWithHandleColors },
-  { id: "loop-mop", name: "Loop Mop", unit: "Select quantity", image: LoopMop },
-  { id: "magik-spin-mop-bucket", name: "MAGIK SPIN MOP BUCKET", unit: "Select quantity", image: MAGIKSPINMOPBUCKET },
-  { id: "mega-mop-refill", name: "Mega Mop Refill", unit: "Select quantity", image: MegaMopRefill },
-  { id: "mega-mop-with-handle", name: "Mega Mop With Handle", unit: "Select quantity", image: MegaMopWithHandle },
-  { id: "metal-handle", name: "Metal handle", unit: "Select quantity", image: MetalHandle },
-  { id: "microfiber-cloth", name: "Microfiber cloth", unit: "Select quantity", image: MicrofiberCloth },
-  { id: "microfiber-loop-mop-with-handle", name: "Microfiber Loop Mop With Handle", unit: "Select quantity", image: MicrofiberLoopMopWithHandle },
-  { id: "mop-clip", name: "Mop clip", unit: "Select quantity", image: MopClip },
-  { id: "mop-cloth", name: "Mop cloth", unit: "Select quantity", image: MopCloth },
-  { id: "plunger", name: "PLUNGER", unit: "Select quantity", image: PLUNGER },
-  { id: "power-mop-refill", name: "Power Mop Refill", unit: "Select quantity", image: PowerMopRefill },
-  { id: "power-mop-with-handle", name: "Power Mop With Handle", unit: "Select quantity", image: PowerMopWithHandle },
-  { id: "push-broom", name: "Push Broom", unit: "Select quantity", image: PushBroom },
-  { id: "que-manager", name: "Que manager", unit: "Select quantity", image: QueManager },
-  { id: "replacement-rubber", name: "Replacement rubber", unit: "Select quantity", image: ReplacementRubber },
-  { id: "rubber-hand-glouse", name: "Rubber hand glouse", unit: "Select quantity", image: RubberHandGlouse },
-  { id: "sapphire-broom", name: "Sapphire Broom", unit: "Select quantity", image: SapphireBroom },
-  { id: "shoe-shine-machine", name: "Shoe shine machine", unit: "Select quantity", image: ShoeShineMachine },
-  { id: "sparkle-microfiber-flat-mop", name: "SPARKLE MICROFIBER FLAT MOP", unit: "Select quantity", image: SPARKLEMICROFIBERFLATMOP },
-  { id: "spray-bottle-1", name: "Spray bottle 1", unit: "Select quantity", image: SprayBottle1 },
-  { id: "spray-bottle", name: "Spray bottle", unit: "Select quantity", image: SprayBottle },
-  { id: "teliscopic-poll", name: "Teliscopic poll", unit: "Select quantity", image: TeliscopicPoll },
-  { id: "toilet-brush-1", name: "Toilet brush 1", unit: "Select quantity", image: ToiletBrush1 },
-  { id: "tool-holder-1", name: "Tool holder 1", unit: "Select quantity", image: ToolHolder1 },
-  { id: "tool-holder", name: "Tool holder", unit: "Select quantity", image: ToolHolder },
-  { id: "trigger", name: "Trigger", unit: "Select quantity", image: Trigger },
-  { id: "wonder-kitchen-wiper", name: "WONDER KITCHEN WIPER", unit: "Select quantity", image: WONDERKITCHENWIPER },
-  { id: "wooden-handle", name: "Wooden handle", unit: "Select quantity", image: WoodenHandle },
-  { id: "wooden-carpet-brush", name: "Wooden Carpet Brush", unit: "Select quantity", image: WoodenCarpetBrush },
+  { id: "aluminium-handle", name: "Aluminium handle", category: "Cleaning Tools", image: AluminiumHandle },
+  { id: "aroma-toilet-brush-with-stand", name: "AROMA TOILET BRUSH WITH STAND", category: "Cleaning Tools", image: AROMATOILETBRUSHWITHSTAND },
+  { id: "carpet-brush", name: "Carpet Brush", category: "Cleaning Tools", image: CarpetBrush },
+  { id: "caution-sign-board", name: "Caution sign board", category: "Cleaning Tools", image: CautionSignBoard },
+  { id: "ceiling-brush", name: "Ceiling Brush", category: "Cleaning Tools", image: CeilingBrush },
+  { id: "checked-cloth", name: "Checked cloth", category: "Cleaning Tools", image: CheckedCloth },
+  { id: "cloth-brush", name: "Cloth brush", category: "Cleaning Tools", image: ClothBrush },
+  { id: "co-web-brush", name: "Co web brush", category: "Cleaning Tools", image: CoWebBrush },
+  { id: "co-web-triangle-brush", name: "Co web triangle brush", category: "Cleaning Tools", image: CoWebTriangleBrush },
+  { id: "cobweb-brush", name: "Cobweb Brush", category: "Cleaning Tools", image: CobwebBrush },
+  { id: "cotton-cut-end-refill-2", name: "Cotton Cut End Refill 2", category: "Cleaning Tools", image: CottonCutEndRefill2 },
+  { id: "cotton-jumbo-wet-mop-refill", name: "Cotton Jumbo Wet Mop Refill", category: "Cleaning Tools", image: CottonJumboWetMopRefill },
+  { id: "cotton-loop-mop-refill-2a", name: "Cotton Loop Mop Refill 2", category: "Cleaning Tools", image: CottonLoopMopRefill2 },
+  { id: "cotton-loop-mop-refill-1", name: "Cotton Loop Mop Refill 1", category: "Cleaning Tools", image: CottonLoopMopRefill1 },
+  { id: "cotton-loop-mop-refill-2b", name: "Cotton Loop Mop Refill 2", category: "Cleaning Tools", image: CottonLoopMopRefill22 },
+  { id: "cotton-loop-mop-refill-3", name: "Cotton Loop Mop Refill 3", category: "Cleaning Tools", image: CottonLoopMopRefill3 },
+  { id: "cotton-loop-mop-refill", name: "Cotton Loop Mop Refill", category: "Cleaning Tools", image: CottonLoopMopRefill },
+  { id: "damp-mop-40cm", name: "Damp Mop 40cm", category: "Cleaning Tools", image: DampMop40cm },
+  { id: "deck-mop-refill", name: "Deck Mop Refill", category: "Cleaning Tools", image: DeckMopRefill },
+  { id: "deck-mop-with-handle", name: "Deck Mop With Handle", category: "Cleaning Tools", image: DeckMopWithHandle },
+  { id: "dry-mop-refill-18in-24in", name: "Dry Mop Refill 18in 24in", category: "Cleaning Tools", image: DryMopRefill18in24in },
+  { id: "dry-mop-set-18in-24in", name: "Dry Mop Set 18in 24in", category: "Cleaning Tools", image: DryMopSet18in24in },
+  { id: "feather-duster-1", name: "Feather duster 1", category: "Cleaning Tools", image: FeatherDuster1 },
+  { id: "feather-duster", name: "Feather duster", category: "Cleaning Tools", image: FeatherDuster },
+  { id: "flat-mop-45cm", name: "Flat Mop 45cm", category: "Cleaning Tools", image: FlatMop45cm },
+  { id: "flat-mop-55cm", name: "Flat Mop 55cm", category: "Cleaning Tools", image: FlatMop55cm },
+  { id: "flat-mop-refill-45cm-60cm", name: "Flat Mop Refill 45cm 60cm", category: "Cleaning Tools", image: FlatMopRefill45cm60cm },
+  { id: "flexi-mop-refill", name: "Flexi Mop Refill", category: "Cleaning Tools", image: FlexiMopRefill },
+  { id: "flexi-mop-with-handle-colors", name: "Flexi Mop With Handle Colors", category: "Cleaning Tools", image: FlexiMopWithHandleColors },
+  { id: "flexi-mop-with-handle", name: "Flexi Mop With Handle", category: "Cleaning Tools", image: FlexiMopWithHandle },
+  { id: "floor-brush", name: "Floor brush", category: "Cleaning Tools", image: FloorBrush },
+  { id: "floor-scrubbing-pad", name: "Floor scrubbing pad", category: "Cleaning Tools", image: FloorScrubbingPad },
+  { id: "floor-scrubbing-brush", name: "Floor Scrubbing Brush", category: "Cleaning Tools", image: FloorScrubbingBrush },
+  { id: "floor-wiper-16in", name: "Floor Wiper 16in", category: "Cleaning Tools", image: FloorWiper16in },
+  { id: "floor-wiper-dual-blade-45cm", name: "Floor Wiper Dual Blade 45cm", category: "Cleaning Tools", image: FloorWiperDualBlade45cm },
+  { id: "floor-wiper-dual-blade-55cm", name: "Floor Wiper Dual Blade 55cm", category: "Cleaning Tools", image: FloorWiperDualBlade55cm },
+  { id: "floor-wiper-hd-black-18in-24in", name: "Floor Wiper HD Black 18in 24in", category: "Cleaning Tools", image: FloorWiperHDBlack18in24in },
+  { id: "glass-applicator-refill", name: "Glass Applicator refill", category: "Cleaning Tools", image: GlassApplicatorRefill },
+  { id: "glass-applicator", name: "Glass Applicator", category: "Cleaning Tools", image: GlassApplicator },
+  { id: "glass-cloth", name: "Glass cloth", category: "Cleaning Tools", image: GlassCloth },
+  { id: "glass-scraper-mini", name: "Glass scraper mini", category: "Cleaning Tools", image: GlassScraperMini },
+  { id: "glass-scraper", name: "Glass scraper", category: "Cleaning Tools", image: GlassScraper },
+  { id: "glass-squeege", name: "Glass squeege", category: "Cleaning Tools", image: GlassSqueege },
+  { id: "iron-brush", name: "iron brush", category: "Cleaning Tools", image: IronBrush },
+  { id: "jazz-spin-mop-bucket", name: "JAZZ SPIN MOP BUCKET", category: "Cleaning Tools", image: JAZZSPINMOPBUCKET },
+  { id: "kentucky-mop-clip", name: "Kentucky mop clip", category: "Cleaning Tools", image: KentuckyMopClip },
+  { id: "leaf-picker", name: "Leaf picker", category: "Cleaning Tools", image: LeafPicker },
+  { id: "lobby-dustpan", name: "Lobby dustpan", category: "Cleaning Tools", image: LobbyDustpan },
+  { id: "loop-mop-refill", name: "Loop Mop Refill", category: "Cleaning Tools", image: LoopMopRefill },
+  { id: "loop-mop-with-handle-colors", name: "Loop Mop With Handle Colors", category: "Cleaning Tools", image: LoopMopWithHandleColors },
+  { id: "loop-mop", name: "Loop Mop", category: "Cleaning Tools", image: LoopMop },
+  { id: "magik-spin-mop-bucket", name: "MAGIK SPIN MOP BUCKET", category: "Cleaning Tools", image: MAGIKSPINMOPBUCKET },
+  { id: "mega-mop-refill", name: "Mega Mop Refill", category: "Cleaning Tools", image: MegaMopRefill },
+  { id: "mega-mop-with-handle", name: "Mega Mop With Handle", category: "Cleaning Tools", image: MegaMopWithHandle },
+  { id: "metal-handle", name: "Metal handle", category: "Cleaning Tools", image: MetalHandle },
+  { id: "microfiber-cloth", name: "Microfiber cloth", category: "Cleaning Tools", image: MicrofiberCloth },
+  { id: "microfiber-loop-mop-with-handle", name: "Microfiber Loop Mop With Handle", category: "Cleaning Tools", image: MicrofiberLoopMopWithHandle },
+  { id: "mop-clip", name: "Mop clip", category: "Cleaning Tools", image: MopClip },
+  { id: "mop-cloth", name: "Mop cloth", category: "Cleaning Tools", image: MopCloth },
+  { id: "plunger", name: "PLUNGER", category: "Cleaning Tools", image: PLUNGER },
+  { id: "power-mop-refill", name: "Power Mop Refill", category: "Cleaning Tools", image: PowerMopRefill },
+  { id: "power-mop-with-handle", name: "Power Mop With Handle", category: "Cleaning Tools", image: PowerMopWithHandle },
+  { id: "push-broom", name: "Push Broom", category: "Cleaning Tools", image: PushBroom },
+  { id: "que-manager", name: "Que manager", category: "Cleaning Tools", image: QueManager },
+  { id: "replacement-rubber", name: "Replacement rubber", category: "Cleaning Tools", image: ReplacementRubber },
+  { id: "rubber-hand-glouse", name: "Rubber hand glouse", category: "Cleaning Tools", image: RubberHandGlouse },
+  { id: "sapphire-broom", name: "Sapphire Broom", category: "Cleaning Tools", image: SapphireBroom },
+  { id: "shoe-shine-machine", name: "Shoe shine machine", category: "Cleaning Tools", image: ShoeShineMachine },
+  { id: "sparkle-microfiber-flat-mop", name: "SPARKLE MICROFIBER FLAT MOP", category: "Cleaning Tools", image: SPARKLEMICROFIBERFLATMOP },
+  { id: "spray-bottle-1", name: "Spray bottle 1", category: "Cleaning Tools", image: SprayBottle1 },
+  { id: "spray-bottle", name: "Spray bottle", category: "Cleaning Tools", image: SprayBottle },
+  { id: "teliscopic-poll", name: "Teliscopic poll", category: "Cleaning Tools", image: TeliscopicPoll },
+  { id: "toilet-brush-1", name: "Toilet brush 1", category: "Cleaning Tools", image: ToiletBrush1 },
+  { id: "tool-holder-1", name: "Tool holder 1", category: "Cleaning Tools", image: ToolHolder1 },
+  { id: "tool-holder", name: "Tool holder", category: "Cleaning Tools", image: ToolHolder },
+  { id: "trigger", name: "Trigger", category: "Cleaning Tools", image: Trigger },
+  { id: "wonder-kitchen-wiper", name: "WONDER KITCHEN WIPER", category: "Cleaning Tools", image: WONDERKITCHENWIPER },
+  { id: "wooden-handle", name: "Wooden handle", category: "Cleaning Tools", image: WoodenHandle },
+  { id: "wooden-carpet-brush", name: "Wooden Carpet Brush", category: "Cleaning Tools", image: WoodenCarpetBrush },
 ];
 
 const emptyCustomer = {
@@ -175,232 +181,281 @@ const emptyCustomer = {
   notes: "",
 };
 
-export default function CleaningTools() {
+const CleaningTools = () => {
   const [cart, setCart] = useState(() => getOrderCart());
-  const [showProduct, setShowProduct] = useState(null);
-  const [showOrder, setShowOrder] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [showCart, setShowCart] = useState(false);
+  const [showCheckout, setShowCheckout] = useState(false);
   const [customer, setCustomer] = useState(emptyCustomer);
-  const [submitting, setSubmitting] = useState(false);
-  const [successOrder, setSuccessOrder] = useState(null);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [orderedQuantities, setOrderedQuantities] = useState({});
+  const [error, setError] = useState("");
 
   useEffect(() => {
     updateOrderCart(cart);
   }, [cart]);
 
   useEffect(() => {
-    const shouldLock = Boolean(showProduct) || showOrder || Boolean(successOrder);
-    document.body.style.overflow = shouldLock ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [showProduct, showOrder, successOrder]);
+    const syncCart = () => setCart(getOrderCart());
 
-  useEffect(() => {
-    const loadOrderedQuantities = async () => {
-      try {
-        const response = await fetch(`${API_URL}/api/product-order-quantities`);
-        if (!response.ok) return;
-        const data = await response.json();
-        if (data?.success && data?.quantities) setOrderedQuantities(data.quantities);
-      } catch (error) {
-        console.error("Unable to load ordered quantities:", error);
-      }
+    window.addEventListener("focus", syncCart);
+    window.addEventListener("storage", syncCart);
+
+    return () => {
+      window.removeEventListener("focus", syncCart);
+      window.removeEventListener("storage", syncCart);
     };
-    loadOrderedQuantities();
   }, []);
 
+  useEffect(() => {
+    const modalOpen = Boolean(selectedProduct) || showCart || showCheckout;
+
+    document.body.style.overflow = modalOpen ? "hidden" : "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [selectedProduct, showCart, showCheckout]);
+
   const cartCount = useMemo(
-    () => cart.reduce((total, item) => total + Number(item?.quantity || 0), 0),
+    () => cart.reduce((total, item) => total + Number(item.quantity || 0), 0),
     [cart]
   );
 
-  const addToCart = (product) => {
-    setErrorMessage("");
-    setCart((current) => {
-      const existing = current.find((item) => item.id === product.id);
+  const addToOrder = (product) => {
+    setCart((currentCart) => {
+      const existing = currentCart.find((item) => item.id === product.id);
+
       if (existing) {
-        return current.map((item) =>
+        return currentCart.map((item) =>
           item.id === product.id
             ? { ...item, quantity: Number(item.quantity || 0) + 1 }
             : item
         );
       }
-      return [...current, {
-        id: product.id,
-        name: product.name,
-        unit: product.unit,
-        image: product.image,
-        quantity: 1,
-      }];
+
+      return [
+        ...currentCart,
+        {
+          id: product.id,
+          name: product.name,
+          category: product.category,
+          image: product.image,
+          quantity: 1,
+        },
+      ];
     });
-    setShowProduct(null);
-    setShowOrder(true);
+
+    setSelectedProduct(null);
+    setError("");
+    setShowCart(true);
   };
 
-  const updateQuantity = (productId, change) => {
-    setCart((current) =>
-      current.map((item) =>
-        item.id === productId
-          ? { ...item, quantity: Number(item.quantity || 0) + change }
+  const increaseQuantity = (id) => {
+    setCart((currentCart) =>
+      currentCart.map((item) =>
+        item.id === id
+          ? { ...item, quantity: Number(item.quantity || 0) + 1 }
           : item
-      ).filter((item) => Number(item.quantity || 0) > 0)
+      )
     );
   };
 
-  const removeFromCart = (productId) => {
-    setCart((current) => current.filter((item) => item.id !== productId));
+  const decreaseQuantity = (id) => {
+    setCart((currentCart) =>
+      currentCart
+        .map((item) =>
+          item.id === id
+            ? { ...item, quantity: Number(item.quantity || 0) - 1 }
+            : item
+        )
+        .filter((item) => Number(item.quantity || 0) > 0)
+    );
+  };
+
+  const removeItem = (id) => {
+    setCart((currentCart) => currentCart.filter((item) => item.id !== id));
   };
 
   const handleCustomerChange = (event) => {
     const { name, value } = event.target;
+
     setCustomer((current) => ({ ...current, [name]: value }));
-    if (errorMessage) setErrorMessage("");
+    setError("");
   };
 
-  const isValidPhone = (phone) =>
-    /^[+]?[0-9()\-\s]{7,20}$/.test(phone.trim());
-
-  const isValidEmail = (email) =>
-    !email.trim() || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
-
-  const handleSubmitOrder = async (event) => {
-    event.preventDefault();
-    if (submitting) return;
-    setErrorMessage("");
-
-    if (!cart.length) return setErrorMessage("Please add at least one product.");
-    if (!customer.name.trim()) return setErrorMessage("Please enter your name.");
-    if (!isValidPhone(customer.phone)) return setErrorMessage("Please enter a valid phone number.");
-    if (!customer.location.trim()) return setErrorMessage("Please enter your location.");
-    if (!isValidEmail(customer.email)) return setErrorMessage("Please enter a valid email address.");
-
-    setSubmitting(true);
-    try {
-      const response = await fetch(`${API_URL}/api/order`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          customer: {
-            name: customer.name.trim(),
-            phone: customer.phone.trim(),
-            email: customer.email.trim(),
-            company: customer.company.trim(),
-            location: customer.location.trim(),
-          },
-          items: cart.map((item) => ({
-            id: item.id,
-            name: item.name,
-            unit: item.unit,
-            quantity: Number(item.quantity),
-          })),
-          notes: customer.notes.trim(),
-        }),
-      });
-
-      const responseText = await response.text();
-      let data = {};
-      if (responseText) {
-        try { data = JSON.parse(responseText); }
-        catch { data = { message: responseText }; }
-      }
-      if (!response.ok || !data?.success) {
-        throw new Error(data?.message || "Unable to submit your order.");
-      }
-
-      setSuccessOrder(data.order || data);
-      setCart([]);
-      updateOrderCart([]);
-      setCustomer({ ...emptyCustomer });
-      setShowOrder(false);
-      try {
-        const quantityResponse = await fetch(`${API_URL}/api/product-order-quantities`);
-        if (quantityResponse.ok) {
-          const quantityData = await quantityResponse.json();
-          if (quantityData?.success && quantityData?.quantities) {
-            setOrderedQuantities(quantityData.quantities);
-          }
-        }
-      } catch (error) {
-        console.error("Unable to refresh ordered quantities:", error);
-      }
-    } catch (error) {
-      console.error("Order submission failed:", error);
-      setErrorMessage(error?.message || "Something went wrong while submitting your order.");
-    } finally {
-      setSubmitting(false);
+  const goToCheckout = () => {
+    if (!cart.length) {
+      setError("Please add products to your order first.");
+      return;
     }
+
+    setError("");
+    setShowCart(false);
+    setShowCheckout(true);
   };
 
-  const closeSuccess = () => {
-    setSuccessOrder(null);
-    setErrorMessage("");
+  const backToCart = () => {
+    setShowCheckout(false);
+    setShowCart(true);
+    setError("");
+  };
+
+  const submitOrder = (event) => {
+    event.preventDefault();
+    setError("");
+
+    if (!customer.name.trim()) {
+      setError("Please enter your name.");
+      return;
+    }
+
+    if (!/^[0-9+\-\s()]{7,20}$/.test(customer.phone.trim())) {
+      setError("Please enter a valid phone number.");
+      return;
+    }
+
+    if (!customer.location.trim()) {
+      setError("Please enter your location.");
+      return;
+    }
+
+    if (
+      customer.email.trim() &&
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customer.email.trim())
+    ) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    if (!cart.length) {
+      setError("Your order is empty.");
+      return;
+    }
+
+    const productDetails = cart
+      .map(
+        (item, index) =>
+          `${index + 1}. ${item.name}\nQuantity: ${item.quantity}`
+      )
+      .join("\n\n");
+
+    const message = [
+      "*NEW ORDER - CLEAN N CLEAR*",
+      "",
+      "*CUSTOMER DETAILS*",
+      `Name: ${customer.name.trim()}`,
+      `Phone: ${customer.phone.trim()}`,
+      `Email: ${customer.email.trim() || "Not provided"}`,
+      `Company: ${customer.company.trim() || "Not provided"}`,
+      `Location: ${customer.location.trim()}`,
+      "",
+      "*ORDER DETAILS*",
+      productDetails,
+      "",
+      `Total quantity: ${cartCount}`,
+      "",
+      "*ADDITIONAL REQUIREMENTS*",
+      customer.notes.trim() || "None",
+      "",
+      "Please contact the customer to confirm this order enquiry.",
+    ].join("\n");
+
+    const whatsappURL =
+      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+
+    window.open(whatsappURL, "_blank", "noopener,noreferrer");
   };
 
   return (
-    <main className="ccq-section">
+    <section className="ccq-section">
       <header className="ccq-header">
         <span className="ccq-label">CLEAN N CLEAR</span>
-        <h1 className="ccq-title">Cleaning Tools &amp; <span>Accessories</span></h1>
+
+        <h1 className="ccq-title">
+          Cleaning Tools &amp; <span>Accessories</span>
+        </h1>
+
         <p className="ccq-intro">
           Explore our cleaning tools and accessories for household,
           commercial and institutional cleaning requirements.
         </p>
+
+        <button
+          type="button"
+          className="ccq-cart-button"
+          onClick={() => {
+            setError("");
+            setShowCart(true);
+          }}
+        >
+          My Order {cartCount > 0 && <strong>{cartCount}</strong>}
+        </button>
       </header>
 
-      {cartCount > 0 && (
-        <button type="button" className="ccq-cart-button" onClick={() => {
-          setErrorMessage("");
-          setShowOrder(true);
-        }}>
-          <span>My Order</span><strong>{cartCount}</strong>
-        </button>
-      )}
-
       <div className="ccq-grid">
-        {products.map((product) => {
-          const ordered = Number(orderedQuantities[product.id] || 0);
-          return (
-            <article className="ccq-card" key={product.id}>
+        {products.map((product) => (
+          <article className="ccq-card" key={product.id}>
+            <button
+              type="button"
+              className="ccq-image-button"
+              onClick={() => setSelectedProduct(product)}
+              aria-label={`View ${product.name}`}
+            >
+              <img
+                src={product.image}
+                alt={product.name}
+                className="ccq-product-image"
+                loading="lazy"
+              />
+            </button>
+
+            <div className="ccq-card-content">
+              <span className="ccq-category">{product.category}</span>
+              <h2 className="ccq-product-name">{product.name}</h2>
+
               <button
                 type="button"
-                className="ccq-image-button"
-                onClick={() => setShowProduct(product)}
-                aria-label={`View ${product.name}`}
+                className="ccq-add-button"
+                onClick={() => addToOrder(product)}
               >
-                <img className="ccq-product-image" src={product.image} alt={product.name} loading="lazy" />
+                Add to Order
               </button>
-              <div className="ccq-card-content">
-                <span className="ccq-category">Cleaning Tools</span>
-                <h2 className="ccq-product-name">{product.name}</h2>
-                <div className="ccq-unit">{product.unit}</div>
-                {ordered > 0 && (
-                  <div className="ccq-product-ordered">
-                    <span>Ordered</span><strong>{ordered}</strong>
-                  </div>
-                )}
-                <button type="button" className="ccq-add-button" onClick={() => addToCart(product)}>
-                  Add to Order
-                </button>
-              </div>
-            </article>
-          );
-        })}
+            </div>
+          </article>
+        ))}
       </div>
 
-      {showProduct && (
-        <div className="ccq-overlay" onClick={() => setShowProduct(null)}>
-          <div className="ccq-product-modal" onClick={(event) => event.stopPropagation()}>
-            <button type="button" className="ccq-close" onClick={() => setShowProduct(null)} aria-label="Close product">×</button>
+      {selectedProduct && (
+        <div className="ccq-overlay" onClick={() => setSelectedProduct(null)}>
+          <div
+            className="ccq-product-modal"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="ccq-close"
+              onClick={() => setSelectedProduct(null)}
+              aria-label="Close product"
+            >
+              ×
+            </button>
+
             <div className="ccq-modal-image-wrap">
-              <img className="ccq-modal-image" src={showProduct.image} alt={showProduct.name} />
+              <img
+                src={selectedProduct.image}
+                alt={selectedProduct.name}
+                className="ccq-modal-image"
+              />
             </div>
+
             <div className="ccq-modal-content">
-              <span className="ccq-label">CLEAN N CLEAR</span>
-              <h2>{showProduct.name}</h2>
-              <div className="ccq-modal-unit">
-                <span>Unit</span><strong>{showProduct.unit}</strong>
-              </div>
-              <button type="button" className="ccq-add-large" onClick={() => addToCart(showProduct)}>
+              <span className="ccq-category">{selectedProduct.category}</span>
+              <h2>{selectedProduct.name}</h2>
+
+              <button
+                type="button"
+                className="ccq-add-large"
+                onClick={() => addToOrder(selectedProduct)}
+              >
                 Add to Order
               </button>
             </div>
@@ -408,14 +463,26 @@ export default function CleaningTools() {
         </div>
       )}
 
-      {showOrder && (
-        <div className="ccq-overlay" onClick={() => setShowOrder(false)}>
-          <div className="ccq-checkout" onClick={(event) => event.stopPropagation()}>
-            <button type="button" className="ccq-close" onClick={() => setShowOrder(false)} aria-label="Close order">×</button>
-            <div className="ccq-checkout-heading">
-              <span>CLEAN N CLEAR</span>
-              <h2>My Order</h2>
-              <p>Review your selected products and submit your enquiry.</p>
+      {showCart && (
+        <div className="ccq-overlay" onClick={() => setShowCart(false)}>
+          <aside
+            className="ccq-cart-drawer"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="ccq-cart-header">
+              <div>
+                <span className="ccq-label">YOUR ORDER</span>
+                <h2>My Order</h2>
+              </div>
+
+              <button
+                type="button"
+                className="ccq-close"
+                onClick={() => setShowCart(false)}
+                aria-label="Close cart"
+              >
+                ×
+              </button>
             </div>
 
             <div className="ccq-cart-items">
@@ -424,89 +491,210 @@ export default function CleaningTools() {
                   <div className="ccq-empty-icon">🛒</div>
                   <h3>Your order is empty</h3>
                   <p>Add products from the catalogue to continue.</p>
+                  <Link to="/products" onClick={() => setShowCart(false)}>
+                    Browse Products
+                  </Link>
                 </div>
-              ) : cart.map((item) => (
-                <div className="ccq-cart-item" key={item.id}>
-                  <img src={item.image} alt={item.name} />
-                  <div className="ccq-cart-item-info">
-                    <h3>{item.name}</h3>
-                    <small>{item.unit}</small>
-                    <div className="ccq-quantity">
-                      <button type="button" onClick={() => updateQuantity(item.id, -1)} aria-label={`Decrease ${item.name}`}>−</button>
-                      <strong>{item.quantity}</strong>
-                      <button type="button" onClick={() => updateQuantity(item.id, 1)} aria-label={`Increase ${item.name}`}>+</button>
+              ) : (
+                cart.map((item) => (
+                  <div className="ccq-cart-item" key={item.id}>
+                    <img src={item.image} alt={item.name} />
+
+                    <div className="ccq-cart-item-info">
+                      <h3>{item.name}</h3>
+
+                      <div className="ccq-quantity">
+                        <button
+                          type="button"
+                          onClick={() => decreaseQuantity(item.id)}
+                          aria-label={`Decrease ${item.name}`}
+                        >
+                          −
+                        </button>
+
+                        <strong>{item.quantity}</strong>
+
+                        <button
+                          type="button"
+                          onClick={() => increaseQuantity(item.id)}
+                          aria-label={`Increase ${item.name}`}
+                        >
+                          +
+                        </button>
+                      </div>
+
+                      <button
+                        type="button"
+                        className="ccq-remove"
+                        onClick={() => removeItem(item.id)}
+                      >
+                        Remove
+                      </button>
                     </div>
                   </div>
-                  <button type="button" className="ccq-remove" onClick={() => removeFromCart(item.id)}>Remove</button>
-                </div>
-              ))}
+                ))
+              )}
             </div>
 
             {cart.length > 0 && (
-              <>
-                <div className="ccq-final-summary">
-                  <div><span>Selected items</span><strong>{cartCount}</strong></div>
+              <div className="ccq-cart-footer">
+                <div className="ccq-total">
+                  <span>Selected items</span>
+                  <strong>{cartCount}</strong>
                 </div>
-                <form className="ccq-form" onSubmit={handleSubmitOrder}>
-                  <div className="ccq-form-grid">
-                    <div className="ccq-field">
-                      <label htmlFor="tools-name">Name *</label>
-                      <input id="tools-name" name="name" value={customer.name} onChange={handleCustomerChange} placeholder="Enter your name" required />
-                    </div>
-                    <div className="ccq-field">
-                      <label htmlFor="tools-phone">Phone Number *</label>
-                      <input id="tools-phone" type="tel" name="phone" value={customer.phone} onChange={handleCustomerChange} placeholder="Enter phone number" required />
-                    </div>
-                    <div className="ccq-field">
-                      <label htmlFor="tools-email">Email</label>
-                      <input id="tools-email" type="email" name="email" value={customer.email} onChange={handleCustomerChange} placeholder="Enter email address" />
-                    </div>
-                    <div className="ccq-field">
-                      <label htmlFor="tools-company">Company</label>
-                      <input id="tools-company" name="company" value={customer.company} onChange={handleCustomerChange} placeholder="Company name" />
-                    </div>
-                    <div className="ccq-field">
-                      <label htmlFor="tools-location">Location *</label>
-                      <input id="tools-location" name="location" value={customer.location} onChange={handleCustomerChange} placeholder="City / Location" required />
-                    </div>
-                    <div className="ccq-field">
-                      <label htmlFor="tools-notes">Additional Requirements</label>
-                      <textarea id="tools-notes" name="notes" value={customer.notes} onChange={handleCustomerChange} placeholder="Tell us about your requirement..." rows="4" />
-                    </div>
-                  </div>
 
-                  {errorMessage && <div className="ccq-error">{errorMessage}</div>}
+                {error && <div className="ccq-error">{error}</div>}
 
-                  <div className="ccq-form-actions">
-                    <button type="button" className="ccq-back-button" onClick={() => setShowOrder(false)}>Continue Shopping</button>
-                    <button type="submit" className="ccq-submit" disabled={submitting}>
-                      {submitting ? "Submitting..." : "Submit Order"}
-                    </button>
-                  </div>
-                </form>
-              </>
-            )}
-          </div>
-        </div>
-      )}
-
-      {successOrder && (
-        <div className="ccq-overlay">
-          <div className="ccq-success">
-            <div className="ccq-success-icon">✓</div>
-            <span>ORDER RECEIVED</span>
-            <h2>Thank You!</h2>
-            <p>Your order has been submitted successfully. Our team will review your requirement and contact you shortly.</p>
-            {(successOrder?.id || successOrder?.orderId) && (
-              <div className="ccq-order-number">
-                <small>Order Number</small>
-                <strong>{successOrder.id || successOrder.orderId}</strong>
+                <button
+                  type="button"
+                  className="ccq-checkout-button"
+                  onClick={goToCheckout}
+                >
+                  Proceed to Customer Details
+                </button>
               </div>
             )}
-            <button type="button" className="ccq-success-button" onClick={closeSuccess}>Continue Shopping</button>
+          </aside>
+        </div>
+      )}
+
+      {showCheckout && (
+        <div className="ccq-overlay" onClick={() => {}}>
+          <div className="ccq-checkout">
+            <button
+              type="button"
+              className="ccq-close"
+              onClick={backToCart}
+              aria-label="Back to cart"
+            >
+              ×
+            </button>
+
+            <div className="ccq-checkout-heading">
+              <span className="ccq-label">CLEAN N CLEAR</span>
+              <h2>Customer Details</h2>
+              <p>
+                Fill in your details and continue to WhatsApp to send your
+                product enquiry.
+              </p>
+            </div>
+
+            {error && <div className="ccq-error">{error}</div>}
+
+            <form className="ccq-form" onSubmit={submitOrder}>
+              <div className="ccq-form-grid">
+                <div className="ccq-field">
+                  <label htmlFor="tools-name">Name *</label>
+                  <input
+                    id="tools-name"
+                    name="name"
+                    value={customer.name}
+                    onChange={handleCustomerChange}
+                    placeholder="Enter your name"
+                    autoComplete="name"
+                    required
+                  />
+                </div>
+
+                <div className="ccq-field">
+                  <label htmlFor="tools-phone">Phone Number *</label>
+                  <input
+                    id="tools-phone"
+                    type="tel"
+                    name="phone"
+                    value={customer.phone}
+                    onChange={handleCustomerChange}
+                    placeholder="Enter phone number"
+                    autoComplete="tel"
+                    required
+                  />
+                </div>
+
+                <div className="ccq-field">
+                  <label htmlFor="tools-email">Email</label>
+                  <input
+                    id="tools-email"
+                    type="email"
+                    name="email"
+                    value={customer.email}
+                    onChange={handleCustomerChange}
+                    placeholder="Enter email address"
+                    autoComplete="email"
+                  />
+                </div>
+
+                <div className="ccq-field">
+                  <label htmlFor="tools-company">Company</label>
+                  <input
+                    id="tools-company"
+                    name="company"
+                    value={customer.company}
+                    onChange={handleCustomerChange}
+                    placeholder="Company name"
+                    autoComplete="organization"
+                  />
+                </div>
+
+                <div className="ccq-field">
+                  <label htmlFor="tools-location">Location *</label>
+                  <input
+                    id="tools-location"
+                    name="location"
+                    value={customer.location}
+                    onChange={handleCustomerChange}
+                    placeholder="City / Location"
+                    required
+                  />
+                </div>
+
+                <div className="ccq-field">
+                  <label htmlFor="tools-notes">Additional Requirements</label>
+                  <textarea
+                    id="tools-notes"
+                    name="notes"
+                    value={customer.notes}
+                    onChange={handleCustomerChange}
+                    placeholder="Tell us about your requirements..."
+                    rows={4}
+                  />
+                </div>
+              </div>
+
+              <div className="ccq-final-summary">
+                <h3>Order Summary</h3>
+
+                {cart.map((item) => (
+                  <div className="ccq-final-item" key={item.id}>
+                    <span>{item.name}</span>
+                    <strong>× {item.quantity}</strong>
+                  </div>
+                ))}
+
+                <div className="ccq-total">
+                  <span>Total quantity</span>
+                  <strong>{cartCount}</strong>
+                </div>
+              </div>
+
+              <div className="ccq-form-actions">
+                <button
+                  type="button"
+                  className="ccq-back-button"
+                  onClick={backToCart}
+                >
+                  Back to Order
+                </button>
+
+                <button type="submit" className="ccq-submit">
+                  Continue to WhatsApp
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}
-    </main>
+    </section>
   );
-}
+};
+
+export default CleaningTools;
