@@ -1,6 +1,10 @@
-
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "./CleaningChemicals.css";
+
+import {
+  getOrderCart,
+  updateOrderCart,
+} from "../../utils/OrderCart";
 
 import Product3LayerServiceCart from "../../images/ProffessionalEquipment/3_Layer_Service_Cart.png";
 import ABSJRTDispenser from "../../images/ProffessionalEquipment/ABS_JRT_Dispenser.png";
@@ -45,12 +49,6 @@ import WringerTrolley20L from "../../images/ProffessionalEquipment/Wringer_Troll
 import WringerTrolley40L from "../../images/ProffessionalEquipment/Wringer_Trolley_40L.png";
 import WringerTrolley60L from "../../images/ProffessionalEquipment/Wringer_Trolley_60L.png";
 
-import {
-  getOrderCart,
-  updateOrderCart,
-} from "../../utils/OrderCart";
-
-// WhatsApp number in international format without + or spaces.
 const WHATSAPP_NUMBER = "918147304734";
 
 const products = [
@@ -109,28 +107,35 @@ const emptyCustomer = {
   email: "",
   company: "",
   location: "",
+  notes: "",
 };
 
-const ProfessionalEquipment = () => {
+export default function ProfessionalEquipment() {
+  const [cart, setCart] = useState(() => getOrderCart() || []);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [cart, setCart] = useState(() => {
-    const savedCart = getOrderCart();
-    return Array.isArray(savedCart) ? savedCart : [];
-  });
-
   const [showCart, setShowCart] = useState(false);
   const [showCheckout, setShowCheckout] = useState(false);
   const [customer, setCustomer] = useState(emptyCustomer);
-  const [notes, setNotes] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     updateOrderCart(cart);
   }, [cart]);
 
   useEffect(() => {
-    const modalOpen =
-      Boolean(selectedProduct) || showCart || showCheckout;
+    const syncCart = () => setCart(getOrderCart() || []);
 
+    window.addEventListener("focus", syncCart);
+    window.addEventListener("storage", syncCart);
+
+    return () => {
+      window.removeEventListener("focus", syncCart);
+      window.removeEventListener("storage", syncCart);
+    };
+  }, []);
+
+  useEffect(() => {
+    const modalOpen = Boolean(selectedProduct) || showCart || showCheckout;
     document.body.style.overflow = modalOpen ? "hidden" : "";
 
     return () => {
@@ -138,85 +143,98 @@ const ProfessionalEquipment = () => {
     };
   }, [selectedProduct, showCart, showCheckout]);
 
-  const addToCart = (product) => {
-    setCart((previousCart) => {
-      const existing = previousCart.find(
-        (item) => item.id === product.id
-      );
+  const cartCount = useMemo(
+    () => cart.reduce((total, item) => total + Number(item.quantity || 0), 0),
+    [cart]
+  );
+
+  const addToOrder = (product) => {
+    setCart((currentCart) => {
+      const existing = currentCart.find((item) => item.id === product.id);
 
       if (existing) {
-        return previousCart.map((item) =>
+        return currentCart.map((item) =>
           item.id === product.id
-            ? {
-                ...item,
-                quantity: Number(item.quantity || 0) + 1,
-              }
+            ? { ...item, quantity: Number(item.quantity || 0) + 1 }
             : item
         );
       }
 
-      return [...previousCart, { ...product, quantity: 1 }];
+      return [
+        ...currentCart,
+        {
+          id: product.id,
+          name: product.name,
+          category: product.category,
+          image: product.image,
+          unit: product.unit,
+          description: product.description,
+          quantity: 1,
+        },
+      ];
     });
 
     setSelectedProduct(null);
+    setError("");
     setShowCheckout(false);
     setShowCart(true);
   };
 
-  const removeFromCart = (id) => {
-    setCart((previousCart) =>
-      previousCart.filter((item) => item.id !== id)
-    );
-  };
-
-  const updateQuantity = (id, quantity) => {
-    const nextQuantity = Math.floor(Number(quantity));
-
-    if (!Number.isFinite(nextQuantity)) return;
-
-    if (nextQuantity < 1) {
-      removeFromCart(id);
-      return;
-    }
-
-    setCart((previousCart) =>
-      previousCart.map((item) =>
+  const increaseQuantity = (id) => {
+    setCart((currentCart) =>
+      currentCart.map((item) =>
         item.id === id
-          ? { ...item, quantity: nextQuantity }
+          ? { ...item, quantity: Number(item.quantity || 0) + 1 }
           : item
       )
     );
   };
 
-  const cartCount = cart.reduce(
-    (total, item) => total + Number(item.quantity || 0),
-    0
-  );
+  const decreaseQuantity = (id) => {
+    setCart((currentCart) =>
+      currentCart
+        .map((item) =>
+          item.id === id
+            ? { ...item, quantity: Number(item.quantity || 0) - 1 }
+            : item
+        )
+        .filter((item) => Number(item.quantity || 0) > 0)
+    );
+  };
+
+  const removeItem = (id) => {
+    setCart((currentCart) => currentCart.filter((item) => item.id !== id));
+  };
 
   const handleCustomerChange = (event) => {
     const { name, value } = event.target;
-
-    setCustomer((previous) => ({
-      ...previous,
-      [name]: value,
-    }));
+    setCustomer((currentCustomer) => ({ ...currentCustomer, [name]: value }));
+    setError("");
   };
 
-  const openCheckout = () => {
-    if (cart.length === 0) {
-      window.alert("Please add at least one product to your order.");
+  const goToCheckout = () => {
+    if (!cart.length) {
+      setError("Please add products to your order first.");
       return;
     }
 
+    setError("");
     setShowCart(false);
     setShowCheckout(true);
   };
 
+  const backToCart = () => {
+    setShowCheckout(false);
+    setShowCart(true);
+    setError("");
+  };
+
   const submitOrder = (event) => {
     event.preventDefault();
+    setError("");
 
-    if (cart.length === 0) {
-      window.alert("Please add at least one product to your order.");
+    if (!cart.length) {
+      setError("Your order is empty.");
       return;
     }
 
@@ -225,84 +243,88 @@ const ProfessionalEquipment = () => {
     const email = customer.email.trim();
     const company = customer.company.trim();
     const location = customer.location.trim();
+    const notes = customer.notes.trim();
 
-    if (!name || !phone || !location) {
-      window.alert(
-        "Please enter your name, phone number and location."
-      );
+    if (!name) {
+      setError("Please enter your name.");
       return;
     }
 
-    const phoneDigits = phone.replace(/\D/g, "");
-
-    if (phoneDigits.length < 7 || phoneDigits.length > 15) {
-      window.alert("Please enter a valid phone number.");
+    if (!/^[0-9+\-\s()]{7,20}$/.test(phone)) {
+      setError("Please enter a valid phone number.");
       return;
     }
 
-    if (
-      email &&
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
-    ) {
-      window.alert("Please enter a valid email address.");
+    if (!location) {
+      setError("Please enter your location.");
       return;
     }
 
-    const productLines = cart
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    const productDetails = cart
       .map(
         (item, index) =>
-          `${index + 1}. ${item.name}\n` +
-          `   Quantity: ${Number(item.quantity) || 1} ${item.unit || "Unit"}`
+          `${index + 1}. ${item.name}\nCategory: ${item.category || "Professional Equipment"}\nQuantity: ${Number(item.quantity || 1)} ${item.unit || "Unit"}`
       )
       .join("\n\n");
 
     const message = [
-      "Hello! I would like to place a Professional Equipment order.",
+      "*NEW ORDER ENQUIRY - CLEAN N CLEAR*",
       "",
-      "CUSTOMER DETAILS",
+      "*CUSTOMER DETAILS*",
       `Name: ${name}`,
       `Phone: ${phone}`,
       `Email: ${email || "Not provided"}`,
       `Company / Organization: ${company || "Not provided"}`,
-      `Delivery / Location: ${location}`,
+      `Location: ${location}`,
       "",
-      "ORDER ITEMS",
-      productLines,
+      "*SELECTED PROFESSIONAL EQUIPMENT*",
+      productDetails,
       "",
-      `Total quantity: ${cartCount} items`,
+      `Total quantity: ${cartCount}`,
       "",
-      `Additional Notes: ${notes.trim() || "None"}`,
+      "*ADDITIONAL REQUIREMENTS*",
+      notes || "None",
       "",
-      "Please confirm product availability and pricing. Thank you!",
+      "Please confirm product availability and pricing.",
     ].join("\n");
 
-    const whatsappURL =
-      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    const whatsappWindow = window.open(whatsappURL, "_blank", "noopener,noreferrer");
 
-    // WhatsApp opens with the order prepared; the customer must press Send.
-    window.open(whatsappURL, "_blank", "noopener,noreferrer");
+    if (!whatsappWindow) {
+      window.location.href = whatsappURL;
+    }
   };
 
   return (
     <section className="ccq-section">
-      <div className="ccq-header">
-        <span className="ccq-label">PROFESSIONAL EQUIPMENT</span>
-        <h1 className="ccq-title">Professional Cleaning Equipment</h1>
-        <p className="ccq-intro">
-          Explore our range of professional cleaning equipment designed
-          for commercial, household and institutional cleaning requirements.
-        </p>
-      </div>
+      <header className="ccq-header">
+        <span className="ccq-label">CLEAN N CLEAR</span>
 
-      <button
-        type="button"
-        className="ccq-cart-button"
-        onClick={() => setShowCart(true)}
-        aria-label={`My Order - ${cartCount} items`}
-      >
-        <span>My Order</span>
-        <strong>{cartCount}</strong>
-      </button>
+        <h1 className="ccq-title">
+          Professional Cleaning Equipment
+        </h1>
+
+        <p className="ccq-intro">
+          Explore our range of professional cleaning equipment designed for commercial, household and institutional cleaning requirements.
+        </p>
+
+        <button
+          type="button"
+          className="ccq-cart-button"
+          onClick={() => {
+            setError("");
+            setShowCart(true);
+          }}
+        >
+          My Order {cartCount > 0 && <strong>{cartCount}</strong>}
+        </button>
+      </header>
 
       <div className="ccq-grid">
         {products.map((product) => (
@@ -325,11 +347,10 @@ const ProfessionalEquipment = () => {
               <span className="ccq-category">{product.category}</span>
               <h2 className="ccq-product-name">{product.name}</h2>
               <div className="ccq-unit">{product.unit}</div>
-
               <button
                 type="button"
                 className="ccq-add-button"
-                onClick={() => addToCart(product)}
+                onClick={() => addToOrder(product)}
               >
                 Add to Order
               </button>
@@ -338,19 +359,15 @@ const ProfessionalEquipment = () => {
         ))}
       </div>
 
-      {/* Product details */}
+      {/* ================= PRODUCT DETAILS MODAL ================= */}
       {selectedProduct && (
-        <div
-          className="ccq-overlay"
-          onClick={() => setSelectedProduct(null)}
-          role="presentation"
-        >
+        <div className="ccq-overlay" onClick={() => setSelectedProduct(null)}>
           <div
             className="ccq-product-modal"
             onClick={(event) => event.stopPropagation()}
             role="dialog"
             aria-modal="true"
-            aria-label={selectedProduct.name}
+            aria-label={`${selectedProduct.name} details`}
           >
             <button
               type="button"
@@ -370,21 +387,17 @@ const ProfessionalEquipment = () => {
             </div>
 
             <div className="ccq-modal-content">
-              <span className="ccq-category">
-                {selectedProduct.category}
-              </span>
+              <span className="ccq-label">PROFESSIONAL EQUIPMENT</span>
               <h2>{selectedProduct.name}</h2>
               <p>{selectedProduct.description}</p>
-
               <div className="ccq-modal-unit">
                 <span>Pack / Unit:</span>
                 <strong>{selectedProduct.unit}</strong>
               </div>
-
               <button
                 type="button"
                 className="ccq-add-large"
-                onClick={() => addToCart(selectedProduct)}
+                onClick={() => addToOrder(selectedProduct)}
               >
                 Add to Order
               </button>
@@ -393,31 +406,26 @@ const ProfessionalEquipment = () => {
         </div>
       )}
 
-      {/* Order summary */}
+      {/* ================= ORDER CART DRAWER ================= */}
       {showCart && (
-        <div
-          className="ccq-overlay"
-          onClick={() => setShowCart(false)}
-          role="presentation"
-        >
+        <div className="ccq-overlay" onClick={() => setShowCart(false)}>
           <aside
             className="ccq-cart-drawer"
             onClick={(event) => event.stopPropagation()}
             role="dialog"
             aria-modal="true"
-            aria-label="Order Summary"
+            aria-label="Order cart"
           >
             <div className="ccq-cart-header">
               <div>
-                <span>YOUR ORDER</span>
-                <h2>Order Summary</h2>
+                <span className="ccq-label">YOUR SELECTION</span>
+                <h2>My Order</h2>
               </div>
-
               <button
                 type="button"
                 className="ccq-close"
                 onClick={() => setShowCart(false)}
-                aria-label="Close order summary"
+                aria-label="Close order cart"
               >
                 ×
               </button>
@@ -427,57 +435,40 @@ const ProfessionalEquipment = () => {
               <div className="ccq-empty">
                 <div className="ccq-empty-icon">🛒</div>
                 <h3>Your order is empty</h3>
-                <p>Add products to your order to continue.</p>
+                <p>Add professional equipment to your order to continue.</p>
               </div>
             ) : (
               <>
-                <div className="ccq-cart-items">
+                <div className="ccq-cart-items" style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
                   {cart.map((item) => (
-                    <div className="ccq-cart-item" key={item.id}>
-                      <img
-                        src={item.image}
-                        alt={item.name || "Product"}
-                      />
-
+                    <div className="ccq-cart-item" key={item.id} style={{ display: "grid", gridTemplateColumns: "64px minmax(0, 1fr)", alignItems: "start", gap: "12px", width: "100%" }}>
+                      <img src={item.image} alt={item.name} />
                       <div className="ccq-cart-item-info">
-                        <h3>{item.name || "Product"}</h3>
+                        <h3>{item.name}</h3>
                         <span>{item.unit || "Unit"}</span>
-
                         <div className="ccq-quantity">
                           <button
                             type="button"
-                            onClick={() =>
-                              updateQuantity(
-                                item.id,
-                                Number(item.quantity) - 1
-                              )
-                            }
+                            onClick={() => decreaseQuantity(item.id)}
                             aria-label={`Decrease ${item.name} quantity`}
                           >
                             −
                           </button>
-
                           <strong>{item.quantity}</strong>
-
                           <button
                             type="button"
-                            onClick={() =>
-                              updateQuantity(
-                                item.id,
-                                Number(item.quantity) + 1
-                              )
-                            }
+                            onClick={() => increaseQuantity(item.id)}
                             aria-label={`Increase ${item.name} quantity`}
                           >
                             +
                           </button>
                         </div>
                       </div>
-
                       <button
                         type="button"
                         className="ccq-remove"
-                        onClick={() => removeFromCart(item.id)}
+                        style={{ gridColumn: "2", justifySelf: "start" }}
+                        onClick={() => removeItem(item.id)}
                       >
                         Remove
                       </button>
@@ -487,25 +478,17 @@ const ProfessionalEquipment = () => {
 
                 <div className="ccq-cart-footer">
                   <div className="ccq-total">
-                    <span>Products in your order</span>
+                    <span>Total quantity</span>
                     <strong>{cartCount}</strong>
                   </div>
-
+                  {error && <div className="ccq-error" role="alert">{error}</div>}
                   <button
                     type="button"
                     className="ccq-checkout-button"
-                    onClick={openCheckout}
+                    onClick={goToCheckout}
                   >
-                    Continue to Customer Details
+                    Enter Customer Details
                   </button>
-
-                  <div className="ccq-no-payment">
-                    <strong>WhatsApp Order Request</strong>
-                    <span>
-                      Your order will be prepared in WhatsApp for you
-                      to review before sending.
-                    </span>
-                  </div>
                 </div>
               </>
             )}
@@ -513,36 +496,37 @@ const ProfessionalEquipment = () => {
         </div>
       )}
 
-      {/* Customer details */}
+      {/* ================= CUSTOMER DETAILS ================= */}
       {showCheckout && (
         <div
           className="ccq-overlay"
-          onClick={() => setShowCheckout(false)}
-          role="presentation"
+          onClick={(event) => {
+            if (event.target === event.currentTarget) setShowCheckout(false);
+          }}
         >
           <div
             className="ccq-checkout"
             onClick={(event) => event.stopPropagation()}
             role="dialog"
             aria-modal="true"
-            aria-label="Customer Details"
+            aria-label="Customer details"
           >
             <button
               type="button"
               className="ccq-close"
-              onClick={() => setShowCheckout(false)}
-              aria-label="Close customer details"
+              onClick={backToCart}
+              aria-label="Back to order cart"
             >
               ×
             </button>
 
             <div className="ccq-checkout-heading">
-              <span>FINAL STEP</span>
+              <span className="ccq-label">CLEAN N CLEAR</span>
               <h2>Customer Details</h2>
-              <p>
-                Enter your details to prepare your order in WhatsApp.
-              </p>
+              <p>Enter your details to prepare your professional equipment order request on WhatsApp.</p>
             </div>
+
+            {error && <div className="ccq-error" role="alert">{error}</div>}
 
             <form className="ccq-form" onSubmit={submitOrder}>
               <div className="ccq-form-grid">
@@ -569,7 +553,6 @@ const ProfessionalEquipment = () => {
                     onChange={handleCustomerChange}
                     placeholder="Enter your phone number"
                     autoComplete="tel"
-                    inputMode="tel"
                     required
                   />
                 </div>
@@ -588,9 +571,7 @@ const ProfessionalEquipment = () => {
                 </div>
 
                 <div className="ccq-field">
-                  <label htmlFor="equipment-company">
-                    Company / Organization
-                  </label>
+                  <label htmlFor="equipment-company">Company / Organization</label>
                   <input
                     id="equipment-company"
                     name="company"
@@ -603,15 +584,13 @@ const ProfessionalEquipment = () => {
               </div>
 
               <div className="ccq-field">
-                <label htmlFor="equipment-location">
-                  Delivery / Location *
-                </label>
+                <label htmlFor="equipment-location">Location / Address *</label>
                 <textarea
                   id="equipment-location"
                   name="location"
                   value={customer.location}
                   onChange={handleCustomerChange}
-                  placeholder="Enter delivery location / address"
+                  placeholder="Enter your location or address"
                   rows={3}
                   autoComplete="street-address"
                   required
@@ -619,40 +598,57 @@ const ProfessionalEquipment = () => {
               </div>
 
               <div className="ccq-field">
-                <label htmlFor="equipment-notes">Additional Notes</label>
+                <label htmlFor="equipment-notes">Additional Requirements</label>
                 <textarea
                   id="equipment-notes"
-                  value={notes}
-                  onChange={(event) => setNotes(event.target.value)}
-                  placeholder="Any specific requirements?"
-                  rows={3}
+                  name="notes"
+                  value={customer.notes}
+                  onChange={handleCustomerChange}
+                  placeholder="Tell us about your requirements..."
+                  rows={4}
                 />
               </div>
 
-              <div className="ccq-final-summary">
-                <div>
-                  <span>Products</span>
+              <div
+                className="ccq-final-summary"
+                style={{ display: "flex", flexDirection: "column", alignItems: "stretch", gap: "12px", width: "100%" }}
+              >
+                <h3 style={{ margin: 0 }}>Order Summary</h3>
+                {cart.map((item) => (
+                  <div
+                    className="ccq-final-item"
+                    key={item.id}
+                    style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", gap: "16px", width: "100%", boxSizing: "border-box" }}
+                  >
+                    <span style={{ flex: "1", minWidth: 0, whiteSpace: "normal", overflowWrap: "anywhere" }}>{item.name}</span>
+                    <strong style={{ flexShrink: 0 }}>× {item.quantity}</strong>
+                  </div>
+                ))}
+                <div
+                  className="ccq-total"
+                  style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", width: "100%", boxSizing: "border-box" }}
+                >
+                  <span>Total quantity</span>
                   <strong>{cartCount}</strong>
                 </div>
               </div>
 
-              <div className="ccq-no-payment">
-                <strong>Continue with WhatsApp</strong>
-                <span>
-                  WhatsApp will open with your prepared order. Review the
-                  details and press Send to submit your request.
-                </span>
+              <div className="ccq-form-actions">
+                <button type="button" className="ccq-back-button" onClick={backToCart}>
+                  Back to Order
+                </button>
+                <button type="submit" className="ccq-submit">
+                  Continue to WhatsApp
+                </button>
               </div>
-
-              <button type="submit" className="ccq-submit">
-                Continue to WhatsApp
-              </button>
+              <p className="ccq-intro">
+                WhatsApp will open with your order details filled in. Review the
+                message and press Send to submit your enquiry.
+              </p>
             </form>
           </div>
         </div>
       )}
     </section>
   );
-};
-
-export default ProfessionalEquipment;
+}

@@ -1,5 +1,4 @@
-
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "./CleaningChemicals.css";
 
 import {
@@ -56,60 +55,58 @@ import REVAStickOff from "../../images/house/REVA_STICK_OFF.png";
 import REVASVD from "../../images/house/REVA_SVD.png";
 import REVAWSR from "../../images/house/REVA_WSR.png";
 
-// ================= WHATSAPP CONFIGURATION =================
-
-const WHATSAPP_NUMBER = "918147304734";
-
 // ================= PRODUCT LIST =================
 
 const products = [
-  { id: "reva-a-bright", name: "REVA A Bright", image: REVAABright },
-  { id: "reva-ac-2", name: "REVA AC 2", image: REVAAC2 },
-  { id: "reva-aqua-plus", name: "REVA Aqua Plus", image: REVAAquaPlus },
-  { id: "reva-aqua-tab", name: "REVA Aqua Tab", image: REVAAquaTab },
-  { id: "reva-bio-clean", name: "REVA Bio Clean", image: REVABioClean },
-  { id: "reva-clean-hard", name: "REVA Clean Hard", image: REVACleanHard },
-  { id: "reva-cs-o4", name: "REVA CS O4", image: REVACS04 },
-  { id: "reva-cs-o8", name: "REVA CS O8", image: REVACS08 },
-  { id: "reva-dcl", name: "REVA DCL", image: REVADCL },
-  { id: "reva-dish-o-det", name: "REVA Dish O Det", image: REVADishODet },
-  { id: "reva-fccs", name: "REVA FCCS", image: RevaFCCS },
-  { id: "reva-foam-soap", name: "REVA Foam Soap", image: REVAFoamSoap },
-  { id: "reva-fpm", name: "REVA FPM", image: REVAFPM },
-  { id: "reva-fresh-aroma-oil", name: "REVA Fresh Aroma Oil", image: REVAFreshAromaOil },
-  { id: "reva-fresh-bs", name: "REVA Fresh BS", image: REVAFreshBS },
-  { id: "reva-hand-degreaser", name: "REVA Hand Degreaser", image: REVAHandDegreaser },
-  { id: "reva-hand-sanitizer", name: "REVA Hand Sanitizer", image: REVAHandSanitizer },
-  { id: "reva-handplus", name: "REVA Handplus", image: REVAHandPlus },
-  { id: "reva-hd-2", name: "REVA HD 2", image: REVAHD2 },
-  { id: "reva-hygi", name: "REVA HYGI+", image: REVAHyg1 },
-  { id: "reva-m-det", name: "REVA M Det", image: REVAMDet },
-  { id: "reva-m-rinse", name: "REVA M Rinse", image: REVAMRinse },
-  { id: "reva-maklin", name: "REVA Maklin", image: REVAMaklin },
-  { id: "reva-md-10", name: "REVA MD 10", image: REVAMD10 },
-  { id: "reva-mpc", name: "REVA MPC", image: REVAMPC },
-  { id: "reva-multi-det", name: "REVA Multi Det", image: RevaMultiDet },
-  { id: "reva-nfc", name: "REVA NFC", image: REVANFC },
-  { id: "reva-ocr-plus", name: "REVA OCR Plus", image: REVAOCRPlus },
-  { id: "reva-prime-det-fs", name: "REVA Prime Det FS", image: REVAPrimeDetFS },
-  { id: "reva-prime-det", name: "REVA Prime Det", image: REVAPrimeDet },
-  { id: "reva-purple-leaf-body-gel", name: "REVA Purple Leaf Body Gel", image: REVAPurpleLeafBodyGel },
-  { id: "reva-purple-leaf-hand-wash", name: "REVA Purple Leaf Hand Wash", image: REVAPurpleLeafHandWash },
-  { id: "reva-purple-leaf-premium-shampoo", name: "REVA Purple Leaf Premium Shampoo", image: REVAPurpleLeafPremiumShampoo },
-  { id: "reva-purple-leaf-skin-moisturizer", name: "REVA Purple Leaf Skin Moisturizer", image: REVAPurpleLeafSkinMoisturizer },
-  { id: "reva-quat-hyg", name: "REVA Quat Hyg", image: REVAQuatHyg },
-  { id: "reva-rpa", name: "REVA RPA", image: REVARPA },
-  { id: "reva-sanicil", name: "REVA Sanicil", image: REVASanicil },
-  { id: "reva-sense", name: "REVA Sense", image: REVASense },
-  { id: "reva-soft-handwash", name: "REVA Soft Handwash", image: REVASoftHandwash },
-  { id: "reva-solution-a-b", name: "REVA Solution A B", image: REVASolutionAB },
-  { id: "reva-sparkle", name: "REVA Sparkle", image: REVASparkle },
-  { id: "reva-spotter", name: "REVA Spotter", image: REVASpotter },
-  { id: "reva-ssp", name: "REVA SSP", image: REVASSP },
-  { id: "reva-stick-off", name: "REVA Stick Off", image: REVAStickOff },
-  { id: "reva-svd", name: "REVA SVD", image: REVASVD },
-  { id: "reva-wsr", name: "REVA WSR", image: REVAWSR },
+  { id: "reva-a-bright", name: "REVA A Bright", category: "REVA Collection", image: REVAABright },
+  { id: "reva-ac-2", name: "REVA AC 2", category: "REVA Collection", image: REVAAC2 },
+  { id: "reva-aqua-plus", name: "REVA Aqua Plus", category: "REVA Collection", image: REVAAquaPlus },
+  { id: "reva-aqua-tab", name: "REVA Aqua Tab", category: "REVA Collection", image: REVAAquaTab },
+  { id: "reva-bio-clean", name: "REVA Bio Clean", category: "REVA Collection", image: REVABioClean },
+  { id: "reva-clean-hard", name: "REVA Clean Hard", category: "REVA Collection", image: REVACleanHard },
+  { id: "reva-cs-o4", name: "REVA CS O4", category: "REVA Collection", image: REVACS04 },
+  { id: "reva-cs-o8", name: "REVA CS O8", category: "REVA Collection", image: REVACS08 },
+  { id: "reva-dcl", name: "REVA DCL", category: "REVA Collection", image: REVADCL },
+  { id: "reva-dish-o-det", name: "REVA Dish O Det", category: "REVA Collection", image: REVADishODet },
+  { id: "reva-fccs", name: "REVA FCCS", category: "REVA Collection", image: RevaFCCS },
+  { id: "reva-foam-soap", name: "REVA Foam Soap", category: "REVA Collection", image: REVAFoamSoap },
+  { id: "reva-fpm", name: "REVA FPM", category: "REVA Collection", image: REVAFPM },
+  { id: "reva-fresh-aroma-oil", name: "REVA Fresh Aroma Oil", category: "REVA Collection", image: REVAFreshAromaOil },
+  { id: "reva-fresh-bs", name: "REVA Fresh BS", category: "REVA Collection", image: REVAFreshBS },
+  { id: "reva-hand-degreaser", name: "REVA Hand Degreaser", category: "REVA Collection", image: REVAHandDegreaser },
+  { id: "reva-hand-sanitizer", name: "REVA Hand Sanitizer", category: "REVA Collection", image: REVAHandSanitizer },
+  { id: "reva-handplus", name: "REVA Handplus", category: "REVA Collection", image: REVAHandPlus },
+  { id: "reva-hd-2", name: "REVA HD 2", category: "REVA Collection", image: REVAHD2 },
+  { id: "reva-hygi", name: "REVA HYGI+", category: "REVA Collection", image: REVAHyg1 },
+  { id: "reva-m-det", name: "REVA M Det", category: "REVA Collection", image: REVAMDet },
+  { id: "reva-m-rinse", name: "REVA M Rinse", category: "REVA Collection", image: REVAMRinse },
+  { id: "reva-maklin", name: "REVA Maklin", category: "REVA Collection", image: REVAMaklin },
+  { id: "reva-md-10", name: "REVA MD 10", category: "REVA Collection", image: REVAMD10 },
+  { id: "reva-mpc", name: "REVA MPC", category: "REVA Collection", image: REVAMPC },
+  { id: "reva-multi-det", name: "REVA Multi Det", category: "REVA Collection", image: RevaMultiDet },
+  { id: "reva-nfc", name: "REVA NFC", category: "REVA Collection", image: REVANFC },
+  { id: "reva-ocr-plus", name: "REVA OCR Plus", category: "REVA Collection", image: REVAOCRPlus },
+  { id: "reva-prime-det-fs", name: "REVA Prime Det FS", category: "REVA Collection", image: REVAPrimeDetFS },
+  { id: "reva-prime-det", name: "REVA Prime Det", category: "REVA Collection", image: REVAPrimeDet },
+  { id: "reva-purple-leaf-body-gel", name: "REVA Purple Leaf Body Gel", category: "REVA Collection", image: REVAPurpleLeafBodyGel },
+  { id: "reva-purple-leaf-hand-wash", name: "REVA Purple Leaf Hand Wash", category: "REVA Collection", image: REVAPurpleLeafHandWash },
+  { id: "reva-purple-leaf-premium-shampoo", name: "REVA Purple Leaf Premium Shampoo", category: "REVA Collection", image: REVAPurpleLeafPremiumShampoo },
+  { id: "reva-purple-leaf-skin-moisturizer", name: "REVA Purple Leaf Skin Moisturizer", category: "REVA Collection", image: REVAPurpleLeafSkinMoisturizer },
+  { id: "reva-quat-hyg", name: "REVA Quat Hyg", category: "REVA Collection", image: REVAQuatHyg },
+  { id: "reva-rpa", name: "REVA RPA", category: "REVA Collection", image: REVARPA },
+  { id: "reva-sanicil", name: "REVA Sanicil", category: "REVA Collection", image: REVASanicil },
+  { id: "reva-sense", name: "REVA Sense", category: "REVA Collection", image: REVASense },
+  { id: "reva-soft-handwash", name: "REVA Soft Handwash", category: "REVA Collection", image: REVASoftHandwash },
+  { id: "reva-solution-a-b", name: "REVA Solution A B", category: "REVA Collection", image: REVASolutionAB },
+  { id: "reva-sparkle", name: "REVA Sparkle", category: "REVA Collection", image: REVASparkle },
+  { id: "reva-spotter", name: "REVA Spotter", category: "REVA Collection", image: REVASpotter },
+  { id: "reva-ssp", name: "REVA SSP", category: "REVA Collection", image: REVASSP },
+  { id: "reva-stick-off", name: "REVA Stick Off", category: "REVA Collection", image: REVAStickOff },
+  { id: "reva-svd", name: "REVA SVD", category: "REVA Collection", image: REVASVD },
+  { id: "reva-wsr", name: "REVA WSR", category: "REVA Collection", image: REVAWSR },
 ];
+
+const WHATSAPP_NUMBER = "918147304734";
 
 const emptyCustomer = {
   name: "",
@@ -117,27 +114,35 @@ const emptyCustomer = {
   email: "",
   company: "",
   location: "",
+  notes: "",
 };
 
 const HouseholdCleaning = () => {
-  const [cart, setCart] = useState(() => getOrderCart());
+  const [cart, setCart] = useState(() => getOrderCart() || []);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [showCart, setShowCart] = useState(false);
   const [showCheckout, setShowCheckout] = useState(false);
   const [customer, setCustomer] = useState(emptyCustomer);
-  const [notes, setNotes] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [error, setError] = useState("");
 
-  // Keep the shared order cart updated.
   useEffect(() => {
     updateOrderCart(cart);
   }, [cart]);
 
-  // Lock background scrolling while a modal is open.
   useEffect(() => {
-    const modalOpen =
-      Boolean(selectedProduct) || showCart || showCheckout;
+    const syncCart = () => setCart(getOrderCart() || []);
 
+    window.addEventListener("focus", syncCart);
+    window.addEventListener("storage", syncCart);
+
+    return () => {
+      window.removeEventListener("focus", syncCart);
+      window.removeEventListener("storage", syncCart);
+    };
+  }, []);
+
+  useEffect(() => {
+    const modalOpen = Boolean(selectedProduct) || showCart || showCheckout;
     document.body.style.overflow = modalOpen ? "hidden" : "";
 
     return () => {
@@ -145,103 +150,96 @@ const HouseholdCleaning = () => {
     };
   }, [selectedProduct, showCart, showCheckout]);
 
-  const cartCount = cart.reduce(
-    (total, item) => total + Number(item?.quantity || 0),
-    0
+  const cartCount = useMemo(
+    () => cart.reduce((total, item) => total + Number(item.quantity || 0), 0),
+    [cart]
   );
 
-  const addToCart = (product) => {
-    setErrorMessage("");
-
-    setCart((previousCart) => {
-      const existing = previousCart.find(
-        (item) => item.id === product.id
-      );
+  const addToOrder = (product) => {
+    setCart((currentCart) => {
+      const existing = currentCart.find((item) => item.id === product.id);
 
       if (existing) {
-        return previousCart.map((item) =>
+        return currentCart.map((item) =>
           item.id === product.id
-            ? {
-                ...item,
-                quantity: Number(item.quantity || 0) + 1,
-              }
+            ? { ...item, quantity: Number(item.quantity || 0) + 1 }
             : item
         );
       }
 
       return [
-        ...previousCart,
+        ...currentCart,
         {
           id: product.id,
           name: product.name,
+          category: product.category,
           image: product.image,
           quantity: 1,
-          unit: "Unit",
         },
       ];
     });
 
     setSelectedProduct(null);
+    setError("");
     setShowCheckout(false);
     setShowCart(true);
   };
 
-  const updateQuantity = (id, quantity) => {
-    const nextQuantity = Number(quantity);
-
-    if (!Number.isFinite(nextQuantity)) return;
-
-    if (nextQuantity < 1) {
-      setCart((previousCart) =>
-        previousCart.filter((item) => item.id !== id)
-      );
-      return;
-    }
-
-    setCart((previousCart) =>
-      previousCart.map((item) =>
+  const increaseQuantity = (id) => {
+    setCart((currentCart) =>
+      currentCart.map((item) =>
         item.id === id
-          ? { ...item, quantity: nextQuantity }
+          ? { ...item, quantity: Number(item.quantity || 0) + 1 }
           : item
       )
     );
   };
 
-  const removeFromCart = (id) => {
-    setCart((previousCart) =>
-      previousCart.filter((item) => item.id !== id)
+  const decreaseQuantity = (id) => {
+    setCart((currentCart) =>
+      currentCart
+        .map((item) =>
+          item.id === id
+            ? { ...item, quantity: Number(item.quantity || 0) - 1 }
+            : item
+        )
+        .filter((item) => Number(item.quantity || 0) > 0)
     );
+  };
+
+  const removeItem = (id) => {
+    setCart((currentCart) => currentCart.filter((item) => item.id !== id));
   };
 
   const handleCustomerChange = (event) => {
     const { name, value } = event.target;
-
-    setCustomer((previousCustomer) => ({
-      ...previousCustomer,
-      [name]: value,
-    }));
-
-    setErrorMessage("");
+    setCustomer((currentCustomer) => ({ ...currentCustomer, [name]: value }));
+    setError("");
   };
 
-  const openCheckout = () => {
-    setErrorMessage("");
-
+  const goToCheckout = () => {
     if (!cart.length) {
-      setErrorMessage("Please add at least one product to your order.");
+      setError("Please add products to your order first.");
       return;
     }
 
+    setError("");
     setShowCart(false);
     setShowCheckout(true);
   };
 
+  const backToCart = () => {
+    setShowCheckout(false);
+    setShowCart(true);
+    setError("");
+  };
+
   const submitOrder = (event) => {
     event.preventDefault();
-    setErrorMessage("");
+    setError("");
 
     if (!cart.length) {
-      setErrorMessage("Please add at least one product to your order.");
+      setError("Your order is empty.");
       return;
     }
 
@@ -250,90 +248,89 @@ const HouseholdCleaning = () => {
     const email = customer.email.trim();
     const company = customer.company.trim();
     const location = customer.location.trim();
-    const additionalNotes = notes.trim();
+    const notes = customer.notes.trim();
 
-    if (!name || !phone || !location) {
-      setErrorMessage(
-        "Please enter your name, phone number and location."
-      );
+    if (!name) {
+      setError("Please enter your name.");
       return;
     }
 
-    const phoneDigits = phone.replace(/\D/g, "");
-
-    if (phoneDigits.length < 7 || phoneDigits.length > 15) {
-      setErrorMessage("Please enter a valid phone number.");
+    if (!/^[0-9+\-\s()]{7,20}$/.test(phone)) {
+      setError("Please enter a valid phone number.");
       return;
     }
 
-    if (
-      email &&
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
-    ) {
-      setErrorMessage("Please enter a valid email address.");
+    if (!location) {
+      setError("Please enter your location.");
       return;
     }
 
-    const productLines = cart
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    const productDetails = cart
       .map(
         (item, index) =>
-          `${index + 1}. ${item.name} — Quantity: ${Number(
-            item.quantity || 1
-          )}`
+          `${index + 1}. ${item.name}\nCategory: ${item.category || "REVA Collection"}\nQuantity: ${Number(item.quantity || 1)}`
       )
-      .join("\n");
+      .join("\n\n");
 
     const message = [
-      "Hello Clean N Clear,",
+      "*NEW ORDER ENQUIRY - CLEAN N CLEAR*",
       "",
-      "I would like to enquire about the following REVA products:",
-      "",
-      productLines,
-      "",
-      "CUSTOMER DETAILS",
+      "*CUSTOMER DETAILS*",
       `Name: ${name}`,
       `Phone: ${phone}`,
       `Email: ${email || "Not provided"}`,
       `Company / Organization: ${company || "Not provided"}`,
-      `Location / Address: ${location}`,
-      `Additional Requirements: ${additionalNotes || "None"}`,
+      `Location: ${location}`,
       "",
-      "Please share the availability, pricing and further details.",
+      "*SELECTED REVA PRODUCTS*",
+      productDetails,
+      "",
+      `Total quantity: ${cartCount}`,
+      "",
+      "*ADDITIONAL REQUIREMENTS*",
+      notes || "None",
+      "",
+      "Please confirm product availability and pricing.",
     ].join("\n");
 
-    const whatsappURL =
-      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    const whatsappWindow = window.open(whatsappURL, "_blank", "noopener,noreferrer");
 
-    // Open WhatsApp directly. No backend or API request is made.
-    window.open(whatsappURL, "_blank", "noopener,noreferrer");
+    if (!whatsappWindow) {
+      window.location.href = whatsappURL;
+    }
   };
 
   return (
     <section className="ccq-section">
       <header className="ccq-header">
-        <span className="ccq-label">REVA PRODUCTS</span>
+        <span className="ccq-label">CLEAN N CLEAR</span>
 
         <h1 className="ccq-title">
-          Cleaning <span>Solutions</span>
+          REVA Cleaning <span>Solutions</span>
         </h1>
 
         <p className="ccq-intro">
-          Explore our range of REVA cleaning, hygiene and care products
-          for household, commercial and institutional use.
+          Explore our range of REVA cleaning, hygiene and care products for
+          household, commercial and institutional requirements.
         </p>
-      </header>
 
-      <button
-        type="button"
-        className="ccq-cart-button"
-        onClick={() => {
-          setErrorMessage("");
-          setShowCart(true);
-        }}
-      >
-        <span>My Order</span>
-        <strong>{cartCount}</strong>
-      </button>
+        <button
+          type="button"
+          className="ccq-cart-button"
+          onClick={() => {
+            setError("");
+            setShowCart(true);
+          }}
+        >
+          Order Cart {cartCount > 0 && <strong>{cartCount}</strong>}
+        </button>
+      </header>
 
       <div className="ccq-grid">
         {products.map((product) => (
@@ -353,18 +350,12 @@ const HouseholdCleaning = () => {
             </button>
 
             <div className="ccq-card-content">
-              <span className="ccq-category">
-                REVA Collection
-              </span>
-
-              <h2 className="ccq-product-name">
-                {product.name}
-              </h2>
-
+              <span className="ccq-category">{product.category}</span>
+              <h2 className="ccq-product-name">{product.name}</h2>
               <button
                 type="button"
                 className="ccq-add-button"
-                onClick={() => addToCart(product)}
+                onClick={() => addToOrder(product)}
               >
                 Add to Order
               </button>
@@ -374,12 +365,8 @@ const HouseholdCleaning = () => {
       </div>
 
       {/* ================= PRODUCT DETAILS MODAL ================= */}
-
       {selectedProduct && (
-        <div
-          className="ccq-overlay"
-          onClick={() => setSelectedProduct(null)}
-        >
+        <div className="ccq-overlay" onClick={() => setSelectedProduct(null)}>
           <div
             className="ccq-product-modal"
             onClick={(event) => event.stopPropagation()}
@@ -406,18 +393,15 @@ const HouseholdCleaning = () => {
 
             <div className="ccq-modal-content">
               <span className="ccq-label">REVA COLLECTION</span>
-
               <h2>{selectedProduct.name}</h2>
-
               <p>
-                Contact our team for product details and assistance
-                with your requirements.
+                Add this product to your order to enquire about availability and
+                pricing.
               </p>
-
               <button
                 type="button"
                 className="ccq-add-large"
-                onClick={() => addToCart(selectedProduct)}
+                onClick={() => addToOrder(selectedProduct)}
               >
                 Add to Order
               </button>
@@ -426,31 +410,26 @@ const HouseholdCleaning = () => {
         </div>
       )}
 
-      {/* ================= ORDER SUMMARY ================= */}
-
+      {/* ================= ORDER CART DRAWER ================= */}
       {showCart && (
-        <div
-          className="ccq-overlay"
-          onClick={() => setShowCart(false)}
-        >
+        <div className="ccq-overlay" onClick={() => setShowCart(false)}>
           <aside
             className="ccq-cart-drawer"
             onClick={(event) => event.stopPropagation()}
             role="dialog"
             aria-modal="true"
-            aria-label="Order summary"
+            aria-label="Order cart"
           >
             <div className="ccq-cart-header">
               <div>
-                <span>YOUR SELECTION</span>
-                <h2>Order Summary</h2>
+                <span className="ccq-label">YOUR SELECTION</span>
+                <h2>My Order</h2>
               </div>
-
               <button
                 type="button"
                 className="ccq-close"
                 onClick={() => setShowCart(false)}
-                aria-label="Close order summary"
+                aria-label="Close order cart"
               >
                 ×
               </button>
@@ -468,45 +447,30 @@ const HouseholdCleaning = () => {
                   {cart.map((item) => (
                     <div className="ccq-cart-item" key={item.id}>
                       <img src={item.image} alt={item.name} />
-
                       <div className="ccq-cart-item-info">
                         <h3>{item.name}</h3>
-
                         <div className="ccq-quantity">
                           <button
                             type="button"
-                            onClick={() =>
-                              updateQuantity(
-                                item.id,
-                                Number(item.quantity) - 1
-                              )
-                            }
+                            onClick={() => decreaseQuantity(item.id)}
                             aria-label={`Decrease ${item.name} quantity`}
                           >
                             −
                           </button>
-
                           <strong>{item.quantity}</strong>
-
                           <button
                             type="button"
-                            onClick={() =>
-                              updateQuantity(
-                                item.id,
-                                Number(item.quantity) + 1
-                              )
-                            }
+                            onClick={() => increaseQuantity(item.id)}
                             aria-label={`Increase ${item.name} quantity`}
                           >
                             +
                           </button>
                         </div>
                       </div>
-
                       <button
                         type="button"
                         className="ccq-remove"
-                        onClick={() => removeFromCart(item.id)}
+                        onClick={() => removeItem(item.id)}
                       >
                         Remove
                       </button>
@@ -516,16 +480,16 @@ const HouseholdCleaning = () => {
 
                 <div className="ccq-cart-footer">
                   <div className="ccq-total">
-                    <span>Selected items</span>
+                    <span>Total quantity</span>
                     <strong>{cartCount}</strong>
                   </div>
-
+                  {error && <div className="ccq-error" role="alert">{error}</div>}
                   <button
                     type="button"
                     className="ccq-checkout-button"
-                    onClick={openCheckout}
+                    onClick={goToCheckout}
                   >
-                    Continue to Customer Details
+                    Enter Customer Details
                   </button>
                 </div>
               </>
@@ -535,11 +499,12 @@ const HouseholdCleaning = () => {
       )}
 
       {/* ================= CUSTOMER DETAILS ================= */}
-
       {showCheckout && (
         <div
           className="ccq-overlay"
-          onClick={() => setShowCheckout(false)}
+          onClick={(event) => {
+            if (event.target === event.currentTarget) setShowCheckout(false);
+          }}
         >
           <div
             className="ccq-checkout"
@@ -551,19 +516,19 @@ const HouseholdCleaning = () => {
             <button
               type="button"
               className="ccq-close"
-              onClick={() => setShowCheckout(false)}
-              aria-label="Close customer details"
+              onClick={backToCart}
+              aria-label="Back to order cart"
             >
               ×
             </button>
 
             <div className="ccq-checkout-heading">
-              <span>FINAL STEP</span>
+              <span className="ccq-label">CLEAN N CLEAR</span>
               <h2>Customer Details</h2>
-              <p>
-                Enter your details to prepare your order on WhatsApp.
-              </p>
+              <p>Enter your details to prepare your REVA product enquiry on WhatsApp.</p>
             </div>
+
+            {error && <div className="ccq-error" role="alert">{error}</div>}
 
             <form className="ccq-form" onSubmit={submitOrder}>
               <div className="ccq-form-grid">
@@ -608,9 +573,7 @@ const HouseholdCleaning = () => {
                 </div>
 
                 <div className="ccq-field">
-                  <label htmlFor="reva-company">
-                    Company / Organization
-                  </label>
+                  <label htmlFor="reva-company">Company / Organization</label>
                   <input
                     id="reva-company"
                     name="company"
@@ -623,9 +586,7 @@ const HouseholdCleaning = () => {
               </div>
 
               <div className="ccq-field">
-                <label htmlFor="reva-location">
-                  Location / Address *
-                </label>
+                <label htmlFor="reva-location">Location / Address *</label>
                 <textarea
                   id="reva-location"
                   name="location"
@@ -639,57 +600,52 @@ const HouseholdCleaning = () => {
               </div>
 
               <div className="ccq-field">
-                <label htmlFor="reva-notes">
-                  Additional Requirements
-                </label>
+                <label htmlFor="reva-notes">Additional Requirements</label>
                 <textarea
                   id="reva-notes"
-                  value={notes}
-                  onChange={(event) => {
-                    setNotes(event.target.value);
-                    setErrorMessage("");
-                  }}
+                  name="notes"
+                  value={customer.notes}
+                  onChange={handleCustomerChange}
                   placeholder="Tell us about your requirements..."
                   rows={4}
                 />
               </div>
 
-              <div className="ccq-final-summary">
-                <div>
-                  <span>Selected products</span>
+              <div
+                className="ccq-final-summary"
+                style={{ display: "flex", flexDirection: "column", alignItems: "stretch", gap: "12px", width: "100%" }}
+              >
+                <h3 style={{ margin: 0 }}>Order Summary</h3>
+                {cart.map((item) => (
+                  <div
+                    className="ccq-final-item"
+                    key={item.id}
+                    style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", gap: "16px", width: "100%", boxSizing: "border-box" }}
+                  >
+                    <span style={{ flex: "1", minWidth: 0, whiteSpace: "normal", overflowWrap: "anywhere" }}>{item.name}</span>
+                    <strong style={{ flexShrink: 0 }}>× {item.quantity}</strong>
+                  </div>
+                ))}
+                <div
+                  className="ccq-total"
+                  style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", width: "100%", boxSizing: "border-box" }}
+                >
+                  <span>Total quantity</span>
                   <strong>{cartCount}</strong>
                 </div>
               </div>
 
-              {errorMessage && (
-                <div className="ccq-error" role="alert">
-                  {errorMessage}
-                </div>
-              )}
-
               <div className="ccq-form-actions">
-                <button
-                  type="button"
-                  className="ccq-back-button"
-                  onClick={() => {
-                    setShowCheckout(false);
-                    setShowCart(true);
-                  }}
-                >
+                <button type="button" className="ccq-back-button" onClick={backToCart}>
                   Back to Order
                 </button>
-
-                <button
-                  type="submit"
-                  className="ccq-submit"
-                >
+                <button type="submit" className="ccq-submit">
                   Continue to WhatsApp
                 </button>
               </div>
-
               <p className="ccq-intro">
-                WhatsApp will open with your order details filled in.
-                Please review the message and press Send to submit your enquiry.
+                WhatsApp will open with your order details filled in. Review the
+                message and press Send to submit your enquiry.
               </p>
             </form>
           </div>

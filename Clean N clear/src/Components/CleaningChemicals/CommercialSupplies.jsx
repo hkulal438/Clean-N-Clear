@@ -1,9 +1,7 @@
-
 import { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import "./CleaningChemicals.css";
 import { getOrderCart, updateOrderCart } from "../../utils/OrderCart";
-
-// ================= IMAGE IMPORTS =================
 
 import BinTrolley from "../../images/institute/Bin-trolley.png";
 import BioMedicalBin from "../../images/institute/Bio_Medical_Bin.png";
@@ -73,79 +71,77 @@ import WaterBottleTrolley from "../../images/institute/water bottle trolley.png"
 import WheelWasteBin120L240L from "../../images/institute/Wheel_Waste_Bin_120L_240L.png";
 import WheelWasteBin660L1100L from "../../images/institute/Wheel_Waste_Bin_660L_1100L.png";
 
-const WHATSAPP_NUMBER = "918147304734";
-
-// ================= PRODUCT LIST =================
-
 const products = [
-  { id: "bin-trolley", name: "Bin Trolley", image: BinTrolley },
-  { id: "bio-medical-bin", name: "Bio Medical Bin", image: BioMedicalBin },
-  { id: "canteen-bin", name: "Canteen Bin", image: CanteenBin },
-  { id: "dome-bin-with-stand", name: "Dome Bin With Stand", image: DomeBinWithStand },
-  { id: "dome-bin", name: "Dome Bin", image: DomeBin },
-  { id: "feminine", name: "Feminine Bin", image: Feminine },
-  { id: "frp-wet-dry-bin", name: "FRP Wet Dry Bin", image: FRPWetDryBin },
-  { id: "furniture-shine-maintainer-5l-x-4", name: "Furniture Shine Maintainer", image: FurnitureShineMaintainer5LX4 },
-  { id: "garbabe-bin-2", name: "Garbabe Bin 2", image: GarbabeBin2 },
-  { id: "garbage-bin-box", name: "Garbage Bin Box", image: GarbageBinBox },
-  { id: "garbage-bin-3", name: "Garbage Bin 3", image: GarbageBin3 },
-  { id: "garbage-bin-4", name: "Garbage Bin 4", image: GarbageBin4 },
-  { id: "garbage-bin-5", name: "Garbage Bin 5", image: GarbageBin5 },
-  { id: "garbage-bin-6", name: "Garbage Bin 6", image: GarbageBin6 },
-  { id: "garbage-bin-7", name: "Garbage Bin 7", image: GarbageBin7 },
-  { id: "garbage-bin-8", name: "Garbage Bin 8", image: GarbageBin8 },
-  { id: "garbage-bin", name: "Garbage Bin", image: GarbageBin },
-  { id: "gemini-no-dust-broom", name: "Gemini No Dust Broom", image: GEMININODUSTBROOM },
-  { id: "hard-surface-cleaner-1l-x-4", name: "Hard Surface Cleaner", image: HardSurfaceCleaner1LX4 },
-  { id: "hrt-dispenser-sensor-based", name: "HRT Sensor-Based Dispenser", image: HRTDispenserSensorBased },
-  { id: "jazz-spin-mop-bucket", name: "Jazz Spin Mop Bucket", image: JAZZSPINMOPBUCKET },
-  { id: "metal-mesh-bin", name: "Metal Mesh Bin", image: MetalMeshBin },
-  { id: "monkey-bin", name: "Monkey Bin", image: MonkeyBin },
-  { id: "pallette", name: "Pallette", image: Pallette },
-  { id: "penguin-bin", name: "Penguin Bin", image: PenguinBin },
-  { id: "plastic-pedal-bin", name: "Plastic Pedal Bin", image: PlasticPedalBin },
-  { id: "plastic-swing-bin", name: "Plastic Swing Bin", image: PlasticSwingBin },
-  { id: "plate-trolley", name: "Plate Trolley", image: PlateTrolley },
-  { id: "rabbit-bin", name: "Rabbit Bin", image: RabbitBin },
-  { id: "rectangular-bin", name: "Rectangular Bin", image: RectangularBin },
-  { id: "recycle-bin-2", name: "Recycle Bin 2", image: RecycleBin2 },
-  { id: "recycle-bin-3", name: "Recycle Bin 3", image: RecycleBin3 },
-  { id: "recycle-bin-4", name: "Recycle Bin 4", image: RecycleBin4 },
-  { id: "recycle-bin-5", name: "Recycle Bin 5", image: RecycleBin5 },
-  { id: "recycle-bin-6", name: "Recycle Bin 6", image: RecycleBin6 },
-  { id: "recycle-bin-7", name: "Recycle Bin 7", image: RecycleBin7 },
-  { id: "recycle-bin-8", name: "Recycle Bin 8", image: RecycleBin8 },
-  { id: "recycle-bin-9", name: "Recycle Bin 9", image: RecycleBin9 },
-  { id: "recycle-bin-10", name: "Recycle Bin 10", image: RecycleBin10 },
-  { id: "recycle-bin-11", name: "Recycle Bin 11", image: RecycleBin11 },
-  { id: "recycle-bin-12", name: "Recycle Bin 12", image: RecycleBin12 },
-  { id: "recycle-bin-13", name: "Recycle Bin 13", image: RecycleBin13 },
-  { id: "recycle-bin-round", name: "Recycle Bin Round", image: RecycleBinRound },
-  { id: "recycle-bin-square", name: "Recycle Bin Square", image: RecycleBinSquare },
-  { id: "round-dustbin", name: "Round Dustbin", image: RoundDustbin },
-  { id: "ss-ash-bin", name: "SS Ash Bin", image: SSAshBin },
-  { id: "ss-dustbin-perforated", name: "SS Dustbin Perforated", image: SSDustbinPerforated },
-  { id: "ss-pedal-bin", name: "SS Pedal Bin", image: SSPedalBin },
-  { id: "ss-plain-bin", name: "SS Plain Bin", image: SSPlainBin },
-  { id: "ss-planter", name: "SS Planter", image: SSPlanter },
-  { id: "ss-swing-bin", name: "SS Swing Bin", image: SSSwingBin },
-  { id: "tree-bin", name: "Tree Bin", image: TreeBin },
-  { id: "troll-2", name: "Troll 2", image: Troll2 },
-  { id: "troll-3", name: "Troll 3", image: Troll3 },
-  { id: "troll-4", name: "Troll 4", image: Troll4 },
-  { id: "troll-5", name: "Troll 5", image: Troll5 },
-  { id: "troll-6", name: "Troll 6", image: Troll6 },
-  { id: "troll-7", name: "Troll 7", image: Troll7 },
-  { id: "troll-8", name: "Troll 8", image: Troll8 },
-  { id: "trolly", name: "Trolly", image: Trolly },
-  { id: "vacuum-sweeper", name: "Vacuum Sweeper", image: VacuumSweeper },
-  { id: "washing-sink-1", name: "Washing Sink 1", image: WashingSink1 },
-  { id: "washing-sink", name: "Washing Sink", image: WashingSink },
-  { id: "water-bottle-stand", name: "Water Bottle Stand", image: WaterBottleStand },
-  { id: "water-bottle-trolley", name: "Water Bottle Trolley", image: WaterBottleTrolley },
-  { id: "wheel-waste-bin-120l-240l", name: "Wheel Waste Bin 120L / 240L", image: WheelWasteBin120L240L },
-  { id: "wheel-waste-bin-660l-1100l", name: "Wheel Waste Bin 660L / 1100L", image: WheelWasteBin660L1100L },
+  { id: "bin-trolley", name: "Bin Trolley", image: BinTrolley , category: "Institutional Supplies" },
+  { id: "bio-medical-bin", name: "Bio Medical Bin", image: BioMedicalBin , category: "Institutional Supplies" },
+  { id: "canteen-bin", name: "Canteen Bin", image: CanteenBin , category: "Institutional Supplies" },
+  { id: "dome-bin-with-stand", name: "Dome Bin With Stand", image: DomeBinWithStand , category: "Institutional Supplies" },
+  { id: "dome-bin", name: "Dome Bin", image: DomeBin , category: "Institutional Supplies" },
+  { id: "feminine", name: "Feminine Bin", image: Feminine , category: "Institutional Supplies" },
+  { id: "frp-wet-dry-bin", name: "FRP Wet Dry Bin", image: FRPWetDryBin , category: "Institutional Supplies" },
+  { id: "furniture-shine-maintainer-5l-x-4", name: "Furniture Shine Maintainer", image: FurnitureShineMaintainer5LX4 , category: "Institutional Supplies" },
+  { id: "garbabe-bin-2", name: "Garbabe Bin 2", image: GarbabeBin2 , category: "Institutional Supplies" },
+  { id: "garbage-bin-box", name: "Garbage Bin Box", image: GarbageBinBox , category: "Institutional Supplies" },
+  { id: "garbage-bin-3", name: "Garbage Bin 3", image: GarbageBin3 , category: "Institutional Supplies" },
+  { id: "garbage-bin-4", name: "Garbage Bin 4", image: GarbageBin4 , category: "Institutional Supplies" },
+  { id: "garbage-bin-5", name: "Garbage Bin 5", image: GarbageBin5 , category: "Institutional Supplies" },
+  { id: "garbage-bin-6", name: "Garbage Bin 6", image: GarbageBin6 , category: "Institutional Supplies" },
+  { id: "garbage-bin-7", name: "Garbage Bin 7", image: GarbageBin7 , category: "Institutional Supplies" },
+  { id: "garbage-bin-8", name: "Garbage Bin 8", image: GarbageBin8 , category: "Institutional Supplies" },
+  { id: "garbage-bin", name: "Garbage Bin", image: GarbageBin , category: "Institutional Supplies" },
+  { id: "gemini-no-dust-broom", name: "Gemini No Dust Broom", image: GEMININODUSTBROOM , category: "Institutional Supplies" },
+  { id: "hard-surface-cleaner-1l-x-4", name: "Hard Surface Cleaner", image: HardSurfaceCleaner1LX4 , category: "Institutional Supplies" },
+  { id: "hrt-dispenser-sensor-based", name: "HRT Sensor-Based Dispenser", image: HRTDispenserSensorBased , category: "Institutional Supplies" },
+  { id: "jazz-spin-mop-bucket", name: "Jazz Spin Mop Bucket", image: JAZZSPINMOPBUCKET , category: "Institutional Supplies" },
+  { id: "metal-mesh-bin", name: "Metal Mesh Bin", image: MetalMeshBin , category: "Institutional Supplies" },
+  { id: "monkey-bin", name: "Monkey Bin", image: MonkeyBin , category: "Institutional Supplies" },
+  { id: "pallette", name: "Pallette", image: Pallette , category: "Institutional Supplies" },
+  { id: "penguin-bin", name: "Penguin Bin", image: PenguinBin , category: "Institutional Supplies" },
+  { id: "plastic-pedal-bin", name: "Plastic Pedal Bin", image: PlasticPedalBin , category: "Institutional Supplies" },
+  { id: "plastic-swing-bin", name: "Plastic Swing Bin", image: PlasticSwingBin , category: "Institutional Supplies" },
+  { id: "plate-trolley", name: "Plate Trolley", image: PlateTrolley , category: "Institutional Supplies" },
+  { id: "rabbit-bin", name: "Rabbit Bin", image: RabbitBin , category: "Institutional Supplies" },
+  { id: "rectangular-bin", name: "Rectangular Bin", image: RectangularBin , category: "Institutional Supplies" },
+  { id: "recycle-bin-2", name: "Recycle Bin 2", image: RecycleBin2 , category: "Institutional Supplies" },
+  { id: "recycle-bin-3", name: "Recycle Bin 3", image: RecycleBin3 , category: "Institutional Supplies" },
+  { id: "recycle-bin-4", name: "Recycle Bin 4", image: RecycleBin4 , category: "Institutional Supplies" },
+  { id: "recycle-bin-5", name: "Recycle Bin 5", image: RecycleBin5 , category: "Institutional Supplies" },
+  { id: "recycle-bin-6", name: "Recycle Bin 6", image: RecycleBin6 , category: "Institutional Supplies" },
+  { id: "recycle-bin-7", name: "Recycle Bin 7", image: RecycleBin7 , category: "Institutional Supplies" },
+  { id: "recycle-bin-8", name: "Recycle Bin 8", image: RecycleBin8 , category: "Institutional Supplies" },
+  { id: "recycle-bin-9", name: "Recycle Bin 9", image: RecycleBin9 , category: "Institutional Supplies" },
+  { id: "recycle-bin-10", name: "Recycle Bin 10", image: RecycleBin10 , category: "Institutional Supplies" },
+  { id: "recycle-bin-11", name: "Recycle Bin 11", image: RecycleBin11 , category: "Institutional Supplies" },
+  { id: "recycle-bin-12", name: "Recycle Bin 12", image: RecycleBin12 , category: "Institutional Supplies" },
+  { id: "recycle-bin-13", name: "Recycle Bin 13", image: RecycleBin13 , category: "Institutional Supplies" },
+  { id: "recycle-bin-round", name: "Recycle Bin Round", image: RecycleBinRound , category: "Institutional Supplies" },
+  { id: "recycle-bin-square", name: "Recycle Bin Square", image: RecycleBinSquare , category: "Institutional Supplies" },
+  { id: "round-dustbin", name: "Round Dustbin", image: RoundDustbin , category: "Institutional Supplies" },
+  { id: "ss-ash-bin", name: "SS Ash Bin", image: SSAshBin , category: "Institutional Supplies" },
+  { id: "ss-dustbin-perforated", name: "SS Dustbin Perforated", image: SSDustbinPerforated , category: "Institutional Supplies" },
+  { id: "ss-pedal-bin", name: "SS Pedal Bin", image: SSPedalBin , category: "Institutional Supplies" },
+  { id: "ss-plain-bin", name: "SS Plain Bin", image: SSPlainBin , category: "Institutional Supplies" },
+  { id: "ss-planter", name: "SS Planter", image: SSPlanter , category: "Institutional Supplies" },
+  { id: "ss-swing-bin", name: "SS Swing Bin", image: SSSwingBin , category: "Institutional Supplies" },
+  { id: "tree-bin", name: "Tree Bin", image: TreeBin , category: "Institutional Supplies" },
+  { id: "troll-2", name: "Troll 2", image: Troll2 , category: "Institutional Supplies" },
+  { id: "troll-3", name: "Troll 3", image: Troll3 , category: "Institutional Supplies" },
+  { id: "troll-4", name: "Troll 4", image: Troll4 , category: "Institutional Supplies" },
+  { id: "troll-5", name: "Troll 5", image: Troll5 , category: "Institutional Supplies" },
+  { id: "troll-6", name: "Troll 6", image: Troll6 , category: "Institutional Supplies" },
+  { id: "troll-7", name: "Troll 7", image: Troll7 , category: "Institutional Supplies" },
+  { id: "troll-8", name: "Troll 8", image: Troll8 , category: "Institutional Supplies" },
+  { id: "trolly", name: "Trolly", image: Trolly , category: "Institutional Supplies" },
+  { id: "vacuum-sweeper", name: "Vacuum Sweeper", image: VacuumSweeper , category: "Institutional Supplies" },
+  { id: "washing-sink-1", name: "Washing Sink 1", image: WashingSink1 , category: "Institutional Supplies" },
+  { id: "washing-sink", name: "Washing Sink", image: WashingSink , category: "Institutional Supplies" },
+  { id: "water-bottle-stand", name: "Water Bottle Stand", image: WaterBottleStand , category: "Institutional Supplies" },
+  { id: "water-bottle-trolley", name: "Water Bottle Trolley", image: WaterBottleTrolley , category: "Institutional Supplies" },
+  { id: "wheel-waste-bin-120l-240l", name: "Wheel Waste Bin 120L / 240L", image: WheelWasteBin120L240L , category: "Institutional Supplies" },
+  { id: "wheel-waste-bin-660l-1100l", name: "Wheel Waste Bin 660L / 1100L", image: WheelWasteBin660L1100L , category: "Institutional Supplies" },
 ];
+
+const WHATSAPP_NUMBER = "918147304734";
 
 const emptyCustomer = {
   name: "",
@@ -156,20 +152,20 @@ const emptyCustomer = {
   notes: "",
 };
 
-export default function Institute() {
-  const [cart, setCart] = useState(() => getOrderCart() || []);
+const Institute = () => {
+  const [cart, setCart] = useState(() => getOrderCart());
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [showOrder, setShowOrder] = useState(false);
+  const [showCart, setShowCart] = useState(false);
   const [showCheckout, setShowCheckout] = useState(false);
   const [customer, setCustomer] = useState(emptyCustomer);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     updateOrderCart(cart);
   }, [cart]);
 
   useEffect(() => {
-    const syncCart = () => setCart(getOrderCart() || []);
+    const syncCart = () => setCart(getOrderCart());
 
     window.addEventListener("focus", syncCart);
     window.addEventListener("storage", syncCart);
@@ -181,33 +177,25 @@ export default function Institute() {
   }, []);
 
   useEffect(() => {
-    const modalOpen =
-      Boolean(selectedProduct) || showOrder || showCheckout;
-
+    const modalOpen = Boolean(selectedProduct) || showCart || showCheckout;
     document.body.style.overflow = modalOpen ? "hidden" : "";
 
     return () => {
       document.body.style.overflow = "";
     };
-  }, [selectedProduct, showOrder, showCheckout]);
+  }, [selectedProduct, showCart, showCheckout]);
 
   const cartCount = useMemo(
-    () =>
-      cart.reduce(
-        (total, item) => total + Number(item?.quantity || 0),
-        0
-      ),
+    () => cart.reduce((total, item) => total + Number(item.quantity || 0), 0),
     [cart]
   );
 
-  const addToCart = (product) => {
-    setErrorMessage("");
-
-    setCart((current) => {
-      const existing = current.find((item) => item.id === product.id);
+  const addToOrder = (product) => {
+    setCart((currentCart) => {
+      const existing = currentCart.find((item) => item.id === product.id);
 
       if (existing) {
-        return current.map((item) =>
+        return currentCart.map((item) =>
           item.id === product.id
             ? { ...item, quantity: Number(item.quantity || 0) + 1 }
             : item
@@ -215,92 +203,87 @@ export default function Institute() {
       }
 
       return [
-        ...current,
+        ...currentCart,
         {
           id: product.id,
           name: product.name,
+          category: product.category,
           image: product.image,
-          category: "Institutional Supplies",
           quantity: 1,
         },
       ];
     });
 
     setSelectedProduct(null);
-    setShowCheckout(false);
-    setShowOrder(true);
+    setError("");
+    setShowCart(true);
   };
 
-  const updateQuantity = (productId, change) => {
-    setCart((current) =>
-      current
+  const increaseQuantity = (id) => {
+    setCart((currentCart) =>
+      currentCart.map((item) =>
+        item.id === id
+          ? { ...item, quantity: Number(item.quantity || 0) + 1 }
+          : item
+      )
+    );
+  };
+
+  const decreaseQuantity = (id) => {
+    setCart((currentCart) =>
+      currentCart
         .map((item) =>
-          item.id === productId
-            ? {
-                ...item,
-                quantity: Number(item.quantity || 0) + change,
-              }
+          item.id === id
+            ? { ...item, quantity: Number(item.quantity || 0) - 1 }
             : item
         )
         .filter((item) => Number(item.quantity || 0) > 0)
     );
   };
 
-  const removeFromCart = (productId) => {
-    setCart((current) =>
-      current.filter((item) => item.id !== productId)
-    );
+  const removeItem = (id) => {
+    setCart((currentCart) => currentCart.filter((item) => item.id !== id));
   };
 
   const handleCustomerChange = (event) => {
     const { name, value } = event.target;
-
-    setCustomer((current) => ({
-      ...current,
-      [name]: value,
-    }));
-
-    setErrorMessage("");
+    setCustomer((current) => ({ ...current, [name]: value }));
+    setError("");
   };
 
-  const openCheckout = () => {
+  const goToCheckout = () => {
     if (!cart.length) {
-      setErrorMessage("Please add products to your order first.");
+      setError("Please add products to your order first.");
       return;
     }
 
-    setErrorMessage("");
-    setShowOrder(false);
+    setError("");
+    setShowCart(false);
     setShowCheckout(true);
   };
 
-  const backToOrder = () => {
-    setErrorMessage("");
+  const backToCart = () => {
     setShowCheckout(false);
-    setShowOrder(true);
+    setShowCart(true);
+    setError("");
   };
 
-  const handleSubmitOrder = (event) => {
+  const submitOrder = (event) => {
     event.preventDefault();
-    setErrorMessage("");
-
-    if (!cart.length) {
-      setErrorMessage("Please add at least one product.");
-      return;
-    }
+    setError("");
 
     if (!customer.name.trim()) {
-      setErrorMessage("Please enter your name.");
+      setError("Please enter your name.");
       return;
     }
 
-    if (!/^[+]?[0-9()\-\s]{7,20}$/.test(customer.phone.trim())) {
-      setErrorMessage("Please enter a valid phone number.");
+    if (!/^[0-9+\-\s()]{7,20}$/.test(customer.phone.trim())) {
+      setError("Please enter a valid phone number.");
       return;
     }
 
     if (!customer.location.trim()) {
-      setErrorMessage("Please enter your location.");
+      setError("Please enter your location.");
       return;
     }
 
@@ -308,28 +291,33 @@ export default function Institute() {
       customer.email.trim() &&
       !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customer.email.trim())
     ) {
-      setErrorMessage("Please enter a valid email address.");
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    if (!cart.length) {
+      setError("Your order is empty.");
       return;
     }
 
     const productDetails = cart
       .map(
         (item, index) =>
-          `${index + 1}. ${item.name}\nQuantity: ${item.quantity}`
+          `${index + 1}. ${item.name}\nCategory: ${item.category}\nQuantity: ${item.quantity}`
       )
       .join("\n\n");
 
     const message = [
-      "*NEW ORDER ENQUIRY - CLEAN N CLEAR*",
+      "*NEW ORDER - CLEAN N CLEAR*",
       "",
       "*CUSTOMER DETAILS*",
       `Name: ${customer.name.trim()}`,
       `Phone: ${customer.phone.trim()}`,
       `Email: ${customer.email.trim() || "Not provided"}`,
-      `Company / Institution: ${customer.company.trim() || "Not provided"}`,
+      `Company: ${customer.company.trim() || "Not provided"}`,
       `Location: ${customer.location.trim()}`,
       "",
-      "*SELECTED PRODUCTS*",
+      "*ORDER DETAILS*",
       productDetails,
       "",
       `Total quantity: ${cartCount}`,
@@ -337,17 +325,23 @@ export default function Institute() {
       "*ADDITIONAL REQUIREMENTS*",
       customer.notes.trim() || "None",
       "",
-      "Please confirm product availability and pricing.",
+      "Please contact the customer to confirm this order enquiry.",
     ].join("\n");
 
-    const whatsappURL =
-      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    const whatsappWindow = window.open(
+      whatsappURL,
+      "_blank",
+      "noopener,noreferrer"
+    );
 
-    window.open(whatsappURL, "_blank", "noopener,noreferrer");
+    if (!whatsappWindow) {
+      window.location.href = whatsappURL;
+    }
   };
 
   return (
-    <main className="ccq-section">
+    <section className="ccq-section">
       <header className="ccq-header">
         <span className="ccq-label">CLEAN N CLEAR</span>
 
@@ -356,21 +350,20 @@ export default function Institute() {
         </h1>
 
         <p className="ccq-intro">
-          Explore our range of waste-management products, bins,
-          dispensers, trolleys and essential institutional supplies.
+          Explore our range of waste-management products, bins, dispensers, trolleys and essential institutional supplies.
         </p>
-      </header>
 
-      <button
-        type="button"
-        className="ccq-cart-button"
-        onClick={() => {
-          setErrorMessage("");
-          setShowOrder(true);
-        }}
-      >
-        My Order <strong>{cartCount}</strong>
-      </button>
+        <button
+          type="button"
+          className="ccq-cart-button"
+          onClick={() => {
+            setError("");
+            setShowCart(true);
+          }}
+        >
+          Order Cart {cartCount > 0 && <strong>{cartCount}</strong>}
+        </button>
+      </header>
 
       <div className="ccq-grid">
         {products.map((product) => (
@@ -382,24 +375,21 @@ export default function Institute() {
               aria-label={`View ${product.name}`}
             >
               <img
-                className="ccq-product-image"
                 src={product.image}
                 alt={product.name}
+                className="ccq-product-image"
                 loading="lazy"
               />
             </button>
 
             <div className="ccq-card-content">
-              <span className="ccq-category">
-                Institutional Supplies
-              </span>
-
+              <span className="ccq-category">{product.category}</span>
               <h2 className="ccq-product-name">{product.name}</h2>
 
               <button
                 type="button"
                 className="ccq-add-button"
-                onClick={() => addToCart(product)}
+                onClick={() => addToOrder(product)}
               >
                 Add to Order
               </button>
@@ -421,28 +411,29 @@ export default function Institute() {
               type="button"
               className="ccq-close"
               onClick={() => setSelectedProduct(null)}
-              aria-label="Close product"
+              aria-label="Close product details"
             >
               ×
             </button>
 
             <div className="ccq-modal-image-wrap">
               <img
-                className="ccq-modal-image"
                 src={selectedProduct.image}
                 alt={selectedProduct.name}
+                className="ccq-modal-image"
               />
             </div>
 
             <div className="ccq-modal-content">
-              <span className="ccq-label">INSTITUTIONAL SUPPLIES</span>
+              <span className="ccq-category">
+                {selectedProduct.category}
+              </span>
               <h2>{selectedProduct.name}</h2>
-              <p>Add this product to your order to request availability and pricing.</p>
 
               <button
                 type="button"
                 className="ccq-add-large"
-                onClick={() => addToCart(selectedProduct)}
+                onClick={() => addToOrder(selectedProduct)}
               >
                 Add to Order
               </button>
@@ -451,26 +442,23 @@ export default function Institute() {
         </div>
       )}
 
-      {showOrder && (
-        <div
-          className="ccq-overlay"
-          onClick={() => setShowOrder(false)}
-        >
+      {showCart && (
+        <div className="ccq-overlay" onClick={() => setShowCart(false)}>
           <aside
             className="ccq-cart-drawer"
             onClick={(event) => event.stopPropagation()}
           >
             <div className="ccq-cart-header">
               <div>
-                <span className="ccq-label">YOUR SELECTION</span>
-                <h2>My Order</h2>
+                <span className="ccq-label">YOUR ORDER</span>
+                <h2>Order Cart</h2>
               </div>
 
               <button
                 type="button"
                 className="ccq-close"
-                onClick={() => setShowOrder(false)}
-                aria-label="Close order"
+                onClick={() => setShowCart(false)}
+                aria-label="Close cart"
               >
                 ×
               </button>
@@ -482,6 +470,9 @@ export default function Institute() {
                   <div className="ccq-empty-icon">🛒</div>
                   <h3>Your order is empty</h3>
                   <p>Add products from the catalogue to continue.</p>
+                  <Link to="/products" onClick={() => setShowCart(false)}>
+                    Browse Products
+                  </Link>
                 </div>
               ) : (
                 cart.map((item) => (
@@ -490,21 +481,20 @@ export default function Institute() {
 
                     <div className="ccq-cart-item-info">
                       <h3>{item.name}</h3>
+                      <span>{item.category}</span>
 
                       <div className="ccq-quantity">
                         <button
                           type="button"
-                          onClick={() => updateQuantity(item.id, -1)}
+                          onClick={() => decreaseQuantity(item.id)}
                           aria-label={`Decrease ${item.name}`}
                         >
                           −
                         </button>
-
                         <strong>{item.quantity}</strong>
-
                         <button
                           type="button"
-                          onClick={() => updateQuantity(item.id, 1)}
+                          onClick={() => increaseQuantity(item.id)}
                           aria-label={`Increase ${item.name}`}
                         >
                           +
@@ -514,7 +504,7 @@ export default function Institute() {
                       <button
                         type="button"
                         className="ccq-remove"
-                        onClick={() => removeFromCart(item.id)}
+                        onClick={() => removeItem(item.id)}
                       >
                         Remove
                       </button>
@@ -527,20 +517,23 @@ export default function Institute() {
             {cart.length > 0 && (
               <div className="ccq-cart-footer">
                 <div className="ccq-total">
-                  <span>Total quantity</span>
+                  <span>Selected Products</span>
                   <strong>{cartCount}</strong>
                 </div>
 
-                {errorMessage && (
-                  <div className="ccq-error">{errorMessage}</div>
-                )}
+                <p className="ccq-payment-note">
+                  Submit your request and our team will contact you to confirm
+                  the details.
+                </p>
+
+                {error && <div className="ccq-error">{error}</div>}
 
                 <button
                   type="button"
                   className="ccq-checkout-button"
-                  onClick={openCheckout}
+                  onClick={goToCheckout}
                 >
-                  Enter Customer Details
+                  Proceed to Customer Details
                 </button>
               </div>
             )}
@@ -549,43 +542,32 @@ export default function Institute() {
       )}
 
       {showCheckout && (
-        <div
-          className="ccq-overlay"
-          onClick={(event) => {
-            if (event.target === event.currentTarget) {
-              setShowCheckout(false);
-            }
-          }}
-        >
-          <div
-            className="ccq-checkout"
-            onClick={(event) => event.stopPropagation()}
-          >
+        <div className="ccq-overlay">
+          <div className="ccq-checkout">
             <button
               type="button"
               className="ccq-close"
-              onClick={backToOrder}
+              onClick={backToCart}
               aria-label="Back to order"
             >
               ×
             </button>
 
             <div className="ccq-checkout-heading">
-              <span className="ccq-label">CLEAN N CLEAR</span>
-              <h2>Customer Details</h2>
+              <span className="ccq-label">CUSTOMER DETAILS</span>
+              <h2>Submit Your Order</h2>
               <p>
-                Enter your details to prepare your order enquiry in WhatsApp.
+                Provide your contact information so our team can review your
+                product request.
               </p>
             </div>
 
-            {errorMessage && (
-              <div className="ccq-error">{errorMessage}</div>
-            )}
+            {error && <div className="ccq-error">{error}</div>}
 
-            <form className="ccq-form" onSubmit={handleSubmitOrder}>
+            <form className="ccq-form" onSubmit={submitOrder}>
               <div className="ccq-form-grid">
                 <div className="ccq-field">
-                  <label htmlFor="inst-name">Name *</label>
+                  <label htmlFor="inst-name">Full Name *</label>
                   <input
                     id="inst-name"
                     name="name"
@@ -612,7 +594,7 @@ export default function Institute() {
                 </div>
 
                 <div className="ccq-field">
-                  <label htmlFor="inst-email">Email</label>
+                  <label htmlFor="inst-email">Email Address</label>
                   <input
                     id="inst-email"
                     type="email"
@@ -625,58 +607,59 @@ export default function Institute() {
                 </div>
 
                 <div className="ccq-field">
-                  <label htmlFor="inst-company">
-                    Company / Institution
-                  </label>
+                  <label htmlFor="inst-company">Company / Organisation</label>
                   <input
                     id="inst-company"
                     name="company"
                     value={customer.company}
                     onChange={handleCustomerChange}
-                    placeholder="Institution name"
+                    placeholder="Company name"
                     autoComplete="organization"
                   />
                 </div>
 
-                <div className="ccq-field">
+                <div className="ccq-field ccq-field-full">
                   <label htmlFor="inst-location">Location *</label>
                   <input
                     id="inst-location"
                     name="location"
                     value={customer.location}
                     onChange={handleCustomerChange}
-                    placeholder="City / Location"
-                    autoComplete="street-address"
+                    placeholder="City / Area"
                     required
                   />
                 </div>
 
-                <div className="ccq-field">
+                <div className="ccq-field ccq-field-full">
                   <label htmlFor="inst-notes">Additional Requirements</label>
                   <textarea
                     id="inst-notes"
                     name="notes"
                     value={customer.notes}
                     onChange={handleCustomerChange}
-                    placeholder="Tell us about your requirements..."
+                    placeholder="Mention any product or delivery requirements..."
                     rows={4}
                   />
                 </div>
               </div>
 
               <div className="ccq-final-summary">
-                <h3>Order Summary</h3>
+                <div className="ccq-final-summary-header">
+                  <h3>Selected Products</h3>
+                  <span>{cartCount} item(s)</span>
+                </div>
 
-                {cart.map((item) => (
-                  <div className="ccq-final-item" key={item.id}>
-                    <span>{item.name}</span>
-                    <strong>× {item.quantity}</strong>
-                  </div>
-                ))}
-
-                <div className="ccq-total">
-                  <span>Total quantity</span>
-                  <strong>{cartCount}</strong>
+                <div className="ccq-final-items">
+                  {cart.map((item) => (
+                    <div className="ccq-final-item" key={item.id}>
+                      <div>
+                        <strong>{item.name}</strong>
+                        <span>
+                          Quantity: {item.quantity} · {item.category}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
 
@@ -684,7 +667,7 @@ export default function Institute() {
                 <button
                   type="button"
                   className="ccq-back-button"
-                  onClick={backToOrder}
+                  onClick={backToCart}
                 >
                   Back to Order
                 </button>
@@ -697,6 +680,8 @@ export default function Institute() {
           </div>
         </div>
       )}
-    </main>
+    </section>
   );
-}
+};
+
+export default Institute;
