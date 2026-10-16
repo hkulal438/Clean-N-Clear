@@ -1,7 +1,9 @@
+
 /* ============================================================
    CLEAN N CLEAR — PREMIUM RANGE SECTION
    All class names are unique to this section
    Brand colors: Blue #081fef · Green #95d501
+   Font: Cambria
    ============================================================ */
 
 .clean-range-section {
@@ -43,11 +45,7 @@
 
   color: var(--clean-range-ink);
 
-  font-family:
-    "Inter",
-    system-ui,
-    -apple-system,
-    sans-serif;
+  font-family: Cambria, Georgia, "Times New Roman", serif;
 
   -webkit-font-smoothing: antialiased;
 }
@@ -170,11 +168,7 @@
 .clean-range-title {
   margin: 0;
 
-  font-family:
-    "Fraunces",
-    Georgia,
-    "Times New Roman",
-    serif;
+  font-family: Cambria, Georgia, "Times New Roman", serif;
 
   font-size: clamp(1.7rem, 3.4vw, 2.6rem);
 
@@ -256,7 +250,7 @@
 
   background: var(--clean-range-card);
 
-  border-top: 3px solid var(--clean-range-green);
+  border-top: 3px solid var(--clean-range-blue);
 
   border-radius: var(--clean-range-radius);
 
@@ -278,7 +272,7 @@
 .clean-range-card:hover {
   transform: translateY(-8px);
 
-  border-top-color: var(--clean-range-blue);
+  border-top-color: var(--clean-range-green);
 
   box-shadow:
     0 2px 4px rgba(10, 18, 64, 0.06),
@@ -390,10 +384,7 @@
    ============================================================ */
 
 .clean-range-index {
-  font-family:
-    "Fraunces",
-    Georgia,
-    serif;
+  font-family: Cambria, Georgia, "Times New Roman", serif;
 
   font-size: 0.85rem;
 
@@ -412,11 +403,7 @@
 .clean-range-card-title {
   margin: 0.55rem 0 0;
 
-  font-family:
-    "Fraunces",
-    Georgia,
-    "Times New Roman",
-    serif;
+  font-family: Cambria, Georgia, "Times New Roman", serif;
 
   font-size: 1.3rem;
 
