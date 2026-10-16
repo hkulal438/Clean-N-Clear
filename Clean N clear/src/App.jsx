@@ -1,4 +1,4 @@
-import React from "react";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // ======================================================
@@ -44,15 +44,22 @@ import CommercialSupplies from "./Components/CleaningChemicals/CommercialSupplie
 import AdminOrders from "./Components/pages/AdminOrders/AdminOrders";
 
 // ======================================================
+// CATALOGUE DOWNLOAD
+// ======================================================
+
+import CatalogueDownload from "./Components/CatalogueDownload/CatalogueDownload";
+
+// ======================================================
 // KÄRCHER
 // ======================================================
 
 import Karcher from "./Components/Karcher/Karcher";
 import WhyKarcher from "./Components/Whykarcher/Whykarcher";
 import ProductCategory from "./Components/ProductCategory/ProductCategory";
-// import Appointment from "./Components/Appointment/Appointment";
 
-//industries
+// ======================================================
+// INDUSTRIES
+// ======================================================
 
 import Industries from "./Components/Industries/Industries";
 import Healthcare from "./Components/Pagesofindustries/Healthcare";
@@ -62,24 +69,32 @@ import Office from "./Components/Pagesofindustries/Office";
 import Industrial from "./Components/Pagesofindustries/Industrial";
 import Residential from "./Components/Pagesofindustries/Residential";
 
+// ======================================================
+// SOLUTIONS
+// ======================================================
 
-//Solutions
 import Solution from "./Components/Solution/Solution";
+import Commercial from "./Components/Commercial/Commercial";
+import House from "./Components/House/House";
+import Institute from "./Components/Institute/Institute";
+import Retail from "./Components/Retail/Retail";
+import Wholesale from "./Components/Wholesale/Wholesale";
 
-import Commercial from "./Components/Commercial/Commercial"
-import House from "./Components/House/House"
-import Institute from "./Components/Institute/Institute"
-import Retail from "./Components/Retail/Retail"
-import Wholesale from "./Components/Wholesale/Wholesale"
+// ======================================================
+// REQUEST A QUOTE
+// ======================================================
 
-//get a quote
-import Quote from "./Components/Quote/Quote"
+import Quote from "./Components/Quote/Quote";
 
-//cart
+// ======================================================
+// CART
+// ======================================================
+
 import OrderCart from "./Components/OrderCart/OrderCart";
 
-
-// contact
+// ======================================================
+// CONTACT
+// ======================================================
 
 import Contact from "./Components/Contact/Contact";
 
@@ -89,7 +104,6 @@ import Contact from "./Components/Contact/Contact";
 
 import "./App.css";
 // import ScrollAnimation from "./Components/ScrollAnimation/ScrollAnimation";
-
 
 // ======================================================
 // HOME PAGE
@@ -106,7 +120,6 @@ function Home() {
   );
 }
 
-
 // ======================================================
 // ABOUT PAGE
 // ======================================================
@@ -121,7 +134,6 @@ function AboutPage() {
   );
 }
 
-
 // ======================================================
 // KÄRCHER PAGE
 // ======================================================
@@ -132,12 +144,10 @@ function KarcherPage() {
       <Karcher />
       <WhyKarcher />
       <ProductCategory />
-      {/* <Appointment /> */}
       <Footer />
     </>
   );
 }
-
 
 // ======================================================
 // SIMPLE PAGE
@@ -169,7 +179,6 @@ function Page({ title }) {
   );
 }
 
-
 // ======================================================
 // APP
 // ======================================================
@@ -177,49 +186,28 @@ function Page({ title }) {
 function App() {
   return (
     <BrowserRouter>
-              {/* <ScrollAnimation /> */}
-      <Routes>
+      {/* <ScrollAnimation /> */}
 
+      <Routes>
         {/* ==================================================
             MAIN WEBSITE
             Navbar + Page Content
         ================================================== */}
 
         <Route element={<Layout />}>
+          {/* HOME */}
 
-          {/* ==================================================
-              HOME
-          ================================================== */}
+          <Route path="/" element={<Home />} />
 
-          <Route
-            path="/"
-            element={<Home />}
-          />
+          {/* ABOUT US */}
 
+          <Route path="/about-us" element={<AboutPage />} />
 
-          {/* ==================================================
-              ABOUT US
-          ================================================== */}
+          {/* PRODUCTS */}
 
-          <Route
-            path="/about-us"
-            element={<AboutPage />}
-          />
+          <Route path="/products" element={<Product />} />
 
-
-          {/* ==================================================
-              PRODUCTS
-          ================================================== */}
-
-          <Route
-            path="/products"
-            element={<Product />}
-          />
-
-
-          {/* ==================================================
-              PRODUCT CATEGORIES
-          ================================================== */}
+          {/* PRODUCT CATEGORIES */}
 
           <Route
             path="/products/cleaning-chemicals"
@@ -231,192 +219,127 @@ function App() {
             element={<AdminOrders />}
           />
 
-
-
-
           <Route
             path="/products/cleaning-tools"
-            element={
-              <CleaningTools />
-            }
+            element={<CleaningTools />}
           />
 
           <Route
             path="/products/professional-cleaning-equipment"
-            element={
-              <ProffessionalEquiment />
-            }
+            element={<ProffessionalEquiment />}
           />
 
           <Route
             path="/products/hygiene-supplies"
-            element={
-              <HygieneSupplies />
-            }
+            element={<HygieneSupplies />}
           />
 
           <Route
             path="/products/household-cleaning"
-            element={
-              <HouseholdCleaning />
-            }
+            element={<HouseholdCleaning />}
           />
 
           <Route
             path="/products/commercial-institutional-supplies"
-            element={
-              <CommercialSupplies />
-            }
+            element={<CommercialSupplies />}
           />
 
-
           {/* ==================================================
-              SOLUTIONS
+              CATALOGUE DOWNLOAD
           ================================================== */}
 
           <Route
-            path="/solutions"
-            element={
-              <Solution />
-            }
+            path="/catalogues"
+            element={<CatalogueDownload />}
           />
+
+          {/* SOLUTIONS */}
+
+          <Route path="/solutions" element={<Solution />} />
 
           <Route
             path="/solutions/commercial"
-            element={
-              <Commercial />
-            }
+            element={<Commercial />}
           />
 
           <Route
             path="/solutions/household"
-            element={
-              <House />
-            }
+            element={<House />}
           />
 
           <Route
             path="/solutions/institutional"
-            element={
-              <Institute />
-            }
+            element={<Institute />}
           />
 
           <Route
             path="/solutions/retail"
-            element={
-              <Retail />
-            }
+            element={<Retail />}
           />
 
           <Route
             path="/solutions/wholesale"
-            element={
-              <Wholesale />
-            }
+            element={<Wholesale />}
           />
 
+          {/* INDUSTRIES */}
 
-          {/* ==================================================
-              INDUSTRIES
-          ================================================== */}
-
-          <Route
-            path="/industries"
-            element={
-              <Industries />
-            }
-          />
+          <Route path="/industries" element={<Industries />} />
 
           <Route
             path="/industries/healthcare"
-            element={
-              <Healthcare />
-            }
+            element={<Healthcare />}
           />
 
           <Route
             path="/industries/hospitality"
-            element={
-              <Hospitality />
-            }
+            element={<Hospitality />}
           />
 
           <Route
             path="/industries/education"
-            element={
-              <Education />
-            }
+            element={<Education />}
           />
 
           <Route
             path="/industries/offices-commercial"
-            element={
-              <Office />
-            }
+            element={<Office />}
           />
 
           <Route
             path="/industries/industrial"
-            element={
-              <Industrial />
-            }
+            element={<Industrial />}
           />
 
           <Route
             path="/industries/residential"
-            element={
-              <Residential />
-            }
+            element={<Residential />}
           />
 
+          {/* BRANDS */}
 
-          {/* ==================================================
-              BRANDS
-          ================================================== */}
+          <Route path="/brands" element={<Supply />} />
 
-          <Route
-            path="/brands"
-            element={<Supply />}
-          />
+          {/* CONTACT */}
 
+          <Route path="/contact" element={<Contact />} />
 
-
-          {/* ==================================================
-              CONTACT
-          ================================================== */}
-
-          <Route
-            path="/contact"
-            element={
-              <Contact />
-            }
-          />
-
-
-          {/* ==================================================
-              REQUEST A QUOTE
-          ================================================== */}
+          {/* REQUEST A QUOTE */}
 
           <Route
             path="/request-a-quote"
-            element={
-              <Quote />
-            }
+            element={<Quote />}
           />
-
         </Route>
 
-         {/* =====================================================
-              ORDER CART
-          ===================================================== */}
+        {/* ==================================================
+            ORDER CART
+        ================================================== */}
 
-          <Route
-            path="/order-cart"
-            element={<OrderCart />}
-          />
-
-
+        <Route
+          path="/order-cart"
+          element={<OrderCart />}
+        />
 
         {/* ==================================================
             KÄRCHER PAGE
@@ -428,20 +351,15 @@ function App() {
           element={<KarcherPage />}
         />
 
-
         {/* ==================================================
             PAGE NOT FOUND
         ================================================== */}
 
         <Route
           path="*"
-          element={
-            <Page title="Page Not Found" />
-          }
+          element={<Page title="Page Not Found" />}
         />
-
       </Routes>
-
     </BrowserRouter>
   );
 }

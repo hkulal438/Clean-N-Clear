@@ -1,8 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap");
-
-
 /* =========================================================
    CLEAN N CLEAR - CONTACT SECTION
+   Font: Cambria
+   ========================================================= */
+
+/* =========================================================
+   CONTACT SECTION
    ========================================================= */
 
 .cnc-contact-section {
@@ -29,7 +31,7 @@
 
   overflow: hidden;
 
-  font-family: "Nunito", sans-serif;
+  font-family: Cambria, Georgia, "Times New Roman", serif;
 }
 
 
@@ -291,7 +293,7 @@
 
   color: var(--cnc-text);
 
-  font-family: "Nunito", sans-serif;
+  font-family: Cambria, Georgia, "Times New Roman", serif;
 
   font-size: 14px;
 
@@ -373,7 +375,7 @@
 
   color: #ffffff;
 
-  font-family: "Nunito", sans-serif;
+  font-family: Cambria, Georgia, "Times New Roman", serif;
 
   font-size: 15px;
 
@@ -705,7 +707,6 @@
    ========================================================= */
 
 @keyframes cncContactFromLeft {
-
   from {
     opacity: 0;
 
@@ -717,12 +718,9 @@
 
     transform: translateX(0);
   }
-
 }
 
-
 @keyframes cncContactFromRight {
-
   from {
     opacity: 0;
 
@@ -734,12 +732,9 @@
 
     transform: translateX(0);
   }
-
 }
 
-
 @keyframes cncContactFloatOne {
-
   0%,
   100% {
     transform: translate(0, 0);
@@ -748,12 +743,9 @@
   50% {
     transform: translate(-25px, 25px);
   }
-
 }
 
-
 @keyframes cncContactFloatTwo {
-
   0%,
   100% {
     transform: translate(0, 0);
@@ -762,7 +754,6 @@
   50% {
     transform: translate(25px, -20px);
   }
-
 }
 
 
@@ -771,7 +762,6 @@
    ========================================================= */
 
 @media (max-width: 1050px) {
-
   .cnc-contact-section {
     padding-top: 135px;
   }
@@ -791,7 +781,6 @@
 
     text-align: left;
   }
-
 }
 
 
@@ -800,7 +789,6 @@
    ========================================================= */
 
 @media (max-width: 600px) {
-
   .cnc-contact-section {
     padding-top: 115px;
 
@@ -864,7 +852,6 @@
 
     border-radius: 15px;
   }
-
 }
 
 
@@ -873,7 +860,6 @@
    ========================================================= */
 
 @media (max-width: 400px) {
-
   .cnc-contact-section {
     padding-top: 105px;
 
@@ -908,7 +894,6 @@
   .cnc-contact-map {
     height: 230px;
   }
-
 }
 
 
@@ -917,7 +902,6 @@
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-
   .cnc-contact-form,
   .cnc-contact-details,
   .cnc-contact-circle {
@@ -931,5 +915,4 @@
   .cnc-contact-social a {
     transition: none;
   }
-
 }
