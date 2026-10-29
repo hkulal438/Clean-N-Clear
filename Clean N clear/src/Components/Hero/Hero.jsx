@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "./Hero.css";
 
 import slider1 from "../../images/Slider1.png";
@@ -12,46 +14,28 @@ const AUTO_DELAY = 4500;
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  /* ================================
-     AUTO SLIDE
-     ================================ */
-
+  /* AUTO SLIDE */
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => {
-        return (prev + 1) % slides.length;
-      });
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, AUTO_DELAY);
 
-    return () => {
-      clearInterval(timer);
-    };
+    return () => clearInterval(timer);
   }, []);
 
-  /* ================================
-     NEXT
-     ================================ */
-
+  /* NEXT SLIDE */
   const nextSlide = () => {
-    setCurrentSlide((prev) => {
-      return (prev + 1) % slides.length;
-    });
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
   };
 
-  /* ================================
-     PREVIOUS
-     ================================ */
-
+  /* PREVIOUS SLIDE */
   const prevSlide = () => {
-    setCurrentSlide((prev) => {
-      return (prev - 1 + slides.length) % slides.length;
-    });
+    setCurrentSlide(
+      (prev) => (prev - 1 + slides.length) % slides.length
+    );
   };
 
-  /* ================================
-     GO TO SLIDE
-     ================================ */
-
+  /* GO TO SELECTED SLIDE */
   const goToSlide = (index) => {
     setCurrentSlide(index);
   };
@@ -61,13 +45,8 @@ const Hero = () => {
       className="cnc-hero-slider"
       aria-label="Clean N Clear"
     >
-
-      {/* ==========================================
-          SLIDES
-          ========================================== */}
-
+      {/* SLIDES */}
       <div className="cnc-hero-slider__slides">
-
         {slides.map((image, index) => (
           <div
             key={index}
@@ -77,23 +56,59 @@ const Hero = () => {
                 : ""
             }`}
           >
-
+            {/* ORIGINAL SLIDE IMAGE */}
             <img
               src={image}
               alt={`Clean N Clear slide ${index + 1}`}
               className="cnc-hero-slider__image"
             />
 
+            {/* SLIDER 2 TEXT OVERLAY */}
+            {index === 1 && (
+              <div className="cnc-hero-slider__overlay cnc-hero-slider__overlay--black">
+                <h1>
+                  Your complete
+                  <br />
+                  Cleaning partner
+                </h1>
+
+                <p>
+                  Thoughtful care for cleaner, fresher,
+                  happier spaces.
+                </p>
+
+                <Link
+                  to="/products"
+                  className="cnc-hero-slider__cta"
+                >
+                  Explore Products
+                </Link>
+              </div>
+            )}
+
+            {/* SLIDER 3 TEXT OVERLAY */}
+            {index === 2 && (
+              <div className="cnc-hero-slider__overlay">
+                <h1>CLEAN SMARTER. WORK BETTER.</h1>
+
+                <p>
+                  A little more care for cleaner, healthier,
+                  happier spaces.
+                </p>
+
+                <Link
+                  to="/karcher"
+                  className="cnc-hero-slider__cta"
+                >
+                  Explore Products
+                </Link>
+              </div>
+            )}
           </div>
         ))}
-
       </div>
 
-
-      {/* ==========================================
-          PREVIOUS BUTTON
-          ========================================== */}
-
+      {/* PREVIOUS BUTTON */}
       <button
         type="button"
         className="cnc-hero-slider__arrow cnc-hero-slider__arrow--prev"
@@ -103,11 +118,7 @@ const Hero = () => {
         <span aria-hidden="true">‹</span>
       </button>
 
-
-      {/* ==========================================
-          NEXT BUTTON
-          ========================================== */}
-
+      {/* NEXT BUTTON */}
       <button
         type="button"
         className="cnc-hero-slider__arrow cnc-hero-slider__arrow--next"
@@ -117,16 +128,11 @@ const Hero = () => {
         <span aria-hidden="true">›</span>
       </button>
 
-
-      {/* ==========================================
-          PAGINATION
-          ========================================== */}
-
+      {/* PAGINATION */}
       <div
         className="cnc-hero-slider__pagination"
         aria-label="Slider navigation"
       >
-
         {slides.map((_, index) => (
           <button
             key={index}
@@ -139,15 +145,11 @@ const Hero = () => {
             onClick={() => goToSlide(index)}
             aria-label={`Go to slide ${index + 1}`}
             aria-current={
-              index === currentSlide
-                ? "true"
-                : undefined
+              index === currentSlide ? "true" : undefined
             }
           />
         ))}
-
       </div>
-
     </section>
   );
 };

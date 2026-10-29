@@ -531,3 +531,365 @@
     transition: none !important;
   }
 }
+
+/* ==========================================
+   CLEAN N CLEAR - HERO SLIDER OVERLAY
+   DESKTOP + TABLET + MOBILE
+   ========================================== */
+
+/* COMMON OVERLAY */
+.cnc-hero-slider__overlay {
+  position: absolute;
+  top: 5%;
+  left: 8%;
+  right: 8%;
+  z-index: 10;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  padding: 12px 20px;
+  box-sizing: border-box;
+  line-height: normal;
+}
+
+/* MAIN HEADING */
+.cnc-hero-slider__overlay h1 {
+  margin: 0 0 12px;
+  font-family: Cambria, Georgia, serif;
+  font-size: clamp(26px, 2.7vw, 42px);
+  font-weight: 700;
+  line-height: 1.2;
+  color: #081fef;
+  letter-spacing: 0.2px;
+}
+
+/* SUBHEADING */
+.cnc-hero-slider__overlay h2 {
+  margin: 0 0 10px;
+  font-family: Cambria, Georgia, serif;
+  font-size: clamp(18px, 1.8vw, 26px);
+  font-weight: 600;
+  line-height: 1.35;
+  color: #102b4e;
+}
+
+/* DESCRIPTION */
+.cnc-hero-slider__overlay p {
+  max-width: 780px;
+  margin: 0 auto 20px;
+  font-family: Cambria, Georgia, serif;
+  font-size: clamp(14px, 1.15vw, 17px);
+  font-weight: 400;
+  line-height: 1.6;
+  color: #263b53;
+}
+
+/* BUTTON */
+.cnc-hero-slider__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 46px;
+  padding: 12px 28px;
+
+  border: 1px solid #081fef;
+  border-radius: 5px;
+  background: #081fef;
+  color: #ffffff;
+
+  font-family: Cambria, Georgia, serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  box-sizing: border-box;
+
+  transition: background 0.2s ease,
+              border-color 0.2s ease;
+}
+
+.cnc-hero-slider__cta:hover {
+  background: #0617b5;
+  border-color: #0617b5;
+  color: #ffffff;
+}
+
+/* ==========================================
+   SECOND SLIDER
+   ========================================== */
+
+.hero-slide-2 h1 {
+  font-size: 36px;
+  line-height: 1.2;
+}
+
+/* BLACK TEXT VARIANT */
+.cnc-hero-slider__overlay--black,
+.cnc-hero-slider__overlay--black h1,
+.cnc-hero-slider__overlay--black h2,
+.cnc-hero-slider__overlay--black p {
+  color: #000000;
+}
+
+.cnc-hero-slider__overlay--black {
+  top: 2%;
+  transform: none;
+}
+
+/* ==========================================
+   TABLET - 768px AND BELOW
+   ========================================== */
+
+@media (max-width: 768px) {
+
+  .cnc-hero-slider__overlay {
+    top: 4%;
+    left: 5%;
+    right: 5%;
+    width: auto;
+
+    padding: 6px 8px;
+    transform: none;
+
+    align-items: center;
+    text-align: center;
+  }
+
+  .cnc-hero-slider__overlay h1 {
+    font-size: clamp(18px, 3.5vw, 25px);
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+
+  .cnc-hero-slider__overlay h2 {
+    font-size: clamp(14px, 2.5vw, 18px);
+    line-height: 1.25;
+    margin-bottom: 5px;
+  }
+
+  .cnc-hero-slider__overlay p {
+    font-size: clamp(11px, 1.8vw, 14px);
+    line-height: 1.35;
+    margin-bottom: 9px;
+    max-width: 95%;
+  }
+
+  .cnc-hero-slider__cta {
+    min-height: 34px;
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+
+  /* SECOND SLIDER */
+  .hero-slide-2 h1 {
+    font-size: 23px;
+    line-height: 1.2;
+  }
+
+  .cnc-hero-slider__overlay--black {
+    top: 3%;
+  }
+}
+
+/* ==========================================
+   MOBILE - 480px AND BELOW
+   ========================================== */
+
+@media (max-width: 480px) {
+
+  .cnc-hero-slider__overlay {
+    top: 4%;
+    left: 4%;
+    right: 4%;
+    width: auto;
+
+    padding: 4px 6px;
+    transform: none;
+
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+  }
+
+  /* FIRST SLIDER HEADING */
+  .cnc-hero-slider__overlay h1 {
+    font-size: clamp(16px, 4.2vw, 19px);
+    line-height: 1.15;
+    margin-bottom: 5px;
+  }
+
+  .cnc-hero-slider__overlay h2 {
+    font-size: 13px;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+
+  .cnc-hero-slider__overlay p {
+    font-size: 11px;
+    line-height: 1.3;
+    margin: 0 auto 8px;
+    max-width: 95%;
+  }
+
+  .cnc-hero-slider__cta {
+    min-height: 30px;
+    padding: 7px 14px;
+    font-size: 11px;
+    line-height: 1.2;
+  }
+
+  /* SECOND SLIDER */
+  .hero-slide-2 h1 {
+    font-size: 19px;
+    line-height: 1.2;
+    margin-bottom: 5px;
+  }
+
+  .hero-slide-2 .cnc-hero-slider__overlay {
+    top: 3%;
+  }
+
+  .hero-slide-2 .cnc-hero-slider__overlay p {
+    font-size: 10px;
+    line-height: 1.3;
+    margin-bottom: 7px;
+  }
+
+  .hero-slide-2 .cnc-hero-slider__cta {
+    min-height: 29px;
+    padding: 6px 13px;
+    font-size: 11px;
+  }
+
+  /* BLACK TEXT */
+  .cnc-hero-slider__overlay--black,
+  .cnc-hero-slider__overlay--black h1,
+  .cnc-hero-slider__overlay--black h2,
+  .cnc-hero-slider__overlay--black p {
+    color: #000000;
+  }
+}
+@media (max-width: 480px) {
+
+  /* FIRST SLIDER - EQUIPMENT */
+  .cnc-hero-slider__overlay {
+    top: 5%;
+  }
+
+  .cnc-hero-slider__overlay h1 {
+    font-size: 17px;
+    margin-bottom: 7px;
+  }
+
+  .cnc-hero-slider__overlay p {
+    font-size: 11px;
+    margin-bottom: 10px;
+  }
+
+  /* SECOND SLIDER - PRODUCTS */
+  .hero-slide-2 .cnc-hero-slider__overlay {
+    top: 5%;
+  }
+
+  .hero-slide-2 h1 {
+    font-size: 18px;
+    line-height: 1.2;
+    margin-bottom: 7px;
+  }
+
+  .hero-slide-2 .cnc-hero-slider__overlay p {
+    font-size: 11px;
+    margin-bottom: 10px;
+  }
+
+  /* BUTTON */
+  .cnc-hero-slider__cta {
+    padding: 7px 15px;
+    font-size: 11px;
+  }
+}
+/* ==========================================
+   MOBILE - BUTTON AT BOTTOM OF BOTH SLIDERS
+   ========================================== */
+
+@media (max-width: 768px) {
+
+  /* Make slide the positioning reference */
+  .cnc-hero-slider__overlay {
+    top: 4%;
+    bottom: 0;
+    left: 4%;
+    right: 4%;
+    width: auto;
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    padding: 5px 8px 0;
+    transform: none;
+    text-align: center;
+  }
+
+  /* Heading stays at top */
+  .cnc-hero-slider__overlay h1 {
+    margin-bottom: 6px;
+  }
+
+  /* Description stays below heading */
+  .cnc-hero-slider__overlay p {
+    margin-bottom: 8px;
+  }
+
+  /* Button moves to bottom */
+  .cnc-hero-slider__overlay .cnc-hero-slider__cta {
+    margin-top: auto;
+    margin-bottom: 28px;
+
+    min-height: 32px;
+    padding: 7px 16px;
+    font-size: 12px;
+  }
+
+  /* Second slider same positioning */
+  .hero-slide-2 .cnc-hero-slider__overlay {
+    top: 4%;
+    bottom: 0;
+    height: auto;
+  }
+}
+
+/* SMALL MOBILE */
+
+@media (max-width: 480px) {
+
+  .cnc-hero-slider__overlay .cnc-hero-slider__cta {
+    margin-top: auto;
+    margin-bottom: 25px;
+    padding: 7px 15px;
+    font-size: 11px;
+  }
+}
+/* MOVE BUTTON FURTHER DOWN - MOBILE ONLY */
+
+@media (max-width: 768px) {
+  .cnc-hero-slider__overlay .cnc-hero-slider__cta {
+    margin-top: auto;
+    margin-bottom: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cnc-hero-slider__overlay .cnc-hero-slider__cta {
+    margin-top: auto;
+    margin-bottom: 8px;
+  }
+}
