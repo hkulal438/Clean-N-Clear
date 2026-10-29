@@ -5,14 +5,14 @@ import {
   FaPhone,
   FaEnvelope,
   FaWhatsapp,
-  FaFacebookF,
   FaInstagram,
-  FaLinkedinIn,
 } from "react-icons/fa6";
 
 import logo from "../../images/CLEANNCLEAR_LOGO-05.png";
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="cnc-footer">
       {/* Background Overlay */}
@@ -128,16 +128,14 @@ const Footer = () => {
           <p>Follow Clean N Clear</p>
 
           <div className="cnc-footer-social-icons">
-            <a href="#" aria-label="Facebook" className="cnc-footer-social-link">
-              <FaFacebookF />
-            </a>
-
-            <a href="#" aria-label="Instagram" className="cnc-footer-social-link">
+            <a
+              href="https://www.instagram.com/clean_n_clear_official?cplk=azljN2JxMmdpNmJj&utm_source=qr"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Follow Clean N Clear on Instagram"
+              className="cnc-footer-social-link"
+            >
               <FaInstagram />
-            </a>
-
-            <a href="#" aria-label="LinkedIn" className="cnc-footer-social-link">
-              <FaLinkedinIn />
             </a>
           </div>
         </div>
@@ -145,7 +143,7 @@ const Footer = () => {
         {/* BOTTOM FOOTER */}
         <div className="cnc-footer-bottom">
           <p className="cnc-footer-copyright">
-            Copyright © 2026 | <span>Clean N Clear</span>
+            Copyright © {currentYear} | <span>Clean N Clear</span>
           </p>
 
           <div className="cnc-footer-bottom-links">
