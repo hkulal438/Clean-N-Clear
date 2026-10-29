@@ -67,9 +67,9 @@ const Hero = () => {
             {index === 1 && (
               <div className="cnc-hero-slider__overlay cnc-hero-slider__overlay--black">
                 <h1>
-                  Your complete
+                 YOUR COMPLETE 
                   <br />
-                  Cleaning partner
+                 CLEANING PARTNER
                 </h1>
 
                 <p>
